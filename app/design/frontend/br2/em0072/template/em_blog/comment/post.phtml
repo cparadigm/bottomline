@@ -1,0 +1,253 @@
+<?php $post = $this->getPost();?>
+<?php if(!Mage::getStoreConfig('blog/comments_facebook/enabled')):?>
+<?php
+    $commentLevel1 = $this->getCommentByPost();
+    $commentList = $this->frontTreeComment();
+    $toolbar = $this->getToolbar()->setCollection($this->getCollection());
+    $publickey = Mage::getStoreConfig('blog/recaptcha/public_key');
+    $frontName = Mage::getStoreConfig('blog/info/url_key');
+	$helper = Mage::helper('blog');
+?>
+<div class="post-footer">
+	<span class="comment-count">
+		<?php if($this->getSum()):?>
+			<?php echo $this->getSum().' '.$this->__('Comments')?>
+		<?php else:?>
+			<?php echo $this->getSum().' '.$this->__('Comment')?>
+		<?php endif;?>
+	</span>
+	<span class="separator">|</span>
+	<span class="post-by"><?php echo $this->__('Posted by') ?> <span><?php echo $post->getAuthor()->getUsername()?></span></span>
+</div>
+
+			 
+<?php if($commentLevel1->count() > 0):?>
+
+<div class="article-comments">
+	<div id="comments-header">
+		<h3 class="form-title"><?php echo $this->__('Comments').' ('.$this->getSum().')'?></h3>
+	</div>
+	<div id="allcomments">
+	  <?php foreach($commentLevel1 as $c):?>
+		  <div class="level1 comment-item">
+			  <div class="comment-item-header">
+				  <span class="comment-by"><?php echo $this->__('Comment by')?>
+				  <span><?php echo $c->getUsername();?></span></span>
+                                  <?php $date = new DateTime($c->getTime());?>
+                                  <small class="time-stamp">
+                                      <?php echo $date->format('l, M j Y, h:iA'); ?>
+                                  </small>
+				  
+
+
+
+			  </div>
+			  <div class="comment-body">
+				   <?php echo $c->getCommentContent();?>
+			  </div>
+			  
+			   <div class="comment-button">
+				   <button  class="button" name="reply" value="Post Reply" onclick="addCommentBox(<?php echo $c->getId();?>,<?php echo $c->getId();?>);"><span><span><?php echo $this->__('Post reply') ?></span></span></button>
+			   </div>
+			  <div id="<?php echo $c->getId()?>_comment_box"></div>
+			  
+			  <?php if(isset($commentList[$c->getId()]['child'])):?>
+				  <?php foreach($commentList[$c->getId()]['child'] as $child):?>
+						  <?php echo $this->createHtmlCommentChild($commentList[$child],2,$commentList);?>
+				  <?php endforeach;?>
+			  <?php endif;?>
+			 
+		</div>
+	  <?php endforeach;?>
+	</div>
+   
+	<?php echo $this->getToolbar()->toHtml();?>
+</div>
+<?php endif;?>
+
+<div class="form-comment-container">
+<span id="new"><h3><?php echo $this->__('Leave Your Comment') ?></h3></span>
+<div id="0_comment_box" class="form-comment">
+  
+  <form method="post" id="comform" enctype="multipart/form-data" action="<?php echo trim($this->getUrl($frontName.'/post/newcomment'),'/')?>" onsubmit="return processForm();" >
+	  <?php if(!$this->helper('customer')->isLoggedIn()):?>
+		  <div class="field" id="username">
+			  <label class="required" for="name"><?php echo $this->__('Username')?><em>*</em></label>
+			  <div class="input-box">
+				  <input type="text" class="input-text required-entry" value="" title="Name" id="name" name="username">
+			  </div>
+		  </div>
+
+		  <div class="field" id="email">
+			  <label class="required" for="email"><?php echo $this->__('Your Email')?><em>*</em></label>
+			  <div class="input-box">
+				  <input type="text" class="input-text required-entry validate-email" value="" title="Email" id="email" name="email">
+			  </div>
+		  </div>
+	  <?php endif;?>
+	  <div class="input-box">
+		  <label class="required" for="comment"><?php echo $this->__('Comment')?><em>*</em></label>
+			<textarea rows="2" cols="10" class="required-entry input-text" style="width:620px;height:200px" title="Comment" id="comment" name="comment_content"></textarea>
+	  </div>
+	  
+	  <?php if(Mage::getStoreConfig('blog/recaptcha/enable_recapcha')):?>
+	  <?php echo recaptcha_get_html($publickey)?>
+	  <label class="required-1 " for="recaptcha"><?php echo $this->__('Required Field')?><em>*</em></label>
+	  <?php endif;?>
+	  <div class="blog_submit">
+	  <button class="button" type="submit" name="submit" value="Post"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+			<span><img id="loading" style="display:none;bottom:8px;left:115px;top:auto;position:absolute;" src="<?php echo $this->getSkinUrl().'/images/opc-ajax-loader.gif'?>" /></span>
+	  <input type="hidden" name="parent_id" value="0" id="parent_id"/>
+	  <input type="hidden" name="post_id" id="post_id" value="<?php echo $this->getRequest()->getParam('id');?>"/>
+          <input type="hidden" name="uri" id="uri" value="<?php echo $this->getRequest()->getPathInfo();?>"/>
+	  </div>
+  </form>
+	</div> 
+ </div>
+              
+<input type="hidden" id="base_url" value="<?php echo $this->getBaseUrl();?>"/>
+
+<script type="text/javascript">
+//<![CDATA[
+    var commentForm = new VarienForm('comform', true);
+//]]>
+</script>
+
+<script type="text/javascript">
+var active = "0_comment_box";
+function addCommentBox(id,parent_id){
+	if(!$(id + '_comment_box').innerHTML){
+		var html = $(active).innerHTML;
+		$(active).innerHTML = '';
+		$(active).removeClassName('form-comment');
+		if(id > 0)
+			$('new').innerHTML = '<button class="button" onclick="addCommentBox(0,0);"><span><span><?php echo $this->__('Post reply this Comment') ?></span></span></button>';
+		else
+			$('new').innerHTML = '<h3 onclick="addCommentBox(0,0);"><?php echo $this->__('Leave Your Comment') ?></h3>';
+		active = id + '_comment_box';
+		$(active).innerHTML = html;
+		$('parent_id').value = parent_id;
+		$(active).addClassName('form-comment');
+		commentForm = new VarienForm('comform', true);
+        Recaptcha.widget = Recaptcha.$("recaptcha_widget_div"); Recaptcha.challenge_callback();
+	}
+}
+
+function processForm()
+{
+  //$('com-form').disabled = true;
+  //$('com-form').value = "Processing.  Please Wait...";
+
+	if(commentForm.validator && commentForm.validator.validate()){
+            
+		$('loading').show();
+		$('comform').request({
+			onSuccess: function(transport)
+			{
+			  if(transport.responseText == "1")
+			  {
+				
+				$('loading').hide();
+				window.location = '<?php echo $this->getCurrentUrl();?>';
+				location.reload(true);
+			  }
+			  else
+			  {
+					if(transport.responseText == "0")
+					{
+						$('loading').hide();
+						alert('<?php echo $this->__("Captcha is wrong");?>');
+						javascript:Recaptcha.reload();
+					}
+					else
+					{
+						$('loading').hide();
+						alert('You have to login to comment');
+					}
+			  }
+			}
+		});
+
+      //$('com-form').value = 'Send Message';
+      //$('com-form').disabled = false;
+    }
+
+
+
+  return false;
+}
+
+
+function checkRecaptcha()
+{
+    var recaptcha_response_field = $('recaptcha_response_field').value;
+    var recaptcha_challenge_field = $('recaptcha_challenge_field').value;
+    var url = '<?php echo $helper->getBlogUrl('post/checkrecaptcha')?>';
+    var pars = 'recaptcha_response_field=' + recaptcha_response_field + '&recaptcha_challenge_field=' + recaptcha_challenge_field;
+    var myAjax = new Ajax.Request( url, { method: 'post', parameters: pars, onComplete: showResponse });
+    //myAjax.Responders.register(myGlobalHandlers);
+    //$$('div#systemWorking').each(Element.hide);
+    //alert('123');
+    sleep(5000);
+    if($('show_respone').value == "1")
+    {
+        $('com-form').submit();
+        return true;
+    }
+    return false;
+
+   //return check();
+}
+
+function sleep(ms)
+{
+    var dt = new Date();
+    dt.setTime(dt.getTime() + ms);
+    while (new Date().getTime() < dt.getTime());
+}
+
+function check()
+{
+		if($('show_respone').value == "1")
+	    {
+	//	    alert();
+	        $('com-form').submit();
+	        return true;
+	    }
+		else
+			return false;
+
+
+}
+function showResponse(originalRequest)
+{
+    //put returned XML in the textarea
+    var value = originalRequest.responseText;
+
+    //$('show_respone').setValue(value);
+    if(value == "1")
+    {
+        $('com-form').submit();
+        $('show_respone').setValue(value);
+
+        return true;
+    }
+    $('complete').setValue("1");
+
+    return false;
+    //return $('result').value;
+}
+
+
+</script>
+<?php else:?>
+<div class="post-footer">
+	<span class="post-by"><?php echo $this->__('Posted by') ?> <span><?php echo $post->getAuthor()->getUsername()?></span></span>
+</div>
+<div class="form-comment-container">
+    <span>
+        <h3><?php echo $this->__('Leave Your Comment') ?></h3>
+    </span>
+    <div class="fb-comments" data-href="<?php echo $post->getPostUrl(false);?>" data-width="<?php echo Mage::getStoreConfig('blog/comments_facebook/width')?>" data-num-posts="<?php echo Mage::getStoreConfig('blog/comments_facebook/num_posts')?>" data-colorscheme="<?php echo Mage::getStoreConfig('blog/comments_facebook/colorscheme')?>" data-order-by="<?php echo Mage::getStoreConfig('blog/comments_facebook/order_by')?>"></div>
+</div>
+<?php endif;?>

@@ -1,0 +1,217 @@
+<?php $_helper = Mage::helper('catalog/category');?>      
+<?php $_categories = $_helper->getStoreCategories();?>
+
+<div id="magik-verticalmenu" class="block magik-verticalmenu">
+   <div class="nav-title"> <span><?php echo $this->__('Categories') ?></span> </div>
+   
+    <div class="nav-content">
+      <div class="navbar navbar-inverse">
+        <div id="verticalmenu" class="verticalmenu" role="navigation">
+          <div class="navbar">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+    <?php if (count($_categories) > 0): ?>
+             <!-- BEGIN NAV -->  
+            <ul class="nav navbar-nav verticalmenu">
+              
+            <?php foreach($_categories as $_category): ?>
+                <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+                <?php $_subcategories = $_category->getChildrenCategories() ?>
+                           
+                        <?php if (count($_subcategories) > 0) { ?>          
+                           <li class="parent dropdown">     
+                        <?php } else { ?>
+                           <li class=" "> 
+                        <?php } ?>               
+                  
+                    <a  class="dropdown-toggle" data-toggle="dropdown" href="<?php echo $_helper->getCategoryUrl($_category) ?>"><span><?php echo $_category->getName() ?></span><?php if (count($_subcategories) > 0) { ?><b class="round-arrow"></b><?php } ?></a>
+                    
+                    <?php if (count($_subcategories) > 0): ?>
+                        <div class="dropdown-menu" style="width:580px">
+                          <div class="dropdown-menu-inner">
+                            <div class="row">                                                   
+                                
+                        
+                         <?php foreach($_subcategories as $_subcategory): ?>
+
+                            <div class="mega-col col-sm-6" data-widgets="wid-5" data-colwidth="6">
+                              <div class="mega-col-inner">
+                                <div class="ves-widget" id="wid-5">
+                                     
+                                <?php $_subcategory = Mage::getModel('catalog/category')->load($_subcategory->getId()) ?>                             
+                                <?php $_subsubcategories = $_subcategory->getChildrenCategories() ?>
+
+                            <?php /*if($_subcategory->getThumbnail()) { ?>
+                               <div class="cat-img"><img src="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$_subcategory->getThumbnail()  ?>" alt="<?php echo $_subcategory->getName() ?>" /></div>
+                            <?php }*/ ?>
+
+                                <div class="menu-title"><a href="<?php echo $_helper->getCategoryUrl($_subcategory) ?>"><?php echo $_subcategory->getName() ?></a></div> <!--menu-title-->
+                                <div class="widget-html">
+                                  <?php if($_subcategory->getThumbnail()) { ?>
+                                  <div class="widget-inner" style="min-height:98px;">
+                                    <?php } else { ?>
+                                  <div class="widget-inner">
+                                    <?php } ?>
+                                <!--sub sub category-->
+                                
+                                <?php if (count($_subsubcategories) > 0): ?>
+                                 
+                                   <ul>
+                                    <?php foreach($_subsubcategories as $_subsubcategory): ?>
+                                       <li>
+                                          <a href="<?php echo $_helper->getCategoryUrl($_subsubcategory) ?>"><span><?php echo $_subsubcategory->getName() ?></span></a>
+            
+                                          <?php $_subsubsubcategory = Mage::getModel('catalog/category')->load($_subsubcategory->getId()) ?>                             
+                                          <?php $_subsubsubcategories = $_subsubcategory->getChildrenCategories() ?>
+                                          <?php if (count($_subsubsubcategories) > 0): ?>
+                                             <div class="level2 sub-wrapper" style="height: auto;">
+                                                   <ul class="level2">
+                                                     <?php foreach($_subsubsubcategories as $_subsubsubcategory): ?>
+                                                       <li class="level3 nav-1-1-1-1">
+                                                         <a href="<?php echo $_helper->getCategoryUrl($_subsubsubcategory) ?>"><span><?php echo $_subsubsubcategory->getName() ?></span></a>
+                                                       </li> <!--level3 nav-1-1-1-1-->
+                                                     <?php endforeach; ?>
+                                                   </ul> <!--level2-->
+                                             </div> <!--level2 sub-wrapper-->
+                                          <?php endif; ?>
+
+                                       </li> <!--level2 nav-6-1-1-->
+                                    <?php endforeach; ?>
+                                   </ul> 
+                                  
+                               <?php endif; ?>
+                                 <!--sub sub category-->  
+                                    </div> <!--widget-inner-->
+                                  </div> <!--widget-html-->
+                                </div> <!--ves-widget-->
+                              </div> <!--mega-col-inner-->                                                
+                            </div> <!--mega-col col-sm-6-->
+                         <?php endforeach; ?>        
+                                
+                              <?php if($_category->getThumbnail()) { ?>
+                          <div class="mega-col col-sm-6 " data-colwidth="6" data-widgets="wid-8">
+                            <div class="mega-col-inner">
+                              <div class="magik-widget" id="wid-8">
+                                <div class="widget-image">
+                                  <div class="widget-inner clearfix">
+                                    <div><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><img src="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$_category->getThumbnail() ?>" width="200" height="123" alt="<?php echo $this->__('Thumbnail Image') ?>" /></a></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                               <?php } ?>
+
+                            </div> <!--row-->  
+
+             
+                          </div> <!--dropdown-menu-inner-->
+      <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('category-node-left-'.$_category->getId())->toHtml(); ?>
+                       </div> <!--dropdown-menu-->
+                    <?php endif; ?>
+                    </li> 
+             <?php endforeach; ?> 
+
+          <?php  $custom_tab = Mage::getModel('cms/block')->load('eclipse_navigation_block');
+            if($custom_tab->getIsActive()) {
+            echo '
+            <li class=" parent dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                    <span>'.$custom_tab->getTitle().'</span><b class="round-arrow"></b>
+                </a>
+                <div class="dropdown-menu" style="width:520px"><div class="dropdown-menu-inner">'.$this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_left_navigation_block')->toHtml().'</div></div>
+            </li>';
+          }  ?>
+
+            </ul> <!--nav navbar-nav verticalmenu-->
+
+    <?php endif; ?>
+
+          </div> <!--collapse navbar-collapse navbar-ex1-collapse-->
+        </div> <!--navbar-->
+      </div> <!--verticalmenu-->
+    </div> <!--navbar navbar-inverse-->
+  </div> <!--nav-content-->
+</div> <!--block magik-verticalmenu-->
+
+<script type="text/javascript">
+        //<![CDATA[
+
+            jQuery(function($) {
+                $("#nav > li").hover(function() {
+                    var el = $(this).find(".level0-wrapper");
+                    el.hide();
+                    el.css("left", "0");
+                    el.stop(true, true).delay(150).fadeIn(300, "easeOutCubic");
+                }, function() {
+                    $(this).find(".level0-wrapper").stop(true, true).delay(300).fadeOut(300, "easeInCubic");
+                });
+            });
+
+            var isTouchDevice = ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0);
+            jQuery(window).on("load", function() {
+
+                if (isTouchDevice)
+                {
+                    jQuery('#nav a.level-top').click(function(e) {
+                        $t = jQuery(this);
+                        $parent = $t.parent();
+                        if ($parent.hasClass('parent'))
+                        {
+                            if ( !$t.hasClass('menu-ready'))
+                            {                    
+                                jQuery('#nav a.level-top').removeClass('menu-ready');
+                                $t.addClass('menu-ready');
+                                return false;
+                            }
+                            else
+                            {
+                                $t.removeClass('menu-ready');
+                            }
+                        }
+                    });
+                }
+
+            }); //end: on load
+
+        //]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+    jQuery(document).ready(function(){
+        var scrolled = false;
+        jQuery("#nav li.level0.drop-menu").mouseover(function(){
+            if(jQuery(window).width() >= 740){
+                jQuery(this).children('ul.level1').fadeIn(100);
+            }
+            return false;
+        }).mouseleave(function(){
+            if(jQuery(window).width() >= 740){
+                jQuery(this).children('ul.level1').fadeOut(100);
+            }
+            return false;
+        });
+        jQuery("#nav li.level0.drop-menu li").mouseover(function(){
+            if(jQuery(window).width() >= 740){
+                jQuery(this).children('ul').css({top:0,left:"165px"});
+                var offset = jQuery(this).offset();
+                if(offset && (jQuery(window).width() < offset.left+325)){
+                    jQuery(this).children('ul').removeClass("right-sub");
+                    jQuery(this).children('ul').addClass("left-sub");
+                    jQuery(this).children('ul').css({top:0,left:"-167px"});
+                } else {
+                    jQuery(this).children('ul').removeClass("left-sub");
+                    jQuery(this).children('ul').addClass("right-sub");
+                }
+                jQuery(this).children('ul').fadeIn(100);
+            }
+        }).mouseleave(function(){
+            if(jQuery(window).width() >= 740){
+                jQuery(this).children('ul').fadeOut(100);
+            }
+        });
+        
+
+    });
+//]]>
+</script>

@@ -1,0 +1,59 @@
+<?php
+
+$quote = Mage::getSingleton('checkout/session')->getQuote();
+$totals = $quote->getTotals();
+$subtotal = $totals["subtotal"]->getValue();
+$grandtotal = $totals["grand_total"]->getValue();
+$items = $quote->getAllVisibleItems();
+$item = $items[0];
+
+if($item->getProduct()->getSpecialPrice()>0) {
+    $discount = number_format($item->getProduct()->getSpecialPrice(), 2); //Discount value if applied
+} else {
+    $discount = '';
+}
+
+if(isset($totals['tax']) && $totals['tax']->getValue()) {
+    $tax = $totals['tax']->getValue(); //Tax value if present
+} else {
+    $tax = '';
+}
+
+if(isset($totals['shipping']) && $totals['shipping']->getValue()) {
+    $shipping = $totals['shipping']->getValue(); //Tax value if present
+} else {
+    $shipping = '';
+}
+?>
+<div>
+    <div>
+        <span><?php echo $item->getProduct()->getName()?></span>
+        <span><?php echo $item->getPrice()?></span>
+    </div>
+    <div>
+        <span>Quantity</span>
+        <input type="text" name="qty" id="qty" value="1"/>
+    </div>
+    <div>
+        <div>
+            <span>Subtotal </span><?php echo $subtotal ?>
+        </div>
+        <!--
+        <div>
+            <span>Discount </span><?php echo $discount ?>
+        </div>
+        <div>
+            <span>Tax </span><?php echo $tax ?>
+        </div>
+        <div>
+            <span>Shipping </span><?php echo $shipping ?>
+        </div>
+        -->
+        <div>
+            <span>Total </span><?php echo $grandtotal ?>
+        </div>
+    </div>
+    <div>
+        <button onclick="submitCustomCheckoutOrder();">Submit Order</button>
+    </div>
+</div>

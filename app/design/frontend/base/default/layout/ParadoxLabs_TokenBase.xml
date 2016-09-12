@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<layout>
+	<customer_account>
+		<reference name="customer_account_navigation">
+			<block type="tokenbase/customer_link" name="tokenbase_customer_link">
+				<action method="addProfileLink"></action>
+			</block>
+		</reference>
+	</customer_account>
+	
+	<customer_paymentinfo_index>
+		<label>Customer Payment Data Manager</label>
+		<update handle="customer_account" />
+		
+		<!-- referencing content rather than my.account for compatibility back to 1.4. -->
+		<reference name="content">
+			<!-- The active payment method can inject itself into this wrapper with handle customer_paymentinfo_index_{method}. -->
+			<block type="tokenbase/customer_wrapper" name="tokenbase_customer_wrapper" template="paradoxlabs/tokenbase/customer/wrapper.phtml" />
+			
+			<block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml" />
+		</reference>
+	</customer_paymentinfo_index>
+	
+	<sales_recurring_profile_view>
+		<reference name="sales.recurring.profile.view">
+			<block type="core/text_list" name="billing_info">
+				<action method="addToParentGroup"><value>info_blocks_row_5</value></action>
+				<action method="setViewColumn"><value>1</value></action>
+				<action method="setViewLabel" translate="value"><value>Billing Information</value></action>
+				<block type="tokenbase/recurringprofile_info" name="tokenbase_profile_info" template="paradoxlabs/tokenbase/recurringprofile/info.phtml" />
+			</block>
+		</reference>
+		<reference name="sales.recurring.profile.view">
+			<action method="setTemplate"><template>paradoxlabs/tokenbase/recurringprofile/view.phtml</template></action>
+		</reference>
+		<reference name="sales.recurring.profile.view.billing">
+			<action method="setTemplate"><template>paradoxlabs/tokenbase/recurringprofile/view/address.phtml</template></action>
+		</reference>
+		<reference name="sales.recurring.profile.view.shipping">
+			<action method="setTemplate"><template>paradoxlabs/tokenbase/recurringprofile/view/address.phtml</template></action>
+		</reference>
+	</sales_recurring_profile_view>
+	
+	<customer_recurringprofile_edit>
+		<update handle="customer_account" />
+		
+		<reference name="content">
+			<block type="tokenbase/recurringprofile_edit" name="tokenbase_profile_settings" template="paradoxlabs/tokenbase/recurringprofile/edit.phtml">
+				<block type="core/text_list" name="tokenbase_profile_edit_above" />
+				<block type="core/text_list" name="tokenbase_profile_edit_below" />
+			</block>
+		</reference>
+	</customer_recurringprofile_edit>
+</layout>

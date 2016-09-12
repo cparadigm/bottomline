@@ -1,0 +1,79 @@
+2.0.0 : Initial public release of module
+2.0.1 : Add new rule: Category Parent to limit by parent categories
+2.0.2 : BUG FIX: New created products do not have origData set
+2.0.3 : make attributes available to rules, even if not set to use in rules.
+2.0.4 : BUG FIX: Dynamic categories prevented normal category <-> product associations o continue to function
+2.0.5 : Fix category_product indexing after dynamic saving
+2.0.6 : FEATURE: Ability to set rule using Catalog Price Rules
+2.0.7 : BUG FIX: Improve how cron scheduling works
+2.0.8 : BUG FIX: string text fields did not do wildcard searches
+2.1.0 : FEATURE: Discount specialized rules
+2.2.0 : FEATURE: Sales Report rules (stock levels, best sellers and most viewed)
+2.2.1 : BUGFIX: Remove ref to giftpromo helpers
+2.2.2 : BUGFIX: specialized rules (delayed rules ) did not limit to result of attribute rules
+2.2.3 : Change rule layouts, and fix some issues with rule combinations
+2.2.4 : Put back string comparison list
+2.3.0 : Drop freetext field (using 'contains' rather). Select becomes multiselect, making it possible to select multiple values in one rule
+2.3.1 : Adjust multiselect attribute rules
+2.3.2 : Fix bug in cron which cleared out dynamic categories on rebuild
+2.4.0 : Add Stock availability rule
+2.4.1 : Fix issue with 'applied_catalog_rule_id' collection build.
+2.5.1 : Fix issue with singular date attributes (not the same as ranges)
+2.6.0 : Add Data transform rule. Initial is to load parents of found simples to category.
+2.7.0 : Add delayed processing feature
+2.7.1 : Add admin option to set max exec time
+2.7.2 : Add indexing disabling options
+2.7.3 : Add contains / does not contain to strings checking
+2.8.0 : Adjust module to be backwards compatible with magento 1.4.1, 1.4.2 and 1.5.x
+2.9.0 : Add in updated_at and Created_at product attributes
+      : Put back Datetext element class file that was somehow dropped at version 2.6.0, introduced in version 2.5.1
+2.9.1 : Adjust code to work with older version of php - <b>Parse error</b>:  syntax error, unexpected T_FUNCTION, expecting ')' in <b>/chroot/home/noktwoze/dev4.nok200.com/html/app/code/community/ProxiBlue/DynCatProd/Model/Resource/Category.php</b> on line <b>54</b>
+2.10.0 : Add Product type to attributes rules
+       : Fix display of text fields after save (was not displaying)
+2.11.0 : Initial lingkage of giftpromo module for giftpromo rules
+2.11.1  : Fix bug surrounding text fields and contains (includes SKU field contains which is a text field in code)
+2.11.2  : Adjust how wildcard textual fields are done, allowing for user defined wildcards
+2.12.0 : Add ability to transform other attributes to date range
+       : Add Limiter (start, length)
+       : Fix bug in rule sequence (attribute rules did not affect results of report rules)
+2.12.1 : Fix best sellers not using attribute limitations
+2.12.2 : Further adjustments in fixing all sales report with attribute limiters
+2.12.3 : Fix issues with data transformation rule and order of sales reports when used together
+2.12.4 : Fix ordering issue in sales reports
+2.12.5 : Fix non array in foreach in category resource
+2.12.6 : Fix bug with empty sql (null results sets)
+2.13.0 : Add in Least viewed and Least sellers rules
+2.13.1 : Fix role permissions. Must have Categories role to allow usage of rules.
+2.13.2 : Fix data transformation issue dropping items.
+       : Fix blank sl query in final product availability test
+2.13.3 : Fix attributes with defaults not found (never saved, thus had no value, thus need to null it)
+       : Fix data transformation not adding simples and parents
+2.14.0 : Add new column to Catalog Product Grid that shows which products are dynamic
+       : Add ability to set positions on dynamic assigned products !
+       : Fix cron and shel scripts to use the same code as the observer when category saved. less code, and works the same as admin saved.
+       : Fix data transformation rules to allow manually (non dynamic) products to be added as well
+3.0.0   : Complete rewrite of how rule collections are built. Massive speed increase to resulting data
+3.0.1	: Fix issue with Products Found rules dropping out on save in admin
+3.0.2   : Move variable declarations outside try block in cron.
+3.0.3   : Fix bug with data transformation rules not populating
+3.1.0   : Category Attribute control
+3.2.0	: Regex rules
+3.2.1   : Fix display of non dynamic ticks, add rule to eliminate non dynamic upon save
+3.2.2	: Add hints to admin - show version number
+3.2.3	: BUG FIX: Issue with ANY and specials
+3.2.4   : BUG FIX: Issue with Category Ids attribute and not in / not one of
+3.2.5   : BUG FIX: Join issue on special price date table linkage
+3.2.6   : Initial release of v3 backported to pre magento 1.6
+3.3.0 (3.2.7)	: Notifications functionality
+3.3.1   : Fix bug with joinfield duplication in collection
+3.3.2   : Move debug to own log file
+        : Fix bug with multiple rules and dropping of special attribute filters in built sql.
+        : Start of coding standards cleanup
+3.4.0   : Fix all products return if category control is only rule in set
+        : Add 'ignore attribute default' to bool attribute rules
+        : FEATURE: Action on parent or current category in category control
+3.4.1   : Fix bug with multiple category control rules
+3.4.2   : Fix bug when Category Parent is used.
+3.4.3   : Fix bug with transformation rules. Seems introduced when category control came in
+3.4.4   : Display date range attributes (raw) attribute in the list of attributes as well.
+3.4.5   : Fix bug with limiter and last not resulting in last (asc in place of desc in order)

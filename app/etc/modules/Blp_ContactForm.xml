@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+ <config>
+  <modules>
+   <Blp_ContactForm>
+    <active>true</active>
+    <codePool>local</codePool>
+   </Blp_ContactForm>
+  </modules>
+ </config>

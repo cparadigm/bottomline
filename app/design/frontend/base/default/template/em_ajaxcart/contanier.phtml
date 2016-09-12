@@ -1,0 +1,21 @@
+<div id="containerDiv" style="display:none">	
+	<a href="javascript:void(0);" id="close"><?php echo $this->__('close');?></a>
+		<div class="ajaxcart">
+			<img class='ajax_loading' id="ajax_loading" src='<?php echo $this->getSkinUrl('images/em_ajaxcart/loading.gif')?>' alt="" />
+			<div id="ajax_content" style="display:none">
+				<div class="ajaxcart_row1 row1" >					
+					<div id="ajax_image"></div>
+				</div>
+				<div class="row2">
+					<a href="javascript:void(0);" id="closeLink" class="back"><span><?php echo Mage::helper('checkout')->__('Continue Shopping')?></span></a>
+					<a id="viewcart_button" href="<?php echo $this->getUrl('checkout/cart')?>" class="next"><span><?php echo Mage::helper('checkout')->__('View cart &amp; checkout')?></span></a>
+				</div>	
+			</div>
+		</div>
+	</div>
+<input type="hidden" id="enable_module" value="<?php echo Mage::getStoreConfig('advanced/modules_disable_output/EM_Ajaxcart');?>"/>
+<input type="hidden" id="ajax_base_url" value="<?php echo Mage::getBaseUrl();?>"/>
+<input type="hidden" id="ajax_package_name" value="<?php echo Mage::getSingleton('core/design_package')->getPackageName();?>"/>	
+<input type="hidden" id="ajax_layout" value="<?php echo Mage::getSingleton('core/design_package')->getTheme('layout');?>"/>	
+<input type="hidden" id="ajax_template" value="<?php echo Mage::getSingleton('core/design_package')->getTheme('package');?>"/>	
+<input type="hidden" id="ajax_skin" value="<?php echo Mage::getSingleton('core/design_package')->getTheme('skin');?>"/>

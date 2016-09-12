@@ -1,0 +1,59 @@
+<aside id="secondary" class="widget_wrapper13" role="complementary">
+		<div id="recent-posts-4" class="popular-posts widget widget__sidebar">
+			<h3 class="widget-title"><?php echo $this->__('Most Popular Post') ?></h3>
+                        <div class="widget-content">
+			<ul class="posts-list unstyled clearfix">
+				<?php
+				$recent_posts = $this->getRecentPost();
+				$home_url = Mage::helper('core/url')->getHomeUrl();
+				foreach ($recent_posts as $recent_post_key => $recent_post_value) {
+					//$blog_url = $home_url.'blog/view/post/p/'.$recent_post_value['title_slug'].'/';
+
+					$urlKey = $recent_post_value['title_slug'];
+					$curl = Mage::getUrl('blog/view/post/p/'.$urlKey, array('_direct' => $urlKey)); 
+					$cnt=Mage::getModel('blogmate/blog')->chkIfExists('index/'.$urlKey,$urlKey);
+					$store_id=Mage::app()->getStore()->getId();
+					if($cnt==0 && ($urlKey != ''))
+					{	
+						$curl1=$recent_post_value['title_slug'];
+						$rewrite = Mage::getModel('core/url_rewrite');
+						$rewrite->setStoreId($store_id)
+						->setIdPath('index/'.$urlKey)
+						->setRequestPath($urlKey)
+						->setTargetPath('blog/view/post/p/'.$urlKey)
+						->setIsSystem(true)
+						->save();
+
+					}
+					$blog_url =$curl; 
+					?>
+					<li>
+
+						<?php 
+						$texthtml2 = $recent_post_value['blog_content'];
+						preg_match('/<img[^>]+src="{{media url="([^">]+)"/', $texthtml2, $image);
+						?>
+
+						<?php if($image[1]) { ?>
+						<figure class="featured-thumb">
+							<a href="<?php echo $blog_url;?>"> <img src="<?php echo Mage::getBaseUrl('media') . $image[1];?>" width="80" height="53" alt="<?php echo $this->__('blog image') ?>" /> </a>							
+						</figure> <!--featured-thumb-->
+						<?php } ?>
+						<h4><a href="<?php echo $blog_url;?>" title="<?php echo ucfirst($recent_post_value['title']);?>"><?php echo ucfirst($recent_post_value['title']);?></a></h4>
+						<p class="post-meta"><i class="icon-calendar"></i><time class="entry-date" datetime="<?php echo date('c', strtotime($recent_post_value['created_at']));?>"><?php echo date('M d, Y', strtotime($recent_post_value['created_at']));?></time>.</p>
+					</li>
+					<?php
+				}
+				?>
+			</ul>
+                        </div> <!--widget-content-->
+		</div>
+		<div id="categories-2" class="popular-posts widget widget_categories"><h3 class="widget-title"><?php echo $this->__('Categories') ?></h3>		
+			<?php echo Mage::helper('blogmate')->getcattree(0);?>
+		</div>
+                  <!-- Banner Ad Block -->
+                  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_blog_banner_ad_block')->toHtml() ?>
+                  <!-- Banner Text Block -->
+                  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_blog_banner_text_block')->toHtml() ?>
+		
+	</aside>

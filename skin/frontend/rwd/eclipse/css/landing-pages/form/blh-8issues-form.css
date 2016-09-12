@@ -1,0 +1,96 @@
+h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: Lato, sans-serif;
+  font-size: 38px;
+  line-height: 44px;
+  font-weight: 700;
+  text-align: center;
+}
+
+h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 21px;
+  line-height: 30px;
+  font-weight: 700;
+  text-align: center;
+}
+
+p {
+  margin-bottom: 10px;
+  line-height: 24px;
+}
+
+.main-section {
+  height: 300px;
+  margin-bottom: 29px;
+  background-image: url('http://bottomlinestore.com/skin/frontend/rwd/eclipse/css/landing-pages/form/imgs/ThinkstockPhotos-508150362.jpg');
+  background-position: 50% 24%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header-container {
+  padding-top: 204px;
+}
+
+.footer-section {
+  margin-top: 25px;
+  background-color: #f3f3f3;
+}
+
+.text-block {
+  margin-top: 40px;
+  margin-right: 142px;
+  margin-left: 142px;
+  padding: 33px 0px 20px;
+  border-top: 1px solid #000;
+  font-size: 12px;
+  text-align: center;
+}
+
+.dude-img {
+  margin-right: 10px;
+  padding-top: 15px;
+  float: left;
+}
+
+@media (max-width: 991px) {
+  h1 {
+    font-size: 32px;
+  }
+  .main-section {
+    height: 250px;
+  }
+  .header-container {
+    padding-top: 166px;
+  }
+}
+
+@media (max-width: 767px) {
+  h1 {
+    padding-right: 19px;
+    padding-left: 19px;
+  }
+  .main-section {
+    height: 280px;
+  }
+}
+
+@media (max-width: 479px) {
+  h1 {
+    font-size: 23px;
+    line-height: 28px;
+  }
+  .main-section {
+    height: 220px;
+  }
+  .header-container {
+    padding-top: 117px;
+  }
+  .text-block {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}

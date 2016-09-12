@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/em_ajaxcart/em_ajaxcart.css</stylesheet></action>
+			<action method="addJs"><file>em/jquery-1.8.3.min.js</file></action>
+			<action method="addItem"><type>skin_js</type><name>js/em_ajaxcart/jquery.form.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/em_ajaxcart/lightbox.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/em_ajaxcart/em_ajaxcart.js</name></action>
+		</reference>
+		<reference name="before_body_end">
+            <block type="core/template" name="ajax.cart" template="em_ajaxcart/contanier.phtml"/>
+        </reference>
+    </default>
+</layout> 

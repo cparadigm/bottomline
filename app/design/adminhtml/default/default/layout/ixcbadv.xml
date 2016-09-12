@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<layout>
+	 <adminhtml_sales_order_view>
+		<!--<reference name="order_history">
+			<action method="setTemplate">
+				<template>ixcbadv/backend/history.phtml</template>
+			</action>
+		</reference>-->
+		<reference name="sales_order_tabs">
+            <action method="addTab">
+                <name>ixcbadv_gift</name>
+                <block>ixcbadv/adminhtml_sales_order_view_tab_gift</block>
+            </action>
+        </reference>
+	 </adminhtml_sales_order_view>
+	 
+	 <!--<adminhtml_sales_order_creditmemo_updateqty>
+		<reference name="order_totalbar">
+			<action method="setTemplate">
+				<template>ixcbadv/backend/totalbar.phtml</template>
+			</action>
+		</reference>
+		<reference name="creditmemo_totals">
+			<action method="setTemplate">
+				<template>ixcbadv/backend/totals.phtml</template>
+			</action>
+		</reference>
+	</adminhtml_sales_order_creditmemo_updateqty>
+
+	<adminhtml_sales_order_creditmemo_new>
+		<reference name="order_totalbar">
+			<action method="setTemplate">
+				<template>ixcbadv/backend/totalbar.phtml</template>
+			</action>
+		</reference>
+		<reference name="creditmemo_totals">
+			<action method="setTemplate">
+				<template>ixcbadv/backend/totals.phtml</template>
+			</action>
+		</reference>
+	 </adminhtml_sales_order_creditmemo_new>-->
+</layout>

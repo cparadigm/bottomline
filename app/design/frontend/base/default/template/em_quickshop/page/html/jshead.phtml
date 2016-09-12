@@ -1,0 +1,23 @@
+<script type="text/javascript">
+//<![CDATA[
+	<?php if (!Mage::helper('quickshop')->getConfig('enable')): ?>
+	window.EM_QUICKSHOP_DISABLED = true;
+	<?php endif; ?>
+	
+	if (typeof EM == 'undefined') EM = {};
+	EM.QuickShop = {
+		BASE_URL : '<?php echo $this->getUrl() ?>',
+		QS_FRM_TYPE : <?php echo Mage::getStoreConfig('quickshop/general/size_type');?>,
+		QS_FRM_WIDTH : <?php echo Mage::getStoreConfig('quickshop/general/frame_width');?>,
+		QS_FRM_HEIGHT : <?php echo Mage::getStoreConfig('quickshop/general/frame_height');?>,
+		QS_TEXT: '<?php echo $this->__('QUICK SHOP'); ?>',
+		QS_BTN_WIDTH : 96,
+		QS_BTN_HEIGHT : 25
+	};
+	if(EM.QuickShop.QS_FRM_TYPE == 0 ){
+		EM.QuickShop.QS_FRM_WIDTH = EM.QuickShop.QS_FRM_WIDTH + "%";
+		EM.QuickShop.QS_FRM_HEIGHT = EM.QuickShop.QS_FRM_HEIGHT + "%";
+	}
+
+//]]	
+</script> 

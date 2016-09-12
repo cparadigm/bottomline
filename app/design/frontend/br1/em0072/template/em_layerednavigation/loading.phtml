@@ -1,0 +1,17 @@
+<div id="loading-mask" style="display:none">
+    <div class="loader" id="loading_mask_loader">
+		<img src="<?php echo $this->getSkinUrl('images/em_layerednavigation/ajax-loader.gif') ?>" alt="<?php echo Mage::helper('adminhtml')->__('Loading...') ?>"/>
+		<div><?php echo Mage::helper('adminhtml')->__('Please wait...') ?></div>
+	</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	em_layer = new EM_LayeredNavigation({
+		current_layout: '<?php echo Mage::app()->getLayout()->getBlock('root')->getTemplate()?>',
+		endpoint: '<?php echo $this->getEndpointUrl() ?>',
+		category: <?php echo Mage::getSingleton('catalog/layer')->getCurrentCategory()->getId(); ?>,
+		ajax: <?php echo $this->isAjaxEnabled() ?>,
+		reqUri: '<?php echo $_SERVER['REQUEST_URI'] ?>'
+	});
+//]]>
+</script>

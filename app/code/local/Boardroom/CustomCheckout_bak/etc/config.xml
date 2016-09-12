@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Boardroom_CustomCheckout>
+            <version>0.0.1</version>
+        </Boardroom_CustomCheckout>
+    </modules>
+    <frontend>
+        <routers>
+            <checkout>
+                <use>standard</use>
+                <args>
+                    <modules>
+                        <Boardroom_CustomCheckout before="Mage_Checkout">Boardroom_CustomCheckout</Boardroom_CustomCheckout>
+                    </modules>
+                </args>
+            </checkout>
+        </routers>
+        <layout>
+            <updates>
+                <boardroom_customcheckout>
+                    <file>boardroom_customcheckout.xml</file>
+                </boardroom_customcheckout>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <blocks>
+            <checkout>
+                <rewrite>
+                    <onepage>Boardroom_CustomCheckout_Block_Onepage</onepage>
+                </rewrite>
+            </checkout>
+        </blocks>
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <boardroom_customcheckout>
+                        <type>singleton</type>
+                        <class>Boardroom_CustomCheckout_Model_Observer</class>
+                        <method>checkForPCD</method>
+                    </boardroom_customcheckout>
+                </observers>
+            </sales_order_save_after>
+        </events>
+    </global>
+</config>

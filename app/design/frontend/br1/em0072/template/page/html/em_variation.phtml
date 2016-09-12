@@ -1,0 +1,342 @@
+<?php
+    /* get config from themesetting */
+
+$setting = Mage::helper('em0072settings');
+$fonts = Mage::getModel('em0072settings/config_font')->toOptionArray();
+?>
+<a href="javascript:void(0)" class="btn-toggle">+ open/close</a>
+<div id="demotool_variation" class="hide-lte0">
+	
+	
+	<div class="variation-cp" style="display:none">
+		<div class="demotool-title">Magento Theme Variations</div>
+		<form method="GET" name="emvariationform" id="emvariationform" action="<?php echo $this->getSkinUrl('css/theme.css.php') ?>">
+		<div class="demotool-content">
+			<!-- Color -->
+			<div class="demo demo-01">
+				<div class="content-title"><span>Color</span></div>
+				<div class="wrapper-content general-setting">
+					<div class="box last">
+						<div class="content">
+						
+							<div class="col col-1">
+								<div class="row">
+									<div class="label">General</div>
+									<div class="input"><input type="text" name="general_color" value="<?php echo htmlspecialchars($setting->getTypography_GeneralColor()) ?>" class="color-picker" /></div>
+									<div class="desc">Default color used in description product, ....</div>
+								</div>
+								
+								<div class="row">
+									<div class="label">Secondary</div>
+									<div class="input"><input type="text" name="secondary_color" value="<?php echo htmlspecialchars($setting->getTypography_SecondaryColor()) ?>" class="color-picker" /></div>
+									<div class="desc">The secondary color used in this theme</div>
+								</div>
+								
+								<div class="row">
+									<div class="label">Negative 2</div>
+									<div class="input"><input type="text" name="negative_color_2" value="<?php echo htmlspecialchars($setting->getTypography_NegativeColor2()) ?>" class="color-picker" /></div>
+									<div class="desc">Another negative color used when text display on negative background</div>
+								</div>
+								<div class="row">
+									<div class="label">Background 3</div>
+									<div class="input"><input type="text" name="third_bgcolor" value="<?php echo htmlspecialchars($setting->getTypography_ThirdBgcolor()) ?>" class="color-picker" /></div>
+									<div class="desc">Background color used in product shop</div>
+								</div>
+								
+								<div class="row">
+									<div class="label">Border 3</div>
+									<div class="input"><input type="text" name="line_third_color" value="<?php echo htmlspecialchars($setting->getTypography_LineThirdColor()) ?>" class="color-picker" /></div>
+									<div class="desc">Hover product line's color</div>
+								</div>
+								
+								
+							</div>
+							
+							<div class="col col-1">
+								<div class="row">
+									<div class="label">General 2</div>
+									<div class="input"><input type="text" name="general_color_2" value="<?php echo htmlspecialchars($setting->getTypography_GeneralColor2()) ?>" class="color-picker" /></div>
+									<div class="desc">Default color used in content blog,...</div>
+								</div>
+								
+								
+								<div class="row">
+									<div class="label">Secondary 2</div>
+									<div class="input"><input type="text" name="secondary_color_2" value="<?php echo htmlspecialchars($setting->getTypography_SecondaryColor2()) ?>" class="color-picker" /></div>
+									<div class="desc">Another secondary color used in this theme</div>
+								</div>
+								
+								<div class="row">
+									<div class="label">Background</div>
+									<div class="input"><input type="text" name="primary_bgcolor" value="<?php echo htmlspecialchars($setting->getTypography_PrimaryBgcolor()) ?>" class="color-picker" /></div>
+									<div class="desc">Background color used in body or main sections</div>
+								</div>
+								
+								<div class="row">
+									<div class="label">Border 1</div>
+									<div class="input"><input type="text" name="line_color" value="<?php echo htmlspecialchars($setting->getTypography_LineColor()) ?>" class="color-picker" /></div>
+									<div class="desc">Line and border's color</div>
+								</div>
+								<div class="row">
+									<div class="label">Border 4</div>
+									<div class="input"><input type="text" name="line_fourth_color" value="<?php echo htmlspecialchars($setting->getTypography_LineFourthColor()) ?>" class="color-picker" /></div>
+									<div class="desc">Line title checkout active</div>
+								</div>
+								
+							</div>
+							
+							<div class="col col-1">
+								<div class="row">
+									<div class="label">Primary</div>
+									<div class="input"><input type="text" name="primary_color" value="<?php echo htmlspecialchars($setting->getTypography_PrimaryColor()) ?>" class="color-picker" /></div>
+									<div class="desc">Price product sidebar, hover link, ...</div>
+								</div>
+								
+								<div class="row">
+									<div class="label">Negative</div>
+									<div class="input"><input type="text" name="negative_color" value="<?php echo htmlspecialchars($setting->getTypography_NegativeColor()) ?>" class="color-picker" /></div>
+									<div class="desc">Negative color used when text display on negative background</div>
+								</div>
+								
+								<div class="row">
+									<div class="label">Background 2</div>
+									<div class="input"><input type="text" name="secondary_bgcolor" value="<?php echo htmlspecialchars($setting->getTypography_SecondaryBgcolor()) ?>" class="color-picker" /></div>
+									<div class="desc">Background color used in content, product, or secondary sections to highlight</div>
+								</div>
+								<div class="row">
+									<div class="label">Border 2</div>
+									<div class="input"><input type="text" name="line_secondary_color" value="<?php echo htmlspecialchars($setting->getTypography_LineSecondaryColor()) ?>" class="color-picker" /></div>
+									<div class="desc">Input line and border's color</div>
+								</div>
+								
+							</div>
+							
+							<div class="col">
+								<div class="row">
+									<div class="label">Background Pattern</div>
+									<div class="input">
+										<input type="hidden" name="page_bg_image" value="<?php echo htmlspecialchars($setting->getTypography_PageBgImage()) ?>"  />
+										<?php $imgDir = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN).'frontend/default/em0072/images/stripes/'; ?>
+										<?php foreach (Mage::getModel('em0072settings/config_stripes')->toOptionArray() as $row):?>
+										<a href="#" class="page_bg_image" data-input-value="<?php echo htmlspecialchars($row['value']) ?>" <?php echo $setting->getTypography_PageBgImage() == $row['value'] ? 'selected="selected"' : '' ?>>
+											<img src="<?php echo $imgDir . 'blank.png' ?>" style="background-image:url(<?php echo $imgDir . $row['value'] ?>)" alt="" />
+										</a>
+										<?php endforeach ?>
+									</div>
+									<div class="desc">Specify background pattern image.</div>
+								</div>
+								
+								<div class="row">
+									<div class="label">Box Shadow</div>
+									<div class="input"><input type="text" name="box_shadow" value="<?php echo htmlspecialchars($setting->getTypography_BoxShadow()) ?>" class="input-text"/></div>
+									<div class="desc">Configure box shadow for box, widgets, slider. No box shadow by default.</div>
+								</div>
+								
+	
+								
+								<div class="row">
+									<div class="label">Rounded Corner</div>
+									<div class="input"><input type="text" name="rounded_corner" value="<?php echo htmlspecialchars($setting->getTypography_RoundedCorner()) ?>" class="input-text"/></div>
+									<div class="desc">Configure rounded corner for box, widgets, slider.</div>
+								</div>
+
+								<input type="hidden" name="additional_css_file" value="<?php echo htmlspecialchars($setting->getTypography_AdditionalCssFile()) ?>" />
+							</div>
+
+						</div>
+					</div>
+				</div>			
+			</div>
+			
+			<!-- Google Fonts -->
+			<div class="demo demo-02">
+				<div class="content-title"><span>Google Fonts</span></div>
+				<div class="wrapper-content general-setting">
+					<div class="box last">
+						<div class="content">
+							<div class="col">
+								<div class="row">
+									<div class="label">Import these google fonts</div>
+									<div class="input">
+										<select id="em_variation_google_font" multiple="true" rows="10" size="10">
+											<?php Mage::log($setting->getTypography_GoogleFonts())?>
+											<?php $selectedFonts = explode(',', $setting->getTypography_GoogleFonts()) ?>
+											<?php foreach ($fonts as $_font): ?>
+											<option value="<?php echo htmlspecialchars($_font['value']) ?>" <?php echo @in_array($_font['value'], $selectedFonts) ? 'selected="selected"' : '' ?>><?php echo $_font['label'] ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+									<div class="desc">Select which google fonts should be imported to your site</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>					
+			</div>
+			
+			<!-- Element Fonts -->
+			<div class="demo demo-03">
+				<div class="content-title"><span>Element Fonts</span></div>
+				
+				<div class="wrapper-content">
+					<div class="box last">
+						<div class="content">
+							<div class="col">
+								<div class="row">
+									<div class="label">General Font</div>
+									<div class="input"><input type="text" name="general_font" value="<?php echo htmlspecialchars($setting->getTypography_GeneralFont()) ?>" class="input-text"/></div>
+									<div class="desc">Font for body, content, text...<br/>E.g. <em>normal 13px/1.55 "Helvetica Neue", "Open Sans", helvetica, arial, sans-serif</em></div>
+								</div>
+								<div class="row">
+									<div class="label">H1</div>
+									<div class="input"><input type="text" name="h1_font" value="<?php echo htmlspecialchars($setting->getTypography_H1Font()) ?>" class="input-text" /></div>
+									<div class="desc">E.g. <em>normal 20px/1.15 "Open Sans", helvetica, arial, sans-serif</em></div>
+								</div>
+								<div class="row">
+									<div class="label">H2</div>
+									<div class="input"><input type="text" name="h2_font" value="<?php echo htmlspecialchars($setting->getTypography_H2Font()) ?>" class="input-text" /></div>
+									<div class="desc">E.g. <em>normal 18px/1.15 "Open Sans", helvetica, arial, sans-serif</em></div>
+								</div>
+								<div class="row">
+									<div class="label">H3</div>
+									<div class="input"><input type="text" name="h3_font" value="<?php echo htmlspecialchars($setting->getTypography_H3Font()) ?>" class="input-text" /></div>
+									<div class="desc">E.g. <em>normal 16px/1.35 "Open Sans", helvetica, arial, sans-serif</em></div>
+								</div>
+								<div class="row">
+									<div class="label">H4</div>
+									<div class="input"><input type="text" name="h4_font" value="<?php echo htmlspecialchars($setting->getTypography_H4Font()) ?>" class="input-text" /></div>
+									<div class="desc">E.g. <em>normal 14px/1.35 "Open Sans", helvetica, arial, sans-serif</em></div>
+								</div>
+								<div class="row">
+									<div class="label">H5</div>
+									<div class="input"><input type="text" name="h5_font" value="<?php echo htmlspecialchars($setting->getTypography_H5Font()) ?>" class="input-text" /></div>
+									<div class="desc">E.g. <em>normal 13px/1.35 "Open Sans", helvetica, arial, sans-serif</em></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<!-- Buttons -->
+			<div class="demo demo-03">
+				<div class="content-title"><span>Buttons</span></div>
+				
+				<div class="wrapper-content body-variations">
+					<div class="box last">
+						<div class="content">
+							<div class="col">
+								<div class="row">
+									<div class="label">Default button style</div>
+									<div class="input"><input type="text" name="button1" value="<?php echo htmlspecialchars($setting->getTypography_Button1()) ?>" class="input-text" /></div>
+									<div class="desc">E.g. <em>background:#2a2a2a; border:1px solid #020202; color:#ffffff;</em></div>
+								</div>
+								<div class="row">
+									<div class="label">2nd button style</div>
+									<div class="input"><input type="text" name="button2" value="<?php echo htmlspecialchars($setting->getTypography_Button2()) ?>" class="input-text" /></div>
+									<div class="desc">E.g. <em>background:#f5447b; border:1px solid #d5265c; color:#ffffff;</em></div>
+								</div>
+								<div class="row">
+									<div class="label">3rd button style</div>
+									<div class="input"><input type="text" name="button3" value="<?php echo htmlspecialchars($setting->getTypography_Button3()) ?>" class="input-text" /></div>
+									<div class="desc">E.g. <em>background:#ffffff; border:1px solid #dadada; color:#f5447b;</em></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+			
+			<a href="#" class="btn-reset">Reset</a>
+			<a href="#" class="btn-apply">Apply Changes</a>
+		</div>
+		<div class="copyright">Theme designed by <a href="http://emthemes.com/premium-magento-themes.html" title="Premium Magento Themes &amp; Premium Magento Templates" target="_blank">EMThemes.com</a></div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+jQuery(function($) {
+	var panel = $('#demotool_variation').css({'left':'-100%', 'position':'absolute'});
+	
+	$('a.btn-toggle').click(function () {
+		if (!panel.hasClass('show')) {
+			$('.variation-cp').show();
+			panel.css('top', Math.max($(document).scrollTop(), Math.min($(this).offset().top, $(document).scrollTop() + $(window).height() - panel.outerHeight())) + 'px')
+				.addClass('show')
+				.animate({'left':$(this).width() + 1 + 'px'});
+		} else {
+			panel.removeClass('show')
+				.animate({'left':-$(this).width() - panel.outerWidth() - 10 + 'px'}, 
+				500, function () {
+					$('.variation-cp').hide();
+				});
+			
+		}
+		return false;
+	});
+
+	// toogle section content-title
+	$('#demotool_variation .content-title').click(function() {
+		$(this).next('.wrapper-content').slideToggle('fast');
+	}).trigger('click').first().trigger('click');
+	
+
+	// toggle box content
+	$('#demotool_variation .box .title').click(function () {
+		var box = $(this).parent();
+
+		if (box.children('.content').is(':visible')) {
+			box.children('.content').slideUp('fast');
+			box.addClass('close');
+		} else {
+			box.children('.content').slideDown('fast');
+			box.removeClass('close');
+		}
+			
+	});
+	
+	
+	var oldCss = $('#emcssvariation').attr('href');
+	
+	$('#demotool_variation .btn-apply').click(function() {
+		$('#emcssvariation').attr('href', $('#emvariationform').attr('action') + '?' + $('#emvariationform').serialize());
+	
+		return false;
+	});
+	
+	$('#demotool_variation .btn-reset').click(function() {
+		$('#emcssvariation').attr('href', oldCss);
+		$('#demotool_variation input[type=text], #demotool_variation select, #demotool_variation input[type=hidden]').val('').css('background-color', '');
+	
+		return false;
+	});
+
+
+	// load google fonts
+	var fontLoaded = {};
+	$('#em_variation_google_font').after('<p id="em_variation_google_font_preview" style="font-size:20px;padding:10px 0"></p>')
+		.bind('change', function() {
+			var font = $(this).val();
+			if (font.length > 0) {
+				font = font[font.length-1];
+				if (typeof fontLoaded[font] == 'undefined') {
+					$('head').append('<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='+encodeURIComponent(font)+':400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic&subset=latin,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese,latin-ext"></link>');
+					$('#em_variation_google_font_preview').html(font)
+						.css('font-family', font);
+				}
+			}
+		});
+		
+	// stripes pattern
+	$('#demotool_variation a.page_bg_image').click(function() {
+		$('#demotool_variation a.page_bg_image').removeClass('selected');
+		$(this).addClass('selected');
+		$('#demotool_variation input[name=page_bg_image]').val('url(../images/stripes/' + $(this).data('input-value') + ')');
+		return false;
+	});
+});
+//]]>
+</script>

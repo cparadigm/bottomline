@@ -1,0 +1,62 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">
+ <cms_index_index>
+   <reference name="head">
+        <action method="addItem"><type>skin_css</type><name>css/blogmate/blogmate.css</name></action>
+    </reference>
+  </cms_index_index>
+  <blogmate_index_index>   
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference> 
+    <reference name="head">
+	<action method="addItem"><type>skin_css</type><name>css/blogmate/blogmate.css</name></action>
+    </reference>
+    <reference name="content">   
+      <block type="blogmate/index" name="blogmate_index" template="blogmate/index.phtml">
+        <block type="blogmate/index" name="blog_right" template="blogmate/right/right.phtml"/>
+      </block> 
+    </reference>   
+  </blogmate_index_index>
+  <blogmate_view_post>   
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference>
+    <reference name="head">
+	<action method="addItem"><type>skin_css</type><name>css/blogmate/blogmate.css</name></action>
+    </reference>
+    <reference name="content">   
+      <block type="blogmate/index" name="blogmate_index" template="blogmate/view/post.phtml">
+        <block type="blogmate/comments" name="blog_comments" template="blogmate/comments/comments.phtml"/>
+        <block type="blogmate/index" name="blog_right" template="blogmate/right/right.phtml"/>
+      </block> 
+    </reference>   
+  </blogmate_view_post>
+  <blogmate_view_category>   
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference>
+    <reference name="head">
+	<action method="addItem"><type>skin_css</type><name>css/blogmate/blogmate.css</name></action>
+    </reference>
+    <reference name="content">   
+      <block type="blogmate/view" name="blogmate_view" template="blogmate/view/category.phtml">
+        <block type="blogmate/view" name="blog_right" template="blogmate/right/right.phtml"/>
+      </block> 
+    </reference>   
+  </blogmate_view_category>
+  <blogmate>   
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference> 
+    <reference name="head">
+	<action method="addItem"><type>skin_css</type><name>css/blogmate/blogmate.css</name></action>
+    </reference>
+    <reference name="content">   
+      <block type="blogmate/index" name="blogmate_index" template="blogmate/index.phtml">
+        <block type="blogmate/index" name="blog_right" template="blogmate/right/right.phtml"/>
+      </block> 
+    </reference>   
+  </blogmate>
+</layout>   
+	

@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Magik
+ * @package    Magik_Autocomplete
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Magik_Autocomplete>
+            <version>0.1.0</version>
+        </Magik_Autocomplete>
+    </modules>
+    <frontend>
+        <routers>
+            <autocomplete>
+                <use>standard</use>
+                <args>
+                    <module>Magik_Autocomplete</module>
+                    <frontName>autocomplete</frontName>
+                </args>
+            </autocomplete>
+        </routers>
+        <layout>
+            <updates>
+                <autocomplete>
+                    <file>autocomplete.xml</file>
+                </autocomplete>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<autocomplete>
+				<use>admin</use>
+				<args>
+					<module>Magik_Autocomplete</module>
+					<frontName>autocomplete</frontName>
+				</args>
+			</autocomplete>
+        </routers>
+    </admin>
+    <adminhtml>
+	  <acl>
+		  <resources>
+		      <admin>  
+			  <children>
+			      <system>
+				  <children>
+				      <config>
+					  <children>
+					      <mgkautocompletesection translate="title" module="autocomplete">  
+						  <title>Magik Autocomplete Section ACL</title>  
+						  <sort_order>263</sort_order>
+					      </mgkautocompletesection>
+					  </children>
+				      </config>
+				  </children>
+			      </system>
+			</children>
+		      </admin>
+		  </resources>
+	      </acl> 
+		<layout>
+			<updates>
+				<autocomplete>
+					<file>autocomplete.xml</file>
+				</autocomplete>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>	
+	<rewrite>           
+            <magik_autocomplete_catalogsearch>
+                <from><![CDATA[#^/catalogsearch/result/#]]></from>               
+                <to>/autocomplete/result/</to>
+            </magik_autocomplete_catalogsearch>
+        </rewrite> 
+        <models>
+            <autocomplete>
+                <class>Magik_Autocomplete_Model</class>
+                <resourceModel>autocomplete_mysql4</resourceModel>
+            </autocomplete>
+        </models>
+        <resources>
+            <autocomplete_setup>
+                <setup>
+                    <module>Magik_Autocomplete</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </autocomplete_setup>
+            <autocomplete_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </autocomplete_write>
+            <autocomplete_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </autocomplete_read>
+        </resources>
+        <blocks>
+            <autocomplete>
+                <class>Magik_Autocomplete_Block</class>
+            </autocomplete>
+        </blocks>
+        <helpers>
+            <autocomplete>
+                <class>Magik_Autocomplete_Helper</class>
+            </autocomplete>
+        </helpers>
+    </global>
+    <default>
+	<mgkautocompletesection>
+            <general>
+		<productcount>5</productcount>
+		<headercontent>Most relevant searches shown</headercontent>
+		<tempcontent><![CDATA[<img align="left" src="{small_image}" id="image"><strong>{name}</strong><br/><span style="color:#999;">Price :</span><span style="color:#ff0000;">{price}</span>]]>
+		</tempcontent>
+	    </general>
+	 </mgkautocompletesection>
+    </default>
+</config>

@@ -1,0 +1,24 @@
+<?php $_product = $this->getProduct(); ?>
+<?php 
+					
+	$storeId = Mage::app()->getStore()->getId();
+	Mage::getModel('review/review')->getEntitySummary($_product, $storeId);
+?>
+<?php $url= $this->getBaseUrl().'review/product/list/id/'.$_product->getId().'/'?>
+<?php if ($_product->getRatingSummary()->getReviewsCount()): ?>
+	 <div class="ratings">
+        <?php if ($_product->getRatingSummary()->getRatingSummary()):?>
+            <div class="rating-box">
+                <div class="rating" style="width:<?php echo $_product->getRatingSummary()->getRatingSummary() ?>%"></div>
+            </div>
+        <?php endif;?>
+        <p class="rating-links">
+            <a href="<?php echo $url?>"><?php echo $this->__('%d Review(s)', $_product->getRatingSummary()->getReviewsCount()) ?></a>
+            <span class="separator">|</span>
+            <a href="<?php echo $url?>#review-form"><?php echo $this->__('Add Your Review') ?></a>
+        </p>
+    </div>
+	
+<?php else: ?>
+   <p class="no-rating"><a href="<?php echo $url?>#review-form"><?php echo $this->__('Be the first to review this product') ?></a></p>
+<?php endif; ?>

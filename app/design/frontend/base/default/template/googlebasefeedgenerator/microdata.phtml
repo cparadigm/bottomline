@@ -1,0 +1,20 @@
+<?php
+/** @var $this RocketWeb_GoogleBaseFeedGenerator_Block_Product_View_Microdata */
+
+$microdata_list = $this->getMicrodata();
+?>
+<?php if (!empty($microdata_list)): ?>
+<?php foreach($microdata_list as $microdata): ?>
+    <div itemscope itemtype="http://schema.org/Product">
+        <meta itemprop="name" content="<?php echo $microdata->getName()?>" />
+        <meta itemprop="sku" content="<?php echo $microdata->getId()?>" />
+
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="<?php echo $microdata->getCurrency()?>" />
+            <meta itemprop="price" content="<?php echo $microdata->getPrice()?>" />
+            <meta itemprop="itemCondition" itemtype="http://schema.org/OfferItemCondition" content="<?php echo $microdata->getCondition()?>" />
+            <meta itemprop="availability" content="<?php echo $microdata->getAvailability()?>" />
+        </div>
+    </div>
+<?php endforeach;?>
+<?php endif; ?>

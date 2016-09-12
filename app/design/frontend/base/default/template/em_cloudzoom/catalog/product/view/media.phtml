@@ -1,0 +1,223 @@
+<?php
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+    
+    $_position		= Mage::getStoreConfig('em_cloudzoom/general/position');
+    $_show_title	= intval(Mage::getStoreConfig('em_cloudzoom/general/show_title'));
+    $_title_opacity	= intval(Mage::getStoreConfig('em_cloudzoom/general/title_opacity'))/100;
+    $_lens_opacity	= intval(Mage::getStoreConfig('em_cloudzoom/general/lens_opacity'))/100;
+    $_tint_color	= trim(Mage::getStoreConfig('em_cloudzoom/general/tint_color'));
+    $_tint_opacity	= intval(Mage::getStoreConfig('em_cloudzoom/general/tint_opacity'))/100;
+    $_zoom_width	= intval(Mage::getStoreConfig('em_cloudzoom/general/zoom_width'));
+    $_zoom_height	= intval(Mage::getStoreConfig('em_cloudzoom/general/zoom_height'));
+    //$_big_image_width	= intval(Mage::getStoreConfig('em_cloudzoom/general/big_image_width'));
+    //$_big_image_height	= intval(Mage::getStoreConfig('em_cloudzoom/general/big_image_height'));
+	
+	$_fix_width = intval(Mage::getStoreConfig('em_cloudzoom/general/fix_width'));
+	$_fix_height = intval(Mage::getStoreConfig('em_cloudzoom/general/fix_height'));
+	
+	$_fix_thumb_width = intval(Mage::getStoreConfig('em_cloudzoom/general/fix_thumb_width'));
+	$_fix_thumb_height = intval(Mage::getStoreConfig('em_cloudzoom/general/fix_thumb_height'));
+	
+	$config = "position:'{$_position}',showTitle:{$_show_title},titleOpacity:{$_title_opacity},lensOpacity:{$_lens_opacity},";
+	
+	if($_fix_width){ $config .= "fixWidth:{$_fix_width},"; }
+    if($_fix_height){ $config .= "fixHeight:{$_fix_height},"; }
+	if($_fix_thumb_width){ $config .= "fixThumbWidth:{$_fix_thumb_width},"; }
+    if($_fix_thumb_height){ $config .= "fixThumbHeight:{$_fix_thumb_height},"; }
+    if($_position == 'inside'){ $config .= 'adjustX: -4, adjustY:-4,';} 
+	elseif($_position == 'right'){ $config .= 'adjustX: 10, adjustY:-4,'; }
+	elseif($_position == 'bottom'){ $config .= 'adjustX: -4, adjustY:10,'; }
+    elseif($_position == 'left'){ $config .= 'adjustX: -18, adjustY:-4,'; }
+    elseif($_position == 'top'){ $config .= 'adjustX: -4, adjustY:-18,'; }
+    if($_tint_color){ $config .= "tint:'{$_tint_color}', tintOpacity:{$_tint_opacity},"; }
+    if($_zoom_width){ $config .= "zoomWidth:{$_zoom_width},"; }
+    if($_zoom_height){ $config .= "zoomHeight:{$_zoom_height},";}
+    $config = trim($config, ',');   
+?>
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+	<?php if($_fix_width && $_fix_height): ?>	<!--Co dinh width & height--> 
+		<p class="product-image"> 
+			<?php if ($this->helper('catalog/image')->init($_product, 'image')->getOriginalWidth() > $_fix_width || $this->helper('catalog/image')->init($_product, 'image')->getOriginalHeight() > $_fix_height): ?>		
+				<a href='<?php echo $this->helper('catalog/image')->init($_product, 'image');?>' class = 'cloud-zoom' id='zoom1' rel="<?php echo $config;?>">
+					<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize($_fix_width, $_fix_height);?>" alt='' title="<?php echo $this->htmlEscape($this->getImageLabel());?>" />
+				</a>
+			<?php else: ?>
+				<a href='<?php echo $this->helper('catalog/image')->init($_product, 'image');?>' class = 'cloud-zoom' id='zoom1' rel="<?php echo $config;?>">
+					<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(null);?>" alt='' title="<?php echo $this->htmlEscape($this->getImageLabel());?>" />
+				</a>
+			<?php endif; ?>
+		</p>
+		
+	<?php elseif($_fix_width && $_fix_height==null): ?> 	<!--Co dinh width, auto height-->
+			<p class="product-image">
+				<?php $w = $_fix_width; ?>
+				<?php $ratio = $w / $this->helper('catalog/image')->init($_product, 'image')->getOriginalWidth(); ?>
+				<?php $h = $ratio * $this->helper('catalog/image')->init($_product, 'image')->getOriginalHeight(); ?>
+				<?php if ($this->helper('catalog/image')->init($_product, 'image')->getOriginalWidth() > $_fix_width): ?>
+					<a href='<?php echo $this->helper('catalog/image')->init($_product, 'image');?>' class = 'cloud-zoom' id='zoom1' rel="<?php echo $config;?>">
+						<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize($w, $h); ?>" alt='' title="<?php echo $this->htmlEscape($this->getImageLabel());?>" />
+					</a>
+				<?php else: ?>
+					<a href='<?php echo $this->helper('catalog/image')->init($_product, 'image');?>' class = 'cloud-zoom' id='zoom1' rel="<?php echo $config;?>">
+						<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image');?>" alt='' title="<?php echo $this->htmlEscape($this->getImageLabel());?>" />
+					</a>
+				<?php endif; ?>
+			</p>
+			
+	<?php elseif($_fix_width==null && $_fix_height):  ?>	<!--Co dinh height, auto width--> 
+		<p class="product-image">
+			<?php $h = $_fix_height; ?>
+			<?php $ratio = $h / $this->helper('catalog/image')->init($_product, 'image')->getOriginalHeight(); ?>
+			<?php $w = $ratio * $this->helper('catalog/image')->init($_product, 'image')->getOriginalWidth(); ?>
+			<?php if ($this->helper('catalog/image')->init($_product, 'image')->getOriginalHeight() > $_fix_height): ?>
+				<a href='<?php echo $this->helper('catalog/image')->init($_product, 'image');?>' class = 'cloud-zoom' id='zoom1' rel="<?php echo $config;?>">
+					<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize($w, $h); ?>" alt='' title="<?php echo $this->htmlEscape($this->getImageLabel());?>" />
+				</a>
+			<?php else: ?>
+				<a href='<?php echo $this->helper('catalog/image')->init($_product, 'image');?>' class = 'cloud-zoom' id='zoom1' rel="<?php echo $config;?>">
+					<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(null);?>" alt='' title="<?php echo $this->htmlEscape($this->getImageLabel());?>" />
+				</a>
+			<?php endif; ?>
+		</p>
+		
+	<?php else: ?>
+		<p class="product-image">
+			<?php if ($this->helper('catalog/image')->init($_product, 'image')->getOriginalHeight() > $_fix_height): ?>
+				<a href='<?php echo $this->helper('catalog/image')->init($_product, 'image');?>' class = 'cloud-zoom' id='zoom1' rel="<?php echo $config;?>">
+					<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(400); ?>" alt='' title="<?php echo $this->htmlEscape($this->getImageLabel());?>" />
+				</a>
+			<?php else: ?>
+				<a href='<?php echo $this->helper('catalog/image')->init($_product, 'image');?>' class = 'cloud-zoom' id='zoom1' rel="<?php echo $config;?>">
+					<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(null);?>" alt='' title="<?php echo $this->htmlEscape($this->getImageLabel());?>" />
+				</a>
+			<?php endif; ?>
+		</p>
+	<?php endif; ?>
+<?php endif; ?>
+
+<?php if (count($this->getGalleryImages()) > 0): ?>
+	<div class="more-views">
+		<div id="slideshow_moreview" class="slideshow_moreview">
+			<div class="slideshow-box">
+				<ul>
+					<?php foreach ($this->getGalleryImages() as $_image): ?>
+						<li> 
+							<?php $_product = $this->getProduct(); ?>
+							<?php $img = $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())?>
+							<div style="display:none;"><?php echo $img;?></div>
+							
+							<?php $width_root = $img->getImageWidth(); ?>
+							<?php $height_root = $img->getImageHeight(); ?>
+							
+							<?php if($_fix_width && $_fix_height): ?>			<!-- Truong hop co dinh width va height-->
+								<?php $w_img = $_fix_width; ?>
+								<?php $h_img = $_fix_height; ?>
+								
+								<?php if ($_fix_thumb_width && $_fix_thumb_height): ?>
+									<?php $w_thumb = $_fix_thumb_width; ?>
+									<?php $h_thumb = $_fix_thumb_height; ?>
+								<?php elseif($_fix_thumb_width && $_fix_thumb_height==null): ?>
+									<?php $w_thumb = $_fix_thumb_width; ?>
+									<?php $ratio_thumb = $w_thumb / $width_root; ?>
+									<?php $h_thumb = $height_root * $ratio_thumb; ?>
+								<?php elseif($_fix_thumb_width==null && $_fix_thumb_height): ?>
+									<?php $h_thumb = $_fix_thumb_height; ?>
+									<?php $ratio_thumb = $h_thumb / $height_root; ?>
+									<?php $w_thumb = $width_root * $ratio_thumb; ?>
+								<?php else: ?>
+									<?php $h_thumb = 60; ?>
+									<?php $w_thumb = 60; ?>
+								<?php endif; ?>
+							<?php elseif($_fix_width && $_fix_height==null): ?>	<!-- Truong hop co dinh width, auto height-->
+								<?php $w_img = $_fix_width; ?>
+								<?php $ratio_img = $_fix_width / $width_root; ?>
+								<?php $h_img = $height_root * $ratio_img; ?>
+
+								<?php if ($_fix_thumb_width && $_fix_thumb_height): ?>
+									<?php $w_thumb = $_fix_thumb_width; ?>
+									<?php $h_thumb = $_fix_thumb_height; ?>
+								<?php elseif($_fix_thumb_width && $_fix_thumb_height==null): ?>
+									<?php $w_thumb = $_fix_thumb_width; ?>
+									<?php $ratio_thumb = $w_thumb / $width_root; ?>
+									<?php $h_thumb = $height_root * $ratio_thumb; ?>
+								<?php elseif($_fix_thumb_width==null && $_fix_thumb_height): ?>
+									<?php $h_thumb = $_fix_thumb_height; ?>
+									<?php $ratio_thumb = $h_thumb / $height_root; ?>
+									<?php $w_thumb = $width_root * $ratio_thumb; ?>
+								<?php else: ?>
+									<?php $h_thumb = 60; ?>
+									<?php $w_thumb = 60; ?>
+								<?php endif; ?>
+							<?php elseif($_fix_width==null && $_fix_height): ?>	<!-- Truong hop co dinh height, auto width-->
+							
+								<?php $h_img = $_fix_height; ?>
+								<?php $ratio_img = $_fix_height / $height_root; ?>
+								<?php $w_img = $width_root * $ratio_img; ?>
+							
+								<?php if ($_fix_thumb_width && $_fix_thumb_height): ?>
+									<?php $w_thumb = $_fix_thumb_width; ?>
+									<?php $h_thumb = $_fix_thumb_height; ?>
+								<?php elseif($_fix_thumb_width && $_fix_thumb_height==null): ?>
+									<?php $w_thumb = $_fix_thumb_width; ?>
+									<?php $ratio_thumb = $w_thumb / $width_root; ?>
+									<?php $h_thumb = $height_root * $ratio_thumb; ?>
+								<?php elseif($_fix_thumb_width==null && $_fix_thumb_height): ?>
+									<?php $h_thumb = $_fix_thumb_height; ?>
+									<?php $ratio_thumb = $h_thumb / $height_root; ?>
+									<?php $w_thumb = $width_root * $ratio_thumb; ?>
+								<?php else: ?>
+									<?php $h_thumb = 60; ?>
+									<?php $w_thumb = 60; ?>
+								<?php endif; ?>	
+							<?php else: ?>	<!-- Truong hop khong xac dinh width, height-->
+								<?php $h_img = 400; ?>
+								<?php $w_img = 400; ?>
+								<?php if ($_fix_thumb_width && $_fix_thumb_height): ?>
+									<?php $w_thumb = $_fix_thumb_width; ?>
+									<?php $h_thumb = $_fix_thumb_height; ?>
+								<?php elseif($_fix_thumb_width && $_fix_thumb_height==null): ?>
+									<?php $w_thumb = $_fix_thumb_width; ?>
+									<?php $ratio_thumb = $w_thumb / $width_root; ?>
+									<?php $h_thumb = $height_root * $ratio_thumb; ?>
+								<?php elseif($_fix_thumb_width==null && $_fix_thumb_height): ?>
+									<?php $h_thumb = $_fix_thumb_height; ?>
+									<?php $ratio_thumb = $h_thumb / $height_root; ?>
+									<?php $w_thumb = $width_root * $ratio_thumb; ?>
+								<?php else: ?>
+									<?php $h_thumb = 60; ?>
+									<?php $w_thumb = 60; ?>
+								<?php endif; ?>
+							<?php endif; ?>
+
+							<?php if(($_fix_width && $width_root>$_fix_width) || ($_fix_height && $height_root>$_fix_height)): ?>
+								<a href='<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile());?>'  class='cloud-zoom-gallery' title='<?php echo $this->htmlEscape($_image->getLabel()) ?>'
+								rel="useZoom: 'zoom1', smallImage: '<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->resize($w_img, $h_img);?>' ">
+								<img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize($w_thumb, $h_thumb);?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"/>
+								</a>
+							<?php else: ?>
+								<a href='<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile());?>'  class='cloud-zoom-gallery' title='<?php echo $this->htmlEscape($_image->getLabel()) ?>'
+								rel="useZoom: 'zoom1', smallImage: '<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->resize(null);?>' ">
+								<img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize($w_thumb, $h_thumb);?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"/>
+								</a>
+							<?php endif?>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>	<!-- /slideshow-box -->
+
+			<?php if(count($this->getGalleryImages())>0): ?>
+				<a href="javascript:void(0)" class="previous">Previous</a>
+				<a href="javascript:void(0)" class="next">Next</a>
+			<?php endif; ?>
+		</div>
+	</div>
+<?php endif; ?>

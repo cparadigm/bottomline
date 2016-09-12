@@ -1,0 +1,14 @@
+<?php
+$id = $this->getData('wrapperId');
+$class = $this->getData('wrapperClass');
+$content = $this->getChildHtml('', true, true);
+?>
+<?php if (!empty($content)): ?>
+	<?php if ($id || $class): ?>
+		<div id="<?php echo $id ?>" class="<?php echo $class ?>">
+			<?php echo $content ?>
+		</div>
+	<?php else: ?>
+		<?php echo $content ?>
+	<?php endif ?>
+<?php endif ?>

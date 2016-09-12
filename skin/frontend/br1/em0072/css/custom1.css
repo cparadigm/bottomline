@@ -1,0 +1,44 @@
+/**
+ * EMThemes
+ *
+ * @license commercial software
+ * @copyright (c) 2012 Codespot Software JSC - EMThemes.com. (http://www.emthemes.com)
+ */
+
+.em_nav .hnav { 
+	background-image:url(../images/bkg_nav.png); 
+		background-position:0 0;
+		background-repeat: repeat-x; 
+	border-radius:3px 3px 0 0;
+}
+
+.wrapper_footer { 
+	background-color:rgba(0,0,0,0.02);
+	border-top:1px solid /*BEGIN:line_color*/#cccccc/*END:line_color*/;
+	box-shadow:0 3px 8px rgba(0,0,0,0.08) inset;
+}
+.wrapper_footer .container_24 { border-top:0 }
+
+.footer-container { 
+	background:transparent;
+	color:/*BEGIN:secondary_color*/#878686/*END:secondary_color*/;
+	border-top:/*BEGIN:line_color*/1px solid #cccccc/*END:line_color*/;
+}
+.footer-container a {
+	color:/*BEGIN:secondary_color*/#878686/*END:secondary_color*/;
+}
+
+.box,
+.slider_container,
+.slider_container .widget-title, 
+.slider_container .block_title,
+.sidebar,
+.sidebar .block-title {
+	box-shadow:0 -3px 3px rgba(0,0,0,0.05) inset;
+}
+
+hr, .hr {
+	box-shadow:0 -3px 3px rgba(0,0,0,0.05);
+}
+
+#emarea18 { border-top:0 }

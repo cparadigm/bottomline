@@ -1,0 +1,229 @@
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700,300' rel='stylesheet' type='text/css'>
+<!--@subject A gift card from {{htmlescape var=$sendername}} @-->
+<!--@vars
+{"htmlescape var=$name":"Recipient Name",
+"htmlescape var=$sendername":"Sender name",
+"var code":"Gift Card Code",
+"var balance":"Gift Card Balance",
+"var status":"Status",
+"htmlescape var=$message":"Message",
+"var expiredat":"Expired At"}
+@-->
+
+<!--@styles
+body,td { background:#FFFFFF; margin:0; padding:0; color:#2f2f2f; font-family: 'Open Sans', sans-serif; }
+pre{ white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;}
+@-->
+
+<div style="font-family: 'Open Sans', sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font-family: 'Open Sans', sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="660">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}">
+                                <img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="660">
+                    <tr>
+                        <td valign="top">
+                            <p>
+                                <strong>Dear {{htmlescape var=$name}}</strong>,<br/>
+                                We are glad to inform that <strong>{{htmlescape var=$sendername}}</strong> has sent you a Gift Card from {{var store.getFrontendName()}}.<br/>
+                                You can comfortably use the Gift Card(s) to purchase other products at <a href="{{store url=""}}">{{var store.getFrontendName()}}</a> or add it to your Gift Card list by clicking  <a href="{{var addurl}}"> here</a>.<br/>
+                                Print Gift Card <a href="{{store url=""}}/giftvoucher/index/printemail/k/{{var secure_key}}">now</a></br>
+                            </p>                            
+                             {{depend back}}
+                           <div>
+                                <div style="width: 600px;float: left; height: 365px; font-size: 14px;background-image:url({{var image}})">
+                                    <div style="position: relative; height: 84px;">
+                                        {{if logo}}
+                                        <img src="{{var logo}}" height="65" style="margin-left: 15px; float: left;border-radius: 0 0 5px 5px;"/>
+                                        {{else}}
+                                        <img src="{{skin url="images/logo_email.gif" _area='frontend'}}" height="65" style="margin-left: 15px; float: left;border-radius: 0 0 5px 5px;"/>
+                                        {{/if}}                                        
+                                    </div>
+                                    <div style="float: left; width: 100%; max-height: 51px; background-repeat: no-repeat ;background-image: url({{skin url='css/magestore/giftvoucher/bkg-title.png' _area='frontend'}})">
+                                        <div style="line-height: 55px; font-size: 20px; color: {{var style}}; float: left; margin-left: 15px; font-weight: 600;"><span style="font-family: 'Open Sans', sans-serif;">{{var template.caption}}</span></div>
+                                        <div style="width: 194px; height: 52px;float: right;text-align: right; background-repeat: no-repeat ;background-image: url({{skin url='css/magestore/giftvoucher/bkg-value.png' _area='frontend'}})">
+                                            <span style="height: 21px;font-size: 12px;font-family: 'Open Sans', sans-serif; color: {{var text}}">Value</span>
+                                            <span style="margin-right: 15px;font-size: 26px; line-height: 55px;margin-left: 11px; height: 50px;color: {{var style}};font-family: 'Open Sans', sans-serif; font-weight: bold;">{{var balance}}</span>
+                                        </div>
+                                    </div>
+                                    <div style="float: left; width: 100%;margin-top: 10px;">
+                                        <div style="margin-left: 15px; float: left;width: 50%;">
+                                            <div style="float: left; text-align: left;margin-bottom: 5px;">
+                                                <label style=" float: left; margin-right: 15px; font-size: 16px; font-weight: 600;font-family: 'Open Sans', sans-serif;color: {{var text}};">From:</label>
+                                                <span style="font-family: 'Open Sans', sans-serif;line-height: 22px;color: {{var style}}; ">{{var sendername}}</span>
+                                            </div>
+                                            <div style="clear: both; float: left;margin-right: 15px;">
+                                                <label style="float: left; margin-right: 10px; font-size: 16px; font-weight: 600;font-family: 'Open Sans', sans-serif;color: {{var text}};">To: </label>
+                                                <span style="font-family: 'Open Sans', sans-serif;line-height: 22px;color: {{var style}}; ">{{var receivename}}</span>
+                                            </div>
+                                        </div>
+                                         <div style="width: 45%;float: right;text-align: right;margin-right: 15px;">  
+                                            {{if barcode}}
+                                            <div style="text-align: right;">                                                
+                                            <span class="giftcard-style-color" style="float:right;width:100%;font-style: italic;color: {{var style}}; font-family: 'Open Sans', sans-serif;font-weight: 600; font-style: italic">{{var code}}</span>
+                                            <span style="width: 180px; min-height: 40px; margin-top: 5px; float: right;"><img style="max-height: 40px;float: right;"src='{{var barcode}}' {{var resize}} /></span>
+                                            </div>                                            
+                                           {{else}}                                          
+                                            <div style="font-style: italic;font-size: 16px; color: {{var style}};font-family: 'Open Sans', sans-serif; font-weight: 600;">{{var code}}</div>                                            
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                    <div style="float: left; width: 100%;margin-top: 10px;">
+                                        <div class = "message-box-top"style="height: 85px;width: 569px;margin: 0 auto;background: #fff;border: 1px solid #ececec; border-radius: 5px;color: {{var text}}">
+                                            <p  class="print-font" style="height: 30px;overflow: hidden;padding: 10px;font-size: 12px; margin: 0;max-height: 85px;font-family: 'Open Sans', sans-serif; overflow: hidden; padding: 5px;">
+                                                 {{var message}}
+                                            </p>
+                                        </div>
+                                    </div>                                   
+                                    <div style="float: left; width: 100%;margin-top: 10px;">
+                                        <div style="">
+                                            <p style="font-size: 12px;font-family: 'Open Sans', sans-serif;padding: 0px 15px;line-height: 15px; margin: 0; color: {{var text}}">{{var note}}</p>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                            {{/depend}}
+                            {{depend top}}
+                            <div style="width: 600px; height: 365px;font-size: 14px;">
+                                <div style="float: left; width: 100%; background-image:url({{var image}}); background-size: 100% 100%; height: 183px;background-repeat: no-repeat ">                                  
+                                    <div style="width: 600px;" >
+                                        <div style="width: 100%; height: 84px; font-size: 40px; font-style: italic; color: orange;float: left">
+                                            {{if logo}}
+                                            <img src="{{var logo}}" height="63" style="border-radius: 0px 0px 5px 5px;float:left;margin-left: 15px;"/>
+                                            {{else}}
+                                            <img src="{{skin url="images/logo_email.gif" _area='frontend'}}" height="63" style="border-radius: 0px 0px 5px 5px;float:left;margin-left: 15px;"/>
+                                            {{/if}}                                        
+                                        </div>
+                                        <div style="float: left;max-height: 51px;width: 100%; margin-top: 48px; line-height: 50px; background-repeat: no-repeat ;background-image: url({{skin url='css/magestore/giftvoucher/bkg-title.png' _area='frontend'}})">
+                                            <span style="line-height: 52px; font-size: 20px; color: {{var style}}; float: left; margin-left: 15px; font-weight: 600">{{var template.caption}}</span>
+                                            <div style="width: 194px; text-align: right;height: 52px; background-repeat: no-repeat;float: right; background-image: url({{skin url='css/magestore/giftvoucher/bkg-value.png' _area='frontend'}})">
+                                                <span style="text-align: right; width: 160px;height: 21px; color: {{var text}}">Value</span>
+                                                <span style="margin-right: 15px;margin-left: 15px;text-align: right; font-size: 25px;height: 50px; line-height:46px; color: {{var style}}; font-weight: bold">{{var balance}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="width: 600px; height: 170px; padding-top: 10px;background-image:url({{var background}});float: left;">                                   
+                                    <div style="width: 600px;float: left;">
+                                        <div style="width: 320px; height: 25px; padding-left: 15px; float: left;font-size: 16px;">
+                                            <span style="float: left;margin-bottom: 6px;margin-top: 5px;">
+                                                <label style="float: left; margin-right: 10px; font-size: 16px; font-weight: 600;color: {{var text}};">From:</label>
+                                                <span style="color: {{var text}};">{{var sendername}}</span>
+                                            </span>
+                                            <span style="float: left; clear: both;margin-bottom: 8px;">
+                                                <label for="giftcard-to" style="float: left; margin-right: 10px; font-size: 16px; font-weight: 600;clear: both;color: {{var text}};">To: </label>
+                                                <span style="color: {{var text}};">{{var receivename}}</span>
+                                            </span>
+                                        </div>
+                                        <div style="width: 250px; padding-right: 15px;float: left; text-align: right;font-size: 14px;float: right;">                                            
+                                            
+                                                {{if barcode}}
+                                                <div style="font-size: 14px; margin-bottom: 10px;color: {{var text}}; font-weight: 600;font-style: italic;">{{var code}}</div>
+                                                <span style="width: 158px">
+                                                    <img height="40" style="float: right;max-width: 100%;" src="{{var barcode}}" {{var resize}}/>
+                                                </span>
+                                                {{else}}
+                                                <div style="font-size: 14px;margin-bottom: 10px;color: {{var text}}; font-weight: 600;font-style: italic;">{{var code}}</div>
+                                                {{/if}}                                           
+                                        </div>
+                                    </div>
+                                    <div style="position: relative; width: 600px;height: 110px;float: left;">
+                                        <div style="width:342px; margin-bottom: 10px;float: left; margin-left: 15px;margin-top: -5px;">
+                                            <div class = "message-box-top"style="height: 97px;background: #fff;border: 1px solid #ececec; border-radius: 5px;color: {{var text}}">
+                                                 <p  class="print-font" style="font-size: 12px; margin: 0; max-height: 85px; overflow: hidden; font-size: 11px; padding: 10px;">
+                                                     {{var message}}
+                                                </p>
+                                            </div>
+                                        </div>                                        
+                                        <div style="width: 215px;margin-top: 20px;height: 75px;text-align: right; overflow: hidden; margin-top: 5px;vertical-align: bottom;float: right;margin-right: 15px;">
+                                            <p style="font-size: 12px; line-height: 15px; margin: 0; color: {{var text}}">{{var note}}</p>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>                                                      
+                            {{/depend}}
+                            {{depend left}}
+                           
+                            <div style="width: 600px; max-height: 365px;font-size: 14px;">                               
+                                <div style="width: 250px; height: 50px; padding-top: 284px; padding-bottom: 35px; float: left; background-image: url({{var image}}); background-repeat: no-repeat;">
+                                    <div style="width: 250px; height: 50px; padding:5px; display: table-cell; vertical-align: middle; text-align: center">
+                                        {{if logo}}
+                                        <img src="{{var logo}}" height="63"/>
+                                        {{else}}
+                                        <img src="{{skin url="images/logo_email.gif" _area='frontend'}}" height="63"/>
+                                        {{/if}}
+                                    </div>
+                                </div>                                
+                                <div style="width: 350px; max-height: 365px; min-height: 365px;float: right; background-image: url({{var background}})">
+                                    <div style="margin-left: 10px;margin-top: 15px;width: 100%;margin-bottom: 10px; font-weight: 600;font-size: 20px; color: {{var style}};">
+                                        {{var template.caption}}
+                                    </div>
+                                    <div style="margin: 10px 15px 10px 15px;">
+                                        <div style="width: 100%;font-size: 16px; height: 35px;float: left;">
+                                            <span style="float: left;margin-bottom: 10px;">
+                                                <label style="float: left; margin-right: 10px; font-size: 16px; font-weight: 600;color: {{var text}};">From:</label>
+                                                <span style="color: {{var style}};">{{var sendername}}</span>
+                                            </span>
+                                            <span style="float: left; clear: both">
+                                                <label for="giftcard-to" style="float: left; margin-right: 10px; font-size: 16px; font-weight: 600;clear: both;color: {{var text}};">To: </label>
+                                                <span style="color: {{var style}};">{{var receivename}}</span>
+                                            </span>
+                                        </div>
+                                        <div style="float: left; width: 100%; margin-bottom: 10px;float: left;">
+                                            <div class = "message-box-top"style="height: 91px;background: #fff;border: 1px solid #ececec; border-radius: 5px;float: left;width: 100%;margin-top: 10px;color: {{var text}}">
+                                                <p  class="print-font" style="font-size: 12px; margin: 0;padding: 10px; max-height: 85px; overflow: hidden; font-size: 11px">
+                                                     {{var message}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div style="float: left;">
+                                            <span style="width: 55px; float: left; height: 21px; color: {{var text}}">Value</span>
+                                            <span style="width: 130px; height: 50px;clear: both; line-height: 40px; float: left; font-size: 25px; color: {{var style}}; font-weight: bold;">{{var balance}}</span>
+                                        </div>
+                                        <div style="height: 70px;float: right;">                                            
+                                            <span style="width: 179px; height: 50px; float: right; text-align: right;margin-top: -25px;margin-bottom: 5px;">
+                                                {{if barcode}}
+                                                <span style="float: right;margin-bottom: 5px;width: 133%;font-size: 16px; font-style: italic; color: {{var style}}; font-weight: 600;">{{var code}}</span>
+                                                <span> 
+                                                    <img src="{{var barcode}}" {{var resize}} style="float:right;max-width: 100%;max-height: 40px;" />\
+                                                </span>
+                                                {{else}}
+                                                <span style="float: right;margin-bottom: 5px;width: 133%;font-size: 16px; font-style: italic; color: {{var style}}; font-weight: 600;">{{var code}}</span>
+                                                {{/if}}
+                                            </span>
+                                        </div>
+                                         {{if barcode}}
+                                        <div style="width: 100%;height: 30px; overflow: hidden;display:table-cell; vertical-align: bottom;float: left;">
+                                            <p style="font-size: 11px;line-height: 16px; margin: 0; color: {{var text}}">{{var note}}</p>
+                                        </div>
+                                         {{else}}
+                                            <div style="width: 100%;height: 70px; overflow: hidden;display:table-cell; vertical-align: bottom;float: left;">
+                                                <p style="font-size: 11px;line-height: 16px; margin: 0; color: {{var text}}">{{var note}}</p>
+                                             </div>
+                                         {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                            {{/depend}}
+                            <p style="clear: both; float: left">
+                                If you have any questions on your Gift card, please feel free to contact us at <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a> or by phone at {{config path='general/store_information/phone'}}.
+                            </p>
+                            <p style="clear: both;float: left;">Yours sincerely,<br/><strong>{{var store.getFrontendName()}}</strong></p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,97 @@
+<?php
+	if (Mage::getStoreConfig('applycoupon_section/applycoupon_group/active')) {
+		$getScript =Mage::getSingleton('core/session')->getMiscellaneous_Scripts();
+		if ($getScript == 'script') {
+			$script = Mage::getStoreConfig('applycoupon_section/applycoupon_group/miscellaneous_script');
+			echo "<script type='text/javascript'>$script</script>";	
+		}
+		Mage::getSingleton('core/session')->unsMiscellaneous_Scripts();
+		?>
+		<div style="display: none"><?php echo $spopup =Mage::getSingleton('core/session')->getMyPopup(); $cpopup =Mage::getSingleton('core/session')->getMyCPopup(); ?></div>
+		<?php
+		if ($spopup != NULL || $cpopup != NULL ) { ?>
+			
+			<script>
+				jQuery.noConflict();
+			jQuery(function(){
+
+			var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
+
+				jQuery( document ).ready(function(e) {
+					//e.preventDefault();
+			    jQuery("body").append(appendthis);
+			    jQuery(".modal-overlay").fadeTo(500, 0.7);
+			    //$(".js-modalbox").fadeIn(500);
+					var modalBox = 'popup1';
+					jQuery('#'+modalBox).fadeIn(jQuery(this).data());
+				});  
+			  
+			  
+			jQuery(".js-modal-close, .modal-overlay").click(function() {
+			    jQuery(".modal-box, .modal-overlay").fadeOut(500, function() {
+			        jQuery(".modal-overlay").remove();
+			    });
+			 
+			});
+			 
+			jQuery(window).resize(function() {
+			    jQuery(".modal-box").css({
+			        top: (jQuery(window).height() - jQuery(".modal-box").outerHeight()) / 2,
+			        left: (jQuery(window).width() - jQuery(".modal-box").outerWidth()) / 2
+			    });
+			});
+			 
+			jQuery(window).resize();
+			 
+			});
+			</script><?php 
+		}
+		if ($spopup == 'popup') { 
+				$successmsg = Mage::getStoreConfig('applycoupon_section/applycoupon_group/success_message');
+				?>
+
+				<div id="popup1" class="modal-box">
+
+				  <a href="#" class="js-modal-close close">×</a>
+				  
+				  <div class="modal-body">
+				  <div class="coupon-successfully-img">
+				  	<img src="<?php echo $this->getSkinUrl('images/applycoupon/coupon-successfully.png') ?>">
+				  </div>
+				  <div class="coupon-successfully-text">
+				  	<?php echo $successmsg; ?>
+				  </div>
+
+				  </div>
+				  
+				</div>
+
+				<?php
+				
+			}elseif ($cpopup == 'cpopup') {
+				$coupon_code =Mage::getSingleton('core/session')->getMyCouponcode();
+				?>
+				<div id="popup1" class="modal-box">
+
+				  <a href="#" class="js-modal-close close">×</a>
+				  
+				  <div class="modal-body">
+				  <div class="coupon-successfully-img">
+				  	<img src="<?php echo $this->getSkinUrl('images/applycoupon/coupon-expired.png') ?>">
+				  </div>
+				  <div class="coupon-successfully-text">
+				  	<?php echo 'Coupon code "' . $coupon_code . '" is not valid.'; ?>
+				  </div>
+
+				  </div>
+				  
+				</div>
+				<?php
+			}
+			Mage::getSingleton('core/session')->unsMyPopup();
+			Mage::getSingleton('core/session')->unsMyCPopup();
+			Mage::getSingleton('core/session')->unsMyCouponcode();
+
+	}
+	?>
+

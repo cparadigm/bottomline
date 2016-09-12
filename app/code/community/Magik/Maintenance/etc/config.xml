@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Magik_Maintenance>
+      <version>0.1.0</version>
+    </Magik_Maintenance>
+  </modules>
+  <adminhtml>
+      <acl>
+	  <resources>
+	      <admin>  
+		  <children>
+		      <system>
+			  <children>
+			      <config>
+				<children>
+				    <mainmodesec translate="title" module="maintenance">  
+					<title>Magik Maintenance Pro ACL</title>  
+					<sort_order>271</sort_order>
+				    </mainmodesec>
+				</children>
+			      </config>
+			   </children>
+		      </system>
+		  </children>
+	      </admin>
+	  </resources>
+      </acl> 
+  </adminhtml>   
+  <global>
+    <helpers>
+      <maintenance>
+        <class>Magik_Maintenance_Helper</class>
+      </maintenance>
+    </helpers>
+    <models>
+            <maintenance>
+                <class>Magik_Maintenance_Model</class>
+              <!-- <resourceModel>maintenance_mysql4</resourceModel>-->
+            </maintenance>
+    </models>
+    <events>
+            <controller_front_init_routers>
+                <observers>
+                    <maintenance>
+                        <type>singleton</type>
+                        <class>maintenance/observer</class>
+                        <method>initControllerRouters</method>
+                    </maintenance>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+  </global>
+  
+</config> 

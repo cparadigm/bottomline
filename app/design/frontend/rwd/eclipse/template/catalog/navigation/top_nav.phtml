@@ -1,0 +1,253 @@
+<?php
+/**
+ * $this->renderCategoriesMenuHtml() supports optional arguments:
+ * int Level number for list item class to start from
+ * string Extra class of outermost list items
+ * string If specified wraps children list in div with this class
+ */
+?>
+
+    <?php $_helper = Mage::helper('catalog/category') ?>
+    <?php $_categories = $_helper->getStoreCategories() ?>
+    <?php $menu_type = Mage::getStoreConfig('eclipsesettings/eclipsesettings_menu/navigation_menu_type'); ?>
+    <?php $config1 = Mage::getStoreConfig('web/default/cms_home_page'); ?>
+
+    <?php if (count($_categories) > 0): ?>
+             <!-- BEGIN NAV -->  
+            <ul id="nav">
+              <?php if (Mage::getStoreConfig('eclipsesettings/eclipsesettings_header/navigation_home')): ?>
+                <li id="nav-home" class="level0 parent drop-menu"><a class="level-top" href="<?php echo $this->getUrl('') ?>"><span><?php echo $this->__('Home'); ?></span></a>
+                  <?php if(($config1=='eclipse_home_one')) { ?> 
+                  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_home1_tab_dropdown_block')->toHtml(); ?>
+                  <?php } ?>
+
+                  <?php if(($config1=='eclipse_home_two')) { ?> 
+                  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_home2_tab_dropdown_block')->toHtml(); ?>
+                  <?php } ?>
+
+                </li>
+              <?php endif; ?>
+
+            <?php foreach($_categories as $_category): ?>
+                                           
+             
+                    <?php if($menu_type == 'mega-menu') { ?>                   
+                         <li class="level0 nav-5 level-top">  
+                     <?php } else { ?>
+                         <li class="level0 nav-5 level-top drop-menu">  
+                     <?php } ?>       
+             
+                  
+
+<?php if($this->getCurrentCategory()->getId()==$_category->getId()) { ?>
+                    <a class="level-top active" href="<?php echo $_helper->getCategoryUrl($_category) ?>"><span><?php echo $_category->getName() ?></span></a>
+<?php } else { ?> 
+                    <a class="level-top" href="<?php echo $_helper->getCategoryUrl($_category) ?>"><span><?php echo $_category->getName() ?></span></a>
+<?php } ?>       
+                    <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+                    <?php $_subcategories = $_category->getChildrenCategories() ?>
+                    <?php if (count($_subcategories) > 0): ?>
+
+<?php if($menu_type == 'mega-menu') { ?>
+                        <div class="level0-wrapper dropdown-6col" style="left: 0px; display: none;">
+                          <div class="level0-wrapper2">
+                           
+
+<?php if($_category->getData('eclipse_menu_type') == "imgwithtext") { ?>
+  <div class="nav-block nav-block-center grid12-8 itemgrid itemgrid-4col">
+<?php } elseif($_category->getData('eclipse_menu_type') == "singleimage") { ?>
+  <div class="nav-block nav-block-center grid13-8 itemgrid itemgrid-4col"> 
+<?php } else { ?>
+  <div class="nav-block nav-block-center">
+<?php } ?>
+               
+<?php } ?>  <!--mega menu-->       
+
+<?php if($menu_type == 'mega-menu') { ?>                            
+                                <ul class="level0">
+<?php } else { ?>
+                                <ul style="display: none;" class="level1">
+<?php } ?>
+                        
+                         <?php $i=0; foreach($_subcategories as $_subcategory):
+$_secondLevelCat = Mage::getModel('catalog/category')->load($_subcategory->getId());
+                                if (!$_secondLevelCat->getData("include_in_menu")) continue;
+ ?>
+                                <?php $_subcategory = Mage::getModel('catalog/category')->load($_subcategory->getId()) ?>                             
+                                <?php $_subsubcategories = $_subcategory->getChildrenCategories() ?>
+                            
+<li class="level1 nav-6-1 parent item">
+                        
+                              
+                                <a href="<?php echo $_helper->getCategoryUrl($_subcategory) ?>"><span><?php echo $_subcategory->getName() ?></span></a>
+                                <!--sub sub category-->
+                               
+                                <?php if (count($_subsubcategories) > 0): ?>
+                                 
+                                   <ul class="level1">
+                                    <?php foreach($_subsubcategories as $_subsubcategory): 
+$_thirdLevelCat = Mage::getModel('catalog/category')->load($_subsubcategory->getId());
+                                          if (!$_thirdLevelCat->getData("include_in_menu")) continue;
+
+?>
+                                       <li class="level2 nav-6-1-1">
+                                          <a href="<?php echo $_helper->getCategoryUrl($_subsubcategory) ?>"><span><?php echo $_subsubcategory->getName() ?></span></a>
+            
+                                          <?php $_subsubsubcategory = Mage::getModel('catalog/category')->load($_subsubcategory->getId()) ?>                             
+                                          <?php $_subsubsubcategories = $_subsubcategory->getChildrenCategories() ?>
+                                          <?php if (count($_subsubsubcategories) > 0): ?>
+                                             <div class="level2 sub-wrapper" style="height: auto;">
+                                                   <ul class="level2">
+                                                     <?php foreach($_subsubsubcategories as $_subsubsubcategory): ?>
+                                                       <li class="level3 nav-1-1-1-1">
+                                                         <a href="<?php echo $_helper->getCategoryUrl($_subsubsubcategory) ?>"><span><?php echo $_subsubsubcategory->getName() ?></span></a>
+                                                       </li> <!--level3 nav-1-1-1-1-->
+                                                     <?php endforeach; ?>
+                                                   </ul> <!--level2-->
+                                             </div> <!--level2 sub-wrapper-->
+                                          <?php endif; ?>
+
+                                       </li> <!--level2 nav-6-1-1-->
+                                    <?php endforeach; ?>
+                                   </ul> <!--level1-->
+
+                        <?php if($menu_type == 'mega-menu') { ?> 
+                            <?php if($_subcategory->getThumbnail()) { ?>
+                               <div class="cat-img"><img src="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$_subcategory->getThumbnail()  ?>" alt="<?php echo $_subcategory->getName() ?>" /></div>
+                            <?php } ?>
+                        <?php } ?>
+                                  
+                               <?php endif; ?>
+                                 <!--sub sub category-->  
+                                                                                        
+                            </li> <!--level1 nav-6-1 parent item-->
+                         <?php endforeach; ?>        
+                                </ul> <!--level0-->
+
+<?php if($menu_type == 'mega-menu') { ?>
+
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('category-node-text-'.$_category->getId())->toHtml(); ?>
+                              
+                            </div> <!--nav-block nav-block-center-->  
+
+<?php if($_category->getData('eclipse_menu_type') == "imgwithtext") { ?>
+  <div class="nav-block nav-block-right std grid12-4">
+     <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_top_menu_image_with_text_static_block')->toHtml(); ?>
+  </div> <!--nav-block nav-block-right std grid12-4-->
+<?php } ?>
+
+<?php if($_category->getData('eclipse_menu_type') == "singleimage") { ?>
+  <div class="nav-block nav-block-right std grid12-5">
+     <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_top_menu_single_image_static_block')->toHtml(); ?>
+  </div> <!--nav-block nav-block-right std grid12-4-->
+<?php } ?>
+                                                                                                             
+                          </div> <!--level0-wrapper2-->
+			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('category-node-'.$_category->getId())->toHtml(); ?>
+                       </div> <!--level0-wrapper dropdown-6col-->
+
+<?php } ?>  <!--mega menu-->
+
+                    <?php endif; ?>
+                    </li> 
+             <?php endforeach; ?> 
+
+          <?php  $custom_tab = Mage::getModel('cms/block')->load('eclipse_navigation_block');
+            if($custom_tab->getIsActive()) {
+            echo '
+            <li class="nav-custom-link level0 level-top parent">
+                <a href="#" class="level-top">
+                    <span>'.$custom_tab->getTitle().'</span>
+                </a>
+                <div class="level0-wrapper custom-menu" style="left: 0px; display: none;"><div class="header-nav-dropdown-wrapper clearer">'.$this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_navigation_block')->toHtml().'</div></div>
+            </li>';
+
+
+
+          }  ?>
+
+            </ul> <!--nav-->
+
+    <?php endif; ?>
+
+<script type="text/javascript">
+        //<![CDATA[
+
+            jQuery(function($) {
+                $("#nav > li").hover(function() {
+                    var el = $(this).find(".level0-wrapper");
+                    el.hide();
+                    el.css("left", "0");
+                    el.stop(true, true).delay(150).fadeIn(300, "easeOutCubic");
+                }, function() {
+                    $(this).find(".level0-wrapper").stop(true, true).delay(300).fadeOut(300, "easeInCubic");
+                });
+            });
+
+            var isTouchDevice = ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0);
+            jQuery(window).on("load", function() {
+
+                if (isTouchDevice)
+                {
+                    jQuery('#nav a.level-top').click(function(e) {
+                        $t = jQuery(this);
+                        $parent = $t.parent();
+                        if ($parent.hasClass('parent'))
+                        {
+                            if ( !$t.hasClass('menu-ready'))
+                            {                    
+                                jQuery('#nav a.level-top').removeClass('menu-ready');
+                                $t.addClass('menu-ready');
+                                return false;
+                            }
+                            else
+                            {
+                                $t.removeClass('menu-ready');
+                            }
+                        }
+                    });
+                }
+
+            }); //end: on load
+
+        //]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+    jQuery(document).ready(function(){
+        var scrolled = false;
+        jQuery("#nav li.level0.drop-menu").mouseover(function(){
+            if(jQuery(window).width() >= 740){
+                jQuery(this).children('ul.level1').fadeIn(100);
+            }
+            return false;
+        }).mouseleave(function(){
+            if(jQuery(window).width() >= 740){
+                jQuery(this).children('ul.level1').fadeOut(100);
+            }
+            return false;
+        });
+        jQuery("#nav li.level0.drop-menu li").mouseover(function(){
+            if(jQuery(window).width() >= 740){
+                jQuery(this).children('ul').css({top:0,left:"165px"});
+                var offset = jQuery(this).offset();
+                if(offset && (jQuery(window).width() < offset.left+325)){
+                    jQuery(this).children('ul').removeClass("right-sub");
+                    jQuery(this).children('ul').addClass("left-sub");
+                    jQuery(this).children('ul').css({top:0,left:"-167px"});
+                } else {
+                    jQuery(this).children('ul').removeClass("left-sub");
+                    jQuery(this).children('ul').addClass("right-sub");
+                }
+                jQuery(this).children('ul').fadeIn(100);
+            }
+        }).mouseleave(function(){
+            if(jQuery(window).width() >= 740){
+                jQuery(this).children('ul').fadeOut(100);
+            }
+        });
+        
+
+    });
+//]]>
+</script>

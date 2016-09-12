@@ -1,0 +1,14 @@
+Xtento_XtCore
+
+-------------
+  CHANGELOG
+-------------
+
+===== 1.0.0 =====
+ * Initial stable release
+
+===== 1.0.3 =====
+ * Rewriting Testweet_Crontest to avoid problems with order export/product export cron scheduler
+
+===== 1.1.0 =====
+ + Added xtcore_config_data table to store own configuration values.

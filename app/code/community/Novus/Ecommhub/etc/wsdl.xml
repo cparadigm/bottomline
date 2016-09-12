@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:typens="urn:{{var wsdl.name}}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+	name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+			<import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/"/>
+			<complexType name="ArrayOfEcommhubCatalogProductReturnEntity">
+				<complexContent>
+					<restriction base="soapenc:Array">
+						<attribute ref="soapenc:arrayType" wsdl:arrayType="typens::ecommhubCatalogProductReturnEntity[]"/>
+					</restriction>
+				</complexContent>
+			</complexType>
+			<complexType name="ecommhubCatalogProductReturnEntity">
+				<all>
+					<element name="product_id" type="xsd:string" minOccurs="0"/>
+					<element name="sku" type="xsd:string" minOccurs="0"/>
+					<element name="set" type="xsd:string" minOccurs="0"/>
+					<element name="type" type="xsd:string" minOccurs="0"/>
+					<element name="categories" type="typens:ArrayOfString" minOccurs="0"/>
+					<element name="websites" type="typens:ArrayOfString" minOccurs="0"/>
+					<element name="created_at" type="xsd:string" minOccurs="0"/>
+					<element name="updated_at" type="xsd:string" minOccurs="0"/>
+					<element name="type_id" type="xsd:string" minOccurs="0"/>
+					<element name="name" type="xsd:string" minOccurs="0"/>
+					<element name="description" type="xsd:string" minOccurs="0"/>
+					<element name="short_description" type="xsd:string" minOccurs="0"/>
+					<element name="weight" type="xsd:string" minOccurs="0"/>
+					<element name="status" type="xsd:string" minOccurs="0"/>
+					<element name="url_key" type="xsd:string" minOccurs="0"/>
+					<element name="url_path" type="xsd:string" minOccurs="0"/>
+					<element name="visibility" type="xsd:string" minOccurs="0"/>
+					<element name="category_ids" type="typens:ArrayOfString" minOccurs="0"/>
+					<element name="website_ids" type="typens:ArrayOfString" minOccurs="0"/>
+					<element name="has_options" type="xsd:string" minOccurs="0"/>
+					<element name="gift_message_available" type="xsd:string" minOccurs="0"/>
+					<element name="price" type="xsd:string" minOccurs="0"/>
+					<element name="special_price" type="xsd:string" minOccurs="0"/>
+					<element name="special_from_date" type="xsd:string" minOccurs="0"/>
+					<element name="special_to_date" type="xsd:string" minOccurs="0"/>
+					<element name="tax_class_id" type="xsd:string" minOccurs="0"/>
+					<element name="tier_price" type="typens:catalogProductTierPriceEntityArray" minOccurs="0"/>
+					<element name="meta_title" type="xsd:string" minOccurs="0"/>
+					<element name="meta_keyword" type="xsd:string" minOccurs="0"/>
+					<element name="meta_description" type="xsd:string" minOccurs="0"/>
+					<element name="custom_design" type="xsd:string" minOccurs="0"/>
+					<element name="custom_layout_update" type="xsd:string" minOccurs="0"/>
+					<element name="options_container" type="xsd:string" minOccurs="0"/>
+					<element name="additional_attributes" type="typens:associativeArray" minOccurs="0"/>
+
+					<element name="store_ids" type="xsd:ArrayOfString" minOccurs="0"/>
+					<element name="website_ids" type="xsd:ArrayOfString" minOccurs="0"/>
+					<element name="children" type="typens:ArrayOfEcommhubCatalogProductReturnEntity" minOccurs="0"/>
+					<element name="qty" type="xsd:string" minOccurs="0"/>
+					<element name="is_in_stock" type="xsd:string" minOccurs="0"/>
+					<element name="parent_ids" type="xsd:ArrayOfString" minOccurs="0"/>
+					<element name="used_attributes" type="xsd:ArrayOfString" minOccurs="0"/>
+					<element name="attribute_texts" type="xsd:ArrayOfString" minOccurs="0"/>
+				</all>
+			</complexType>
+			<complexType name="ecommhubSalesOrderListEntity">
+				<all>
+					<element name="product_id" type="xsd:string" minOccurs="0"/>
+					<element name="sku" type="xsd:string" minOccurs="0"/>
+					<element name="qty" type="xsd:string" minOccurs="0"/>
+					<element name="is_in_stock" type="xsd:string" minOccurs="0"/>
+					<element name="backorders" type="xsd:string" minOccurs="0"/>
+					<element name="use_config_backorders" type="xsd:string" minOccurs="0"/>
+				</all>
+			</complexType>
+			<complexType name="ecommhubCatalogInventoryStockItemEntityArray">
+				<complexContent>
+					<restriction base="soapenc:Array">
+						<attribute ref="soapenc:arrayType" wsdl:arrayType="typens:ecommhubCatalogInventoryStockItemEntity[]"/>
+					</restriction>
+				</complexContent>
+			</complexType>
+			<complexType name="ecommhubSalesOrderListEntity">
+				<all>
+					<element name="increment_id" type="xsd:string" minOccurs="0" />
+					<element name="store_id" type="xsd:string" minOccurs="0" />
+					<element name="created_at" type="xsd:string" minOccurs="0" />
+					<element name="updated_at" type="xsd:string" minOccurs="0" />
+					<element name="customer_id" type="xsd:string" minOccurs="0" />
+					<element name="tax_amount" type="xsd:string" minOccurs="0" />
+					<element name="shipping_amount" type="xsd:string" minOccurs="0" />
+					<element name="discount_amount" type="xsd:string" minOccurs="0" />
+					<element name="subtotal" type="xsd:string" minOccurs="0" />
+					<element name="grand_total" type="xsd:string" minOccurs="0" />
+					<element name="total_paid" type="xsd:string" minOccurs="0" />
+					<element name="total_refunded" type="xsd:string" minOccurs="0" />
+					<element name="total_qty_ordered" type="xsd:string" minOccurs="0" />
+					<element name="total_canceled" type="xsd:string" minOccurs="0" />
+					<element name="total_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="total_online_refunded" type="xsd:string" minOccurs="0" />
+					<element name="total_offline_refunded" type="xsd:string" minOccurs="0" />
+					<element name="base_tax_amount" type="xsd:string" minOccurs="0" />
+					<element name="base_shipping_amount" type="xsd:string" minOccurs="0" />
+					<element name="base_discount_amount" type="xsd:string" minOccurs="0" />
+					<element name="base_subtotal" type="xsd:string" minOccurs="0" />
+					<element name="base_grand_total" type="xsd:string" minOccurs="0" />
+					<element name="base_total_paid" type="xsd:string" minOccurs="0" />
+					<element name="base_total_refunded" type="xsd:string" minOccurs="0" />
+					<element name="base_total_qty_ordered" type="xsd:string" minOccurs="0" />
+					<element name="base_total_canceled" type="xsd:string" minOccurs="0" />
+					<element name="base_total_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="base_total_online_refunded" type="xsd:string" minOccurs="0" />
+					<element name="base_total_offline_refunded" type="xsd:string" minOccurs="0" />
+					<element name="billing_address_id" type="xsd:string" minOccurs="0" />
+					<element name="billing_firstname" type="xsd:string" minOccurs="0" />
+					<element name="billing_lastname" type="xsd:string" minOccurs="0" />
+					<element name="shipping_address_id" type="xsd:string" minOccurs="0" />
+					<element name="shipping_firstname" type="xsd:string" minOccurs="0" />
+					<element name="shipping_lastname" type="xsd:string" minOccurs="0" />
+					<element name="billing_name" type="xsd:string" minOccurs="0" />
+					<element name="shipping_name" type="xsd:string" minOccurs="0" />
+					<element name="store_to_base_rate" type="xsd:string" minOccurs="0" />
+					<element name="store_to_order_rate" type="xsd:string" minOccurs="0" />
+					<element name="base_to_global_rate" type="xsd:string" minOccurs="0" />
+					<element name="base_to_order_rate" type="xsd:string" minOccurs="0" />
+					<element name="weight" type="xsd:string" minOccurs="0" />
+					<element name="store_name" type="xsd:string" minOccurs="0" />
+					<element name="remote_ip" type="xsd:string" minOccurs="0" />
+					<element name="status" type="xsd:string" minOccurs="0" />
+					<element name="state" type="xsd:string" minOccurs="0" />
+					<element name="applied_rule_ids" type="xsd:string" minOccurs="0" />
+					<element name="global_currency_code" type="xsd:string" minOccurs="0" />
+					<element name="base_currency_code" type="xsd:string" minOccurs="0" />
+					<element name="store_currency_code" type="xsd:string" minOccurs="0" />
+					<element name="order_currency_code" type="xsd:string" minOccurs="0" />
+					<element name="shipping_method" type="xsd:string" minOccurs="0" />
+					<element name="shipping_description" type="xsd:string" minOccurs="0" />
+					<element name="customer_email" type="xsd:string" minOccurs="0" />
+					<element name="customer_firstname" type="xsd:string" minOccurs="0" />
+					<element name="customer_lastname" type="xsd:string" minOccurs="0" />
+					<element name="quote_id" type="xsd:string" minOccurs="0" />
+					<element name="is_virtual" type="xsd:string" minOccurs="0" />
+					<element name="customer_group_id" type="xsd:string" minOccurs="0" />
+					<element name="customer_note_notify" type="xsd:string" minOccurs="0" />
+					<element name="customer_is_guest" type="xsd:string" minOccurs="0" />
+					<element name="email_sent" type="xsd:string" minOccurs="0" />
+					<element name="order_id" type="xsd:string" minOccurs="0" />
+					<element name="gift_message_id" type="xsd:string" minOccurs="0" />
+					<element name="coupon_code" type="xsd:string" minOccurs="0" />
+					<element name="protect_code" type="xsd:string" minOccurs="0" />
+					<element name="base_discount_canceled" type="xsd:string" minOccurs="0" />
+					<element name="base_discount_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="base_discount_refunded" type="xsd:string" minOccurs="0" />
+					<element name="base_shipping_canceled" type="xsd:string" minOccurs="0" />
+					<element name="base_shipping_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="base_shipping_refunded" type="xsd:string" minOccurs="0" />
+					<element name="base_shipping_tax_amount" type="xsd:string" minOccurs="0" />
+					<element name="base_shipping_tax_refunded" type="xsd:string" minOccurs="0" />
+					<element name="base_subtotal_canceled" type="xsd:string" minOccurs="0" />
+					<element name="base_subtotal_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="base_subtotal_refunded" type="xsd:string" minOccurs="0" />
+					<element name="base_tax_canceled" type="xsd:string" minOccurs="0" />
+					<element name="base_tax_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="base_tax_refunded" type="xsd:string" minOccurs="0" />
+					<element name="base_total_invoiced_cost" type="xsd:string" minOccurs="0" />
+					<element name="discount_canceled" type="xsd:string" minOccurs="0" />
+					<element name="discount_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="discount_refunded" type="xsd:string" minOccurs="0" />
+					<element name="shipping_canceled" type="xsd:string" minOccurs="0" />
+					<element name="shipping_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="shipping_refunded" type="xsd:string" minOccurs="0" />
+					<element name="shipping_tax_amount" type="xsd:string" minOccurs="0" />
+					<element name="shipping_tax_refunded" type="xsd:string" minOccurs="0" />
+					<element name="subtotal_canceled" type="xsd:string" minOccurs="0" />
+					<element name="subtotal_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="subtotal_refunded" type="xsd:string" minOccurs="0" />
+					<element name="tax_canceled" type="xsd:string" minOccurs="0" />
+					<element name="tax_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="tax_refunded" type="xsd:string" minOccurs="0" />
+					<element name="can_ship_partially" type="xsd:string" minOccurs="0" />
+					<element name="can_ship_partially_item" type="xsd:string" minOccurs="0" />
+					<element name="edit_increment" type="xsd:string" minOccurs="0" />
+					<element name="forced_do_shipment_with_invoice" type="xsd:string" minOccurs="0" />
+					<element name="payment_authorization_expiration" type="xsd:string" minOccurs="0" />
+					<element name="paypal_ipn_customer_notified" type="xsd:string" minOccurs="0" />
+					<element name="quote_address_id" type="xsd:string" minOccurs="0" />
+					<element name="adjustment_negative" type="xsd:string" minOccurs="0" />
+					<element name="adjustment_positive" type="xsd:string" minOccurs="0" />
+					<element name="base_adjustment_negative" type="xsd:string" minOccurs="0" />
+					<element name="base_adjustment_positive" type="xsd:string" minOccurs="0" />
+					<element name="base_shipping_discount_amount" type="xsd:string" minOccurs="0" />
+					<element name="base_subtotal_incl_tax" type="xsd:string" minOccurs="0" />
+					<element name="base_total_due" type="xsd:string" minOccurs="0" />
+					<element name="payment_authorization_amount" type="xsd:string" minOccurs="0" />
+					<element name="shipping_discount_amount" type="xsd:string" minOccurs="0" />
+					<element name="subtotal_incl_tax" type="xsd:string" minOccurs="0" />
+					<element name="total_due" type="xsd:string" minOccurs="0" />
+					<element name="customer_dob" type="xsd:string" minOccurs="0" />
+					<element name="customer_middlename" type="xsd:string" minOccurs="0" />
+					<element name="customer_prefix" type="xsd:string" minOccurs="0" />
+					<element name="customer_suffix" type="xsd:string" minOccurs="0" />
+					<element name="customer_taxvat" type="xsd:string" minOccurs="0" />
+					<element name="discount_description" type="xsd:string" minOccurs="0" />
+					<element name="ext_customer_id" type="xsd:string" minOccurs="0" />
+					<element name="ext_order_id" type="xsd:string" minOccurs="0" />
+					<element name="hold_before_state" type="xsd:string" minOccurs="0" />
+					<element name="hold_before_status" type="xsd:string" minOccurs="0" />
+					<element name="original_increment_id" type="xsd:string" minOccurs="0" />
+					<element name="relation_child_id" type="xsd:string" minOccurs="0" />
+					<element name="relation_child_real_id" type="xsd:string" minOccurs="0" />
+					<element name="relation_parent_id" type="xsd:string" minOccurs="0" />
+					<element name="relation_parent_real_id" type="xsd:string" minOccurs="0" />
+					<element name="x_forwarded_for" type="xsd:string" minOccurs="0" />
+					<element name="customer_note" type="xsd:string" minOccurs="0" />
+					<element name="total_item_count" type="xsd:string" minOccurs="0" />
+					<element name="customer_gender" type="xsd:string" minOccurs="0" />
+					<element name="hidden_tax_amount" type="xsd:string" minOccurs="0" />
+					<element name="base_hidden_tax_amount" type="xsd:string" minOccurs="0" />
+					<element name="shipping_hidden_tax_amount" type="xsd:string" minOccurs="0" />
+					<element name="base_shipping_hidden_tax_amount" type="xsd:string" minOccurs="0" />
+					<element name="hidden_tax_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="base_hidden_tax_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="hidden_tax_refunded" type="xsd:string" minOccurs="0" />
+					<element name="base_hidden_tax_refunded" type="xsd:string" minOccurs="0" />
+					<element name="shipping_incl_tax" type="xsd:string" minOccurs="0" />
+					<element name="base_shipping_incl_tax" type="xsd:string" minOccurs="0" />
+					<element name="base_customer_balance_amount" type="xsd:string" minOccurs="0" />
+					<element name="customer_balance_amount" type="xsd:string" minOccurs="0" />
+					<element name="base_customer_balance_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="customer_balance_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="base_customer_balance_refunded" type="xsd:string" minOccurs="0" />
+					<element name="customer_balance_refunded" type="xsd:string" minOccurs="0" />
+					<element name="base_customer_balance_total_refunded" type="xsd:string" minOccurs="0" />
+					<element name="customer_balance_total_refunded" type="xsd:string" minOccurs="0" />
+					<element name="gift_cards" type="xsd:string" minOccurs="0" />
+					<element name="base_gift_cards_amount" type="xsd:string" minOccurs="0" />
+					<element name="gift_cards_amount" type="xsd:string" minOccurs="0" />
+					<element name="base_gift_cards_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="gift_cards_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="base_gift_cards_refunded" type="xsd:string" minOccurs="0" />
+					<element name="gift_cards_refunded" type="xsd:string" minOccurs="0" />
+					<element name="reward_points_balance" type="xsd:string" minOccurs="0" />
+					<element name="base_reward_currency_amount" type="xsd:string" minOccurs="0" />
+					<element name="reward_currency_amount" type="xsd:string" minOccurs="0" />
+					<element name="base_reward_currency_amount_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="reward_currency_amount_invoiced" type="xsd:string" minOccurs="0" />
+					<element name="base_reward_currency_amount_refunded" type="xsd:string" minOccurs="0" />
+					<element name="reward_currency_amount_refunded" type="xsd:string" minOccurs="0" />
+					<element name="reward_points_balance_refunded" type="xsd:string" minOccurs="0" />
+					<element name="reward_points_balance_to_refund" type="xsd:string" minOccurs="0" />
+					<element name="reward_salesrule_points" type="xsd:string" minOccurs="0" />
+					<element name="firstname" type="xsd:string" minOccurs="0" />
+					<element name="lastname" type="xsd:string" minOccurs="0" />
+					<element name="telephone" type="xsd:string" minOccurs="0" />
+					<element name="postcode" type="xsd:string" minOccurs="0" />
+
+					<element name="shipping_address" type="typens:ecommhubSalesOrderListEntityAddress" minOccurs="0" />
+					<element name="billing_address" type="typens:ecommhubSalesOrderListEntityAddress" minOccurs="0" />
+					<element name="payment" type="typens:ecommhubSalesOrderListEntityPayment" minOccurs="0" />
+					<element name="items" type="typens:salesOrderItemEntityArray" minOccurs="0" />
+					<!--<element name="" type="typens:ecommhubSalesOrderListEntity" minOccurs="0" />
+					<element name="" type="typens:ecommhubSalesOrderListEntity" minOccurs="0" />-->
+				</all>
+			</complexType>
+			<complexType name="ecommhubSalesOrderListEntityAddress">
+				<all>
+					<element name="parent_id" type="xsd:string" minOccurs="0"/>
+					<element name="customer_address_id" type="xsd:string" minOccurs="0"/>
+					<element name="quote_address_id" type="xsd:string" minOccurs="0"/>
+					<element name="region_id" type="xsd:string" minOccurs="0"/>
+					<element name="customer_id" type="xsd:string" minOccurs="0"/>
+					<element name="fax" type="xsd:string" minOccurs="0"/>
+					<element name="region" type="xsd:string" minOccurs="0"/>
+					<element name="postcode" type="xsd:string" minOccurs="0"/>
+					<element name="lastname" type="xsd:string" minOccurs="0"/>
+					<element name="street" type="xsd:string" minOccurs="0"/>
+					<element name="city" type="xsd:string" minOccurs="0"/>
+					<element name="email" type="xsd:string" minOccurs="0"/>
+					<element name="telephone" type="xsd:string" minOccurs="0"/>
+					<element name="country_id" type="xsd:string" minOccurs="0"/>
+					<element name="firstname" type="xsd:string" minOccurs="0"/>
+					<element name="address_type" type="xsd:string" minOccurs="0"/>
+					<element name="prefix" type="xsd:string" minOccurs="0"/>
+					<element name="middlename" type="xsd:string" minOccurs="0"/>
+					<element name="suffix" type="xsd:string" minOccurs="0"/>
+					<element name="company" type="xsd:string" minOccurs="0"/>
+					<element name="address_id" type="xsd:string" minOccurs="0"/>
+					<element name="tax_id" type="xsd:string" minOccurs="0"/>
+					<element name="gift_message_id" type="xsd:string" minOccurs="0"/>
+				</all>
+			</complexType>
+			<complexType name="ecommhubSalesOrderListEntityPayment">
+				<all>
+					<element name="parent_id" type="xsd:string" minOccurs="0"/>
+					<element name="base_shipping_captured" type="xsd:string" minOccurs="0"/>
+					<element name="shipping_captured" type="xsd:string" minOccurs="0"/>
+					<element name="amount_refunded" type="xsd:string" minOccurs="0"/>
+					<element name="base_amount_paid" type="xsd:string" minOccurs="0"/>
+					<element name="amount_canceled" type="xsd:string" minOccurs="0"/>
+					<element name="base_amount_authorized" type="xsd:string" minOccurs="0"/>
+					<element name="base_amount_paid_online" type="xsd:string" minOccurs="0"/>
+					<element name="base_amount_refunded_online" type="xsd:string" minOccurs="0"/>
+					<element name="base_shipping_amount" type="xsd:string" minOccurs="0"/>
+					<element name="shipping_amount" type="xsd:string" minOccurs="0"/>
+					<element name="amount_paid" type="xsd:string" minOccurs="0"/>
+					<element name="amount_authorized" type="xsd:string" minOccurs="0"/>
+					<element name="base_amount_ordered" type="xsd:string" minOccurs="0"/>
+					<element name="base_shipping_refunded" type="xsd:string" minOccurs="0"/>
+					<element name="shipping_refunded" type="xsd:string" minOccurs="0"/>
+					<element name="base_amount_refunded" type="xsd:string" minOccurs="0"/>
+					<element name="amount_ordered" type="xsd:string" minOccurs="0"/>
+					<element name="base_amount_canceled" type="xsd:string" minOccurs="0"/>
+					<element name="ideal_transaction_checked" type="xsd:string" minOccurs="0"/>
+					<element name="quote_payment_id" type="xsd:string" minOccurs="0"/>
+					<element name="additional_data" type="xsd:string" minOccurs="0"/>
+					<element name="cc_exp_month" type="xsd:string" minOccurs="0"/>
+					<element name="cc_ss_start_year" type="xsd:string" minOccurs="0"/>
+					<element name="echeck_bank_name" type="xsd:string" minOccurs="0"/>
+					<element name="method" type="xsd:string" minOccurs="0"/>
+					<element name="cc_debug_request_body" type="xsd:string" minOccurs="0"/>
+					<element name="cc_secure_verify" type="xsd:string" minOccurs="0"/>
+					<element name="cybersource_token" type="xsd:string" minOccurs="0"/>
+					<element name="ideal_issuer_title" type="xsd:string" minOccurs="0"/>
+					<element name="protection_eligibility" type="xsd:string" minOccurs="0"/>
+					<element name="cc_approval" type="xsd:string" minOccurs="0"/>
+				</all>
+			</complexType>
+			<complexType name="ecommhubSalesOrderListEntityArray">
+				<complexContent>
+					<restriction base="soapenc:Array">
+						<attribute ref="soapenc:arrayType" wsdl:arrayType="typens:ecommhubSalesOrderListEntity[]" />
+					</restriction>
+				</complexContent>
+			</complexType>
+			<complexType name="ecommhubVersionReturnEntity">
+				<all>
+					<element name="extensionversion" type="xsd:string" minOccurs="0"/>
+					<element name="magentoversion" type="xsd:string" minOccurs="0"/>
+				</all>
+			</complexType>
+		</schema>
+	</types>
+
+	<message name="ecommhubCatalogProductInfoResponse">
+		<part name="result" type="typens:ecommhubCatalogProductReturnEntity"/>
+	</message>
+	<message name="ecommhubCatalogProductListRequest">
+		<part name="sessionId" type="xsd:string" />
+		<part name="pagesize" type="xsd:int"/>
+		<part name="pagenumber" type="xsd:int"/>
+		<part name="filters" type="typens:filters"/>
+		<part name="storeId" type="xsd:string"/>
+	</message>
+	<message name="ecommhubCatalogProductListResponse">
+		<part name="result" type="typens:ArrayOfEcommhubCatalogProductReturnEntity"/>
+	</message>
+	<message name="ecommhubCatalogProductListcountResponse">
+		<part name="result" type="xsd:int"/>
+	</message>
+	<message name="ecommhubCatalogInventoryStockItemListResponse">
+		<part name="result" type="typens:ecommhubCatalogInventoryStockItemEntityArray"/>
+	</message>
+	<message name="ecommhubCatalogInventoryStockItemMassupdateRequest">
+		<part name="sessionId" type="xsd:string" />
+		<part name="data" type="typens:associativeArray" />
+	</message>
+	<message name="ecommhubCatalogInventoryStockItemMassupdateResponse">
+		<part name="result" type="xsd:int" />
+	</message>
+	<message name="ecommhubSalesOrderListRequest">
+		<part name="sessionId" type="xsd:string" />
+		<part name="pagesize" type="xsd:int"/>
+		<part name="pagenumber" type="xsd:int"/>
+		<part name="filters" type="typens:filters" />
+	</message>
+	<message name="ecommhubSalesOrderListResponse">
+		<part name="result" type="typens:ecommhubSalesOrderListEntityArray" />
+	</message>
+	<message name="ecommhubSalesOrderListcountResponse">
+		<part name="result" type="xsd:int"/>
+	</message>
+	<message name="ecommhubSalesOrderShipmentAddTrackRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="shipmentIncrementId" type="xsd:string" />
+        <part name="carrier" type="xsd:string" />
+        <part name="title" type="xsd:string" />
+        <part name="trackNumber" type="xsd:string" />
+    </message>
+    <message name="ecommhubSalesOrderShipmentAddTrackResponse">
+        <part name="result" type="xsd:int" />
+    </message>-->
+	<message name="ecommhubVersionRequest">
+		<part name="sessionId" type="xsd:string" />
+	</message>
+	<message name="ecommhubVersionResponse">
+		<part name="result" type="typens:ecommhubVersionReturnEntity"/>
+	</message>
+
+	<portType name="{{var wsdl.handler}}PortType">
+		<operation name="ecommhubCatalogProductInfo">
+			<documentation>ECOMMHUB Retrieve product</documentation>
+			<input message="typens:catalogProductInfoRequest"/>
+			<output message="typens:ecommhubCatalogProductInfoResponse"/>
+		</operation>
+		<operation name="ecommhubCatalogProductList">
+			<documentation>ECOMMHUB Retrieve product</documentation>
+			<input message="typens:ecommhubCatalogProductListRequest"/>
+			<output message="typens:ecommhubCatalogProductListResponse"/>
+		</operation>
+		<operation name="ecommhubCatalogProductListcount">
+			<documentation>ECOMMHUB Retrieve product count</documentation>
+			<input message="typens:ecommhubCatalogProductListRequest"/>
+			<output message="typens:ecommhubCatalogProductListcountResponse"/>
+		</operation>
+		<operation name="ecommhubCatalogInventoryStockItemUpdate">
+			<documentation>ECOMMHUB Update product stock data</documentation>
+			<input message="typens:catalogInventoryStockItemUpdateRequest" />
+			<output message="typens:ecommhubCatalogInventoryStockItemListResponse" />
+		</operation>
+		<operation name="ecommhubCatalogInventoryStockItemList">
+			<documentation>ECOMMHUB Update product stock data</documentation>
+			<input message="typens:catalogInventoryStockItemListRequest" />
+			<output message="typens:ecommhubCatalogInventoryStockItemListResponse" />
+		</operation>
+		<operation name="ecommhubCatalogInventoryStockItemMassupdate">
+			<documentation>Massupdate product stock data</documentation>
+			<input message="typens:ecommhubCatalogInventoryStockItemMassupdateRequest" />
+			<output message="typens:ecommhubCatalogInventoryStockItemMassupdateResponse" />
+		</operation>
+		<operation name="ecommhubSalesOrderList">
+			<documentation>Massupdate product stock data</documentation>
+			<input message="typens:ecommhubSalesOrderListRequest" />
+			<output message="typens:ecommhubSalesOrderListResponse" />
+		</operation>
+		<operation name="ecommhubSalesOrderListcount">
+			<documentation>Massupdate product stock data</documentation>
+			<input message="typens:ecommhubSalesOrderListRequest" />
+			<output message="typens:ecommhubSalesOrderListcountResponse" />
+		</operation>
+		<operation name="ecommhubSalesOrderShipmentAddTrack">
+			<documentation>Add new shipment tracking code</documentation>
+			<input message="typens:ecommhubSalesOrderShipmentAddTrackRequest" />
+			<output message="typens:ecommhubSalesOrderShipmentAddTrackResponse" />
+		</operation>
+		<operation name="ecommhubVersion">
+			<documentation>Retrieve ECOMMHUB version number</documentation>
+			<input message="typens:ecommhubVersionRequest"/>
+			<output message="typens:ecommhubVersionResponse"/>
+		</operation>
+	</portType>
+
+	<binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="ecommhubCatalogProductInfo">
+			<soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+			<input>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</input>
+			<output>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</output>
+		</operation>
+		<operation name="ecommhubCatalogProductList">
+			<soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+			<input>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</input>
+			<output>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</output>
+		</operation>
+		<operation name="ecommhubCatalogProductListcount">
+			<soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+			<input>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</input>
+			<output>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</output>
+		</operation>
+		<operation name="ecommhubCatalogInventoryStockItemUpdate">
+			<soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+			<input>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="ecommhubCatalogInventoryStockItemList">
+			<soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+			<input>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="ecommhubCatalogInventoryStockItemMassupdate">
+			<soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+			<input>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="ecommhubSalesOrderList">
+			<soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+			<input>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="ecommhubSalesOrderListcount">
+			<soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+			<input>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="ecommhubSalesOrderShipmentAddTrack">
+			<soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+			<input>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="ecommhubVersion">
+			<soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+			<input>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+</definitions>

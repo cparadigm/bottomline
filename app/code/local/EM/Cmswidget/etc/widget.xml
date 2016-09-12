@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Mage
+ * @package     Mage_Cms
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<widgets>
+    <em_cms_static_block type="cmswidget/widget_block" translate="name description" module="cmswidget">
+        <name>EM CMS Static Block</name>
+        <description>Contents of a Static Block</description>
+        <parameters>
+            <block_id type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Block</label>
+                <type>label</type>
+                <helper_block>
+                    <type>adminhtml/cms_block_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Block...</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>1</sort_order>
+            </block_id>
+            
+            <custom_class>
+                <label>Custom Class</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+				<sort_order>2</sort_order>
+				<value></value>
+            </custom_class>
+            
+            <custom_html_wrapper_class translate="label">
+                <label>Custom HTML Wrapper Class</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+				<sort_order>3</sort_order>
+				<value></value>
+            </custom_html_wrapper_class>
+            
+            <custom_html_wrapper_id translate="label">
+                <label>Custom HTML Wrapper ID</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+				<sort_order>4</sort_order>
+				<value></value>
+            </custom_html_wrapper_id>
+            <block_title>
+                <label>Block Title</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+				<sort_order>5</sort_order>
+				<value></value>
+            </block_title>
+            <!--template translate="label">
+                <label>Template</label>
+                <visible>5</visible>
+                <type>select</type>
+                <value>em_cms/widget/static_block/default.phtml</value>
+                <values>
+                    <default translate="label">
+                        <value>em_cms/widget/static_block/default.phtml</value>
+                        <label>EM CMS Static Block Default Template</label>
+                    </default>
+                </values>
+                <sort_order>4</sort_order>
+            </template-->
+        </parameters>
+    </em_cms_static_block>
+</widgets>

@@ -1,0 +1,19 @@
+<?php
+/**
+ * Template for filter items block
+ *
+ * @see Mage_Catalog_Block_Layer_Filter
+ */
+?>
+<?php $_items = $this->getItems() ?>
+<select name="<?php echo $this->_filter->getRequestVar(); ?>">
+	<option value="<?php echo $_items[0]->getClearLinkUrl()?>">All </option>
+	<?php foreach ($_items as $_item): ?>
+	<option value="<?php echo $this->urlEscape($_item->getUrl()) ?>" <?php if($_item->isSelected()): ?>selected="selected"<?php endif ?> >
+		<?php echo $_item->getLabel() ?> 
+		<?php if ($this->shouldDisplayProductCount()): ?>
+		(<?php echo $_item->getCount() ?>)
+		<?php endif ?>
+    </option>
+	<?php endforeach ?>
+</select>

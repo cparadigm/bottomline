@@ -1,0 +1,126 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php 
+/**
+ * Store switcher template
+ *
+ * @see Mage_Core_Block_Store_Switcher
+ */
+?>
+<?php	
+	$setting = Mage::helper('em0072settings');
+	$check = $setting->getGeneral_DisableFrontendVariation();
+ ?>
+<?php if($check != 1) : ?>
+	<?php if(count($this->getGroups())>1): ?>
+	<div class="store_switcher_variation">
+		<a href="javascript:void(0)" class="btn_storeview"><?php echo $this->__("Store view") ?></a>
+		<div class="storediv" style="display:none">
+			<a href="javascript:void(0)" class="btn_storeclose"><?php echo $this->__("Close") ?></a>
+			<div class="store_content">
+				<div id="slider_storeview" class="slider_container">
+					<ul class="span24">
+					<?php foreach ($this->getGroups() as $_group): ?>
+						<?php 
+							$name	=	strtolower($this->escapeHtml($_group->getName()));
+							$name	=	str_replace(" ","_",trim($name));
+						?>
+						<li class="item">
+							<a href="<?php echo $_group->getHomeUrl()  ?>" title="<?php echo $this->escapeHtml($_group->getName()) ?>">
+								<img src="<?php echo $this->getSkinUrl('images/storeview/'.$name.'.jpg'); ?>" alt="<?php echo $this->escapeHtml($_group->getName()) ?>" height="364"/>
+							</a>
+							<div class="storename"><?php echo $this->escapeHtml($_group->getName()) ?></div>
+						</li>
+					<?php endforeach; ?>
+					</ul>
+					
+					<div id="slider_storeview_css"></div>
+				</div>
+			</div>
+		</div>   
+	</div>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".btn_storeview").click(function() {
+				store_show();
+			});
+			
+			$(".btn_storeclose").click(function() {
+				store_hide();
+			});
+			
+			function store_show(){
+				var bg	=	$("#bg_fade");
+				bg.css("opacity",0.5);
+				bg.css("visibility","visible");
+				$(".storediv").show();
+			}
+			
+			function store_hide(){
+				var bg	=	$("#bg_fade");
+				$(".storediv").hide();
+				bg.css("opacity",0);
+				bg.css("visibility","hidden");
+			}
+			
+			var width_slider_storeview = jQuery('#slider_storeview ul li.item').width();
+			var height_slider_storeview = jQuery('#slider_storeview ul li.item').height();
+			jQuery('#slider_storeview_css').html('<style type="text/css">#slider_storeview .jcarousel-skin-tango .jcarousel-item {width:' + width_slider_storeview + 'px;height:' + height_slider_storeview + 'px;}</style>');
+			//alert(jQuery('#slider_storeview ul li.item').width());
+			if(jQuery('#slider_storeview ul').length){
+				function carouselCallBack_slider_storeview(carousel){
+					jQuery('.slider_storeview-ul').touchwipe({
+						wipeLeft: function() { 
+							carousel.next();
+						},
+						wipeRight: function() { 
+							carousel.prev();
+						},
+						preventDefaultEvents: false
+					});
+				}
+				jQuery('#slider_storeview ul')
+					.addClass('slider_storeview-ul')
+					.addClass('jcarousel-skin-tango')
+					.jcarousel({				
+						wrap: 'circular',
+						auto: 0,
+						buttonNextHTML:'<a class="next" href="javascript:void(0);" title="Next"></a>',
+						buttonPrevHTML:'<a class="previous" href="javascript:void(0);" title="Previous" ></a>',
+						scroll: 1,
+						animation:'slow',
+						initCallback: carouselCallBack_slider_storeview,
+						vertical: 0
+					});
+				
+			}
+			
+		});
+	</script>
+	<?php endif; ?>
+<?php endif; ?>

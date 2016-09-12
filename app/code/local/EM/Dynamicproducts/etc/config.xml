@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <EM_Dynamicproducts>
+            <version>0.1.0</version>
+        </EM_Dynamicproducts>
+    </modules>
+    <frontend>
+        <routers>
+            <dynamicproducts>
+                <use>standard</use>
+                <args>
+                    <module>EM_Dynamicproducts</module>
+                    <frontName>dynamicproducts</frontName>
+                </args>
+            </dynamicproducts>
+        </routers>
+        <layout>
+            <updates>
+                <dynamicproducts>
+                    <file>dynamicproducts.xml</file>
+                </dynamicproducts>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<dynamicproducts>
+				<use>admin</use>
+				<args>
+					<module>EM_Dynamicproducts</module>
+					<frontName>dynamicproducts</frontName>
+				</args>
+			</dynamicproducts>
+        </routers>
+    </admin>
+    <global>
+        <models>
+            <dynamicproducts>
+                <class>EM_Dynamicproducts_Model</class>
+                <resourceModel>dynamicproducts_mysql4</resourceModel>
+				
+            </dynamicproducts>
+            <dynamicproducts_mysql4>
+                <class>EM_Dynamicproducts_Model_Mysql4</class>
+                <entities>
+                    <dynamicproducts>
+                        <table>dynamicproducts</table>
+                    </dynamicproducts>
+                </entities>
+            </dynamicproducts_mysql4>
+        </models>
+		
+        <resources>
+            <dynamicproducts_setup>
+                <setup>
+                    <module>EM_Dynamicproducts</module>
+					<class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+				
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </dynamicproducts_setup>
+			
+            <dynamicproducts_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </dynamicproducts_write>
+			
+            <dynamicproducts_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </dynamicproducts_read>
+        </resources>
+		
+        <blocks>
+            <dynamicproducts>
+                <class>EM_Dynamicproducts_Block</class>
+            </dynamicproducts>
+        </blocks>
+		
+        <helpers>
+            <dynamicproducts>
+                <class>EM_Dynamicproducts_Helper</class>
+            </dynamicproducts>
+        </helpers>
+    </global>
+</config>

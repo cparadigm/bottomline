@@ -1,0 +1,51 @@
+# Universal ignores
+*.pdf
+*.sql
+*.patch
+*.tgz
+*.gz
+*.zip
+*.psd
+*.log
+*.tar
+*.tar.gz
+*.swp
+.DS_Store
+.project
+.idea
+/robots.txt
+/error_log
+/backup
+/freestyleexport
+/store
+/downloader_jpr2015
+/eclipse
+/Inchoo_Owa
+/rocketweb_googlebasefeedgenerator-1.6.0-rocketweb
+  
+# Magento ignores
+/.htaccess
+/app/etc/local.xml
+/media
+/var
+/sitemap.xml
+/php.ini
+/php5.ini
+/_import/files
+/vendor
+/n98-magerun.phar
+/mageaudit
+  
+#Wordpress Ignores (depends on wordpress directory, blog in this case)
+/blog/.htaccess
+/blog/wp-config.php
+/blog/wp-content/uploads
+/blog/wp-content/cache/*
+/blog/sitemap.xml
+/blog/sitemap.xml.gz
+  
+#Devsite Module ignores
+app/code/local/Cp/Devsite
+app/etc/modules/Cp_Devsite.xml
+var/dev.ini
+

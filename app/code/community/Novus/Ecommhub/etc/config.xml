@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Novus_Ecommhub>
+			<version>2.2.2</version>
+		</Novus_Ecommhub>
+	</modules>
+	<global>
+		<blocks>
+			<ecommhub>
+				<class>Novus_Ecommhub_Block</class>
+			</ecommhub>
+		</blocks>
+		<helpers>
+			<ecommhub>
+				<class>Novus_Ecommhub_Helper</class>
+			</ecommhub>
+		</helpers>
+		<models>
+			<ecommhub>
+				<class>Novus_Ecommhub_Model</class>
+			</ecommhub>
+		</models>
+		<resources>
+            <ecommhub_setup>
+                <setup>
+                    <module>Novus_Ecommhub</module>
+                </setup>
+            </ecommhub_setup>
+        </resources>
+	</global>
+	
+	 <admin>
+        <routers>
+            <ecommhub>
+                <use>admin</use>
+                <args>
+                    <module>Novus_Ecommhub</module>
+                    <frontName>ecommhub</frontName>
+                </args>
+            </ecommhub>
+        </routers>
+    </admin>
+	
+	<adminhtml>
+        <layout>
+            <updates>
+                <ecommhub>
+					<file>ecommhub.xml</file>
+				</ecommhub>
+            </updates>
+        </layout>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <ecommhub>
+                            <title>eCommHub Menu Item</title>
+                            <children>
+                                <information translate="title" module="ecommhub">
+                                    <title>eCommHub Information</title>
+                                </information>
+                            </children>
+                        </ecommhub>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+	</adminhtml>
+</config>

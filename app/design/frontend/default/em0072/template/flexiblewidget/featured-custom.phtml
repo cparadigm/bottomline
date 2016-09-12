@@ -1,0 +1,83 @@
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+	 if(Mage::registry('current_category')){
+    	  $_productCollection->addUrlRewrite(Mage::registry('current_category')->getId());}
+    $_helper = $this->helper('catalog/output');
+    $_collectionSize = $_productCollection->count();
+    $_columnCount = $this->getColumnCount();
+	$confimg = new EM_MarrymeSettings_MarrymeSettings(); 
+	$w = $confimg->get_widget_width();
+	$h = $confimg->get_widget_height();
+	$bg = $confimg->get_widget_bgcolor();
+
+?>
+<?php if(!$_productCollection->count()): ?>
+
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+<div class="widget-title">
+	<h2><?php echo $this->getData('frontend_title'); ?></h2>
+</div>
+
+<div class="category-products">
+    <?php // List mode ?>
+    <?php $_iterator = 0; ?>
+    <ol class="products-list" id="products-list-featured">
+    <?php foreach ($_productCollection as $_product): ?>
+        <li class="quickshop item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
+            <?php // Product Image ?>
+            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" class="product-image"><img style="background-color:<?php echo $bg; ?>" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($w,$h) ?>" width="<?php echo $w;?>" height="<?php echo $h;?>" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" /></a>
+            <?php // Product description ?>
+            <div class="product-shop hover-quickshop" style="display:none" title="<?php echo 'order'.$i; ?>">
+				<div class="f-fix">
+					<h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName() , 'name') ?></a></h3>
+					<a class="view-detail" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('View detail') ?></a>
+				</div>
+			</div>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+    <script type="text/javascript">decorateList('products-list-featured', 'none-recursive')</script>
+</div>
+<script type="text/javascript">
+jQuery(function($) {
+	var timeout = new Array(jQuery('#products-list-featured li.item').length);
+	
+	$('.hover-quickshop').hide();
+	$('.quickshop a.product-image img').bind('mouseover', function(){
+		showDetail($(this).parent().parent().children('.hover-quickshop'));
+	}).bind('click', function(){
+		showDetail($(this).parent().parent().children('.hover-quickshop'));
+	}).bind('mouseout', function(){
+		hideDetail($(this).parent().parent().children('.hover-quickshop'));
+	});
+
+	$('.hover-quickshop').bind('mouseover', function(){
+		showDetail($(this));
+	}).bind('click', function(){
+		hideDetail($(this));
+	}).bind('mouseout', function(){
+		hideDetail($(this));
+	});
+
+	//var timeout = null;
+	function hideDetail(element) {
+		if (timeout[element.attr('title')])
+			clearTimeout(timeout[element.attr('title')]);
+		timeout[element.attr('title')] = setTimeout(function() {
+			timeout[element.attr('title')] = null;
+			element.slideUp();
+		}, 200);
+	}
+
+	function showDetail(element) {
+		if (timeout[element.attr('title')])
+			clearTimeout(timeout[element.attr('title')]);
+		timeout[element.attr('title')] = setTimeout(function() {
+			timeout[element.attr('title')] = null;
+			element.slideDown();
+		}, 200);
+	}
+}); 
+</script>
+<?php endif; ?>

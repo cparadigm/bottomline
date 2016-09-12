@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Boardroom_Orderdetailreports>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Boardroom_Orderdetailreports>
+    </modules>
+</config>

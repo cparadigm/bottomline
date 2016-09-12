@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <catalog_product_view>
+        <reference name="product.info">
+            <action method="setTemplate">
+                <template>boardroom/catalog/product/view.phtml</template>
+            </action>
+            <block type="core/template" name="product.info.book" template="boardroom/catalog/product/view/book.phtml"/>
+            <block type="core/template" name="product.info.vitamin" template="boardroom/catalog/product/view/vitamin.phtml"/>
+            <block type="core/template" name="product.info.default" template="boardroom/catalog/product/view/default.phtml"/>
+        </reference>
+    </catalog_product_view>
+</layout>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+ <global>
+  <cms>
+   <layouts>
+    <custom_static_page_one>
+     <label>CMS layout</label>
+     <template>page/cms-layout.phtml</template>
+    </custom_static_page_one>     
+    <custom_static_page_two>
+     <label>CMS layout one</label>
+     <template>page/cms-layout-one.phtml</template>
+    </custom_static_page_two>
+    <custom_static_page_three>
+     <label>CMS layout two</label>
+     <template>page/cms-layout-2right-banners.phtml</template>
+    </custom_static_page_three>   
+   </layouts>
+  </cms>
+ </global>
+</config>

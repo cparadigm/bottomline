@@ -1,0 +1,81 @@
+<?php
+
+/* @var $this Mage_Core_Block_Template */
+/* @var $catalogSearchHelper Mage_Catalogsearch_Helper_Data */
+$catalogSearchHelper =  $this->helper('catalogsearch');
+?>
+
+<?php 
+    $category = Mage::getModel('catalog/category'); 
+    if(is_object(Mage::registry('current_category'))){ 
+        $currentCategoryPath=Mage::registry('current_category')->getPathIds(); 
+    }else{ 
+        $currentCategoryPath = array(); 
+    } 
+    $category->load(Mage::app()->getStore()->getRootCategoryId()); 
+    $childrenString = $category->getChildren(); 
+    $children = explode(',',$childrenString); 
+    $categoryOptions=''; 
+    foreach($children as $c){ 
+        if($this->getRequest()->getParam('cat')==""){ 
+            $selected = (in_array($c, $currentCategoryPath))?'SELECTED':''; 
+        }else{ 
+            $selected = ($this->getRequest()->getParam('cat')==$c)?'SELECTED':''; 
+    } 
+    $categoryOptions.= '<option value="' . $c . '" ' . $selected . '>' . $category->load($c)->getName() . '</option>' . "\n"; 
+    } 
+?>
+
+ <div class="search-box">
+   <form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">       
+
+        <select name="cat" id="cat" class="cate-dropdown"> 
+            <option value=""><?php echo $this->__('All Categories') ?></option> 
+            <?php echo $categoryOptions ?> 
+        </select> 
+
+	<?php 
+	      $enabled=Mage::app()->getStore()->getConfig('mgkautocompletesection/general/enabled');
+	      $loderimage=Mage::app()->getStore()->getConfig('mgkautocompletesection/general/loaderimg');
+	      if($enabled==1){
+		  if($loderimage==''){  
+			  $selectedlodader=Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'magikautocomplete/default/autocomplete_loader.gif';        
+		  }else{ 
+			  $selectedlodader = Mage::getBaseUrl('media').'magikautocomplete'.DS.$loderimage;       
+		  }
+	?>
+	      <div style="display:none;" class="magikautosearchImg" id="processing-image">
+		<img src="<?php echo $selectedlodader;?>">
+	      </div>	
+	<?php } ?>
+	<!-- Autocomplete End code -->
+        <input id="search" type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>" class="searchbox" maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" />
+        <button type="submit" title="<?php echo $this->__('Search') ?>" class="search-btn-bg" id="submit-button"><span><?php echo $this->__('Search') ?></span></button>
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+        <script type="text/javascript">
+	    var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search entire store here...') ?>');
+$j('html').click(function(){
+$j('#search_autocomplete').hide();
+});
+	    $j("#search").keyup(function() {
+		var text = $j(this).val();
+		var chars = text.length;
+		if (chars > 2) {
+		    $j("#processing-image").show();
+		    var postData = $j('#search_mini_form').serializeArray();
+    
+		    $j.ajax({
+			      url : '<?php echo $catalogSearchHelper->getSuggestUrl() ?>',
+			      type: "POST",
+			      data : postData,
+			      success:function(data)
+			      { $j("#processing-image").hide();
+				    $j('#search_autocomplete').html(data).show();
+				}
+		    });
+		}
+    
+	    });
+	</script>    
+   </form>
+ </div> <!--search-box-->

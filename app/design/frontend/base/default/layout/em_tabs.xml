@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+	    <reference name="head">
+			<action method="addCss"><name>emtabs/css/jquery.sliderTabs.css</name></action>
+			<action method="addItem"><type>skin_js</type><name>emtabs/js/jquery.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>emtabs/js/jquery.sliderTabs.js</name></action>
+        </reference>
+    </default>
+</layout> 

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <block name="inject_new" template="autocompleteplus/inject_new.phtml" type="autocompleteplus_autosuggest/inject"/>
+            <block type="autocompleteplus_autosuggest/autocomplete" />
+        </reference>
+    </default>
+    <catalogsearch_result_index>
+        <reference name="catalogsearch.leftnav">
+            <action method="setTemplate" ifconfig="autocompleteplus/config/layered">
+                <value>autocompleteplus/catalog/layer/view.phtml</value>
+            </action>
+        </reference>
+        <reference name="search_result_list">
+            <action method="setTemplate" ifconfig="autocompleteplus/config/layered">
+                <value>autocompleteplus/catalog/product/list.phtml</value>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+</layout>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+    <adminhtml_productlabels_index>
+        <reference name="content">
+            <block type="productlabels/adminhtml_productlabels" name="productlabels" />
+        </reference>
+    </adminhtml_productlabels_index>
+    <adminhtml_productlabels_edit>
+		<reference name="head">
+			<action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+            <action method="addJs"><script>mage/adminhtml/rules.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name><params/></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/magento.css</name><params/></action>
+        </reference>
+		<reference name="content">
+            <block type="productlabels/adminhtml_productlabels_edit" name="productlabels_edit">
+				<block type="adminhtml/store_switcher" name="store_switcher"/>
+			</block>
+        </reference>
+    </adminhtml_productlabels_edit>
+    <adminhtml_productlabels_new>
+        <update handle="adminhtml_productlabels_edit"/>
+    </adminhtml_productlabels_new>
+	<adminhtml_csslabel_edit>
+		<reference name="content">
+            <block type="productlabels/adminhtml_csslabel_edit" name="csslabels_edit">
+				<block type="adminhtml/store_switcher" name="store_switcher"/>
+			</block>
+        </reference>
+	</adminhtml_csslabel_edit>
+</layout>

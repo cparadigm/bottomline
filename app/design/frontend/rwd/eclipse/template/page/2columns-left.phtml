@@ -1,0 +1,55 @@
+
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+</head>
+
+<?php $config1 = Mage::getStoreConfig('web/default/cms_home_page');
+  $enableResponsive=Mage::app()->getStore()->getConfig('eclipsesettings/responsivecss/enable');
+ ?>
+
+<?php if(($config1=='eclipse_home_one')) { ?>   
+   <link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/slider1.css" type="text/css" />
+      <?php if($enableResponsive==1){ ?>
+	  <link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/responsive1.css" type="text/css" />
+      <?php } ?>
+<?php } ?>
+
+<?php if(($config1=='eclipse_home_two')) { ?>   
+   <link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/slider2.css" type="text/css" />
+    <?php if($enableResponsive==1){ ?>
+      <link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/responsive2.css" type="text/css" />
+    <?php } ?>
+<?php } ?>
+
+<body class="<?php echo $this->getBodyClass()?' '.$this->getBodyClass().'':'' ?> rtl">
+
+<?php echo $this->getChildHtml('after_body_start') ?>
+
+       <?php echo $this->getChildHtml('global_notices') ?>      
+       <?php echo $this->getChildHtml('header') ?>
+        <!-- BEGIN Main Container col2-left -->           
+       <section class="main-container col2-left-layout">
+          <?php echo $this->getChildHtml('breadcrumbs') ?> 
+           <div class="main-container-inner">               
+          <article class="col-main">                                          
+              <?php echo $this->getChildHtml('global_messages') ?>
+              <?php echo $this->getChildHtml('content') ?>                   
+          </article> <!--col-main-->
+          <aside class="col-left sidebar">               
+              <?php echo $this->getChildHtml('left') ?>                 
+          </aside> <!--col-right sidebar-->         
+          </div><!--main-container-inner-->
+       </section> <!--main-container col2-left-layout-->   
+      
+<?php echo $this->getChildHtml('footer') ?>
+<?php echo $this->getChildHtml('before_body_end') ?>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

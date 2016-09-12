@@ -1,0 +1,592 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<magik translate="label" module="eclipsesettings">
+			<label>Magik</label>
+			<sort_order>205</sort_order>
+		</magik>
+	</tabs>
+	<sections>
+		<eclipsesettings translate="label" module="eclipsesettings">
+			<label>Eclipse Theme Settings</label>
+			<tab>magik</tab>
+			<sort_order>10</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<eclipsesettings_appearance translate="label">
+					<label>Appearance</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>												
+						<footer translate="label comment">
+							<label>Footer: </label>
+							<frontend_type>radios</frontend_type>
+							<frontend_model>eclipsesettings/adminhtml_system_config_form_field_footer</frontend_model>
+							<source_model>eclipsesettings/config_footer</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</footer>
+						<font translate="label comment">
+							<label>Font: </label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>eclipsesettings/adminhtml_system_config_form_field_font</frontend_model>
+							<source_model>eclipsesettings/config_font</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</font>						
+
+						<color translate="label comment">
+							<label>Theme Color: </label>
+							<comment>This color will be used for buttons</comment>
+							<frontend_type>text</frontend_type>
+							<frontend_model>eclipsesettings/adminhtml_system_config_form_field_color</frontend_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</color>
+						<header_bg_color translate="label comment">
+							<label>Header BG Color: </label>
+							<comment>This color will be used for header background</comment>
+							<frontend_type>text</frontend_type>
+							<frontend_model>eclipsesettings/adminhtml_system_config_form_field_color</frontend_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</header_bg_color>
+						<header_fg_color translate="label comment">
+							<label>Header Text Color: </label>
+							<comment>This color will be used header text/links</comment>
+							<frontend_type>text</frontend_type>
+							<frontend_model>eclipsesettings/adminhtml_system_config_form_field_color</frontend_model>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</header_fg_color>
+						<footer_bg_color translate="label comment">
+							<label>Footer BG Color: </label>
+							<comment>This color will be used for footer background</comment>
+							<frontend_type>text</frontend_type>
+							<frontend_model>eclipsesettings/adminhtml_system_config_form_field_color</frontend_model>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</footer_bg_color>
+						<footer_fg_color translate="label comment">
+							<label>Footer Text Color: </label>
+							<comment>This color will be used footer text/links</comment>
+							<frontend_type>text</frontend_type>
+							<frontend_model>eclipsesettings/adminhtml_system_config_form_field_color</frontend_model>
+							<sort_order>90</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</footer_fg_color>
+						<content_bg_color translate="label comment">
+							<label>Content bg Color: </label>
+							<comment>This color will be used for content bg</comment>
+							<frontend_type>text</frontend_type>
+							<frontend_model>eclipsesettings/adminhtml_system_config_form_field_color</frontend_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</content_bg_color>
+					</fields>
+				</eclipsesettings_appearance>
+				<eclipsesettings_header translate="label">
+					<label>Header</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<navigation_home translate="label">
+							<label>Home Link in Navigation</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</navigation_home> 						
+					</fields>
+				</eclipsesettings_header>
+				<eclipsesettings_menu translate="label">
+					<label>Menu</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>30</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<navigation_menu_type translate="label">
+							<label>Top Menu Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>eclipsesettings/config_menu</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</navigation_menu_type>
+						<sidebar_menu_type translate="label">
+							<label>Sidebar Menu Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>eclipsesettings/config_sidebarmenu</source_model>
+							<sort_order>41</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</sidebar_menu_type>
+					</fields>
+				</eclipsesettings_menu>
+				<eclipsesettings_labels translate="label">
+					<label>Product Labels</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>40</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<new_label translate="label">
+							<label>Show "New" label</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</new_label>
+						<new_label_text translate="label">
+							<label>New Label Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><new_label>1</new_label></depends>
+						</new_label_text>
+						<new_label_position translate="label">
+							<label>"New" label position</label>
+							<frontend_type>select</frontend_type>
+							<source_model>eclipsesettings/config_position</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</new_label_position>
+						<sale_label translate="label">
+							<label>Show "Sale" label</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</sale_label>
+						<sale_label_text translate="label">
+							<label>Sale Label Text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><sale_label>1</sale_label></depends>
+						</sale_label_text>
+						<sale_label_position translate="label">
+							<label>"Sale" label position</label>
+							<frontend_type>select</frontend_type>
+							<source_model>eclipsesettings/config_position</source_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</sale_label_position>
+					</fields>
+				</eclipsesettings_labels>                
+				<eclipsesettings_footer translate="label">
+					<label>Footer</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>50</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<footer_google_analytics translate="label">
+							<label>Google Analytics in Footer</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</footer_google_analytics>
+						<footer_google_analytics_path translate="label">
+							<label>Google Analytics</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</footer_google_analytics_path>
+					</fields>                    
+				</eclipsesettings_footer>                
+				<eclipsesettings_social translate="label">
+					<label>Social Links</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>60</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<social_link translate="label">
+							<label>Enable All Social Links</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</social_link>
+						<facebook_social_link translate="label">
+							<label>Enable Facebook Social Link</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link></depends>
+						</facebook_social_link>
+						<facebook_social_link_path translate="label">
+							<label>Facebook Link Path</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link><facebook_social_link>1</facebook_social_link></depends>
+						</facebook_social_link_path>
+						<twitter_social_link translate="label">
+							<label>Enable Twitter Social Link</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link></depends>
+						</twitter_social_link>
+						<twitter_social_link_path translate="label">
+							<label>Twitter Link Path</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link><twitter_social_link>1</twitter_social_link></depends>
+						</twitter_social_link_path>
+						<googleplus_social_link translate="label">
+							<label>Enable Googleplus Social Link</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link></depends>
+						</googleplus_social_link>
+						<googleplus_social_link_path translate="label">
+							<label>Googleplus Link Path</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link><googleplus_social_link>1</googleplus_social_link></depends>
+						</googleplus_social_link_path> 
+						<rss_social_link translate="label">
+							<label>Enable RSS Social Link</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link></depends>
+						</rss_social_link>
+						<rss_social_link_path translate="label">
+							<label>RSS Link Path</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>90</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link><rss_social_link>1</rss_social_link></depends>
+						</rss_social_link_path> 
+						<pinterest_social_link translate="label">
+							<label>Enable Pinterest Social Link</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link></depends>
+						</pinterest_social_link>
+						<pinterest_social_link_path translate="label">
+							<label>Pinterest Link Path</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>110</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link><pinterest_social_link>1</pinterest_social_link></depends>
+						</pinterest_social_link_path>
+						<linkedin_social_link translate="label">
+							<label>Enable Linkedin Social Link</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>120</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link></depends>
+						</linkedin_social_link>
+						<linkedin_social_link_path translate="label">
+							<label>Linkedin Link Path</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>130</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link><linkedin_social_link>1</linkedin_social_link></depends>
+						</linkedin_social_link_path>
+						<youtube_social_link translate="label">
+							<label>Enable Youtube Social Link</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>140</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link></depends>
+						</youtube_social_link>
+						<youtube_social_link_path translate="label">
+							<label>Youtube Link Path</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>150</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><social_link>1</social_link><youtube_social_link>1</youtube_social_link></depends>
+						</youtube_social_link_path> 
+					</fields>  
+				</eclipsesettings_social>               
+				<eclipsesettings_products translate="label">
+					<label>Products</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>70</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<upsell_product translate="label">
+							<label>Upsell Products in detail page</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</upsell_product>
+						<related_product translate="label">
+							<label>Related Products in detail page</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</related_product>
+						<nextprevious_product translate="label">
+							<label>Next Previous products in detail page</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</nextprevious_product>
+					</fields>  
+				</eclipsesettings_products>
+
+				<eclipsesettings_newsletterpopup translate="label">
+					<label>Newsletter</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<newsletterpopup_enable translate="label">
+							<label>Display Newsletter Popup On Home Page</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</newsletterpopup_enable>
+					</fields>  
+				</eclipsesettings_newsletterpopup>
+				
+				<eclipsesettings_shoppingcart translate="label">
+					<label>Shopping Cart</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>101</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<shoppingcart_top translate="label">
+							<label>Display Shopping Cart at top</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</shoppingcart_top>
+					</fields>  
+				</eclipsesettings_shoppingcart>
+
+				
+				<eclipsesettings_quickview translate="label">
+					<label>Quick View</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>102</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enable translate="label">
+							<label>Display Quick View</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+					</fields>  
+				</eclipsesettings_quickview>
+				<eclipsesettings_contactmap translate="label">
+					<label>Map on contact page</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>103</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enable translate="label">
+							<label>Enable</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<mapaddress translate="label">
+							<label>Address</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>11</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</mapaddress>
+						<maplat translate="label">
+							<label>Latitude</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>12</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</maplat>
+						<maplong translate="label">
+							<label>Longitude</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>13</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</maplong>
+					</fields>  
+				</eclipsesettings_contactmap>
+				<responsivecss translate="label">
+					<label>Responsive CSS</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>104</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enable translate="label">
+							<label>Enable</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>21</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+					</fields>  
+				</responsivecss>
+				<rtlcss translate="label">
+					<label>RTL CSS</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>105</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enable translate="label">
+							<label>Enable</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>22</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<rtlresponsive translate="label">
+							<label>Enable RTL Responsive css</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>23</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</rtlresponsive>
+					</fields>  
+				</rtlcss>
+			</groups>
+		</eclipsesettings>
+	</sections>
+</config>
+
+

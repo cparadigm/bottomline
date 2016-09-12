@@ -1,0 +1,58 @@
+<?php $_code    = 'authnetcim'; ?>
+<?php $_cards   = $this->getPriorCards(); ?>
+<?php $_card    = $this->getSelected(); ?>
+<?php $type     = $this->getSelectedType( $_card ); ?>
+<?php $both     = count( $_cards['cc'] ) > 0 && count( $_cards['bank'] ) > 0 ? true : false; ?>
+<li>
+    <div class="input-box">
+        <?php if( Mage::getSingleton('customer/session')->isLoggedIn() && ( count( $_cards['cc'] ) > 0 || count( $_cards['bank'] ) > 0 ) ): ?>
+            <button class="button" onclick="if( document.forms['formAuthorizeNetPopup'].elements['Token'].value.length > 0 ) { AuthorizeNetPopup.openAddPaymentPopup(); } else { alert('<?php echo $this->__('Please enter your billing address and email to proceed.'); ?>'); } return false;"><span><span><?php echo $this->__('Add a payment method'); ?></span></span></button>
+            <small class="right"><a href="<?php echo $this->getUrl( $_code . '/manage', array( '_secure' => true ) ); ?>" target="_blank"><?php echo $this->__('Manage'); ?></a></small>
+        <?php else: ?>
+            <a href="#" class="button" onclick="if( document.forms['formAuthorizeNetPopup'].elements['Token'].value.length > 0 ) { AuthorizeNetPopup.openAddPaymentPopup(); } else { alert('<?php echo $this->__('Please enter your billing address and email to proceed.'); ?>'); } return false;"><span><?php echo $this->__('Click to add a payment method'); ?></span></a>
+        <?php endif; ?>
+    </div>
+</li>
+<?php if( count( $_cards['cc'] ) > 0 ): ?>
+<li>
+    <label for="<?php echo $_code; ?>_payment_id_cc" class="required">
+        <?php if( $both === true ): ?>
+            <a href="#" onclick="$('<?php echo $_code; ?>_payment_id_bank').hide().removeClassName('required-entry').value = ''; $('<?php echo $_code; ?>_payment_id_cc').toggle().toggleClassName('required-entry'); if( !$('<?php echo $_code; ?>_payment_id_cc').visible() ){ $('<?php echo $_code; ?>_payment_id_cc').value=''; } $('<?php echo $_code; ?>_payment_id').value=''; return false;"><?php echo $this->__('Pay by credit card'); ?></a>
+        <?php else: ?>
+            <em>*</em><?php echo $this->__('Pay by credit card'); ?>
+        <?php endif; ?>
+    </label>
+    <div class="input-box">
+        <select name="payment[payment_id_cc" id="<?php echo $_code; ?>_payment_id_cc" class="<?php echo $_code; ?>_require <?php if( !$both || $type == 'cc' ): ?>required-entry<?php endif; ?>" <?php if( $both && $type != 'cc' ): ?>style="display:none"<?php endif; ?> onchange="$('<?php echo $_code; ?>_payment_id').value=this.value;">
+            <option value=""><?php echo $this->__('-- Select One --'); ?></option>
+            <?php foreach( $_cards['cc'] as $c ): ?>
+                <option value="<?php echo $c['payment_id']; ?>" <?php if( $_card == $c['payment_id'] ): ?>selected="selected"<?php endif; ?>><?php echo $c['label']; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+</li>
+<?php endif; ?>
+<?php if( count( $_cards['bank'] ) > 0 ): ?>
+<li>
+    <label for="<?php echo $_code; ?>_payment_id_bank" class="required">
+        <?php if( $both === true ): ?>
+            <a href="#" onclick="$('<?php echo $_code; ?>_payment_id_bank').toggle().toggleClassName('required-entry'); $('<?php echo $_code; ?>_payment_id_cc').hide().removeClassName('required-entry').value = ''; if( !$('<?php echo $_code; ?>_payment_id_bank').visible() ){ $('<?php echo $_code; ?>_payment_id_bank').value=''; } $('<?php echo $_code; ?>_payment_id').value=''; return false;"><?php echo $this->__('Pay by bank account'); ?></a>
+        <?php else: ?>
+            <em>*</em><?php echo $this->__('Pay by bank account'); ?>
+        <?php endif; ?>
+    </label>
+    <?php if( $both === true ): ?>
+    <?php endif; ?>
+    <div class="input-box">
+        <select name="payment[payment_id_bank]" id="<?php echo $_code; ?>_payment_id_bank" class="<?php echo $_code; ?>_require <?php if( !$both || $type == 'bank' ): ?>required-entry<?php endif; ?>" <?php if( $both && $type != 'bank' ): ?>style="display:none"<?php endif; ?> onchange="$('<?php echo $_code; ?>_payment_id').value=this.value;">
+            <option value=""><?php echo $this->__('-- Select One --'); ?></option>
+            <?php foreach( $_cards['bank'] as $c ): ?>
+                <option value="<?php echo $c['payment_id']; ?>" <?php if( $_card == $c['payment_id'] ): ?>selected="selected"<?php endif; ?>><?php echo $c['label']; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+</li>
+<?php endif; ?>
+
+<?php /* Magic element for required status */ ?>
+<input type="hidden" name="payment[payment_id]" id="<?php echo $_code; ?>_payment_id" class="required-entry" value="<?php echo $_card; ?>" />

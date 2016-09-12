@@ -1,0 +1,33 @@
+<?php
+    $object = $this->getObject();
+    $labels = $object['labels'];
+   
+    $product = $object['product'];
+    $processor = Mage::getModel('productlabels/filter');
+    $objectFilter = new Varien_Object();
+   
+    $objectFilter->setData('product',$product);
+?>
+<ul class="productlabels_icons">
+    <?php foreach($labels as $label):?>
+    <?php
+	$background = $label->getBackground();
+    if ($background)
+    {
+        $src = Mage::getBaseUrl("media").'em_productlabels'.'/'.'background'.'/'.$background;
+        $style = "style='background:url(\"$src\") no-repeat scroll 0 0 transparent'";
+    }
+    else $style = '';
+    ?>
+    <li class="label <?php echo $label->getCssClass() ?>" <?php echo $style;?>>
+        <?php $image = $label->getImage();?>
+        <?php if($image && $image != 'nopic'):?>
+        <img src="<?php echo Mage::getBaseUrl("media").'em_productlabels'.'/'.'image'.'/'.$image;?>"/>
+        <?php endif;?>
+        <p>
+            <?php $objectFilter->setData('text',$label->getTexthtml());?>
+            <?php echo $processor->filter($objectFilter);?>
+        </p>
+    </li>
+    <?php endforeach;?>
+</ul>

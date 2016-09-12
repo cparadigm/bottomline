@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * OneStepCheckout by EMThemes
+ * 
+ * Based on Magento 1.7.0.0 source code
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 EMThemes. (http://www.emthemes.com)
+ * @license     Commercial License. Granted for authorized users only.
+ */
+
+-->
+<layout version="0.1.0">
+	
+	<!-- BEGIN EM OnePageCheckout Mod -->
+    <CHECKOUT_ONESTEP_INDEX>
+		<remove name="left"/>
+		<remove name="right"/>
+		<reference name="root">
+			<action method="setTemplate"><file>page/1column.phtml</file></action>
+		</reference>
+		
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/opcheckoutEM.css</stylesheet></action>
+		</reference>
+		
+		<reference name="checkout.onepage">
+			<action method="setTemplate"><file>em_onestepcheckout/onepage.phtml</file></action>
+		</reference>
+		<reference name="checkout.onepage.login">
+			<action method="setTemplate"><file>em_onestepcheckout/onepage/login.phtml</file></action>
+		</reference>
+		<reference name="checkout.onepage.billing">
+			<action method="setTemplate"><file>em_onestepcheckout/onepage/billing.phtml</file></action>
+		</reference>
+		<reference name="checkout.payment.methods">
+			<action method="setTemplate"><file>checkout/onepage/payment/methods.phtml</file></action>
+		</reference>
+		<reference name="checkout.onepage.shipping_method">
+			<action method="setTemplate"><file>em_onestepcheckout/onepage/shipping_method.phtml</file></action>
+		</reference>
+		
+		<reference name="checkout.onepage.review">
+			<action method="setTemplate"><file>em_onestepcheckout/onepage/review.phtml</file></action>
+			<!-- Giao: BEGIN - Show order review at initial time -->
+			<block type="checkout/onepage_review_info" name="checkout.onepage.review.info" as="info" template="checkout/onepage/review/info.phtml">
+	            <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+	            <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/review/item.phtml</template></action>
+	            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
+	            <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+
+	            <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+	            <block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before" translate="label">
+	                <label>Items Before</label>
+	            </block>
+	            <block type="core/text_list" name="checkout.onepage.review.info.items.after" as="items_after" translate="label">
+	                <label>Items After</label>
+					<block type="checkout/cart_coupon" name="checkout.onepage.info.coupon" as="coupon" template="em_onestepcheckout/onepage/coupon.phtml"/>
+	            </block>
+	            <block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="checkout/onepage/agreements.phtml"/>
+	            <block type="core/template" name="checkout.onepage.review.button" as="button" template="checkout/onepage/review/button.phtml"/>
+	        </block>
+			<!-- END -->
+		</reference>
+	</CHECKOUT_ONESTEP_INDEX>
+	
+	<onestepcheckout_index_review>
+		<block type="checkout/onepage_review_info" name="checkout.onepage.review.info" as="info" template="checkout/onepage/review/info.phtml">
+			<action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+			<action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/review/item.phtml</template></action>
+			<action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
+			<action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+
+			<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+			<block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before" translate="label">
+				<label>Items Before</label>
+			</block>
+			<block type="core/text_list" name="checkout.onepage.review.info.items.after" as="items_after" translate="label">
+				<label>Items After</label>
+				<block type="checkout/cart_coupon" name="checkout.onepage.info.coupon" as="coupon" template="em_onestepcheckout/onepage/coupon.phtml"/>
+			</block>
+			<block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="checkout/onepage/agreements.phtml"/>
+			<block type="core/template" name="checkout.onepage.review.button" as="button" template="checkout/onepage/review/button.phtml"/>
+		</block>
+	</onestepcheckout_index_review>
+	<!-- ENDOF OnePageCheckout Mod -->
+</layout>

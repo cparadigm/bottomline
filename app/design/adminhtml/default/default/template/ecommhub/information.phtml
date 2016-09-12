@@ -1,0 +1,99 @@
+<div class="content-header">
+    <table cellspacing="0" class="grid-header">
+        <tr>
+            <td><h3><?php echo $this->__('eCommHub - Getting Started');?></h3></td>
+            <?php /*?><td class="a-right">
+                <button onclick="editForm.submit()" class="scalable save" type="button"><span>Update API Key</span></button>
+            </td><?php */?>
+        </tr>
+    </table>
+</div>
+
+<div class="entry-edit">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Step 1 - Create eCommHub Account')?></h4>
+    <fieldset id="my-fieldset">
+    <table cellspacing="0" class="form-list">
+        <tr><td>
+            <table cellspacing="0" class="form-list">
+                <tr>
+                    <td><p>Great! So you just installed the Magento extension, but now you need an eCommHub account to connect it to.</p><p>Creating an eCommHub account takes less than a minute and comes with a <b>free 14 day trial</b>. Sign up in one-click below:</p></td>
+                </tr>
+                <tr>
+                    <td><ul><li style="list-style-type:square;margin-left:30px;"><a href="<?php echo $this->oneClickEcommhubUrl();?>" target="_blank">Create my eCommHub account with 14-day free trial</a></li></ul></td>
+                </tr>
+                <tr>
+                    <td><p style="margin:8px 0 0 0;color:#999;">If you already have an eCommHub account, you can skip this step.</p></td>
+                </tr>
+            </table>
+        </td>
+
+        <td>
+            <table cellspacing="0" class="form-list" width="500px;">
+                <tr><td>
+                <a href="http://ecommhub.com/" title="eCommHub" target="_blank"><img style="margin:2.5em 0 0 6.5em;" src="<?php echo $this->getSkinUrl('images/ecommhub-logo-mage.png') ?>" alt="eCommHub API key update instructions" width="303" height="42" /></a>
+                </td></tr>
+            </table>
+        </td></tr>
+    </table>
+    </fieldset>
+</div>
+
+<div class="entry-edit">
+    <!--<form id="edit_form" name="edit_form" method="post" action="<?php echo $this->getUrl('*/*/post');?>" >
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey();?>" />-->
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Step 2 - Connect eCommHub to Magento')?></h4>
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="form-list">
+            <tr><td>
+                 <p>Now that you have an eCommHub account, it's time to connect it to Magento.</p>
+                 <p>We've gone ahead and created a new Magento API user for eCommHub, but you still need to set the API Key below.</p>
+                 <p style="margin-top:1.5em;font-weight:bold;">Your API User Credentials:</p>
+                <table cellspacing="0" class="form-list" width="500px;" style="border: 1px solid #d6d6d6 !important; padding: 0.3em 0.5em; background: #fff;">
+                <tr>
+                    <td class="label" style="width:85px;"><?php echo $this->__('Username:');?></td>
+                    <td class="input-ele" style="padding-top:5px;"><input class="input-text" style="background:#f9f9f9;" value="eCommHub" readonly="readonly" size="20" /></td>
+                </tr>
+                <?php /*?><tr>
+                    <td class="label" style="width:85px;"><?php echo $this->__('API Key');?></td>
+                    <td class="input-ele"><a href="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/api_user/edit', array('user_id'=>$this->apiUserId()));?>">
+                    Change API key</td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Confirm API Key');?></td>
+                    <td class="input-ele"><a href="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/api_user/edit', array('user_id'=>$this->apiUserId()));?>">
+                    Change API key</td>
+                </tr><?php */?>
+                <tr>
+                    <td class="label" style="width:85px;"><?php echo $this->__('API Key:');?></td>
+                    <td class="input-ele" style="padding-top:5px;">
+                        <a href="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/api_user/edit', array('user_id'=>$this->apiUserId()));?>">Set API Key</a>
+                        <span style="color:#999;font-style:italic;font-size:11px;margin-left:0.5em;">(This is like your password, so pick something you can remember. See screenshot to the right.)</span>
+                    </td>
+                </tr>
+                </table>
+                 <p style="margin-top:1.5em;">Once you have updated your API Key, sign into eCommHub and enter it under the <a href="https://ecommhub.com/settings/website" title="eCommHub Magento Settings Page">Settings > Magento Settings</a> tab.</p>
+                 <p>If you need further help please see the installation guides below or contact <a href="mailto:support@ecommhub.com?subject=Need help installing Magento extension for eCommHub" target="_blank">support@ecommhub.com</a>.</p>
+                 <ul>
+                     <li><a href="http://support.ecommhub.com/customer/portal/articles/743034" title="How do I connect eCommHub to Magento?" target="_blank">How do I connect eCommHub to Magento?</a></li>
+                     <li><a href="http://support.ecommhub.com/customer/portal/articles/1017387" title="How do I upgrade the Magento extension?" target="_blank">How do I upgrade the Magento extension?</a></li>
+                 </ul>
+            </td>
+            <td>
+            <table cellspacing="0" class="form-list" width="500px;">
+                <tr><td>
+                    <img style="margin-left:2.5em;" src="<?php echo $this->getSkinUrl('images/magento_api_key_update_instruction.jpg') ?>" alt="eCommHub API key update instructions" width="425" height="250" />
+                </td></tr>
+            </table>
+            </td>
+            </tr>   
+          </table>
+
+        </fieldset>
+    <?php /*?></form><?php */?>
+</div>
+
+<?php //echo $this->apikey(); ?>
+
+<script type="text/javascript">
+    var editForm = new varienForm('edit_form');
+</script>

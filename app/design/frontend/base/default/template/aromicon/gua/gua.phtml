@@ -1,0 +1,25 @@
+<?php /** */?>
+<?php if($this->isActive()): ?>
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', '<?php echo $this->_getAccountId(); ?>', '<?php echo $this->getRequest()->getHttpHost() ?>');
+        ga('set', 'anonymizeIp', <?php echo $this->_isAnonymizeIp()?>);
+        ga('send', 'pageview');
+        <?php if($this->_isEcommerce()): ?>
+        ga('require', 'ecommerce', 'ecommerce.js');
+        <?php $_order = $this->getOrder();?>
+        ga('set', 'currencyCode', '<?php echo $_order->getOrderCurrencyCode();?>');
+        ga('ecommerce:addTransaction', { 'id': '<?php echo $_order->getData($this->getTransactionIdField())?>', 'affiliation': '<?php echo Mage::app()->getStore()->getName() ?>', 'revenue': '<?php echo $_order->getGrandTotal()?>', 'shipping': '<?php echo $_order->getShippingInclTax()?>', 'tax': '<?php echo  $_order->getTaxAmount()?>'});
+        <?php foreach($_order->getAllItems() as $_item): ?>
+        <?php if($_item->getParentItem()) continue; ?>
+        ga('ecommerce:addItem', {'id': '<?php echo $_order->getData($this->getTransactionIdField()) ?>', 'name': '<?php echo str_replace('\'','', $_item->getName()) ?>', 'sku': '<?php echo $_item->getSku() ?>', 'price': '<?php echo $_item->getPrice() ?>', 'quantity': '<?php echo (int) $_item->getQtyOrdered() ?>'});
+        <?php endforeach;?>
+        ga('ecommerce:send');
+        <?php endif;?>
+    </script>
+    <?php echo $this->getChildHtml(); ?>
+<?php endif; ?>

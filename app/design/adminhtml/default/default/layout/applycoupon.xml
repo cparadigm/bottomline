@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_applycoupon_index>
+        <reference name="content">
+            <block type="applycoupon/adminhtml_grid" name="applycoupon" />
+        </reference>
+        <reference name="js">
+            <block type="core/template" template="applycoupon/inline-edit.phtml" />
+        </reference>
+    </adminhtml_applycoupon_index>
+</layout>

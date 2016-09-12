@@ -1,0 +1,75 @@
+<?php
+	$helper = Mage::helper('cms');
+    $processor = $helper->getBlockTemplateProcessor();
+	$idJs = "slide_".md5(uniqid(rand()));
+	$classJsUl = $idJs."-ul";
+?>
+<div id="<?php echo $idJs;?>" class="slider_container<?php if($cssClass = $this->getData('css_class')):?> <?php echo $cssClass;?><?php endif;?>">
+	<?php echo $processor->filter($this->getWidgetInstance());?>
+	<div id="<?php echo $idJs;?>_css"></div>
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	var width_<?php echo $idJs;?> = jQuery('#<?php echo $idJs;?> <?php echo $this->getData('container')?> li.item').width();
+	var height_<?php echo $idJs;?> = jQuery('#<?php echo $idJs;?> <?php echo $this->getData('container')?> li.item').outerHeight(true);
+	jQuery('#<?php echo $idJs;?>_css').html('<style type="text/css">#<?php echo $idJs;?> .jcarousel-skin-tango .jcarousel-item {width:' + width_<?php echo $idJs;?> + 'px;height:' + height_<?php echo $idJs;?> + 'px;}</style>');
+	//alert(jQuery('#<?php echo $idJs;?> <?php echo $this->getData('container')?> li.item').width());
+	if(jQuery('#<?php echo $idJs;?> <?php echo $this->getData('container')?>').length){
+		function carouselCallBack_<?php echo $idJs;?>(carousel){
+		    jQuery('.<?php echo $classJsUl?>').touchwipe({
+			    wipeLeft: function() { 
+		    		carousel.next();
+		    	},
+			    wipeRight: function() { 
+		    		carousel.prev();
+		    	},
+				preventDefaultEvents: false
+			});
+			// 		    function resetJcarousel_<?php echo $idJs;?>(){
+			// 		    	carousel.scroll(1,true);
+			// 		    }
+			// resetJcarousel_<?php echo $idJs;?>);
+		    /*jQuery(window).bind('emadaptchange', function() {
+			 	$(window).trigger('resize.jcarousel');
+			});*/
+			
+		}
+		jQuery('#<?php echo $idJs;?> <?php echo $this->getData("container")?>')
+			.addClass('<?php echo $classJsUl?>')
+			.addClass('jcarousel-skin-tango')
+			.jcarousel({
+				<?php if ($this->getData('circular')): ?>
+				wrap: 'circular',
+				<?php endif ?>
+				auto:<?php echo ($auto = $this->getData('auto_sliding')) ? $auto : 0;?>,
+				buttonNextHTML:'<a class="next" href="javascript:void(0);" title="Next"></a>',
+				buttonPrevHTML:'<a class="previous" href="javascript:void(0);" title="Previous" ></a>',
+				scroll:<?php echo ($scroll = $this->getData('items_per_slide')) ? $scroll : 1;?>,
+				animation:'slow',
+				initCallback: carouselCallBack_<?php echo $idJs;?>,
+				vertical:<?php echo intval($this->getData('direction'));?>
+			});
+		<?php if ($w = $this->getSliderWidth()): ?>
+		jQuery('#<?php echo $idJs;?> .jcarousel-clip').css({width:'<?php echo $w ?>px'});
+		<?php endif ?>
+		<?php if ($h = $this->getSliderHeight()): ?>
+		jQuery('#<?php echo $idJs;?> .jcarousel-clip').css({height:'<?php echo $h ?>px'});
+		<?php endif ?>
+		
+		var onResize = function () {
+			var scroll = <?php echo ($scroll = $this->getData('items_per_slide')) ? $scroll : 1;?>;
+			var sid = '#<?php echo $idJs;?>';
+			var contW = jQuery(sid + ' .jcarousel-clip').width();
+			var itemW = parseInt(jQuery(sid + ' .jcarousel-clip>ul>li:first').outerWidth(true));
+			var vibs = Math.ceil(contW / itemW);
+
+			var carousel = jQuery(sid + ' .jcarousel-clip>ul').data('jcarousel');
+			carousel.options.scroll = (scroll > vibs) ? vibs : scroll;
+		}
+
+		// set scrolling when resize
+		jQuery(window).resize(onResize);
+		onResize();
+	}
+});
+</script>

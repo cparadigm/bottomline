@@ -1,0 +1,90 @@
+<?php /* Newsletter */ ?>
+<script type='text/javascript'>
+jQuery(function(){
+if (document.cookie.indexOf('visited=true') == -1) {
+    var overlay = jQuery('<div id="overlay"></div>');
+      overlay.show();
+      overlay.appendTo(document.body);
+      jQuery('.popup1').show();
+    
+      jQuery('.x').click(function(){
+         if (document.getElementById('notshowpopup').checked) {
+            var oneDays = 1000*60*60*24*1;
+            var expires = new Date((new Date()).valueOf() + oneDays);
+            document.cookie = "visited=true;expires=" + expires.toUTCString();
+        }
+      jQuery('.popup1').hide();
+      overlay.appendTo(document.body).remove();
+      return false;
+
+  });
+}
+});
+</script>
+
+<div class="popup1">
+ 
+  <div class="newsletter-sign-box">
+
+<div class="newsletter">
+<img src="<?php echo $this->getSkinUrl('images/f-box-close-icon.png') ?>" alt="<?php echo $this->__('close') ?>" class="x" id="x" />
+<div id="formSuccess1" style="display:none;"><?php echo $this->__('Thank you for your subscription.'); ?></div>
+    <form method="post" id="popup-newsletter" name="popup-newsletter" class="email-form">
+        <h3><?php echo $this->__('Newsletter Sign up') ?></h3>
+        <div class="line">&nbsp;</div>
+        <h4><?php echo $this->__('sign up for our exclusive email list and be the first to hear of special promotions, new arrivals, and designer news.') ?></h4>
+     <div class="newsletter-form">
+        <div class="input-box">
+           <input type="text" name="email" id="newsletter2" title="<?php echo $this->__('Sign up for our newsletter') ?>" placeholder="Enter your email address" class="input-text required-entry validate-email" />        
+           <button type="submit" title="<?php echo $this->__('Subscribe') ?>" class="button subscribe" ><span><?php echo $this->__('Subscribe') ?></span></button>
+           <img src="<?php echo $this->getSkinUrl('images/mgkloading1.gif') ?>" alt="<?php echo $this->__('Loading') ?>" id="loader1" style="display:none;margin-left:120px;margin-top:10px;">
+        </div> <!--input-box-->
+     </div> <!--newsletter-form-->
+        <label class="subscribe-bottom"><input type="checkbox" name="notshowpopup" id="notshowpopup"><?php echo $this->__('Don’t show this popup again') ?></label>
+    </form>
+
+<script type="text/javascript">
+//<![CDATA[
+    var formId1 = 'popup-newsletter';
+    var myForm1 = new VarienForm(formId1, true);
+    var postUrl1 = "<?php echo $this->getUrl('newsletter/subscriber/new', array('_secure' => true)) ?>";
+    function doAjax1() {
+        if (myForm1.validator.validate()) {
+	if (document.getElementById('notshowpopup').checked) {
+            var oneDays = 1000*60*60*24*1;
+            var expires = new Date((new Date()).valueOf() + oneDays);
+            document.cookie = "visited=true;expires=" + expires.toUTCString();
+        }
+            var request = new Ajax.Request(      
+            postUrl1,
+            {
+                method: 'post',      
+                onLoading: function() {   
+                  document.getElementById('loader1').style.display='inline';   
+                },
+                onComplete: function(transport){ // Defining Complete Callback Function                     
+                     $(formId1).hide();
+                     $('formSuccess1').show();       
+                     
+                },
+                parameters: $(formId1).serialize(true)    // Seriallizing the form input values
+            }
+            );
+            return false;
+     
+        }
+
+    }
+  
+  new Event.observe(formId1, 'submit', function(e){
+    e.stop();
+    doAjax1();
+  });
+
+//]]>
+</script>
+
+</div> <!--newsletter-->
+
+  </div> <!--newsletter-sign-box-->
+</div> <!--popup1-->

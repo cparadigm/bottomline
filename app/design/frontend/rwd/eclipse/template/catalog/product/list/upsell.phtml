@@ -1,0 +1,132 @@
+
+<?php if (Mage::getStoreConfig('eclipsesettings/eclipsesettings_products/upsell_product')): ?>
+
+<?php if(count($this->getItemCollection()->getItems())): ?>
+<div class="upsell-slider">
+  <div class="new_title center">
+    <h2><span><?php echo $this->__('Upsell Products') ?></span></h2>
+  </div> <!--new_title center-->
+<a href="#" class="jcarousel-prev-horizontal2" id="products_slider_prev"></a>
+<a href="#" class="jcarousel-next-horizontal2" id="products_slider_next"></a>
+<div class="jcarousel-skin-tango4">
+  <div class="jcarousel-container jcarousel-container-horizontal" style="position: relative; display: block;">
+    <div class="jcarousel-clip jcarousel-clip-horizontal" style="overflow: hidden; position: relative;">
+   <ul id="featured_products_slider" class="products-grid jcarousel-list jcarousel-list-horizontal" style="overflow: hidden; position: relative; top: 0px; margin: 0px; padding: 0px; left: 0px; width: 2460px;">
+
+    <?php // $this->setColumnCount(5); // uncomment this line if you want to have another number of columns. also can be changed in layout ?>
+    <?php $this->resetItemsIterator() ?>
+    <?php for($_i=0;$_i<$this->getRowCount();$_i++): ?>
+        <?php for($_j=0;$_j<$this->getColumnCount();$_j++): ?>
+            <?php if($_link=$this->getIterableItem()): ?>
+
+ <li class="item jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal<?php if(($i-1)%$_columnCount==0): ?> first1<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+<div class="item-inner">
+      <?php echo $this->helper('eclipsesettings')->getLabel($_link);  ?>
+
+      <div class="pro-img-thumb">             
+         <a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_link->getName()) ?>"><img alt="<?php echo $this->htmlEscape($_link->getName()) ?>" src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(172,172) ?>"></a>      
+      </div> <!--pro-img-thumb-->  
+
+      <div class="actions-links">
+        <span class="add-to-links">
+          <?php  if(Mage::app()->getStore()->getConfig('eclipsesettings/eclipsesettings_quickview/enable')==1){?> 
+           <a title="magik-btn-quickview" class="magik-btn-quickview" data-fancybox-type="ajax" onclick="callQuickView('<?php echo Mage::getUrl('eclipsesettings/index/view/id/'.$_link->getId());?>');"><span><?php echo $this->__('quickview') ?></span></a>
+          <?php }  ?> 
+           <a href="<?php echo $this->helper('wishlist')->getAddUrl($_link) ?>" class="link-wishlist" title="<?php echo $this->__('Add to Wishlist');?>"><span><?php echo $this->__('Add to Wishlist');?></span></a>
+           <?php if($_compareUrl=$this->getAddToCompareUrl($_link)): ?>
+                    <a href="<?php echo $_compareUrl ?>" class="link-compare" title="<?php echo $this->__('Add to Compare');?>"><span><?php echo $this->__('Add to Compare');?></span></a>
+            <?php endif; ?>
+        </span> <!--add-to-links-->
+      </div> <!--actions-links-->
+      
+    <div class="item-info">
+      <div class="info-inner">
+         <div class="item-title">
+             <a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_link->getName()) ?>">
+                  <?php $prod_name = $this->htmlEscape($_link->getName()) ; 
+                  if(strlen($prod_name) > 30) {echo substr($prod_name,0,30)."...";}else {echo $prod_name;}?>
+             </a>
+          </div> <!--item-title-->
+          <div class="item-content">
+            <?php
+                        $summaryData = Mage::getModel('review/review_summary')
+                                ->setStoreId($storeId)
+                                ->load($_link->getId());
+                        if($summaryData->getRatingSummary()){ ?>
+                            <div class="ratings">
+                                <div class="rating-box">
+                                        <div class="rating" style="width: <?php echo $summaryData->getRatingSummary().'%'; ?>"></div>
+                                </div> <!--rating-box-->
+                            </div> <!--ratings-->
+                    <?php } else { ?>  
+                            <div class="ratings"><div class="rating-box"><div style="width:0%" class="rating"></div></div></div>
+                    <?php } ?>
+            <div class="item-price"><?php echo $this->getPriceHtml($_link, true) ?></div>
+          </div> <!--item-content-->
+      </div> <!--info-inner-->
+      <div class="actions">         
+            <?php if($_link->isSaleable()): ?>
+              <button type="button"  title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_link) ?>')"><span><?php echo $this->__('Add to Cart') ?></span></button>
+            <?php else: ?>
+              <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+            <?php endif; ?>          
+        </div> <!--actions-->
+    </div> <!--item-info-->                        
+   </div> <!--item-inner-->     
+            </li> 
+            <?php endif; ?>
+
+        <?php endfor; ?> 
+    <?php endfor; ?>
+
+  </ul>
+   </div> <!--jcarousel-clip jcarousel-clip-horizontal-->
+ </div> <!--jcarousel-container jcarousel-container-horizontal-->
+</div> <!--jcarousel-skin-tango4-->
+
+<script type="text/javascript">decorateTable('upsell-product-table')</script>
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+
+        function mycarousel_initCallback(carousel) {
+
+            $('#products_slider_next').bind('click', function() {
+                carousel.next();
+                return false;
+            });
+            $('#products_slider_prev').bind('click', function() {
+                carousel.prev();
+                return false;
+            });
+        };
+
+    $('#featured_products_slider').jcarousel({
+            scroll: 1,
+        initCallback: mycarousel_initCallback,
+            buttonNextHTML: null,
+            buttonPrevHTML: null
+    });
+});
+</script>   
+<div id="mgkquickview">
+<div id="magikloading" style="display:none;text-align:center;margin-top:400px;"><img src="<?php echo $this->getSkinUrl('images/mgkloading.gif');?>" alt="loading">
+</div></div>
+<script type="text/javascript">
+function callQuickView(qurl) { 
+    jQuery('#mgkquickview').show();
+    jQuery('#magikloading').show();
+    jQuery.get(qurl, function(data) {
+      jQuery.fancybox(data);
+      jQuery('#magikloading').hide();
+jQuery('#mgkquickview').hide();
+    });
+ }
+ 
+</script>
+
+</div> <!--upsell-slider-->
+
+<?php endif ?>
+
+<?php endif; ?> 

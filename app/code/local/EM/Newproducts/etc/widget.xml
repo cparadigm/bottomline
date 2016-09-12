@@ -1,0 +1,300 @@
+<?xml version="1.0"?>
+<widgets>
+    <newproducts_list type="newproducts/list" translate="name description" module="newproducts" >
+        <name>EM New Products</name>
+        <description type="desc">EM New Products in Multi Categories</description>
+        <parameters>        
+            <order_by>
+                <label>Order by</label>
+                <visible>1</visible>
+                <required>1</required>
+                <type>select</type>
+				<sort_order>4</sort_order>
+                <values>
+                    <order_by_1 translate="label">
+                        <value>name asc</value>
+                        <label>Name ASC</label>
+                    </order_by_1>
+					<order_by_11 translate="label">
+                        <value>name desc</value>
+                        <label>Name DESC</label>
+                    </order_by_11>
+                    <order_by_2 translate="label">
+                        <value>position asc</value>
+                        <label>Position ASC</label>
+                    </order_by_2>
+                    <order_by_21 translate="label">
+                        <value>position desc</value>
+                        <label>Position DESC</label>
+                    </order_by_21>					
+                    <order_by_3 translate="label">
+                        <value>price asc</value>
+                        <label>Price ASC</label>
+                    </order_by_3>
+                    <order_by_31 translate="label">
+                        <value>price desc</value>
+                        <label>Price DESC</label>
+                    </order_by_31>					
+                </values>
+            </order_by>			
+		            
+            <new_category translate="label">            
+                <label>Choose Categories</label>
+                <visible>1</visible>
+                <description>You can choose many categories. Leave empty for selecting all categories</description>
+                <type>multiselect</type>
+                <source_model>newproducts/categorytree</source_model>
+
+            </new_category>
+            
+            <limit_count>
+                <label>Limit Count</label>
+                <description>The numbers of product will be show</description>
+                <visible>1</visible>
+                <required>1</required>
+                <type>text</type>
+                <value>10</value>
+            </limit_count>
+			
+			<column_count>
+                <label>Column Count</label>
+                <description>The numbers of products per row. if not specified or 0, ul will hold all li.item</description>
+                <visible>1</visible>
+                <required>0</required>
+                <type>text</type>
+            </column_count>
+          
+            
+            <custom_class>
+                <label>Custom Wrapper Class</label>	
+    			<visible>1</visible>
+                <required>0</required>
+    			<type>text</type>
+            </custom_class>
+            
+			<frontend_title>
+				<label>Frontend Title</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+			</frontend_title>
+            
+            <frontend_description>
+				<label>Frontend Description</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+			</frontend_description>
+			
+			<item_class>
+                <label>Item Class Custom</label>
+                <description>Also, this class can be used to customize the items' width. Ex: span1, span2...</description>
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+				<value></value>
+            </item_class>
+            
+            <item_height>
+                <label>Item Height</label>
+				<description>unit: px</description>
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+				<value></value>
+            </item_height>
+
+            
+            <thumbnail_width>
+                <label>Thumbnail Width</label>	
+				<visible>1</visible>
+                <required>1</required>
+				<type>text</type>
+				<value>150</value>
+            </thumbnail_width>
+            
+            <thumbnail_height>
+                <label>Thumbnail Height</label>	
+				<visible>1</visible>
+                <required>1</required>
+				<type>text</type>
+				<value>150</value>
+            </thumbnail_height>
+            
+            <show_product_name>
+                <label>Show Product's Name</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <value>true</value>
+                        <label>Yes</label>
+                    </yes>
+                    <no translate="label">
+                        <value>false</value>
+                        <label>No</label>
+                    </no>
+                </values>
+            </show_product_name>
+            
+            <show_thumbnail>
+                <label>Show Thumbnail</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <value>true</value>
+                        <label>Yes</label>
+                    </yes>
+                    <no translate="label">
+                        <value>false</value>
+                        <label>No</label>
+                    </no>
+                </values>
+            </show_thumbnail>
+            
+            <show_description>
+                <label>Show Product's Description</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <value>true</value>
+                        <label>Yes</label>
+                    </yes>
+                    <no translate="label">
+                        <value>false</value>
+                        <label>No</label>
+                    </no>
+                </values>
+            </show_description>
+            
+            <show_price>
+                <label>Show Product's Price</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <value>true</value>
+                        <label>Yes</label>
+                    </yes>
+                    <no translate="label">
+                        <value>false</value>
+                        <label>No</label>
+                    </no>
+                </values>
+            </show_price>
+            
+            <show_reviews>
+                <label>Show Product's Reviews</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <value>true</value>
+                        <label>Yes</label>
+                    </yes>
+                    <no translate="label">
+                        <value>false</value>
+                        <label>No</label>
+                    </no>
+                </values>
+            </show_reviews>
+            
+            <show_addtocart>
+                <label>Show Add to cart button</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <value>true</value>
+                        <label>Yes</label>
+                    </yes>
+                    <no translate="label">
+                        <value>false</value>
+                        <label>No</label>
+                    </no>
+                </values>
+            </show_addtocart>
+            
+            <show_addto>
+                <label>Show Add to wishlist-compare button</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <value>true</value>
+                        <label>Yes</label>
+                    </yes>
+                    <no translate="label">
+                        <value>false</value>
+                        <label>No</label>
+                    </no>
+                </values>
+            </show_addto>            
+            
+			<show_label>
+                <label>Show EM Label</label>	
+				<visible>1</visible>
+                <required>0</required>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <value>true</value>
+                        <label>Yes</label>
+                    </yes>
+                    <no translate="label">
+                        <value>false</value>
+                        <label>No</label>
+                    </no>
+                </values>
+            </show_label>
+            
+            <choose_template translate="label">
+                <label>Frontend Template</label>
+                <visible>1</visible>
+                <required>1</required>
+                <type>select</type>
+                <values>
+                    <list translate="label">
+                        <value>em_new_products/new_list.phtml</value>
+                        <label>List new products</label>
+                    </list>
+					<grid translate="label">
+                        <value>em_new_products/new_grid.phtml</value>
+                        <label>Grid new products</label>
+                    </grid>
+					<cust translate="label">
+                        <value>custom_template</value>
+                        <label>Display as custom template ...</label>
+                    </cust>
+                </values>				
+            </choose_template>
+			
+			<custom_theme>				
+				<label>Custom template :</label>
+				<description>Effect only when selecting "Display as custom template. By default, using 'em_new_products/new_custom.phtml'"</description>
+				<visible>1</visible>				
+				<type>text</type>
+				<value></value>			
+			</custom_theme>
+			
+			<cache_lifetime>				
+				<label>Cache Lifetime (Seconds)</label>
+				<description>7200 seconds by default, if not set. To refresh instantly, Clear the Blocks HTML Output Cache.</description>
+				<visible>1</visible>				
+				<type>text</type>
+				<value></value>
+
+			</cache_lifetime>
+			
+        </parameters>
+    </newproducts_list>    
+</widgets>

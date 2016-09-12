@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Boardroom_OrderDetailReports>
+            <version>0.0.1</version>
+        </Boardroom_OrderDetailReports>
+    </modules>
+    <global>
+        <blocks>
+            <boardroom_orderdetailreports>
+                <class>Boardroom_OrderDetailReports_Block</class>
+            </boardroom_orderdetailreports>
+        </blocks>
+        <helpers>
+            <boardroom_orderdetailreports>
+                <class>Boardroom_OrderDetailReports_Helper</class>
+            </boardroom_orderdetailreports>
+        </helpers>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Boardroom_OrderDetailReports before="Mage_Adminhtml">Boardroom_OrderDetailReports_Adminhtml</Boardroom_OrderDetailReports>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <orderdetailreports>
+                    <file>orderdetailreports.xml</file>
+                </orderdetailreports>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

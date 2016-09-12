@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    EM
+ * @package     EM_Sliderwidget
+ */
+-->
+<widgets>
+    <sliderwidget type="sliderwidget/slide" translate="name description" module="sliderwidget" template="em_sliderwidget/slide.phtml">
+        <name>EM Slider Widget</name>
+        <description>Add a slider</description>
+		<widget_filters>sliderwidget</widget_filters>
+        <parameters>
+			<instance>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Widget instance selected is shown on the content of slider widget</description>
+                <type>select</type>
+				<required>1</required>
+				<source_model>sliderwidget/widgetinstance</source_model>
+			</instance>
+			<direction>
+                <label>Sliding direction</label>
+                <visible>1</visible>
+                <description>Specifies wether the slider appears in horizontal or vertical orientation. Changes the carousel from a left/right style to a up/down style slider.</description>
+                <type>select</type>
+				<source_model>sliderwidget/direction</source_model>
+            </direction>
+			<container>
+				<label>jQuery selector of slider container</label>
+				<description>It should be UL/OL element, its child UL/OL will be considered as slider container</description>
+                <visible>1</visible>
+                <type>text</type>
+				<required>1</required>
+			</container>
+			<slider_width>
+				<label>Slider Width</label>
+                <visible>1</visible>
+                <type>text</type>
+				<value></value>
+			</slider_width>
+			<slider_height>
+				<label>Slider Height</label>
+                <visible>1</visible>
+                <type>text</type>
+				<value></value>
+			</slider_height>
+			<auto_sliding>
+				<label>Auto sliding</label>
+                <visible>1</visible>
+                <description>Specifies how many seconds to periodically autoscroll the content. If set to 0 (default) then autoscrolling is turned off.</description>
+                <type>text</type>
+				<value>0</value>
+			</auto_sliding>
+			<circular>
+				<label>Slide Circular</label>
+                <visible>1</visible>
+                <description>Slide items circularly.</description>
+                <type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<value></value>
+			</circular>
+			<items_per_slide>
+				<label>Number of items per slide</label>
+                <visible>1</visible>
+                <description>The number of items to scroll by.</description>
+                <type>text</type>
+				<value>3</value>
+			</items_per_slide>
+			<css_class>
+				<label>Custom CSS class</label>
+                <visible>1</visible>
+                <description>Enter your custom css class for container slider.</description>
+                <type>text</type>
+			</css_class>
+        </parameters>
+    </sliderwidget>
+</widgets>

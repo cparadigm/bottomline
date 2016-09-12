@@ -1,0 +1,58 @@
+<?php
+
+class Boardroom_OneClickOrder_FormController extends Mage_Core_Controller_Front_Action
+{
+
+    public function indexAction()
+    {
+        //Get current layout state
+        $this->loadLayout();
+        $this->getLayout()->getBlock('root')->setTemplate('page/1column.phtml');
+        $block = $this->getLayout()->createBlock(
+            'Mage_Core_Block_Template', 'boardroom.one_click_order', array(
+                'template' => 'boardroom/one-click-order/form.phtml'
+            )
+        );
+        $this->getLayout()->getBlock('content')->append($block);
+        $this->_initLayoutMessages('core/session');
+        $this->renderLayout();
+    }
+
+    public function submitAction() {
+        $data = $this->getRequest()->getPost();
+
+        $billingAddress = array(
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+            'email' =>  $data['email'],
+            'street' => $data['street'],
+            'city' => $data['city'],
+            'region_id' => $data['region_id'],
+            'region' => $data['region'],
+            'postcode' => $data['postcode'],
+            'country_id' => 'US',
+            'telephone' =>  $data['telephone']
+        );
+
+        if ($data['payment_type'][0]=='1') {
+            $payment_method = array('method' => 'checkmo');
+        } else {
+            $payment_method = array('method' => 'ccsave',
+                'cc_owner' => $data['firstname'].' '.$data['lastname'],
+                'cc_type' => $data['cc_type'],
+                'cc_number' => $data['cc_number'],
+                'cc_exp_month' => $data['cc_exp_month'],
+                'cc_exp_year' => $data['cc_exp_year'],
+                'cc_cid' => $data['cc_cid']
+            );
+
+        }
+
+        Mage::getSingleton('core/session')->setCMethod($payment_method);
+        Mage::getSingleton('core/session')->setBillingAddress($billingAddress);
+        session_write_close();
+
+        $this->_redirect('one-click-order/secondoffer');
+    }
+
+}

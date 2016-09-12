@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   EM
+ * @package    EM_Productlabels
+ * @author     Emthemes <emthemes.com>
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <EM_Productlabels>
+            <version>1.0.0</version>
+        </EM_Productlabels>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <productlabels>
+                    <file>em_productlabels.xml</file>
+                </productlabels>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <productlabels before="Mage_Adminhtml">EM_Productlabels_Adminhtml</productlabels>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<productlabels module="productlabels">
+				<title>Product Labels</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<manage_label module="productlabels">
+						<title>Manage Product Labels</title>
+						<sort_order>0</sort_order>
+						<action>adminhtml/productlabels</action>
+					</manage_label>
+					<css_editor module="productlabels">
+						<title>Css Editor</title>
+						<sort_order>1</sort_order>
+						<action>adminhtml/csslabel/edit</action>
+					</css_editor>
+				</children>
+			</productlabels>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<productlabels translate="title" module="productlabels">
+							<title>Product Labels</title>
+							<sort_order>71</sort_order>
+							<children>
+								<manage_label module="productlabels">
+									<title>Manage Product Labels</title>
+									<sort_order>0</sort_order>
+								</manage_label>
+								<css_editor module="productlabels">
+									<title>Css Editor</title>
+									<sort_order>1</sort_order>
+								</css_editor>
+							</children>
+						</productlabels>   
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<productlabels>
+					<file>em_productlabels.xml</file>
+				</productlabels>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <productlabels>
+                <class>EM_Productlabels_Model</class>
+                <resourceModel>productlabels_resource</resourceModel>
+            </productlabels>
+            <productlabels_resource>
+                <class>EM_Productlabels_Model_Resource</class>
+				<deprecatedNode>productlabels_mysql4</deprecatedNode>
+                <entities>
+                    <productlabels>
+                        <table>label_entity</table>
+                    </productlabels>
+                    <productlabels_entity_text>
+                        <table>label_entity_text</table>
+                    </productlabels_entity_text>
+                    <productlabels_entity_varchar>
+                        <table>label_entity_varchar</table>
+                    </productlabels_entity_varchar>
+                    <productlabels_entity_int>
+                        <table>label_entity_int</table>
+                    </productlabels_entity_int>
+					<css>
+                        <table>label_css_entity</table>
+                    </css>
+					<css_entity_text>
+                        <table>label_css_entity_text</table>
+                    </css_entity_text>
+					<eav_attribute>
+                        <table>label_eav_attribute</table>
+                    </eav_attribute>
+                </entities>
+            </productlabels_resource>
+        </models>
+        <resources>
+            <productlabels_setup>
+                <setup>
+                    <module>EM_Productlabels</module>
+					<class>EM_Productlabels_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </productlabels_setup>
+            <productlabels_write>
+                <connection>
+                    <use>default_write</use>
+                </connection>
+            </productlabels_write>
+            <productlabels_read>
+                <connection>
+                    <use>default_read</use>
+                </connection>
+            </productlabels_read>
+        </resources>
+        <blocks>
+            <productlabels>
+                <class>EM_Productlabels_Block</class>
+            </productlabels>
+        </blocks>
+        <helpers>
+            <productlabels>
+                <class>EM_Productlabels_Helper</class>
+            </productlabels>
+        </helpers>
+        <default>
+            <productlabels>
+                <wysiwyg>
+                    <enabled>enabled</enabled>
+                </wysiwyg>
+            </productlabels>
+        </default>
+    </global>
+    <default>
+        <productlabels>
+            <general>
+                <thumbnail_width_image>50</thumbnail_width_image>
+                <thumbnail_height_image>50</thumbnail_height_image>
+                <thumbnail_width_background>74</thumbnail_width_background>
+                <thumbnail_height_background>76</thumbnail_height_background>
+            </general>
+            <which_show_label>
+                <product_list>36</product_list>
+                <product_detail>36</product_detail>
+                <crossel>36</crossel>
+                <upsell>36</upsell>
+                <related>36</related>
+                <widget>36</widget>
+            </which_show_label>
+        </productlabels>
+    </default>
+</config>

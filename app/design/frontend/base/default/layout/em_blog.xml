@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <default>
+	  
+        <reference name="head">
+                <action method="addCss"><name>em_blog/css/styles.css</name></action>
+        </reference>
+        <reference name="right">
+            <block type="blog/menu" name="blog.menu" template="em_blog/menu.phtml"/>
+        </reference>
+		<reference name="after_body_start">
+            <block type="core/template" name="blog_facebook_sdk" template="em_blog/facebook/sdk.phtml" />
+        </reference>
+    </default>
+
+    <blog_tag_taglist>
+         <reference name="content">
+            <block type="blog/tag_tagcloud" name="blog.tagcloud" template="em_blog/tag/taglist.phtml" />
+        </reference>
+    </blog_tag_taglist>
+
+    <blog_tag_view>
+		<reference name="right">
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+            <action method="unsetChild"><name>right.permanent.callout</name></action>
+            <action method="unsetChild"><name>right.poll</name></action>
+			
+            <block type="blog/post_list_recent" name="blog.recent" template="em_blog/post/list/recent.phtml" />
+            <block type="blog/tag_tagcloud" name="blog.tagcloud" template="em_blog/tag/tagcloud.phtml" />
+            <block type="blog/comment_recent" name="blog.comment.recent" template="em_blog/comment/recent.phtml" />
+        </reference>
+		<reference name="head">
+			<block type="core/template" name="rss.head" template="em_blog/rssaddress.phtml"/>
+		</reference>
+        <reference name="content">
+            <block type="blog/post_list" name="listpost" template="em_blog/post/list.phtml"/>
+        </reference>
+    </blog_tag_view>
+    
+	
+    <blog_index_index>
+        <reference name="content">
+            <block type="blog/post_list" name="listpost" template="em_blog/post/list.phtml"/>
+        </reference>
+    </blog_index_index>
+    <blog_category_view>
+        <reference name="right">
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+            <action method="unsetChild"><name>right.permanent.callout</name></action>
+            <action method="unsetChild"><name>right.poll</name></action>		
+            <block type="blog/post_list_recent" name="blog.recent" template="em_blog/post/list/recent.phtml" />
+            <block type="blog/tag_tagcloud" name="blog.tagcloud" template="em_blog/tag/tagcloud.phtml" />
+            <block type="blog/comment_recent" name="blog.comment.recent" template="em_blog/comment/recent.phtml" />
+        </reference>
+        <reference name="head">
+              <block type="core/template" name="rss.head" template="em_blog/rssaddress.phtml"/>
+          </reference>
+        <reference name="content">
+            <block type="blog/category_view" name="category.view" template="em_blog/category/view.phtml">
+                <block type="blog/post_list" name="list.post" template="em_blog/post/list.phtml"/>
+            </block>
+        </reference>
+    </blog_category_view>
+    
+	<blog_post_view>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+            <action method="setHeaderTitle" translate="title" module="blog"><title>Blog</title></action>
+        </reference>
+        <reference name="right">
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+            <action method="unsetChild"><name>right.permanent.callout</name></action>
+            <action method="unsetChild"><name>right.poll</name></action>
+          		
+            <block type="blog/post_list_recent" name="blog.recent" template="em_blog/post/list/recent.phtml" />
+            <block type="blog/post_list_related" name="blog.related" template="em_blog/post/list/related.phtml" />
+            <block type="blog/tag_tagcloud" name="blog.tagcloud" template="em_blog/tag/tagcloud.phtml" />
+            <block type="blog/comment_recent" name="blog" template="em_blog/comment/recent.phtml" />
+        </reference>
+        <reference name="content">
+            <block type="blog/post_view" name="post" template="em_blog/post/view.phtml" >
+                <block type="blog/tag_post" name="tag.post" template="em_blog/tag/post.phtml"/>
+                <block type="blog/comment_post" name="comment.post" template="em_blog/comment/post.phtml"/>
+            </block>
+        </reference>
+    </blog_post_view>
+
+    <blog_rss_index>
+        <block type="blog/rss" output="toHtml" name="rss.blog.new"/>
+    </blog_rss_index>
+</layout> 

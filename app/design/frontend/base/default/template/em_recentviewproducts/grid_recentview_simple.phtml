@@ -1,0 +1,65 @@
+<?php 
+    $_items = $this->getReviewsCollection_By_Collection_Filter_By_Categories_Show();
+    $_columnCount = ($this->getColumnCount()) ? $this->getColumnCount() : 3;
+    $_limit = $this->getLimitCount();
+    $_n = count($_items);
+    if($_limit == "" || $_limit > $_n){
+        $_limit = $_n;
+    }    
+    $_title = $this->getFrontendTitle();
+    $_showname = $this->showProductName();
+    $limit_length = 160;
+?>
+<?php if ($_limit):?>
+    <div class="box-collateral box-reviews" id="customer-reviews">    
+        <?php if($_title!=""): ?>
+            <h2><span><?php echo $_title; ?></span></h2>
+        <?php endif; ?>     
+       
+        <?php $i=0; foreach ($_items as $_review):?>
+        <?php
+            $_product = Mage::getModel('catalog/product')->load($_review['entity_pk_value']); 
+        ?>
+		<?php if ($i++%$_columnCount==0): ?>
+            <ul class="products-grid">
+        <?php endif ?>
+            <li class="<?php if($itemClass = $this->getData('item_class')) echo $itemClass.' ';?>item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>" style="<?php echo $this->getItemWidth() ? 'width:'.$this->getItemWidth().'px;' : '' ?> <?php echo $this->getItemHeight() ? 'height:'.$this->getItemHeight().'px;' : '' ?> <?php echo $this->getItemSpacing() ? 'margin-right:'.$this->getItemSpacing().'px;margin-bottom:'.$this->getItemSpacing().'px;' : '' ?>">
+               <?php if($_showname=="true"): ?>
+                    <span class="product-name"><?php echo $this->__('Product Name: ');?></span>
+					<a href="<?php echo $_product->getProductUrl() ?>" ><?php echo $_product->getName()?></a>
+                <?php endif; ?>
+               <p class="title">                    
+                    <span class="review-title"><?php echo $this->__('Review Title: ');?></span> 
+                    <a href="<?php echo Mage::getUrl('review/product/list', array('id'=> $_product->getId()));?>">
+						<span class="review-title"><?php echo $this->htmlEscape($_review->getTitle()) ?></span>
+					</a>
+                </p>
+                
+                <p class="by">
+                    <?php echo $this->__('Review by: <span>%s</span>', $this->htmlEscape($_review->getNickname())) ?>
+                </p>
+             
+                <!-- Review Detail -->
+                <p class="detail">
+                    <span><?php echo $this->__('Review Detail: ');?></span>
+                    <?php if (strlen($_review->getDetail()) > $limit_length) : ?>
+                        <?php echo trim($this->helper('recentreviewproducts/data')->cutText2($_review->getDetail(),$limit_length)) ?>
+                    <?php else: ?>
+                        <?php echo trim($_review->getDetail()) ?>
+                    <?php endif;?>
+                </p>
+                <!-- End Review Detail -->
+                
+                <!--Review Post On -->
+                <small class="date"><?php echo $this->__('Posted on : %s', $this->formatDate($_review->getCreatedAt()), 'long') ?></small>
+                <!--End Review Post On -->
+             </li>
+        <?php if ($i%$_columnCount==0 || $i==$_limit): ?>
+        </ul>
+        <?php endif ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif;?>
+<script type="text/javascript">
+    decorateGeneric($$('ul.products-grid'),['last','first','odd','even']);
+</script>

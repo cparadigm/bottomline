@@ -1,0 +1,36 @@
+/**
+ * EM ThemeFramework
+ *
+ * @license commercial software
+ * @copyright (c) 2012 Codespot Software JSC - EMThemes.com. (http://www.emthemes.com)
+ */
+
+.em_themeframework_previewarea {
+	box-shadow:0 0 0 1px #ff0000;
+	min-height:40px;
+}
+.em_themeframework_previewarea:after { content:'.';display:block;clear:both;visibility:hidden;overflow:hidden;height:0;zoom:1 }
+
+.em_themeframework_previewblock,
+.em_themeframework_previewarea_title {
+	display:inline;
+	background:#ff0000;
+	padding:10px;
+	opacity:.9;
+	font:bold 14px/1.2 "Courier New", san-serif;
+	text-align:center;
+	color:#fff;
+	border:1px solid #fff;
+	z-index:9999;
+	box-shadow:0 0 10px #666;
+	white-space:nowrap;
+}
+
+.em_themeframework_previewarea_title { border:0 }
+
+.em_themeframework_previewblock a {
+	color:#fff;
+}
+
+#em_themeframework_previewblock_actions { position:fixed; top:5px; left:5px; z-index:10000}
+#em_themeframework_previewblock_actions .turnoff { display:block; padding:5px 10px; background:#fff; color:#ff0000; border:1px solid #000; font-size:14px; font-weight:bold; box-shadow:0 0 10px #666 }

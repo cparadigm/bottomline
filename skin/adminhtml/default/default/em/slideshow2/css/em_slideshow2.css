@@ -1,0 +1,35 @@
+.item .show_trans{width:60px;height:30px; display:inline-block;vertical-align:middle;}
+.item .trans_demo{background-image:url(../images/transition/demo.png);}
+.item .trans_boxslide{background-image:url(../images/transition/boxslide.png);}
+.item .trans_boxfade{background-image:url(../images/transition/boxfade.png);}
+.item .trans_slotzoom-horizontal{background-image:url(../images/transition/slotzoom-horizontal.png);}
+.item .trans_slotslide-horizontal{background-image:url(../images/transition/slotslide-horizontal.png);}
+.item .trans_slotfade-horizontal{background-image:url(../images/transition/slotfade-horizontal.png);}
+.item .trans_slotzoom-vertical{background-image:url(../images/transition/slotzoom-vertical.png);}
+.item .trans_slotslide-vertical{background-image:url(../images/transition/slotslide-vertical.png);}
+.item .trans_slotfade-vertical{background-image:url(../images/transition/slotfade-vertical.png);}
+.item .trans_curtain-1{background-image:url(../images/transition/curtain-1.png);}
+.item .trans_curtain-2{background-image:url(../images/transition/curtain-2.png);}
+.item .trans_curtain-3{background-image:url(../images/transition/curtain-3.png);}
+.item .trans_slideleft{background-image:url(../images/transition/slideleft.png); }
+.item .trans_slideright{background-image:url(../images/transition/slideright.png);}
+.item .trans_slideup{background-image:url(../images/transition/slideup.png);}
+.item .trans_slidedown{background-image:url(../images/transition/slidedown.png);}
+.item .trans_fade{background-image:url(../images/transition/fade.png);}
+.item .trans_flyin{background-image:url(../images/transition/flyin.png);}
+.item .trans_cubic{background-image:url(../images/transition/cubic.png);}
+.item .trans_turnoff{background-image:url(../images/transition/turnoff.png);}
+.item .trans_3dcurtain-horizontal{background-image:url(../images/transition/3dcurtain-horizontal.png);}
+.item .trans_3dcurtain-vertical{background-image:url(../images/transition/3dcurtain-vertical.png);}
+.item .trans_papercut{background-image:url(../images/transition/papercut.png);}
+
+.item .col_first{ display:block; padding-bottom:15px;}
+.item .col_first img{ vertical-align:middle;}
+.item .col_first .right{ margin-top:13px;}
+.option-header textarea{ width:360px;}
+
+#slideshow2_tabs_form_general_content #slideshow2_general3 table{width:100%;}
+#slideshow2_tabs_form_general_content #slideshow2_general3 table tbody{float:left;}
+#slideshow2_tabs_form_general_content #slideshow2_general3 table tbody tr{float:left;width:40%}
+#slideshow2_tabs_form_general_content table tbody tr td{width:150px}
+#slideshow2_tabs_form_general_content table tbody tr td label{width:100px}

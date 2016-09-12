@@ -1,0 +1,177 @@
+<?php
+$_product = Mage::registry('current_product');
+$_helper = $this->helper('catalog/output');
+?>
+vitamin<div class="product-essential">
+    <form action="<?php echo $this->getParentBlock()->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <?php echo $this->getParentBlock()->getBlockHtml('formkey') ?>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+
+        <div class="product-shop">
+            <div class="product-name">
+                <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            </div>
+
+            <?php if ($_product->getBookAuthor()):?>
+                <div class="book-author">
+                    <div class="std"><p><a href="#"><?php echo $_helper->productAttribute($_product, nl2br($_product->getBookAuthor()), 'book_author') ?></a></p></div>
+                </div>
+            <?php endif;?>
+
+            <?php if ($this->getParentBlock()->canEmailToFriend()): ?>
+                <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
+            <?php endif; ?>
+
+            <?php echo $this->getParentBlock()->getReviewsSummaryHtml($_product, false, true)?>
+            <?php echo $this->getParentBlock()->getChildHtml('alert_urls') ?>
+            <?php echo $this->getParentBlock()->getChildHtml('product_type_data') ?>
+            <?php echo $this->getParentBlock()->getTierPriceHtml() ?>
+            <?php echo $this->getParentBlock()->getChildHtml('extrahint') ?>
+
+            <?php if (!$this->getParentBlock()->hasOptions()):?>
+                <div class="add-to-box">
+                    <?php if($_product->isSaleable()): ?>
+                        <?php echo $this->getParentBlock()->getChildHtml('addtocart') ?>
+                        <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                            <span class="or"><?php echo $this->__('OR') ?></span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php echo $this->getParentBlock()->getChildHtml('addto') ?>
+                </div>
+                <?php echo $this->getParentBlock()->getChildHtml('extra_buttons') ?>
+            <?php elseif (!$_product->isSaleable()): ?>
+                <div class="add-to-box">
+                    <?php echo $this->getParentBlock()->getChildHtml('addto') ?>
+                </div>
+            <?php endif; ?>
+
+
+
+            <?php echo $this->getParentBlock()->getChildHtml('other');?>
+
+            <?php if ($_product->isSaleable() && $this->getParentBlock()->hasOptions()):?>
+                <?php echo $this->getParentBlock()->getChildChildHtml('container1', '', true, true) ?>
+            <?php endif;?>
+
+        </div>
+
+        <div class="product-img-box">
+            <?php echo $this->getParentBlock()->getChildHtml('media') ?>
+        </div>
+
+        <div class="clearer"></div>
+
+        <?php if ($_product->getShortDescription()):?>
+            <div class="short-description">
+                <h2><?php echo $this->__('Quick Overview') ?></h2>
+                <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+            </div>
+        <?php endif;?>
+
+
+
+
+
+
+
+
+        <?php if ($_product->isSaleable() && $this->getParentBlock()->hasOptions()):?>
+            <?php echo $this->getParentBlock()->getChildChildHtml('container2', '', true, true) ?>
+        <?php endif;?>
+    </form>
+    <script type="text/javascript">
+        //<![CDATA[
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                    form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+
+
+
+        var $j = jQuery.noConflict();
+
+        $j(document).ready(function(){
+            $j("p.email-friend").css({display: "inline", float: "left"});
+            $j(".addthis_toolbox").insertAfter("p.email-friend").css("float", "left");
+            //$j('<div class="clearer"></div>').insertAfter(".addthis_toolbox");
+            $j('<div class="clearer"></div>').insertAfter("p.email-friend");
+            $j('li#product_tabs_authorbio.last a').attr("name", "authorbio");
+            $j("div.book-author div.std p a").on( "click", function() {
+                $j( "#product_tabs_description_contents" ).hide();
+                $j( "#product_tabs_authorbio_contents" ).show();
+                $j( "li#product_tabs_description" ).removeClass("active");
+                $j( "li#product_tabs_authorbio" ).addClass("active");
+            });
+            $j("div.product-shop p.no-rating").after('<div class="addthis_toolbox addthis_default_style" style="margin-top:10px;"><a class="addthis_button_preferred_1"></a><a class="addthis_button_preferred_2"></a><a class="addthis_button_preferred_3"></a><a class="addthis_button_preferred_4"></a><a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a></div>');
+        });
+
+        $j(function() {
+            $j('[name="#authorbio"]').click(function() {
+                if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                    var target = $j(this.hash);
+                    target = target.length ? target : $j('[name=' + this.hash.slice(1) +']');
+                    if (target.length) {
+                        $j('html,body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                    }
+                }
+            });
+        //]]>
+    </script>
+</div>
+
+<div class="product-collateral">
+
+
+    <?php echo $this->getParentBlock()->getChildHtml('info_tabs') ?>
+    <!--?php echo $this->getChildHtml('upsell_products') ?-->
+    <!--?php echo $this->getChildHtml('product_additional_data') ?-->
+</div>

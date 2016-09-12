@@ -1,0 +1,5 @@
+/app/design/adminhtml/default/default/template/dyncatprod
+/app/code/community/ProxiBlue/DynCatProd
+/app/etc/modules/Proxiblue_DynCatProd.xml
+/js/dyncatprod
+/shell/rebuildDynamic.php

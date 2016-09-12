@@ -1,0 +1,152 @@
+/* Button panel */
+.dcssb-float .dcssb-content {
+	background: #fff;
+	padding: 10px 10px 5px 10px;
+	text-align: center;
+	width: 60px;
+	border: 1px solid #ccc;
+	border-radius: 3px; 
+	-webkit-border-radius: 3px;
+}
+.dcssb-btn {
+	margin-bottom: 5px;
+}
+.dcssb-btn.size-horizontal {
+	width: 80px;
+	height: 24px;
+}
+.dcssb-btn.size-none {
+	width: 60px;
+	height: 24px;
+}
+.dcssb-btn.size-vertical {
+	width: 60px;
+	height: 62px;
+}
+/* Button specific styling */
+/* Digg */
+.dcssb-digg.size-vertical {
+	height: 68px;
+}
+/* Delicious */
+.dcssb-delicious div {
+	margin: 0 auto;
+}
+/* LinkedIn */
+.dcssb-linkedin.size-horizontal {
+	width: 65px;
+}
+/* Buffer */
+.dcssb-buffer.size-horizontal {
+	width: 85px;
+}
+/* Print & Email */
+.dcssb-print.size-horizontal, .dcssb-print.size-none, .dcssb-email.size-horizontal, .dcssb-email.size-horizontal {
+	width: 56px;
+}
+.dcssb-print.size-vertical, .dcssb-email.size-vertical {
+	height: 24px;
+}
+.link-email, .link-print {
+	padding-left: 20px;
+	display: block;
+	font: bold 11px/18px Arial, sans-serif;
+	height: 20px;
+	text-decoration: none;
+	color: #333333;
+    cursor: pointer;
+    background-color: #F8F8F8;
+    background-image: -moz-linear-gradient(center top , #FFFFFF, #DEDEDE);
+    border: 1px solid #bbb;
+    border-radius: 3px 3px 3px 3px;
+    max-width: 98%;
+    overflow: hidden;
+    position: relative;
+	text-align: left;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.link-print .icon, .link-email .icon {
+	display: block;
+	width: 14px;
+	height: 12px;
+	position: absolute;
+	left: 4px;
+	top: 4px;
+}
+.link-print .icon {
+	background: url(../images/icon_print.png) no-repeat 0 0;
+}
+.link-email .icon {
+	background: url(../images/icon_email.png) no-repeat 0 0;
+}
+.link-email:hover, .link-print:hover {
+	background-color: #e8e8e8;
+	border: 1px solid #999;
+    background-image: -moz-linear-gradient(center top , #f8f8f8, #cecece);
+}
+
+/* Pinterest */
+.dcssb-pinterest {
+	position: relative;
+	width: 60px;
+}
+.dcssb-pinterest.size-horizontal, .dcssb-pinterest.size-none {
+	height: 20px;
+}
+.dcssb-pinterest.size-horizontal {
+	width: 70px;
+}
+.dcssb-pinterest-button {
+    height: 25px;
+    margin: 0;
+    padding: 0 0 10px 0;
+}
+.pinItButton {
+    position: absolute;
+    background: url(../images/pinterest.png);
+    font: 11px Arial, sans-serif;
+    text-indent: -9999em;
+    font-size: .01em;
+    color: #CD1F1F;
+    height: 22px;
+    width: 47px;
+    background-position: 0 -37px;
+	bottom: 0;
+	left: 50%;
+	margin-left: -24px;
+}
+.pinItButton:hover {
+	background-position: 0 -58px;
+	background-color: none;
+}
+.pinterest-counter-count{
+	font: 12px/12px Arial,Helvetica,sans-serif;
+    height: 29px;
+    padding: 9px 0 0;
+    text-align: center;
+    width: 47px;
+	background: url(../images/pinterest.png) no-repeat 0 0;
+    color: #777777;
+    position: absolute;
+	bottom: 23px;
+	right: 8px;
+}
+.size-horizontal .pinItButton {
+	left: 0;
+	margin-left: 0;
+}
+.size-horizontal .pinterest-counter-count{
+	font: 11px/11px Arial,Helvetica,sans-serif;
+    height: 15px;
+    padding: 3px 0 0;
+    text-align: center;
+    width: 21px;
+	background: url(../images/pinit-count-s.png) no-repeat 0 0;
+    color: #777777;
+    position: absolute;
+	bottom: 1px;
+	right: 0;
+}
+.size-none .pinterest-counter-count{
+ display: none;
+}

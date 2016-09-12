@@ -1,0 +1,96 @@
+/**
+ * OneStepCheckout by EMThemes
+ *
+ * Based on Magento 1.7.0.0 source code
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 EMThemes. (http://www.emthemes.com)
+ * @license     Commercial License. Granted for authorized users only.
+ */
+
+.opc-1sc:after {content:'.'; display:block; clear:both; visibility:hidden; height:0; overflow:hidden; zoom:1 }
+.opc-col1, .opc-col2, .opc-col3 {width:32%; float:left; margin-left:2% }
+.opc-col1 {margin-left:0 }
+.opc-1sc{position:relative;}
+.opc-col .section {margin-bottom:3em;  }
+.opc-col #opc-shipping_method.section {margin-bottom:28px;  }
+
+.opc-col .step-title .number {padding:0; float:left;}
+.opc-col .step-title h2 {}	
+
+
+.opc-col .form-list li.fields {width:100%}
+.opc-col .form-list ul {margin-bottom:0}
+.opc-col .form-list ul li.control {padding:5px 0 7px}
+.opc-col .form-list li.control {padding:6px 0 0; margin-bottom:0 }
+.opc-col .form-list li.control label {padding:0; }
+.opc-col .form-list .field {width:100%; padding-bottom:0;float:left }
+.opc-col .form-list .input-box {width:100% }
+.opc-col .form-list input.input-text,.opc-col .sp-methods .form-list input.input-text {width:95% }
+.opc-col3 .discount-form input.input-text {width:50%; margin-bottom: 0; }
+.opc-col3 .discount-form button.button {margin-bottom: 0; }
+.opc-col .form-list select ,.opc-col .sp-methods .form-list select.validate-cc-type-select{width:100% }
+.opc-col .form-list li.wide .input-box {width:100% }
+.opc-col .form-list li.wide input.input-text  {width:95%; margin-bottom:10px; }
+.opc-col .form-list li.wide select {width:100% }
+.opc-col .input-cvv .v-fix{float:none }
+.opc-col .input-exp .v-fix{width:47%; }
+.opc-col .input-exp .v-fix:first-child{margin-right:6%;}
+.opc-col .sp-methods .form-list select.month,.opc-col .sp-methods .form-list select.year{width:100%;}
+.opc-col .cvv-what-is-this{font-size:90%; float:right; padding-top:3px; text-decoration:underline;}
+.opc-col .cvv-what-is-this:hover{text-decoration:none;}
+
+.opc-col .discount {margin-top:5px }
+
+#opc-review .buttons-set {padding:0; border:0; margin:1em 0 0 }
+
+/* hide checkbox "Use Billing Address" */
+#opc-shipping .control {display:none !important }
+
+/* hide all continue buttons except review's */
+.opc-col .buttons-set {display:none !important }
+#opc-review .buttons-set {display:block !important; }
+.opc-col3 #review-buttons-container.buttons-set .f-left{float:left !important}
+.opc-col3 #review-buttons-container.buttons-set button.button{clear:both; float:left}
+/*.opc-col3 .discount-form input.input-text{margin-bottom:10px}*/
+#opc-login-popup {position:fixed; width:231px; margin:0 auto; z-index:9999; background:#fff; padding:10px 20px }
+#opc-login-popup-overlay {display:block; position:fixed; width:100%; height:100%; top:0; left:0; z-index:9998; background:#000;opacity:0.7; filter:alpha(opacity=75); }
+#opc-login-popup .close-btn {background:url(../images/btn_popup-close.png) no-repeat; width:38px; height:38px; position:absolute;; top:-16px; right:-16px; text-indent:-99999px }
+
+#opc-login-popup .form-list .input-box {width:100%; text-align:left }
+#opc-login-popup .form-list input.input-text {width:90%; }
+.opc-col .form-list label.required em{top:0px}
+.opc-col ul.form-list{float:left; width:100%}
+#opc-login-popup .buttons-set .f-left{margin-top:7px}
+#opc-login-popup .buttons-set a:hover{text-decoration:none;}
+#opc-login-popup .buttons-set button.button{float:right;margin-right:0;}
+#opc-login-popup .buttons-set{padding-right:0;}
+#opc-login-popup .buttons-set p.required{margin-right:0;}
+.opc-col #review-buttons-container .please-wait{float:left;clear:both;white-space:nowrap}
+.opc-col .gift-messages-form .form-list .field{width:100%;}
+.opc-col .gift-messages-form .form-list .fields{width:100%;}
+
+/*===================== $Resize 2 ===========================*/
+@media (min-width:980px) and (max-width:1199px) {
+	.opc-col .form-list input.input-text, 
+	.opc-col .sp-methods .form-list input.input-text, 
+	.opc-col .form-list li.wide input.input-text{width:93.5%;}
+	label {border: 1px solid blue !important;}
+}
+
+/*===================== Resize 1 ===========================*/
+@media (min-width:768px) and (max-width:979px) {
+	.opc-col .form-list input.input-text, 
+	.opc-col .sp-methods .form-list input.input-text, 
+	.opc-col .form-list li.wide input.input-text{width:91%;}
+}
+/*===================== $Resize 0 ===========================*/
+@media (max-width:767px) {
+	.opc-col .form-list .input-box select,
+	.opc-col .form-list .fields .input-box select, .opc-col .form-list li.wide .input-box select {width:251px !important;}
+	.opc-col .form-list input.input-text,.opc-col .sp-methods .form-list input.input-text,
+	.opc-col .form-list li.wide input.input-text{width:229px; }
+	.opc-col .sp-methods .form-list select.month, .opc-col .sp-methods .form-list select.year {width:100% !important;}
+	.opc-col3 .discount-form input.input-text {float: left;margin-bottom: 10px;margin-right: 10px;}
+}

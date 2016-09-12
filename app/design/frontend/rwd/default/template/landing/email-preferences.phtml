@@ -1,0 +1,162 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/Mage.php';
+
+// gather query parameters
+$method = $_SERVER["REQUEST_METHOD"];
+$magento_id = $_GET['magento_id'];
+$email = $_GET['email'];
+$campaign_code = $_GET['campaign_code'];
+$token = $_GET['token'];
+$first = $_GET['first'];
+$last = $_GET['last'];
+
+$session_id = $_COOKIE['__utmb'];
+
+define('SYSTEM_ID', 'SHOP');
+
+// include library
+include($_SERVER['DOCUMENT_ROOT'] . "/CDH.php");
+$cdh = new CDH($_SERVER["ESB_URL"]);
+
+// check token for security
+if ($token !== $cdh->get_token($email, $campaign_code)) {
+  syslog('bad link token for email:'. $email . '(expected:' . $cdh->get_token($email, $campaign_code) . 'received:' . $token . ')');
+  Mage::app()->getFrontController()->getResponse()->setRedirect(Mage::getBaseUrl())->sendResponse();
+  exit;
+}
+
+if ( strcmp($method, 'POST') == 0 ) {
+    $sub_array = array(
+        'DHN'=> $_POST['checkbox-11']=='on'?'true':'false',
+        'BLS'=>$_POST['checkbox-9']=='on'?'true':'false',
+        'HDM'=>$_POST['checkbox-5']=='on'?'true':'false',
+        'HEFL'=>$_POST['checkbox-7']=='on'?'true':'false',
+        'STW'=>$_POST['checkbox']=='on'?'true':'false',
+        'MM'=>$_POST['checkbox-3']=='on'?'true':'false',
+        'MRKHS'=>$_POST['checkbox-13']=='on'?'true':'false',
+        'MRK3P'=>$_POST['checkbox-13']=='on'?'true':'false');
+    $sub_status = $cdh->set_subscriptions($email, $magento_id, $first, '', $last, $sub_array, $session_id) ;
+    
+    $base = Mage::getBaseUrl();
+    $url = $base . 'email-preferences-thankyou';
+    echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+    exit;
+    }
+else {
+    $subs_reponse = json_decode($cdh->get_subscriptions($email, $magento_id, $session_id));
+    $subscriptions = $subs_reponse->response->customer->subscriptions->subscription ;
+
+    $sub_array = array( 'DHN'=> false, 'BLS'=> false, 'HDM'=> false, 'HEFL'=>false, 'STW'=>false, 'MM'=>false, 'MRKHS'=>false, 'MRK3P'=>false);
+    foreach ( $subscriptions as $subscription ) {
+        $sub_array[$subscription->subscription_name] = $subscription->opt_in;
+        }
+    }
+
+?>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+  $('#check-all').click(function(){
+    $("input:checkbox").attr('checked', true);
+  });
+  $('#uncheck-all').click(function(){
+    $("input:checkbox").attr('checked', false);
+  });
+});
+</script>
+
+
+
+  <link rel="stylesheet" type="text/css" href="/skin/frontend/rwd/eclipse/images/landing-pages/preferences/css/grid.css">
+  <div class="w-section email-pref-header"><img width="332" src="/skin/frontend/rwd/eclipse/images/landing-pages/preferences/images/573382290bec74851deb2842_BL-logo-v4-400.png">
+  </div><br>
+  <div class="w-section form-section">
+    <div class="w-container">
+      <p>Dear Subscriber,<br>
+
+We respect your privacy and know that your email box is likely already full!  However, to better serve you, we ask permission to email you occasionally with order status, updates, exclusive offers, content and more. Below, please confirm and/or select the valuable newsletters you’d like to receive from us. We look forward to providing you with actionable expert advice for you to live your best life yet! </p><br>
+      <div class="w-form">
+        <form id="email-form" name="email-form" data-name="Email Form" method="post">
+          <div class="w-checkbox">
+            <input id="checkbox-13" type="checkbox" name="checkbox-13" data-name="Checkbox 13" class="w-checkbox-input" <?php echo $sub_array['MRK3P']?'checked':'';?> >
+            <label for="checkbox-13" class="w-form-label">YES! I would like to receive special exclusive offers and discounts about products and services, sent directly to my inbox! My email will never be shared, I may unsubscribe at anytime.</label>
+          </div>
+          <div class="w-row newsletter-row">
+            <div class="w-col w-col-3"><img src="http://bottomlinestore.com/skin/frontend/rwd/eclipse/images/landing-pages/preferences/images/1.png">
+            </div>
+            <div class="w-col w-col-3">
+              <p><strong>Stock of the Week<br></strong>Curated stock tips from our elite BottomLine financial experts</p>
+              <div class="w-checkbox">
+                <input id="checkbox" type="checkbox" name="checkbox" data-name="Checkbox"  class="w-checkbox-input" <?php echo $sub_array['STW']?'checked':'';?> >
+                <label for="checkbox" class="w-form-label">Subscribe</label>
+              </div>
+            </div>
+            <div class="w-col w-col-3"><img src="http://bottomlinestore.com/skin/frontend/rwd/eclipse/images/landing-pages/preferences/images/5.png">
+            </div>
+            <div class="w-col w-col-3">
+              <p><strong>MoneysWorth<br></strong>You’ll receive one weekly email with easy-to-read, clever ideas and expert advice to help you get the most out of your hard-earned money</p>
+              <div class="w-checkbox">
+                <input id="checkbox-3" type="checkbox" name="checkbox-3" data-name="Checkbox 3"  class="w-checkbox-input" <?php echo $sub_array['MM']?'checked':'';?> >
+                <label for="checkbox-3" class="w-form-label">Subscribe</label>
+              </div>
+            </div>
+          </div>
+          <div class="w-row newsletter-row">
+            <div class="w-col w-col-3"><img src="http://bottomlinestore.com/skin/frontend/rwd/eclipse/images/landing-pages/preferences/images/6.png">
+            </div>
+            <div class="w-col w-col-3">
+              <p><strong>Bottom Line Secrets<br></strong>Inside information from the country's leading experts on financial, health, career, home, travel, relationships and more.</p>
+              <div class="w-checkbox">
+                <input id="checkbox-9" type="checkbox" name="checkbox-9" data-name="Checkbox 9"  class="w-checkbox-input" <?php echo $sub_array['BLS']?'checked':'';?> >
+                <label for="checkbox-9" class="w-form-label">Subscribe</label>
+              </div>
+            </div>
+            <div class="w-col w-col-3"><img src="http://bottomlinestore.com/skin/frontend/rwd/eclipse/images/landing-pages/preferences/images/4.png">
+            </div>
+            <div class="w-col w-col-3">
+              <p><strong>Health Insider<br></strong>We dig beyond the simple news headlines to give you insights into what the news really means for you.</p>
+              <div class="w-checkbox">
+                <input id="checkbox-11" type="checkbox" name="checkbox-11" data-name="Checkbox 11"  class="w-checkbox-input" <?php echo $sub_array['DHN']?'checked':'';?> >
+                <label for="checkbox-11" class="w-form-label">Subscribe</label>
+              </div>
+            </div>
+          </div>
+          <div class="w-row newsletter-row">
+            <div class="w-col w-col-3"><img src="http://bottomlinestore.com/skin/frontend/rwd/eclipse/images/landing-pages/preferences/images/2.png">
+            </div>
+            <div class="w-col w-col-3">
+              <p><strong>Household Magic<br></strong>Surprising tips and tricks to save you time and money all over your home, from America's best-loved "non-domestic divas," Joan and Lydia Wilen!</p>
+              <div class="w-checkbox">
+                <input id="checkbox-5" type="checkbox" name="checkbox-5" data-name="Checkbox 5"  class="w-checkbox-input" <?php echo $sub_array['HDM']?'checked':'';?> >
+                <label for="checkbox-5" class="w-form-label">Subscribe</label>
+              </div>
+            </div>
+            <div class="w-col w-col-3"><img src="http://bottomlinestore.com/skin/frontend/rwd/eclipse/images/landing-pages/preferences/images/3.png">
+            </div>
+            <div class="w-col w-col-3">
+              <p><strong>High Energy for Life<br></strong>Get more energy in your life through natural healing with the latest in new therapies, nutrition, fitness, psychology and mind-body techniques.</p>
+              <div class="w-checkbox">
+                <input id="checkbox-7" type="checkbox" name="checkbox-7" data-name="Checkbox 7"  class="w-checkbox-input" <?php echo $sub_array['HEFL']?'checked':'';?> >
+                <label for="checkbox-7" class="w-form-label">Subscribe</label>
+              </div>
+            </div>
+          </div>
+          <br>
+         <a class="w-button" id="check-all" href="javascript:void(0);">Subscribe to all newsletters</a>
+<a class="w-button" id="uncheck-all" href="javascript:void(0);">Unsubscribe from all newsletters</a> 
+
+          
+          <input style=" float:right; font-size:14px;" type="submit" value="Submit" class="w-button submit-btn">
+        </form>
+        <div class="w-form-done">
+          <p>Thank you! Your submission has been received!</p>
+        </div>
+        <div class="w-form-fail">
+          <p>Oops! Something went wrong while submitting the form</p>
+        </div>
+      </div>
+    </div>
+  </div>

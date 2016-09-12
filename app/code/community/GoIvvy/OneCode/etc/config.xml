@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <GoIvvy_OneCode>
+      <version>1.0.0.0</version> 
+    </GoIvvy_OneCode> 
+  </modules>
+  <global>
+   <models>
+     <salesrule_mysql4>
+       <rewrite>
+         <coupon>GoIvvy_OneCode_Model_Mysql4_Coupon</coupon> 
+       </rewrite> 
+     </salesrule_mysql4>
+   </models>
+   <resources>
+     <goivvy_onecode_setup>
+       <setup>
+         <module>GoIvvy_OneCode</module> 
+       </setup> 
+     </goivvy_onecode_setup> 
+     <goivvy_onecode_read>
+       <connection>
+        <use>core_read</use> 
+       </connection> 
+     </goivvy_onecode_read>
+     <goivvy_onecode_write>
+       <connection>  
+         <use>core_write</use> 
+       </connection> 
+     </goivvy_onecode_write>
+   </resources> 
+  </global>
+</config>

@@ -1,0 +1,43 @@
+<?php if (!$_agree = $this->getAgreements()) return; ?>
+<?php
+$agreewidth= Mage::app()->getStore()->getConfig('mgkonestepcheckout_section/mgkopcterms_group/mgktermswidth');
+if($agreewidth == ''){  $agreepopupwidth='500px'; }else{ $agreepopupwidth = $agreewidth; }
+$agreeheight= Mage::app()->getStore()->getConfig('mgkonestepcheckout_section/mgkopcterms_group/mgktermsheight');
+if($agreeheight == ''){  $agreepopupheight='300px'; }else{ $agreepopupheight = $agreeheight; }
+?>
+<style>
+.mgkosc-popuptextblock{
+width:<?php echo $agreepopupwidth ?>;
+height:<?php echo $agreepopupheight ?>;
+}
+</style>
+<div class="checkout-agreements">
+    <p class="agree">
+	<input type="checkbox"   class="checkbox" />I Agree <a href="#" id="mgkoscshowpopup">Terms and Conditions</a>
+	<div id="mgkosc-popup">
+	  <a href="#" id="mgkoschidepopup" class="mgkosc-popupclose"><img src="<?php echo $this->getSkinUrl('mgkoscheckout/images/onestepcheckout/c-icon.png') ?>"  alt="" /></a>
+	      <div class="mgkosc-popuptext">
+		    <p class="mgkosc-agreeinfo">Terms and Conditions</p>
+		      <div class="mgkosc-popuptextblock">
+			    <div class="mgkosc-popuptextdetails"><?php echo Mage::getStoreConfig('mgkonestepcheckout_section/mgkopcterms_group/mgktermscontent'); ?> </div>
+		      </div>
+		  </div>
+	</div>
+   </p>
+   <div id="mgkoscoverlay"></div>
+</div>
+<script>
+  jQuery.noConflict();
+  jQuery(document).ready(function(){
+      jQuery("#mgkoscshowpopup").click(function(){
+		jQuery("div#mgkoscoverlay").fadeIn("fast");       
+		jQuery("div#mgkosc-popup").fadeIn("fast");     
+		return false;  
+      });                            
+      jQuery("#mgkoschidepopup").click(function(){                       
+		jQuery("div#mgkosc-popup").fadeOut("fast");      
+		jQuery("div#mgkoscoverlay").fadeOut("fast");  
+		return false;  
+      });
+  });
+</script>

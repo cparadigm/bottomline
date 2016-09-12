@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Novus_Ecommhub>
+			<active>true</active>
+			<codePool>community</codePool>
+			<depends>
+				<Mage_Api />
+			</depends>
+		</Novus_Ecommhub>
+	</modules>
+</config>

@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<widgets>
+	<recentreviewproducts_list type="recentreviewproducts/list" translate="name description" module="recentreviewproducts" >
+		<name>EM Recent Reviewed Products</name>
+		<description type="desc">EM Reviewed Products</description>
+		<parameters>	
+			<new_category translate="label">			
+				<label>Choose Categories</label>
+				<visible>1</visible>
+				<description>You can choose many categories. Leave empty for selecting all categories</description>
+				<type>multiselect</type>
+				<source_model>recentreviewproducts/categorytree</source_model>
+				<sort_order>1</sort_order>			  
+			</new_category>		
+			<limit_count>
+				<label>Limit Count</label>
+				<description>The numbers of product will be show</description>
+				<visible>1</visible>
+				<required>1</required>
+				<type>text</type>
+				<value>10</value>
+				<sort_order>2</sort_order>
+			</limit_count>
+			
+			<column_count>
+				<label>Column Count</label>
+				<description>The numbers of products per row. Applies only when the grid template is selected</description>
+				<visible>1</visible>
+				<required>0</required>
+				<type>text</type>
+				<value></value>
+				<sort_order>3</sort_order>
+			</column_count>
+			
+			<order_by>
+				<label>Order by</label>
+				<visible>1</visible>
+				<required>1</required>
+				<type>select</type>
+				<values>
+					<order_by_1 translate="label">
+						<value>name asc</value>
+						<label>Name ASC</label>
+					</order_by_1>
+					<order_by_11 translate="label">
+						<value>name desc</value>
+						<label>Name DESC</label>
+					</order_by_11>					
+					<order_by_3 translate="label">
+						<value>price asc</value>
+						<label>Price ASC</label>
+					</order_by_3>
+					<order_by_31 translate="label">
+						<value>price desc</value>
+						<label>Price DESC</label>
+					</order_by_31>					
+				</values>
+				<sort_order>4</sort_order>
+			</order_by>		
+			
+			<custom_class>
+                <label>Custom Wrapper Class</label>	
+    			<visible>1</visible>
+                <required>0</required>
+    			<type>text</type>
+				<sort_order>5</sort_order>
+            </custom_class>
+			
+			
+			<frontend_title>
+				<label>Frontend Title</label>	
+				<visible>1</visible>
+				<required>0</required>
+				<type>text</type>
+				<sort_order>6</sort_order>
+			</frontend_title>
+			
+			<item_class>
+                <label>Item Class Custom</label>
+                <description>Custom class for li item</description>
+				<visible>1</visible>
+				<type>text</type>
+				<sort_order>7</sort_order>
+            </item_class>
+			
+			<item_width>
+                <label>Item Width</label>	
+				<description>unit: px</description>
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+				<value></value>
+				<sort_order>7</sort_order>
+            </item_width>
+            
+            <item_height>
+                <label>Item Height</label>
+				<description>unit: px</description>
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+				<value></value>
+				<sort_order>8</sort_order>
+            </item_height>
+
+			<item_spacing>
+                <label>Item Spacing</label>
+				<description>Spacing between 2 items. unit: px</description>
+				<visible>1</visible>
+                <required>0</required>
+				<type>text</type>
+				<value></value>
+				<sort_order>9</sort_order>
+            </item_spacing>
+
+			<thumbnail_width>
+				<label>Thumbnail Width</label>	
+				<visible>1</visible>
+				<required>1</required>
+				<type>text</type>
+				<sort_order>3</sort_order>
+				<value>150</value>
+				<sort_order>10</sort_order>
+			</thumbnail_width>
+			
+			<thumbnail_height>
+				<label>Thumbnail Height</label> 
+				<visible>1</visible>
+				<required>1</required>
+				<type>text</type>
+				<sort_order>4</sort_order>
+				<value>150</value>
+				<sort_order>11</sort_order>
+			</thumbnail_height>
+			
+			<show_product_name>
+				<label>Show Product's Name</label>	
+				<visible>1</visible>
+				<required>0</required>
+				<type>select</type>
+				<sort_order>5</sort_order>
+				<values>
+					<yes translate="label">
+						<value>true</value>
+						<label>Yes</label>
+					</yes>
+					<no translate="label">
+						<value>false</value>
+						<label>No</label>
+					</no>
+				</values>
+				<sort_order>12</sort_order>
+			</show_product_name>
+			
+			<show_thumbnail>
+				<label>Show Thumbnail</label>	
+				<visible>1</visible>
+				<required>0</required>
+				<type>select</type>
+				<sort_order>6</sort_order>
+				<values>
+					<yes translate="label">
+						<value>true</value>
+						<label>Yes</label>
+					</yes>
+					<no translate="label">
+						<value>false</value>
+						<label>No</label>
+					</no>
+				</values>
+				<sort_order>13</sort_order>
+			</show_thumbnail>
+            <alt_img>
+                <label>Alternative image</label>    
+                <description>Image should be displayed when hover to the thumbnail image.</description>
+                <visible>1</visible>
+                <required>0</required>
+                <type>select</type>
+                <source_model>recentreviewproducts/config_altimg</source_model>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+            </alt_img>
+			
+			<show_price>
+				<label>Show Product's Price</label> 
+				<visible>1</visible>
+				<required>0</required>
+				<type>select</type>
+				<sort_order>7</sort_order>
+				<values>
+					<yes translate="label">
+						<value>true</value>
+						<label>Yes</label>
+					</yes>
+					<no translate="label">
+						<value>false</value>
+						<label>No</label>
+					</no>
+				</values>
+				<sort_order>14</sort_order>
+			</show_price>
+			
+			<show_addtocart>
+				<label>Show Add to cart button</label>	
+				<visible>1</visible>
+				<required>0</required>
+				<type>select</type>
+				<sort_order>8</sort_order>
+				<values>
+					<yes translate="label">
+						<value>true</value>
+						<label>Yes</label>
+					</yes>
+					<no translate="label">
+						<value>false</value>
+						<label>No</label>
+					</no>
+				</values>
+				<sort_order>15</sort_order>
+			</show_addtocart>
+			
+			<show_addto>
+				<label>Show Add to wishlist-compare button</label>	
+				<visible>1</visible>
+				<required>0</required>
+				<type>select</type>
+				<sort_order>9</sort_order>
+				<values>
+					<yes translate="label">
+						<value>true</value>
+						<label>Yes</label>
+					</yes>
+					<no translate="label">
+						<value>false</value>
+						<label>No</label>
+					</no>
+				</values>
+				<sort_order>16</sort_order>
+			</show_addto>			 
+			
+			<show_label>
+				<label>Show EM Label</label>	
+				<visible>1</visible>
+				<required>0</required>
+				<type>select</type>
+				<sort_order>10</sort_order>
+				<values>
+					<yes translate="label">
+						<value>true</value>
+						<label>Yes</label>
+					</yes>
+					<no translate="label">
+						<value>false</value>
+						<label>No</label>
+					</no>
+				</values>
+				<sort_order>17</sort_order>
+			</show_label>
+							
+			<choose_template translate="label">
+				<label>Frontend Template</label>
+				<visible>1</visible>
+				<required>1</required>
+				<type>select</type>
+				<sort_order>11</sort_order>
+				<values>
+					<list translate="label">
+						<value>em_recentviewproducts/list_products_simple.phtml</value>
+						<label>Simple List Recent Reviewed products</label>
+					</list>
+					<full_list translate="label">
+						<value>em_recentviewproducts/list_products_full.phtml</value>
+						<label>Full List Recent Reviewed products</label>
+					</full_list>
+					<grid translate="label">
+						<value>em_recentviewproducts/grid_products_simple.phtml</value>
+						<label>Simple Grid Recent Reviewed products</label>
+					</grid>
+					<full_grid translate="label">
+						<value>em_recentviewproducts/grid_products_full.phtml</value>
+						<label>Full Grid Recent Reviewed products</label>
+					</full_grid>
+					
+					<list_review translate="label">
+						<value>em_recentviewproducts/list_recentview_simple.phtml</value>
+						<label>Simple List Recent Reviewed</label>
+					</list_review>
+					<full_list_review translate="label">
+						<value>em_recentviewproducts/list_recentview_full.phtml</value>
+						<label>Full List Recent Reviewed</label>
+					</full_list_review>
+					<grid_review translate="label">
+						<value>em_recentviewproducts/grid_recentview_simple.phtml</value>
+						<label>Simple Grid Recent Reviewed</label>
+					</grid_review>
+					<full_grid_review translate="label">
+						<value>em_recentviewproducts/grid_recentview_full.phtml</value>
+						<label>Full Grid Recent Reviewed</label>
+					</full_grid_review>
+				</values>		
+				<sort_order>18</sort_order>		
+			</choose_template>
+			
+			<cache_lifetime>				
+				<label>Cache Lifetime (Seconds)</label>
+				<description>7200 seconds by default, if not set. To refresh instantly, Clear the Blocks HTML Output Cache.</description>
+				<visible>1</visible>				
+				<type>text</type>
+				<value></value>
+				<sort_order>19</sort_order>
+			</cache_lifetime>
+			
+		</parameters>
+	</recentreviewproducts_list>	
+</widgets>

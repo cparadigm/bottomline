@@ -1,0 +1,308 @@
+<div style="" id="slideshow2_tabs_form_general_images">
+	<div class="entry-edit custom-options">
+		<div class="entry-edit-head">
+			<h4 class="icon-head head-edit-form fieldset-legend">Images</h4>
+			<div class="form-buttons"></div>
+			<div class="right">
+				<button onclick="return add_img();" class="scalable add" type="button" title="Add New Image">
+					<span><span><span>Add New Image</span></span></span>
+				</button>
+			</div>
+		</div>
+		<div id="slideshow2_images" class="fieldset">
+			<div class="images_content">
+				<div class="ele_num" style="display:none" ><?php if($count == 0) echo 1;else echo $count ?></div>
+				<textarea class="deloldimg" name="deloldimg" style="display:none">0</textarea>
+				<div class="content">
+					<div class="item">
+					</div>
+				<?php if($count == 0): ?>
+					<div class="item num_1 option-box">
+						<div class="col_first">
+							<label>Image : </label><input type="file" class="input-file ele_1" value="" name="files[1]" />&nbsp;&nbsp;
+							<label>Transition : </label><div class="show_trans"></div><select name="images[1][trans]" class="sel_trans">
+							<?php echo $this->getTransition() ?>
+							</select>&nbsp;&nbsp;
+							<div class="right">
+								<button onclick="return add_text(1);" class="scalable add" type="button" title="Add Text">
+									<span><span><span>Add Text</span></span></span>
+								</button>
+								<button onclick="return del_img(1);" class="btn_del scalable delete" type="button" title="Delete Image">
+									<span><span><span>Delete Image</span></span></span>
+								</button>
+							</div>
+						</div>
+						<label>Slot Amount : </label><input type="text" class="input-text" value="7" name="images[1][slotamount]" size=3 />&nbsp;&nbsp;
+						<label>Link : </label><input type="text" class="input-text" value="" name="images[1][link]" />&nbsp;&nbsp;
+						<label>Position : </label><input type="text" name="images[1][position]" class="input-text" size=3 value="0"/>						
+						<div class="text_num" style="display:none" >0</div>
+						<table cellspacing="0" cellpadding="0" class="option-header">
+							<thead>
+								<tr>
+									<th class="opt-text">Text/Html </th>
+									<th class="opt-type">Class</th>
+									<th class="opt-start">Start</th>
+									<th class="opt-end">End</th>
+									<th class="opt-x" style="text-align:center">Left</th>
+									<th class="opt-y" style="text-align:center">Top</th>
+									<th class="opt-animation" style="text-align:center">Animation</th>
+									<th class="opt-easing">Easing</th>
+									<th class="opt-speed">Speed(ms)</th>
+									<th class="opt-action">&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr></tr>
+								<tr class="text_1_0">
+									<td><textarea name="images[1][info][0][text]" rows="3" cols="110" ></textarea></td>
+									<td><input type="text" name="images[1][info][0][class]" class="input-text" /></td>
+									<td><input type="text" name="images[1][info][0][start]"  class="input-text" value="2000" /></td>
+									<td><input type="text" name="images[1][info][0][end]"  class="input-text" value="4000" /></td>
+									<td><input type="text" name="images[1][info][0][data_x]" class="input-text" value="0" /></td>
+									<td><input type="text" name="images[1][info][0][data_y]" class="input-text" value="0" /></td>
+									<td>
+										<select name="images[1][info][0][animation]" >
+											<?php echo $this->getAnimation(); ?>
+										</select>
+									</td>
+									<td>
+										<select name="images[1][info][0][easing]" >
+											<?php echo $this->getEasing(); ?>
+										</select>
+									</td>
+									<td><input type="text" name="images[1][info][0][speed]" size="10" value="300" /></td>
+									<td>
+										<button onclick="return del_text(1,0);" class="scalable delete" type="button" title="Delete Text">
+											<span><span><span>Delete Text</span></span></span>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<?php else : ?>
+					<?php $i=1;foreach($data	as $key=>$value) : ?>
+						<div class="item num_<?php echo $i?> option-box">
+							<div class="col_first">
+								<label>Image : </label>
+									<input class="oldurl" type="hidden" name="images[<?php echo $i?>][url]" value="<?php echo $value['url'] ?>" />
+									<img src="<?php echo $this->getResizeImage($value['url'],55,55); ?>" style="width:55px;height:45px;"/>
+									<input type="file" class="input-file ele_<?php echo $i?>" value="" name="files[<?php echo $i?>]" />&nbsp;&nbsp;
+								<label>Transition : </label><div class="show_trans"></div>
+								<select name="images[<?php echo $i?>][trans]" class="sel_trans"><?php echo $this->getTransition($value['trans']) ?>									
+								</select>&nbsp;&nbsp;
+								<div class="right">
+									<button onclick="return add_text(<?php echo $i?>);" class="scalable add" type="button" title="Add Text">
+										<span><span><span>Add Text</span></span></span>
+									</button>&nbsp;&nbsp;
+									<?php if($count > 1): ?>
+									<button onclick="return del_img(<?php echo $i?>);" class="btn_del scalable delete" type="button" title="Delete Image">
+										<span><span><span>Delete Image</span></span></span>
+									</button>
+									<?php endif ?>
+								</div>
+							</div>
+							<label>Slot Amount : </label><input type="text" class="input-text" value="<?php echo $value['slotamount'] ?>" name="images[<?php echo $i?>][slotamount]" size=3 />&nbsp;&nbsp;
+							<label>Link : </label><input type="text" class="input-text" value="<?php echo $value['link'] ?>" name="images[<?php echo $i?>][link]" />&nbsp;&nbsp;
+							<label>Position : </label><input type="text" name="images[<?php echo $i?>][position]" class="input-text" size=3 value="<?php echo $value['position'] ?>"/>
+							<?php $sub	=	$this->getSub($value['info']); ?>
+							<div class="text_num" style="display:none" ><?php echo $sub['count'] ?></div>
+							<table cellspacing="0" cellpadding="0" class="option-header">
+								<thead>
+									<tr>
+										<th class="opt-text">Text/Html </th>
+										<th class="opt-type">Class</th>
+										<th class="opt-start">Start</th>
+										<th class="opt-end">End</th>
+										<th class="opt-x" style="text-align:center">Left</th>
+										<th class="opt-y" style="text-align:center">Top</th>
+										<th class="opt-animation" style="text-align:center">Animation</th>
+										<th class="opt-easing">Easing</th>
+										<th class="opt-speed">Speed(ms)</th>
+										<th class="opt-action">&nbsp;</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr></tr>
+								<?php if($sub['count'] == 0): ?>
+									<tr class="text_<?php echo $i?>_0">
+										<td><textarea name="images[<?php echo $i?>][info][0][text]" rows="3" cols="110" ></textarea></td>
+										<td><input type="text" name="images[<?php echo $i?>][info][0][class]" class="input-text" /></td>
+										<td><input type="text" name="images[<?php echo $i?>][info][0][start]"  class="input-text" value="2000" /></td>
+										<td><input type="text" name="images[<?php echo $i?>][info][0][end]"  class="input-text" value="4000" /></td>
+										<td><input type="text" name="images[<?php echo $i?>][info][0][data_x]" class="input-text" value="0" /></td>
+										<td><input type="text" name="images[<?php echo $i?>][info][0][data_y]" class="input-text" value="0" /></td>
+										<td>
+											<select name="images[<?php echo $i?>][info][0][animation]" >
+												<?php echo $this->getAnimation(); ?>
+											</select>
+										</td>
+										<td>
+											<select name="images[<?php echo $i?>][info][0][easing]" >
+												<?php echo $this->getEasing(); ?>
+											</select>
+										</td>
+										<td><input type="text" name="images[<?php echo $i?>][info][0][speed]" size="10" value="300" /></td>
+										<td>
+											<button onclick="return del_text(<?php echo $i?>,0);" class="scalable delete" type="button" title="Delete Text">
+												<span><span><span>Delete Text</span></span></span>
+											</button>
+										</td>
+									</tr>
+								<?php else : ?>
+									<?php $j=0;foreach($sub['info'] as $skey=>$sval): ?>									
+									<tr class="text_<?php echo $i.'_'.$j ?>">
+										<td><textarea name="images[<?php echo $i?>][info][<?php echo $j?>][text]" rows="3" cols="110" ><?php echo $sval['text']?></textarea></td>
+										<td><input type="text" name="images[<?php echo $i?>][info][<?php echo $j?>][class]" class="input-text" value="<?php echo $sval['class']?>" /></td>
+										<td><input type="text" name="images[<?php echo $i?>][info][<?php echo $j?>][start]"  class="input-text" value="<?php echo $sval['start']?>" /></td>
+										<td><input type="text" name="images[<?php echo $i?>][info][<?php echo $j?>][end]"  class="input-text" value="<?php echo $sval['end']?>" /></td>
+										<td><input type="text" name="images[<?php echo $i?>][info][<?php echo $j?>][data_x]" class="input-text" value="<?php echo $sval['data_x']?>" /></td>
+										<td><input type="text" name="images[<?php echo $i?>][info][<?php echo $j?>][data_y]" class="input-text" value="<?php echo $sval['data_y']?>" /></td>
+										<td>
+											<select name="images[<?php echo $i?>][info][<?php echo $j?>][animation]" >
+												<?php echo $this->getAnimation($sval['animation']); ?>
+											</select>
+										</td>
+										<td>
+											<select name="images[<?php echo $i?>][info][<?php echo $j?>][easing]" >
+												<?php echo $this->getEasing($sval['easing']); ?>
+											</select>
+										</td>
+										<td><input type="text" name="images[<?php echo $i?>][info][<?php echo $j?>][speed]" size="10" value="<?php echo $sval['speed']?>" /></td>
+										<td>
+											<button onclick="return del_text(<?php echo $i ?>,<?php echo $j ?>);" class="scalable delete" type="button" title="Delete Text">
+												<span><span><span>Delete Text</span></span></span>
+											</button>
+										</td>
+									</tr>
+									<?php $j++;endforeach ?>
+								<?php endif ?>
+								</tbody>
+							</table>
+						</div>
+					<?php $i++;endforeach ?>	
+				<?php endif ?>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function add_img(){
+		var num	=	jQuery('.ele_num').html();
+		var i = parseInt(num)+1;
+		
+		var html ="";
+		html +=	'<div class="item num_'+i+' option-box">';
+		html +=	  '<div class="col_first">';
+		html +=		'<label>Image :</label><input type="file" class="input-file ele_'+i+'" value="" name="files['+i+']" />&nbsp;&nbsp;';
+		html +=		'<label>Transition : </label><div class="show_trans demo"></div><select name="images['+i+'][trans]" class="sel_trans"><?php echo $this->getTransition() ?></select>&nbsp;&nbsp;';
+		html +=		'<div class="right">';
+		html +=			'<button onclick="return add_text('+i+');" class="scalable add" type="button" title="Add Text">';
+		html +=				'<span><span><span>Add Text</span></span></span>';
+		html +=			'</button>&nbsp;&nbsp;';
+		html +=			'<button onclick="return del_img('+i+');" class="btn_del scalable delete" type="button" title="Delete Image">';
+		html +=				'<span><span><span>Delete Image</span></span></span>';
+		html +=			'</button>';
+		html +=		'</div>';
+		html +=	  '</div>';
+		html +=		'<label>Slot Amount : </label><input type="text" class="input-text" value="7" name="images['+i+'][slotamount]" size=3 />&nbsp;&nbsp;';
+		html +=		'<label>Link : </label><input type="text" class="input-text" value="" name="images['+i+'][link]" />&nbsp;&nbsp;';
+		html +=		'<label>Position : </label><input type="text" name="images['+i+'][position]" class="input-text" value="0" size=3 />';
+		html +=		'<div class="text_num" style="display:none" >0</div>';
+		html +=		'<table cellspacing="0" cellpadding="0" class="option-header">';
+		html +=			'<thead>';
+		html +=				'<tr>';
+		html +=					'<th class="opt-text">Text/Html </th>';
+		html +=					'<th class="opt-type">Class</th>';
+		html +=					'<th class="opt-start">Start</th>';
+		html +=					'<th class="opt-end">End</th>';
+		html +=					'<th class="opt-x" style="text-align:center">Left</th>';
+		html +=					'<th class="opt-y" style="text-align:center">Top</th>';
+		html +=					'<th class="opt-animation" style="text-align:center">Animation</th>';
+		html +=					'<th class="opt-easing">Easing</th>';
+		html +=					'<th class="opt-speed">Speed(ms)</th>';
+		html +=				'</tr>';
+		html +=			'</thead>';
+		html +=			'<tbody>';
+		html +=				'<tr>';
+		html +=					'<td><textarea name="images['+i+'][info][0][text]" rows="3" cols="110" ></textarea></td>';
+		html +=					'<td><input type="text" name="images['+i+'][info][0][class]" class="input-text" /></td>';
+		html +=					'<td><input type="text" name="images['+i+'][info][0][start]"  class="input-text" value="2000" /></td>';
+		html +=					'<td><input type="text" name="images['+i+'][info][0][end]"  class="input-text" value="4000" /></td>';
+		html +=					'<td><input type="text" name="images['+i+'][info][0][data_x]" class="input-text" value="0" /></td>';
+		html +=					'<td><input type="text" name="images['+i+'][info][0][data_y]" class="input-text" value="0" /></td>';
+		html +=					'<td>';
+		html +=						'<select name="images['+i+'][info][0][animation]" >';
+		html +=							'<?php echo $this->getAnimation(); ?>';
+		html +=						'</select>';
+		html +=					'</td>';
+		html +=					'<td>';
+		html +=						'<select name="images['+i+'][info][0][easing]" >';
+		html +=							'<?php echo $this->getEasing(); ?>';
+		html +=						'</select>';
+		html +=					'</td>';
+		html +=					'<td><input type="text" name="images['+i+'][info][0][speed]" size="10" value="300" /></td>';
+		html +=				'</tr>';
+		html +=			'</tbody>';
+		html +=		'</table>';
+		html +=	'</div>';
+
+		jQuery(".ele_num").html(i);	
+		jQuery("#slideshow2_images .content .item").last().after(html);change_transaction();
+	}
+	
+	function del_img(id){
+		var r=confirm("Are you sure to delete ?");
+		if (r==true){
+			var oldurl	=	jQuery("#slideshow2_images .content .num_"+id+" .oldurl").val();
+			var delitem	=	jQuery("#slideshow2_images .deloldimg");
+			delitem.html(delitem.html()+"_!_"+oldurl);
+			jQuery(".num_"+id).remove();
+			var count	=	jQuery("#slideshow2_images .item").length;
+			if(count <= 1 )
+				jQuery(".btn_del").remove();
+		}
+	}
+	
+	function add_text(id){
+		var num	=	jQuery('.num_'+id+' .text_num').html();
+		var i = parseInt(num)+1;		
+		var html = "";
+		html +=				'<tr class="text_'+id+'_'+i+'">';
+		html +=					'<td><textarea name="images['+id+'][info]['+i+'][text]" rows="3" cols="110" ></textarea></td>';
+		html +=					'<td><input type="text" name="images['+id+'][info]['+i+'][class]" class="input-text" /></td>';
+		html +=					'<td><input type="text" name="images['+id+'][info]['+i+'][start]"  class="input-text" value="2000" /></td>';
+		html +=					'<td><input type="text" name="images['+id+'][info]['+i+'][end]"  class="input-text" value="4000" /></td>';
+		html +=					'<td><input type="text" name="images['+id+'][info]['+i+'][data_x]" class="input-text" value="0" /></td>';
+		html +=					'<td><input type="text" name="images['+id+'][info]['+i+'][data_y]" class="input-text" value="0" /></td>';
+		html +=					'<td>';
+		html +=						'<select name="images['+id+'][info]['+i+'][animation]" >';
+		html +=							'<?php echo $this->getAnimation(); ?>';
+		html +=						'</select>';
+		html +=					'</td>';
+		html +=					'<td>';
+		html +=						'<select name="images['+id+'][info]['+i+'][easing]" >';
+		html +=							'<?php echo $this->getEasing(); ?>';
+		html +=						'</select>';
+		html +=					'</td>';
+		html +=					'<td><input type="text" name="images['+id+'][info]['+i+'][speed]" size="10" value="300" /></td>';
+		html +=					'<td>';
+		html +=						'<button onclick="return del_text('+id+','+i+');" class="scalable delete" type="button" title="Delete Text">';
+		html +=							'<span><span><span>Delete Text</span></span></span>';
+		html +=						'</button>';
+		html +=					'</td>';
+		html +=				'</tr>';
+		jQuery('.num_'+id+' .text_num').html(i);
+		jQuery('.num_'+id+' tbody tr').last().after(html);
+	}
+	
+	function del_text(num,text){
+		var r=confirm("Are you sure to delete ?");
+		if (r==true){
+			jQuery('.num_'+num+' tr.text_'+num+'_'+text).remove();
+		}
+	}
+	
+</script>

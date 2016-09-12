@@ -1,0 +1,60 @@
+2.0.0   : Initial release with coupon code and dropped catalog/category gifting areas
+2.0.1   : Remove debug code from simple price model
+2.1.0   : Add qty limitators and ratios to promo rule gift items
+2.1.1   : Fix bug in unsetting use autogeneration option
+2.1.2   : Fix bug where multiple coupon rules get mixed up
+2.1.3   : Fix loop in cart when configurable added and person is logged in
+2.1.4   : Fix loop in cart when persistent cart has a gift in the cart.
+2.1.5   : Fix another potential loop when persistent is active, and top cart has items to display
+2.1.6   : Fix bug 0000030 : Subtotal validation not removing gift items totals
+        : Fix bug 0000029 : Multiple clicks possible when adding selectable items to cart
+        : Fix bug 0000028 : Item sort position dud not save in admin
+2.1.7   : Make fix in 2.1.6 for bug  0000028 more robust.
+2.1.8   : FOund another potential loop in gift checking.
+2.1.9   : Fix element not found bug in js that breaks coupon box in cart
+2.1.10  : Fix order totals collection to specific order.
+2.1.11  : At times, subtotal includes tax. Adjust validation to accommodate that
+2.1.12  :  Additional tweaks to 2.1.11 changes
+2.1.13  : Adjust checkout checkForGifts to only run if Login or Register happens
+2.1.14  : Fix unserialize issue in observer
+2.1.15  : Strip out checkout registration rule and gifting checks as it cause issues
+2.1.16  : Workaround for IWD onestepchekout and collectotals quote object not having totals issue
+2.2.0   : Adjust for pre 1.6 magento versions
+2.3.0	: Add Grand Total Rule
+        : Changed collect totals order to run after discounts.
+2.3.1   : Patch release: incorperate the fixes of 'lost' version 2_1_17 - fix qty-rate-calculations
+2.3.2   : Restructure rule display.
+        : More Cart based rules and Checkout based rules
+        : Start of magento 1.9 rwd theme integration
+2.3.3   : Fix issue with currentselectedgift being false causing gifts to be removed.
+2.3.4   : Fix issue with coupons tab in admin for magento < 1.6
+        : Fix issue with gift not removed for some rule types, if item is removed and rule no longer validates
+2.3.5	: magento 1.9 RWD theme adjustments. This then moves the select gifts option in admin to form_before area in cart
+2.3.6	: Adjusts for magento Pro.
+2.3.7 	: Block gifts from adding again when cart merges (caused duplicate gifts)
+2.4.0	: Ability to have multiple gifts on gift select in one promo rule
+2.4.1   : Fix issue with order create via admin
+2.4.2   : Fix bugs surrounding product attributes, and <1.6 coupon tabs in admin
+2.4.3	: Fix bug with multiple select gifts in cart. (not all buttons were disabled)
+2.4.4   : Fix bug with selectable gifts showing gift already in cart. This skips that gift from the selectable list of items
+2.4.5   : Place a block in cart controller to not action of gift replaced/added is the same as already in cart.
+2.4.6   : Fix non object issue in coupon export via admin
+2.4.7   : Remove gift coupons from sales coupon report
+2.4.8   : Fix bug when gift is added, then removed, then add any other product afterwards, gift is added for a non gifting rule products
+2.4.9   : Additional fixes on bug found in 2.4.8
+2.4.10  : Fix bug with count of items including invisible items in cart subselect rule
+2.4.11  : Change that stop further processing is only applied if rule is valid, or already valid and actioned.
+        : Fix Bug 468569_incorrect_gift_products_qty_increment
+2.5.0   : Rework how gifts are associated to parent products. This is a substantial change in the module core functionality
+        : Drop ratio limiter sku functionality as it is causing sme major isues
+2.5.1   : Fix customer login and removal of gifts
+        : Potential fix to image display in selectable gifts and cart line items for the gifts
+        : Fix selectable list to disappear if a gift is selected.
+2.5.2   : Fix bug with magento pro missing method in magento
+        : add ability to set gift select message with placeholders via admin
+        : Fix bug in gift icon display.
+2.5.3   : More RWD theme files.
+        : various minor bug fixes
+2.5.4   : Fix display of gift icon for product attribute related gifts rules
+2.5.5   : Fix that gift icon appeared for all products if gifted item is in cart
+        : Strip out a lot of legacy code from the products and category related gifting areas

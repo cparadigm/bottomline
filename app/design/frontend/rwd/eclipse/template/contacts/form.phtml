@@ -1,0 +1,92 @@
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="page-title">
+    <h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
+</div>
+<form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post">
+    <div class="fieldset">
+        <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact Information') ?></h2>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                    <label for="name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Name') ?></label>
+                    <div class="input-box">
+                        <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="email" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Email') ?></label>
+                    <div class="input-box">
+                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="text" />
+                    </div>
+                </div>
+            </li>
+            <li>
+                <label for="telephone"><?php echo Mage::helper('contacts')->__('Telephone') ?></label>
+                <div class="input-box">
+                    <input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" value="" class="input-text" type="text" />
+                </div>
+            </li>
+            <li class="wide">
+                <label for="comment" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Comment') ?></label>
+                <div class="input-box">
+                    <textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" class="required-entry input-text" cols="5" rows="3"></textarea>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <p class="required"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p>
+        <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+        <button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button"><span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+//]]>
+</script>
+<?php /* Google map */
+    $enableMap=Mage::app()->getStore()->getConfig('eclipsesettings/eclipsesettings_contactmap/enable');
+    if($enableMap==1){
+	$markerImage=Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'blue.png';
+	$mapAddress=Mage::app()->getStore()->getConfig('eclipsesettings/eclipsesettings_contactmap/mapaddress');
+	$mapLat=Mage::app()->getStore()->getConfig('eclipsesettings/eclipsesettings_contactmap/maplat');
+	$mapLong=Mage::app()->getStore()->getConfig('eclipsesettings/eclipsesettings_contactmap/maplong');
+?>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+      <script>
+	  
+	  function initialize() {
+	      var myLatlng = new google.maps.LatLng(<?php echo $mapLat?>,<?php echo $mapLong?>);
+	      var mapOptions = {
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			streetViewControl: true,
+			panControl: true,
+				  zoom: 7,
+				  center: myLatlng
+	      };
+
+	      var map = new google.maps.Map(document.getElementById('magikmap_contact'), mapOptions);
+	      var contentString = '<?php echo $mapAddress;?>';
+	      var infowindow = new google.maps.InfoWindow({
+		content: contentString,
+		maxWidth:200
+	      });
+
+	      var marker = new google.maps.Marker({
+		  position: myLatlng,
+		  map: map,
+		  icon: '<?php echo $markerImage;?>'
+		  //title: 'Uluru (Ayers Rock)'
+	      });
+
+	      google.maps.event.addListener(marker, 'click', function() {
+		infowindow.open(map,marker);
+	      });
+	  }
+	  google.maps.event.addDomListener(window, 'load', initialize);
+      </script>
+      <div class="mapBlock" style="margin-top:15px;">
+	  <div id="magikmap_contact" style="width:700px;height:400px;"></div>
+      </div>
+<?php } ?>

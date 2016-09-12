@@ -1,0 +1,28 @@
+/**
+ * EM ProductLabels
+ *
+ * @license commercial software
+ * @copyright (c) 2012 Codespot Software JSC - EMThemes.com. (http://www.emthemes.com)
+ */
+
+.products-grid .item, .products-list .item { position:relative }
+.product-img-box { position:relative; }
+.product-view .box-up-sell .products-grid td div.td { position:relative; }
+.mini-products-list .product { position:relative; }
+.crosssell .item { position:relative }
+
+.productlabels_icons { position:absolute; top:0; right:0; }
+.product-img-box .productlabels_icons { z-index:10; }
+.productlabels_icons .label { float:right; background:url(../images/productlabel_icons.png) 0 0 no-repeat; width:50px; height:50px; font-size:10px; font-weight:bold; color:#fff; line-height:1em; text-align:center; padding:0; }
+.productlabels_icons .label { padding:10px 0 0; }
+.productlabels_icons .nobg { background:none; width:auto; height:auto; }
+
+.productlabels_icons .orange { background-position:0 0 }
+.productlabels_icons .yellow { background-position:0 -60px }
+.productlabels_icons .blue { background-position:0 -120px }
+.productlabels_icons .violet { background-position:0 -180px }
+.productlabels_icons .red { background-position:0 -240px }
+.productlabels_icons .black { background-position:0 -300px }
+.productlabels_icons .new { background-position:-200px 0 }
+.productlabels_icons .special { background-position:-200px -60px }
+.productlabels_icons .bestseller { background-position:-200px -120px }

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+		<reference name="head">
+			<action method="addCss"><stylesheet>em_slideshow2/css/settings.css</stylesheet></action>
+			<action method="addCss"><stylesheet>em_slideshow2/css/captions.css</stylesheet></action>
+			<!--action method="addItem"><type>skin_js</type><name>em_slideshow2/js/jquery-1.8.3.min.js</name></action-->
+			<action method="addItem"><type>skin_js</type><name>em_slideshow2/js/jquery.themepunch.plugins.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>em_slideshow2/js/jquery.themepunch.revolution.js</name></action>
+        </reference>
+    </default>
+    <slideshow2_index_index>
+        <reference name="content">
+            <block type="slideshow2/slideshow2" name="slideshow2" template="em_slideshow2/slideshow2.phtml" />
+        </reference>
+    </slideshow2_index_index>
+</layout> 

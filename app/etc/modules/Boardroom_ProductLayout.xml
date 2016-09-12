@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Boardroom_ProductLayout>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Boardroom_ProductLayout>
+    </modules>
+</config>

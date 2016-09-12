@@ -1,0 +1,156 @@
+
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/slider1.css" type="text/css" />
+<?php $enableResponsive=Mage::app()->getStore()->getConfig('eclipsesettings/responsivecss/enable');?>
+<?php if($enableResponsive==1){ ?>
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/responsive1.css" type="text/css" />
+<?php } ?>
+<script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('#rev_slider_4').show().revolution({
+                dottedOverlay: 'none',
+                delay: 5000,
+                startwidth: 770,
+                startheight: 460,
+
+                hideThumbs: 200,
+                thumbWidth: 200,
+                thumbHeight: 50,
+                thumbAmount: 2,
+
+                navigationType: 'thumb',
+                navigationArrows: 'solo',
+                navigationStyle: 'round',
+
+                touchenabled: 'on',
+                onHoverStop: 'on',
+                
+                swipe_velocity: 0.7,
+                swipe_min_touches: 1,
+                swipe_max_touches: 1,
+                drag_block_vertical: false,
+            
+                spinner: 'spinner0',
+                keyboardNavigation: 'off',
+
+                navigationHAlign: 'center',
+                navigationVAlign: 'bottom',
+                navigationHOffset: 0,
+                navigationVOffset: 20,
+
+                soloArrowLeftHalign: 'left',
+                soloArrowLeftValign: 'center',
+                soloArrowLeftHOffset: 20,
+                soloArrowLeftVOffset: 0,
+
+                soloArrowRightHalign: 'right',
+                soloArrowRightValign: 'center',
+                soloArrowRightHOffset: 20,
+                soloArrowRightVOffset: 0,
+
+                shadow: 0,
+                fullWidth: 'on',
+                fullScreen: 'off',
+
+                stopLoop: 'off',
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
+
+                shuffle: 'off',
+
+                autoHeight: 'off',
+                forceFullWidth: 'on',
+                fullScreenAlignForce: 'off',
+                minFullScreenHeight: 0,
+                hideNavDelayOnMobile: 1500,
+            
+                hideThumbsOnMobile: 'off',
+                hideBulletsOnMobile: 'off',
+                hideArrowsOnMobile: 'off',
+                hideThumbsUnderResolution: 0,
+
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                startWithSlide: 0,
+                fullScreenOffsetContainer: ''
+            });
+        });
+        </script>
+</head>
+
+<body class="<?php echo $this->getBodyClass()?' '.$this->getBodyClass().'':'' ?> rtl" itemscope itemtype="http://schema.org/WebPage">
+    <?php echo $this->getChildHtml('after_body_start') ?>
+    <?php echo $this->getChildHtml('global_notices') ?>      
+       <?php echo $this->getChildHtml('header') ?> 
+
+    
+
+      <!-- Home Slider Block --> 
+      <div id="magik-slideshow" class="magik-slideshow"> 
+      <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_home_slider_banner_block')->toHtml() ?> 
+      <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_rhs_banner_block')->toHtml() ?> 
+      </div> <!--#magik-slideshow-->        
+
+      <!-- Header block call Mobile-->
+      <div class="our-features-box mob">
+         <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_header_block')->toHtml() ?>  
+      </div>
+            
+            
+            
+  
+      
+            
+            
+      <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_home_offer_banner_block')->toHtml() ?>
+      
+      
+      
+      
+         <!-- Header block call -->
+      <div class="our-features-box">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_header_block')->toHtml() ?>
+      </div> 
+      
+      
+      
+      
+      
+                        
+       <div class="main-col">  
+          <article>             
+              <?php echo $this->getChildHtml('breadcrumbs') ?>               
+              <?php echo $this->getChildHtml('global_messages') ?>
+              <?php echo $this->getChildHtml('content') ?>
+          </article>
+      </div> <!--main-col-->
+      
+      
+      
+               
+      
+      
+      
+      <!-- Home Lastest Blog Block -->
+      <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eclipse_home_latest_blog_block')->toHtml() ?>      
+      
+      <?php echo $this->getChildHtml('footer') ?>
+      <?php echo $this->getChildHtml('before_body_end') ?>
+      <?php echo $this->getAbsoluteFooter() ?>     
+
+      <?php if(Mage::app()->getStore()->getConfig('eclipsesettings/eclipsesettings_newsletterpopup/newsletterpopup_enable')==1){?>
+          <?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('newsletter/subscribe_home_popup.phtml')->toHtml() ; ?>
+      <?php } ?>
+  
+</body>
+</html>
+

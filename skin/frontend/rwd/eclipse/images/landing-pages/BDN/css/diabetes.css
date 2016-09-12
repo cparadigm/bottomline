@@ -1,0 +1,472 @@
+h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: Lato, sans-serif;
+  color: #fff;
+  font-size: 52px;
+  line-height: 44px;
+  font-weight: 700;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: Lato, sans-serif;
+  color: #fff;
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 300;
+  text-align: center;
+}
+
+h3 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  margin-left: 7px;
+  padding-right: 0px;
+  font-family: Lato, sans-serif;
+  font-size: 36px;
+  line-height: 30px;
+  font-weight: 300;
+  text-align: center;
+}
+
+h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 500;
+  text-align: left;
+}
+
+h5 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-family: Lato, sans-serif;
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h6 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: Lato, sans-serif;
+  color: #3b3b3b;
+  font-size: 23px;
+  line-height: 23px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.nav-bar {
+  border-bottom: 1px solid #000;
+  background-color: #fff;
+}
+
+.nav-link {
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.logo {
+  margin-top: 20px;
+  font-family: Lato, sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.nav-menu {
+  margin-top: 0px;
+  background-color: hsla(0, 0%, 95%, .99);
+  line-height: 5px;
+  text-align: left;
+}
+
+.hero-section {
+  height: 400px;
+  background-image: -webkit-linear-gradient(269deg, rgba(0, 0, 0, .58) 31%, transparent), url('../images/ThinkstockPhotos-475085171.jpg');
+  background-image: linear-gradient(181deg, rgba(0, 0, 0, .58) 31%, transparent), url('../images/ThinkstockPhotos-475085171.jpg');
+  background-position: 0px 0px, 50% 50%;
+  background-size: auto, cover;
+}
+
+.hero-container {
+  margin-top: 0px;
+  padding-top: 70px;
+  text-align: center;
+}
+
+.hero-button {
+  margin-top: 7px;
+  margin-right: 10px;
+  padding: 14px 32px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  -webkit-transform: translate(0px, 0px);
+  -ms-transform: translate(0px, 0px);
+  transform: translate(0px, 0px);
+  font-family: Lato, sans-serif;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+
+.hero-button.buy-hero {
+  border-color: #fff;
+  background-color: #fff;
+  color: #000;
+}
+
+.articles-section {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-color: hsla(0, 0%, 87%, .22);
+  font-family: Lato, sans-serif;
+  color: #000;
+  font-weight: 300;
+}
+
+.articles-container {
+  padding-top: 0px;
+  padding-bottom: 30px;
+}
+
+.articles-row {
+  margin-top: 0px;
+  padding-left: 0px;
+}
+
+.articles-col {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0px;
+  background-color: transparent;
+  text-align: center;
+}
+
+.article-div {
+  margin-right: 10px;
+  background-color: #fff;
+  text-align: left;
+}
+
+.article-div.free-book-box {
+  padding-top: 0px;
+  padding-bottom: 13px;
+  text-align: left;
+}
+
+.h4-article {
+  margin-top: 15px;
+  margin-bottom: 0px;
+  padding: 0px 15px 15px 20px;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 300;
+  text-align: left;
+  text-transform: none;
+}
+
+.seperator {
+  display: block;
+  width: 100px;
+  height: 1px;
+  margin: 0px 0px 10px 20px;
+  padding-bottom: 0px;
+  border-color: silver;
+  border-top-style: solid;
+  border-top-width: 1px;
+  text-align: center;
+}
+
+.article-p {
+  margin-bottom: 0px !important;
+  padding-right: 20px !important;
+  padding-bottom: 16px !important;
+  padding-left: 20px !important;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  text-align: left;
+}
+
+.article-btn {
+  margin-bottom: 20px;
+  margin-left: 20px;
+  border: 1px solid silver;
+  background-color: transparent;
+  color: #6d6d6d;
+  text-align: left;
+}
+
+.article-btn.buy-btn {
+  margin-bottom: 0px;
+  margin-left: 15px;
+  border-color: #bde6e4;
+  background-color: #bde6e4;
+  color: #636363;
+}
+
+.bonus-headline {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: #399;
+  font-family: Lato, sans-serif;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+}
+
+.subscribe-section {
+  background-color: #fff;
+}
+
+.subscribe-row {
+  margin-left: 0px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: left;
+}
+
+.separator2 {
+  width: 20%;
+  height: 1px;
+  margin-right: auto;
+  margin-left: auto;
+  border-top: 1px solid #a5a5a5;
+}
+
+.book-name {
+  margin-top: 0px;
+}
+
+.post-hero-section {
+  height: 300px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .32), rgba(0, 0, 0, .32)), url('../images/group6.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .32), rgba(0, 0, 0, .32)), url('../images/group6.jpg');
+  background-position: 0px 0px, 0px -259px;
+  background-size: auto, cover;
+}
+
+.post-hero-h1 {
+  margin-top: 0px;
+  font-size: 44px;
+  font-weight: 300;
+  text-transform: none;
+}
+
+.post-section {
+  margin-bottom: 0px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #f8f8f8;
+}
+
+.post-container {
+  margin-top: 0px;
+}
+
+.post-p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: left;
+}
+
+.list-item {
+  padding: 3px 0px;
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.section-footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #000;
+  background-color: #f8f8f8;
+}
+
+.post-hero-section2 {
+  height: 300px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .33), rgba(0, 0, 0, .33)), url('../images/drink.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .33), rgba(0, 0, 0, .33)), url('../images/drink.jpg');
+  background-position: 0px 0px, 50% 30%;
+  background-size: auto, cover;
+}
+
+.post-hero-section3 {
+  height: 300px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('../images/chilli.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('../images/chilli.jpg');
+  background-position: 0px 0px, 50% -380px;
+  background-size: auto, cover;
+}
+
+.post-hero-section4 {
+  height: 300px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .24), rgba(0, 0, 0, .24)), url('../images/cooking2.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .24), rgba(0, 0, 0, .24)), url('../images/cooking2.jpg');
+  background-position: 0px 0px, 50% -285px;
+  background-size: auto, cover;
+}
+
+.post-hero-section5 {
+  height: 300px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .18)), url('../images/choc.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .18)), url('../images/choc.jpg');
+  background-position: 0px 0px, 50% -3px;
+  background-size: auto, cover;
+}
+
+.post-hero-section6 {
+  height: 300px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .54), rgba(0, 0, 0, .54)), url('../images/ThinkstockPhotos-475085171.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .54), rgba(0, 0, 0, .54)), url('../images/ThinkstockPhotos-475085171.jpg');
+  background-position: 0px 0px, 50% -91px;
+  background-size: auto, cover;
+}
+
+.premium-section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #e3f6f5;
+}
+
+.fotter-p {
+  color: #686868;
+  font-size: 12px;
+  line-height: 19px;
+  text-align: center;
+}
+
+.free-book-container {
+  background-color: transparent;
+}
+
+.cooking-list {
+  margin-bottom: 13px;
+  padding-top: 12px;
+}
+
+.sarah-img {
+  margin-right: 17px;
+  margin-left: 17px;
+  padding-left: 0px;
+  float: left;
+  clear: left;
+  border: 1px solid #ddd6d6;
+}
+
+.forbidden {
+  font-size: 25px;
+  line-height: 32px;
+}
+
+.padding-p {
+  padding-right: 0px;
+  padding-left: 20px;
+}
+
+.big-a {
+  font-size: 42px;
+  text-transform: none;
+  -webkit-column-count: 6;
+  -moz-column-count: 6;
+  column-count: 6;
+}
+
+.forbidden-h {
+  font-size: 28px;
+  line-height: 40px;
+}
+
+@media (max-width: 991px) {
+  .book-name {
+    text-align: left;
+  }
+  .post-hero-section {
+    background-image: -webkit-linear-gradient(270deg, null, null), url('../images/group6.jpg');
+    background-image: linear-gradient(180deg, null, null), url('../images/group6.jpg');
+    background-position: 0px 0px, 50% 50%;
+    background-size: auto, cover;
+    background-repeat: repeat, no-repeat;
+  }
+  .section-footer {
+    height: 120px;
+  }
+  .post-hero-section3 {
+    background-image: -webkit-linear-gradient(270deg, null, null), url('../images/chilli.jpg');
+    background-image: linear-gradient(180deg, null, null), url('../images/chilli.jpg');
+    background-position: 0px 0px, 50% 50%;
+    background-repeat: repeat, no-repeat;
+  }
+}
+
+@media (max-width: 767px) {
+  h1 {
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 37px;
+  }
+  h2 {
+    font-size: 21px;
+  }
+  .hero-section {
+    height: 240px;
+  }
+  .hero-container {
+    padding-top: 18px;
+  }
+  .article-div.free-book-box {
+    text-align: center;
+  }
+  .h4-article {
+    text-align: center;
+  }
+  .subscribe-row {
+    text-align: center;
+  }
+  .post-hero-h1 {
+    font-size: 29px;
+  }
+  .post-container {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  .post-hero-section4 {
+    background-image: -webkit-linear-gradient(270deg, null, null), url('../images/cooking2.jpg');
+    background-image: linear-gradient(180deg, null, null), url('../images/cooking2.jpg');
+    background-position: 0px 0px, 50% 50%;
+    background-repeat: repeat, no-repeat;
+  }
+}
+
+@media (max-width: 479px) {
+  .hero-section {
+    height: 350px;
+  }
+  .post-hero-h1 {
+    line-height: 39px;
+  }
+  .section-footer {
+    height: 330px;
+  }
+  .post-hero-section4 {
+    height: 350px;
+  }
+}
+

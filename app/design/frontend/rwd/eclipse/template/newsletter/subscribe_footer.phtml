@@ -1,0 +1,18 @@
+<?php 
+/* Newsletter subscribe */
+?>
+
+<div class="newsletter">
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail1">
+     <div>
+      <h4><span><?php echo $this->__('Newsletter') ?></span></h4>
+      <input type="text" name="email" id="newsletter1" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email" placeholder="Enter your email address" />                              
+      <button type="submit" title="<?php echo $this->__('Subscribe') ?>" class="subscribe"><span><?php echo $this->__('Subscribe') ?></span></button>
+     </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail1');
+    //]]>
+    </script>
+</div> <!--newsletter-->

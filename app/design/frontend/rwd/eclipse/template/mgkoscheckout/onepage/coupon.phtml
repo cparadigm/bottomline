@@ -1,0 +1,48 @@
+<?php
+?>
+<div id="coupon-discount">
+    <div class="discount">
+	<?php //echo $this->getMessagesBlock()->getGroupedHtml() ?>
+        <div><strong><?php echo $this->__('DISCOUNT CODES') ?></strong></div>
+	<div class="discount-form">
+	    <input type="hidden" name="process_coupon" id="process_coupon" value="0" />
+            <input type="hidden" name="coupon[remove]" id="coupon-remove" value="0" />
+	    <div class="mgkosc-coupon-main">
+		  <div class="mgkosc-coupon-box">
+		      <input class="input-text" id="coupon-code" name="coupon[code]" value="<?php echo $this->htmlEscape($this->getCouponCode()) ?>" />
+		      <?php if(strlen($this->getCouponCode())): ?>
+			  <button type="button" title="<?php echo $this->__('Cancel Coupon') ?>" class="button left" style="margin-right:10px"  value="<?php echo $this->__('Cancel Coupon') ?>" id="coupon-cancel"><span><span><?php echo $this->__('Cancel Coupon') ?></span></span></button>
+		      <?php endif;?>
+		      <button type="button" title="<?php echo $this->__('Apply Coupon') ?>" class="button left" value="<?php echo $this->__('Apply Coupon') ?>" id="coupon-apply"><span><span><?php echo $this->__('Apply Coupon') ?></span></span></button>
+		  </div>
+	    </div>  
+            
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    $('coupon-apply') && $('coupon-apply').observe('click', function(e) { 
+   	 	$('process_coupon').value = "1";
+        if (!$('coupon-code').value.length) {
+            $('coupon-code').addClassName('validation-failed');
+
+            return;
+        }
+        $('coupon-remove').value = "0";
+        checkout.update({ 
+            'process_coupon': 1,
+            'review': 1
+        });
+    });
+    $('coupon-cancel') && $('coupon-cancel').observe('click', function(e) {
+        $('coupon-remove').value = "1";
+        $('process_coupon').value = "1";
+
+        checkout.update({
+            'process_coupon': 1,
+            'review': 1
+        });
+    });
+//]]>
+</script>

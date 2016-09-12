@@ -1,0 +1,141 @@
+<?php
+    $_items_reviews = $this->getReviewsCollection_By_Collection_Filter_By_Categories_Show();
+    $limit_length = 160;
+    $_limit = $this->getLimitCount();
+    $_n = count($_items_reviews);
+    if($_limit == "" || $_limit > $_n){
+        $_limit = $_n;
+    }    
+    $_title = $this->getFrontendTitle();
+    $_showname = $this->showProductName();
+    $_w = $this->getThumbnailWidth();
+    $_h = $this->getThumbnailHeight();
+    $_showthumb = $this->showThumb();
+    $_columnCount = $this->getColumnCount();
+    $alt_img = $this->getAltImg();
+    
+    $_showprice = $this->show_Price();
+    $_showlabel = $this->show_Label();
+    $_showCart = $this->show_AddtoCart();
+    $_showAddto = $this->show_Addto();
+?>
+
+<div class="widget widget-recentreview-products">
+    <?php if($_title!=""): ?>
+    <div class="widget-title">        
+        <h3><span><?php echo $_title; ?></span></h3>
+    </div>
+    <?php endif; ?>
+    <div class="widget-products">
+        <?php $i=0; foreach ( $_items_reviews as $_review) :?>
+        <?php $_product = Mage::getModel('catalog/product')->load($_review['entity_pk_value']); ?>
+		<?php if ($i++%$_columnCount==0): ?>
+            <ul class="products-grid">
+        <?php endif ?>
+            <li class="<?php if($itemClass = $this->getData('item_class')) echo $itemClass.' ';?>item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>" style="<?php echo $this->getItemWidth() ? 'width:'.$this->getItemWidth().'px;' : '' ?> <?php echo $this->getItemHeight() ? 'height:'.$this->getItemHeight().'px;' : '' ?> <?php echo $this->getItemSpacing() ? 'margin-right:'.$this->getItemSpacing().'px;margin-bottom:'.$this->getItemSpacing().'px;' : '' ?>">
+                <?php if($_showthumb="true"): ?>
+                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" class="product-image">
+						<?php if($_showlabel=="true"):?>
+							<?php Mage::helper('productlabels')->display($_product);?>
+						<?php endif; ?>
+						<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_w, $_h) ?>" width="<?php echo $_w; ?>" height="<?php echo $_h; ?>" <?php if ($alt_img): ?> 
+                                rel="<?php echo $alt_img ?>" 
+                                data-alt-src="<?php echo $this->helper('catalog/image')->init($_product, $alt_img)->resize($_w, $_h) ?>"
+                                <?php endif ?> alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" /></a>
+                <?php else:?>
+					<?php if($_showlabel=="true"):?>
+						<?php Mage::helper('productlabels')->display($_product);?>
+					<?php endif; ?>
+				<?php endif; ?>
+                
+                <div class="product-shop">
+                    <div class="f-fix">
+                        <?php if($_showname=="true"): ?>
+                            <h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName() , 'name') ?></a></h3>
+                        <?php endif; ?>
+                        <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                        <?php if($_showprice=="true"): ?>
+                            <?php echo $this->getPriceHtml($_product, true, '-widget-new-list') ?>
+                        <?php endif; ?>
+                        
+                        <?php if($_showCart=="true"): ?>
+                            <?php if ($_product->isSaleable()): ?>
+                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                            <?php else: ?>
+                                <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        
+                        <?php if($_showAddto=="true"):?>
+                        <ul class="add-to-links">
+                            <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                                <li><a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" class="link-wishlist" title="<?php echo $this->__('Add to Wishlist') ?>"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                            <?php endif; ?>
+                            <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                                <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" class="link-compare" title="<?php echo $this->__('Add to Compare') ?>"><?php echo $this->__('Add to Compare') ?></a></li>
+                            <?php endif; ?>
+                        </ul>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                
+				<ul class="review-details">
+                    <li class="review-create-at">
+                        <?php echo ($this->__('Posted on '));?>
+        				<?php echo $this->dateFormat($_review['created_at']) ?>
+    				</li>
+    				<li class="review-product-link">
+    				    <a href="<?php echo $this->getProductLink($_product, $_review) ?>"><?php echo $this->getTitle($_product, $_review) ?></a>
+    				</li>
+    				<li class="review-product-detail">
+                        <?php if (strlen($_review->getDetail()) >  $limit_length) : ?>
+                        <?php echo trim($this->helper('recentreviewproducts/data')->cutText2($_review->getDetail(),$limit_length)) ?>
+                        <?php else: ?>
+                        <?php echo trim($_review->getDetail()) ?>
+                        <?php endif;?>
+                        <!-- End Review Detail -->
+    				</li>
+    				<li class="review-product-nickname">
+    				<?php echo $this->__('Review by:');?>
+    					<?php echo ($this->__($this->htmlEscape($this->helper('review')->getDetail($_review['nickname']))));  ?>
+    				</li>
+    				<li class="review-rating">
+        				<?php
+                            $_review_info = Mage::getModel('review/review')->getCollection()
+                            ->addStoreFilter(Mage::app()->getStore()->getId())
+                            ->addStatusFilter(Mage_Review_Model_Review::STATUS_APPROVED)
+                            ->addFieldToFilter('main_table.review_id', array('eq' =>  $_review['review_id']))
+                            ->addRateVotes()
+                            ; 
+                        ?>
+                        <?php $_votes = $_review_info->getFirstItem()->getRatingVotes(); ?>
+                        <?php if (count($_votes)): ?>
+                        <table class="ratings-table">
+                            <col width="1" />
+                            <col />
+                            <tbody>
+                                <?php foreach ($_votes as $_vote): ?>
+                                <tr>
+                                    <th><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></th>
+                                    <td>
+                                        <div class="rating-box">
+                                            <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <?php endif;?>
+    				</li>
+                </ul>
+            </li>
+        <?php if ($i%$_columnCount==0 || $i==$_limit): ?>
+        </ul>
+        <?php endif ?>            
+        <?php endforeach;?>
+    </div>
+</div>
+<script type="text/javascript">
+    decorateGeneric($$('ul.products-grid'),['last','first','odd','even']);
+</script>

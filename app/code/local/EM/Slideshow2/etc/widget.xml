@@ -1,0 +1,16 @@
+<widgets>
+    <slideshow2 type="slideshow2/slideshow2" module="slideshow2" translate="name description">
+        <name>EM Slideshow 2 </name>
+        <description type="desc"></description>
+        <parameters>
+			<slideshow>
+                <label>Slideshow : </label>
+                <visible>1</visible>
+				<required>1</required>
+                <description></description>
+                <type>select</type>
+                <source_model>slideshow2/Slider</source_model>
+            </slideshow>
+		</parameters>
+    </slideshow2>
+</widgets>

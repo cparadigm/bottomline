@@ -1,0 +1,267 @@
+
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+?>
+
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+    $_imgHtml   = '';
+    if ($_imgUrl = $_category->getImageUrl()) {
+        $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" /></p>';
+        $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+    }
+?>
+<div class="page-title">
+    <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
+        <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
+    <?php endif; ?>
+    <h2><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h2>
+</div> <!--page-title-->
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php if($_imgUrl): ?>
+    <?php echo $_imgHtml ?>
+<?php endif; ?>
+
+<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+    <div class="category-description std">
+        <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+    </div>
+    <?php endif; ?>
+
+<?php if($this->isContentMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+
+<?php elseif($this->isMixedMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+    <?php echo $this->getProductListHtml() ?>
+
+<?php else: ?>
+    <?php echo $this->getProductListHtml() ?>
+<?php endif; ?>
+
+<?php
+$_products = Mage::getModel('catalog/product')
+    ->getCollection()
+    ->addCategoryFilter($_category)
+    ->load();
+?>
+
+<?php if ($_category->getData('skip_cart')): ?>
+    <?php
+    $skipCart = $_category->getResource()
+        ->getAttribute('skip_cart')
+        ->getSource()
+        ->getOptionText($_category->getData('skip_cart'));
+    ?>
+    <form action="<?php echo Mage::getUrl('checkout/cart/add',array('_secure'=>true)) ?>" method="post" id="orderForm" style="display:none;">
+		<?php echo $this->getBlockHtml('formkey') ?>
+        <?php if ($skipCart=='Yes'): ?>
+            <input type="hidden" name="skip_cart" value="Yes"/>
+		<?php elseif ($skipCart=='No'): ?>
+			<input type="hidden" name="skip_cart" value="No"/>
+        <?php endif; ?>
+        <?php foreach($_products as $_product): ?>
+            <input type="hidden" name="product[]" value="<?php echo $_product->getId() ?>"/>
+        <?php endforeach; ?>
+        <input type="submit" value="Submit"/>
+    </form>
+<?php endif; ?>
+
+<?php
+//offer checkout form if we have a payment block
+$payment_block = $_category->getData('payment_block_attribute');
+
+if ($payment_block) {
+    $states = Mage::getModel('directory/country')->load('US')->getRegions();
+    $ccBlock = new Mage_Payment_Block_Form_Cc;
+    $_products = Mage::getModel('catalog/product')
+        ->getCollection()
+        ->addCategoryFilter($_category)
+        ->load();
+    if ($_category->getChildrenCategories() && $_category->getChildrenCategories()->getFirstItem() && $_category->getChildrenCategories()->getFirstItem()->getId()) {
+        $redirect_url = $_category->getChildrenCategories()->getFirstItem()->getUrl();
+    } else {
+        $redirect_url = null;
+    }
+?>
+    <form action="<?php echo Mage::getBaseUrl() ?>one-click-order/form/submit/" method="post" id="orderForm">
+        <?php foreach($_products as $_product): ?>
+            <input type="hidden" name="products[]" value="<?php echo $_product->getId() ?>"/>
+        <?php endforeach; ?>
+        <input type="hidden" name="redirect" value="<?php echo $redirect_url ?>"/>
+        <ul>
+            <li>
+                First Name:&nbsp;<input type="text" name="firstname" class="input-text required-entry"/>
+            </li>
+            <li>
+                Last Name:&nbsp;<input type="text" name="lastname" class="input-text required-entry"/>
+            </li>
+            <li>
+                Email:&nbsp;<input type="text" name="email" class="input-text required-entry"/>
+            </li>
+            <li>
+                Address:&nbsp;<input type="text" name="street" class="input-text required-entry"/>
+            </li>
+            <li>
+                City:&nbsp;<input type="text" name="city" class="input-text required-entry"/>
+            </li>
+            <li>
+                State:&nbsp;<select name="region" class="validate-select required-entry">
+                <?php foreach ($states as $state): ?>
+                    <?php if ($state->getName()!='Florida'): ?>
+                        <option value="<?php echo $state->getId() ?>"><?php echo $state->getName() ?></option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                </select>
+            </li>
+            <li>
+                Zip:&nbsp;<input type="text" name="postcode" class="input-text required-entry"/>
+            </li>
+            <li>
+                Phone:&nbsp;<input type="text" name="telephone" class="input-text required-entry"/>
+            </li>
+            <?php if($payment_block==187): ?>
+                <li>
+                    <input type="hidden" name="payment[method]" value="checkmo"/>
+                    Payment Type:&nbsp;<input type="radio" onclick="hideShowCC();" id="payment_checkmo" value="1" name="payment_type[]"  class="validate-one-required-by-name" checked="checked"/>&nbsp;Bill Me Later
+                </li>
+            <?php elseif($payment_block==188): ?>
+                <style>
+                    #p_method_checkmo,
+                    label[for="p_method_checkmo"] {
+                        display:none;
+                    }
+                </style>
+                <?php
+                    $cart = Mage::getModel('checkout/cart');
+                    $cart->init();
+                    foreach($_products as $_product) {
+                        $cart->addProduct(Mage::getModel('catalog/product')->load($_product->getId()), array('qty' => 1));
+                    }
+                    $cart->save();
+                    Mage::getSingleton('checkout/session')->setCartWasUpdated(true);
+
+                    $layout = new Mage_Core_Model_Layout();
+                    $update = $layout->getUpdate();
+                    $update->load('checkout_onepage_paymentmethod');
+                    $layout->generateXml();
+                    $layout->generateBlocks();
+                    $output = $layout->getOutput();
+                    echo $output;
+                ?>
+            <!--
+            <input type="hidden" value="2" name="payment_type[]"/>
+            <li>
+                Card Type:&nbsp;<select id="ccsave_cc_type" class="required-entry cc-entry validate-cc-type-select" title="Credit Card Type" name="cc_type">
+                    <option value="">--Please Select--</option>
+                    <option value="AE">American Express</option>
+                    <option value="VI">Visa</option>
+                    <option value="MC">MasterCard</option>
+                    <option value="DI">Discover</option>
+                </select>
+            </li>
+            <li>
+                Card Number:&nbsp;<input type="text" id="ccsave_cc_number" name="cc_number" class="input-text required-entry cc-entry validate-cc-number validate-cc-type"/>
+            </li>
+            <li>
+                Exp Date Month:&nbsp;<select id="ccsave_expiration" name="cc_exp_month" class="month validate-cc-exp required-entry cc-entry">
+                    <?php foreach ($ccBlock->getCcMonths() as $k=>$v): ?>
+                        <option value="<?php echo $k?$k:'' ?>"><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </li>
+            <li>
+                Exp Date Year:&nbsp;<select id="ccsave_expiration_yr" name="cc_exp_year" class="year required-entry cc-entry">
+                    <?php foreach ($ccBlock->getCcYears() as $k=>$v): ?>
+                        <option value="<?php echo $k?$k:'' ?>"><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </li>
+            <li>
+                CVV:&nbsp;<input type="text" id="ccsave_cc_cid" name="cc_cid" class="input-text cvv required-entry cc-entry validate-cc-cvn"/>
+            </li>
+            -->
+            <?php elseif($payment_block==189): ?>
+                <?php
+                    $cart = Mage::getModel('checkout/cart');
+                    $cart->init();
+                    $layout = new Mage_Core_Model_Layout();
+                    $update = $layout->getUpdate();
+                    $update->load('checkout_onepage_paymentmethod');
+                    $layout->generateXml();
+                    $layout->generateBlocks();
+                    $output = $layout->getOutput();
+                    echo $output;
+                ?>
+            <!--
+            <li>
+                Payment Type:&nbsp;<input type="radio" onclick="hideShowCC();" id="payment_checkmo" value="1" name="payment_type[]" class="validate-one-required-by-name"/>&nbsp;Check/Money Order
+                <br>
+                <input type="radio" onclick="hideShowCC();" id="payment_ccsave" value="2" name="payment_type[]" class=""/>&nbsp;Credit Card
+            </li>
+            <li>
+                Card Type:&nbsp;<select id="ccsave_cc_type" class="required-entry cc-entry validate-cc-type-select" title="Credit Card Type" name="cc_type">
+                    <option value="">--Please Select--</option>
+                    <option value="AE">American Express</option>
+                    <option value="VI">Visa</option>
+                    <option value="MC">MasterCard</option>
+                    <option value="DI">Discover</option>
+                </select>
+            </li>
+            <li>
+                Card Number:&nbsp;<input type="text" id="ccsave_cc_number" name="cc_number" class="input-text required-entry cc-entry validate-cc-number validate-cc-type"/>
+            </li>
+            <li>
+                Exp Date Month:&nbsp;<select id="ccsave_expiration" name="cc_exp_month" class="month validate-cc-exp required-entry cc-entry">
+                    <?php foreach ($ccBlock->getCcMonths() as $k=>$v): ?>
+                        <option value="<?php echo $k?$k:'' ?>"><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </li>
+            <li>
+                Exp Date Year:&nbsp;<select id="ccsave_expiration_yr" name="cc_exp_year" class="year required-entry cc-entry">
+                    <?php foreach ($ccBlock->getCcYears() as $k=>$v): ?>
+                        <option value="<?php echo $k?$k:'' ?>"><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </li>
+            <li>
+                CVV:&nbsp;<input type="text" id="ccsave_cc_cid" name="cc_cid" class="input-text cvv required-entry cc-entry validate-cc-cvn"/>
+            </li>
+            -->
+            <?php endif; ?>
+            <li>
+                <input type="submit" value=""/>
+            </li>
+        </ul>
+    </form>
+    <script type="text/javascript">
+        var orderForm = new VarienForm('orderForm');
+
+        var payment = {
+            switchMethod : function (n) {
+                jQuery('#orderForm dd').children('ul.form-list').css('display','none');
+                jQuery('#orderForm ul.form-list :input').prop('disabled',true);
+                jQuery('#orderForm ul.form-list :input').attr('disabled',true);
+                jQuery('input#p_method_'+n).parent().next('dd').children('#payment_form_'+n).css('display','block');
+                jQuery('input#p_method_'+n).parent().next('dd').children('#payment_form_'+n).find(':input').prop('disabled',false);
+                jQuery('input#p_method_'+n).parent().next('dd').children('#payment_form_'+n).find(':input').attr('disabled',false);
+            } 
+        }
+    </script>
+<?php } else { ?>
+    <?php
+        $parent_category = $_category->getParentCategory();
+        $parent_payment_block = $parent_category->getData('payment_block_attribute');
+    ?>
+    <?php if ($parent_payment_block) { ?>
+        UPSELL
+    <?php } ?>
+<?php } ?>

@@ -1,0 +1,29 @@
+#typo-chooser_content {height:auto!important; min-height:300px; max-height:700px; padding:20px 0}
+#typo-chooser_content #insert-typo{float: right;}
+#typo-chooser_content .typo-list-item{margin:20px 0 0}
+#typo-chooser_content .typo-list-item .typo-item label{float: left; min-width:150px;}
+#typo-chooser_content .typo-list-item .typo-item .list-content{clear:both;}
+#typo-chooser_content .typo-list-item .typo-item .def-content{clear:both;}
+#typo-chooser_content .typo-list-item .typo-item  select{width:400px}
+#typo-chooser_content .typo-list-item .typo-item  input.input-text{width:394px}
+#typo-chooser_content .typo-list-item .typo-item  textarea{width:394px}
+
+#typo-chooser_content .typo-list-item .typo-item div > .row{border-top:1px solid #cfcfcf; position:relative; padding-top:10px;}
+#typo-chooser_content .typo-list-item .typo-item div > .row:first-child{border-top:none}
+#typo-chooser_content .typo-list-item .typo-item  a.close{text-decoration: none;
+font-weight: bold;
+color: #000;
+font-size: 12px;
+line-height: 21px;
+height: 21px;
+position:absolute;
+top:0; 
+right:0;
+text-align: center;
+display: inline-block;
+width: 20px;
+margin: 10px 0 0;
+border: 1px solid;}
+
+/* Definition */
+#typo-chooser_content .def-content div.row,#typo-chooser_content .list-content div.row{}

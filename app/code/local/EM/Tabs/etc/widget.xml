@@ -1,0 +1,301 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    EM
+ * @package     EM_Tabs
+ */
+-->
+<widgets>
+    <emtabs type="tabs/group" translate="name description" module="tabs" template="emtabs/group.phtml">
+        <name>EM Tabs Widget</name>
+        <description>Adds a tab system</description>
+		<widget_filters>emtabs</widget_filters>
+        <parameters>
+			<title>
+                <label>Title Tab</label>
+                <visible>1</visible>
+                <description>Title Tab 1</description>
+                <type>text</type>
+                <sort_order>5</sort_order>
+            </title>
+			<short_description>
+                <label>Short Description</label>
+                <visible>1</visible>
+                <type>text</type>
+                <sort_order>10</sort_order>
+            </short_description>
+			<custom_class>
+                <label>Custom Class</label>
+                <visible>1</visible>
+                <type>text</type>
+                <sort_order>12</sort_order>
+            </custom_class>
+			<tabs_unique_id>
+				<label>Tabs Unique Id</label>
+                <visible>1</visible>
+                <type>text</type>
+				<sort_order>13</sort_order>
+			</tabs_unique_id>
+			<title_1>
+                <label>Title Tab 1</label>
+                <visible>1</visible>
+                <description>Title Tab 1</description>
+                <type>tab</type>
+                <sort_order>15</sort_order>
+            </title_1>
+			<block_1>
+				<label>Select Static Block</label>
+                <visible>1</visible>
+                <description>Select static block</description>
+                <type>select</type>
+				<source_model>tabs/staticblock</source_model>
+                <sort_order>20</sort_order>
+			</block_1>
+			<instance_1>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Select widget instance</description>
+                <type>select</type>
+				<source_model>tabs/widgetinstance</source_model>
+                <sort_order>25</sort_order>
+			</instance_1>
+			<title_2>
+                <label>Title Tab 2</label>
+                <visible>1</visible>
+                <description>Title Tab 2</description>
+                <type>tab</type>
+                <sort_order>30</sort_order>
+            </title_2>
+			<block_2>
+				<label>Select Static Block</label>
+                <visible>1</visible>
+                <description>Select static block</description>
+                <type>select</type>
+				<source_model>tabs/staticblock</source_model>
+                <sort_order>35</sort_order>
+			</block_2>
+			<instance_2>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Select widget instance</description>
+                <type>select</type>
+				<source_model>tabs/widgetinstance</source_model>
+                <sort_order>40</sort_order>
+			</instance_2>
+			<title_3>
+                <label>Title Tab 3</label>
+                <visible>1</visible>
+                <description>Title Tab 3</description>
+                <type>tab</type>
+                <sort_order>45</sort_order>
+            </title_3>
+			<block_3>
+				<label>Select Static Block</label>
+                <visible>1</visible>
+                <description>Select static block</description>
+                <type>select</type>
+				<source_model>tabs/staticblock</source_model>
+                <sort_order>50</sort_order>
+			</block_3>
+			<instance_3>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Select widget instance</description>
+                <type>select</type>
+				<source_model>tabs/widgetinstance</source_model>
+                <sort_order>55</sort_order>
+			</instance_3>
+			<title_4>
+                <label>Title Tab 4</label>
+                <visible>1</visible>
+                <description>Title Tab 4</description>
+                <type>tab</type>
+                <sort_order>58</sort_order>
+            </title_4>
+			<block_4>
+				<label>Select Static Block</label>
+                <visible>1</visible>
+                <description>Select static block</description>
+                <type>select</type>
+				<source_model>tabs/staticblock</source_model>
+                <sort_order>60</sort_order>
+			</block_4>
+			<instance_4>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Select widget instance</description>
+                <type>select</type>
+				<source_model>tabs/widgetinstance</source_model>
+                <sort_order>65</sort_order>
+			</instance_4>
+			<title_5>
+                <label>Title Tab 5</label>
+                <visible>1</visible>
+                <description>Title Tab 5</description>
+                <type>tab</type>
+                <sort_order>70</sort_order>
+            </title_5>
+			<block_5>
+				<label>Select Static Block</label>
+                <visible>1</visible>
+                <description>Select static block</description>
+                <type>select</type>
+				<source_model>tabs/staticblock</source_model>
+                <sort_order>75</sort_order>
+			</block_5>
+			<instance_5>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Select widget instance</description>
+                <type>select</type>
+				<source_model>tabs/widgetinstance</source_model>
+                <sort_order>80</sort_order>
+			</instance_5>
+			<title_6>
+                <label>Title Tab 6</label>
+                <visible>1</visible>
+                <description>Title Tab 6</description>
+                <type>tab</type>
+                <sort_order>85</sort_order>
+            </title_6>
+			<block_6>
+				<label>Select Static Block</label>
+                <visible>1</visible>
+                <description>Select static block</description>
+                <type>select</type>
+				<source_model>tabs/staticblock</source_model>
+                <sort_order>90</sort_order>
+			</block_6>
+			<instance_6>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Select widget instance</description>
+                <type>select</type>
+				<source_model>tabs/widgetinstance</source_model>
+                <sort_order>95</sort_order>
+			</instance_6>
+			<title_7>
+                <label>Title Tab 7</label>
+                <visible>1</visible>
+                <description>Title Tab 7</description>
+                <type>tab</type>
+                <sort_order>100</sort_order>
+            </title_7>
+			<block_7>
+				<label>Select Static Block</label>
+                <visible>1</visible>
+                <description>Select static block</description>
+                <type>select</type>
+				<source_model>tabs/staticblock</source_model>
+                <sort_order>103</sort_order>
+			</block_7>
+			<instance_7>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Select widget instance</description>
+                <type>select</type>
+				<source_model>tabs/widgetinstance</source_model>
+                <sort_order>105</sort_order>
+			</instance_7>
+			<title_8>
+                <label>Title Tab 8</label>
+                <visible>1</visible>
+                <description>Title Tab 8</description>
+                <type>tab</type>
+                <sort_order>110</sort_order>
+            </title_8>
+			<block_8>
+				<label>Select Static Block</label>
+                <visible>1</visible>
+                <description>Select static block</description>
+                <type>select</type>
+				<source_model>tabs/staticblock</source_model>
+                <sort_order>115</sort_order>
+			</block_8>
+			<instance_8>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Select widget instance</description>
+                <type>select</type>
+				<source_model>tabs/widgetinstance</source_model>
+                <sort_order>120</sort_order>
+			</instance_8>
+			<title_9>
+                <label>Title Tab 9</label>
+                <visible>1</visible>
+                <description>Title Tab 9</description>
+                <type>tab</type>
+                <sort_order>125</sort_order>
+            </title_9>
+			<block_9>
+				<label>Select Static Block</label>
+                <visible>1</visible>
+                <description>Select static block</description>
+                <type>select</type>
+				<source_model>tabs/staticblock</source_model>
+                <sort_order>130</sort_order>
+			</block_9>
+			<instance_9>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Select widget instance</description>
+                <type>select</type>
+				<source_model>tabs/widgetinstance</source_model>
+                <sort_order>135</sort_order>
+			</instance_9>
+			<title_10>
+                <label>Title Tab 10</label>
+                <visible>1</visible>
+                <description>Title Tab 10</description>
+                <type>tab</type>
+                <sort_order>140</sort_order>
+            </title_10>
+			<block_10>
+				<label>Select Static Block</label>
+                <visible>1</visible>
+                <description>Select static block</description>
+                <type>select</type>
+				<source_model>tabs/staticblock</source_model>
+                <sort_order>145</sort_order>
+			</block_10>
+			<instance_10>
+				<label>Select Widget Instance</label>
+                <visible>1</visible>
+                <description>Select widget instance</description>
+                <type>select</type>
+				<source_model>tabs/widgetinstance</source_model>
+                <sort_order>150</sort_order>
+			</instance_10>
+			<instance>
+				<type>tabhidden</type>
+				<visible>1</visible>
+				<sort_order>155</sort_order>
+			</instance>
+			<template translate="label">
+                <label>Frontend Template</label>
+                <visible>1</visible>
+                <required>1</required>
+                <type>select</type>
+                <values>
+                    <list translate="label">
+                        <value>emtabs/group.phtml</value>
+                        <label>Group Tab</label>
+                    </list>
+                </values>
+				<sort_order>160</sort_order>
+            </template>
+        </parameters>
+    </emtabs>
+</widgets>

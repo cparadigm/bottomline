@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<adminhtml_slider_index>
+        <reference name="content">
+            <block type="slideshow2/adminhtml_slider" name="slideshow2_slider" />
+        </reference>
+    </adminhtml_slider_index>
+	<adminhtml_slider_edit>
+		<reference name="head">
+			<action method="addCss"><stylesheet>em/slideshow2/css/colorpicker.css</stylesheet></action>
+			<action method="addCss"><stylesheet>em/slideshow2/css/em_slideshow2.css</stylesheet></action>
+			<action method="addItem"><type>skin_js</type><name>em/slideshow2/js/jquery-1.8.3.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>em/slideshow2/js/colorpicker.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>em/slideshow2/js/em_slideshow2.js</name></action>
+		</reference>
+	</adminhtml_slider_edit>
+
+	<adminhtml_slider_new>
+		<update handle="adminhtml_slider_edit"/>
+	</adminhtml_slider_new>
+		
+</layout>

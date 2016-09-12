@@ -1,0 +1,19 @@
+<script type="text/javascript">
+function updateField(button, fieldId)
+{
+    new Ajax.Request("<?php echo Mage::helper('adminhtml')->getUrl('*/*/updateTitle') ?>", {
+        method: 'post',
+        parameters: { id: fieldId, title: button.getValue() },
+        onSuccess: function(transport) {
+	        if (200 == transport.status) {
+	            location.reload();
+	        } else {
+	            location.reload();
+	        }
+	     }
+
+    });
+
+    
+}
+</script>

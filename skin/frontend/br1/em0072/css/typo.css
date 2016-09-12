@@ -1,0 +1,33 @@
+font:/*BEGIN:general_font*/12px/1.35 Arial, Helvetica, sans-serif/*END:general_font*/;
+font:/*BEGIN:h1_font*/normal 18px/1.35 Arial, Helvetica, sans-serif/*END:h1_font*/; 
+font:/*BEGIN:h2_font*/normal 16px/1.35 Arial, Helvetica, sans-serif/*END:h2_font*/;
+font:/*BEGIN:h3_font*/normal 15px/1.35 Arial, Helvetica, sans-serif/*END:h3_font*/;
+font:/*BEGIN:h4_font*/normal 14px/1.35 Arial, Helvetica, sans-serif/*END:h4_font*/;
+font:/*BEGIN:h5_font*/normal 13px/1.35 Arial, Helvetica, sans-serif/*END:h5_font*/; 
+/*for menu*/
+
+/*BEGIN:line_color*/#dadada/*END:line_color*/                        /* line cac cum, sp, line table*/
+/*BEGIN:line_secondary_color*/#dadada/*END:line_secondary_color*/                          -> line input
+/*BEGIN:line_third_color*/#db96ac/*END:line_third_color*/                           -> /*Line hover sp*/
+/*BEGIN:line_fourth_color*/#444444/*END:line_fourth_color*/                              -> /*Line title checkout active*/
+
+background-color:/*BEGIN:primary_bgcolor*/#ffffff/*END:primary_bgcolor*/; /* Background color body */
+background:/*BEGIN:secondary_bgcolor*/#ffffff/*END:secondary_bgcolor*/; /* Background content, product */
+background:/*BEGIN:third_bgcolor*/#fcfbfb/*END:third_bgcolor*/; /*background product shop */
+
+box-shadow:/*BEGIN:box_shadow*/0 0 2px #dadada/*END:box_shadow*/;
+border-radius:/*BEGIN:rounded_corner*/0/*END:rounded_corner*/;
+
+color:/*BEGIN:general_color*/#a4a4a4/*END:general_color*/; /*description product, ....*/
+color:/*BEGIN:general_color_2*/#5b6169/*END:general_color_2*/; /*content blog,...*/, #7a7d82
+color:/*BEGIN:primary_color*/#f5447b/*END:primary_color*/; /*price product sidebar, hover link, ...*/
+color:/*BEGIN:secondary_color*/#323232/*END:secondary_color*/;/*text menu, title block, ....*/
+color:/*BEGIN:secondary_color_2*/#151515/*END:secondary_color_2*/;/*Price product*/, #141414
+color:/*BEGIN:negative_color_2*/#ffffff/*END:negative_color_2*/; /* Language select, ....*/ 
+color:/*BEGIN:negative_color*/#989898/*END:negative_color*/; ,a7a7a7,999999,888888,989898,848484 /*Page title text, footer text, ....*/
+
+699c40 /*Xanh la*/
+
+/*BEGIN:button1*/background:#2a2a2a; border:1px solid #020202; color:#ffffff;/*END:button1*/ /* General button, quickshop, button manage address in my account dashboard */
+/*BEGIN:button2*/background:#f5447b; border:1px solid #d5265c; color:#ffffff;/*END:button2*/ /*Button Add to cart, button checkout, button place order*/
+/*BEGIN:button3*/background:#ffffff; border:1px solid #dadada; color:#f5447b;/*END:button3*/ /* button ajaxcart, button back-link , button on sidebar*/

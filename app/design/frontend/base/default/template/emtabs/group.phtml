@@ -1,0 +1,43 @@
+<?php 
+	$helper = Mage::helper('cms');
+    $processor = $helper->getBlockTemplateProcessor();
+    $id = "emtabs_".md5(uniqid(rand()));
+	if ($this->getData('tabs_unique_id'))
+		$id = $this->getData('tabs_unique_id');
+?>
+<div class="tabs-widget <?php echo $this->getCustomClass() ?>">
+	<div class="block-title"><?php echo $this->getTitle()?></div>
+	<div class="block-description"><?php echo $processor->filter($this->getShortDescription())?></div>
+	<div class="emtabs" id="<?php echo $id ?>">
+		<ul class="tabs_control">
+			<?php for($i = 1;$i <= 10;$i++):?>
+				<?php if($this->getTitleTab($i)):?>
+				<li>
+					<a href="#tab_<?php echo $id ?>_<?php echo $i;?>"> <span class="icon tab_<?php echo $id ?>_<?php echo $i;?>"></span><?php echo $this->getTitleTab($i)?></a>
+				</li>
+				<?php endif;?>
+			<?php endfor;?>
+		</ul>
+		
+		<?php for($i = 1;$i <= 10;$i++):?>
+			<?php if($this->getTitleTab($i)):?>
+			<div id="tab_<?php echo $id ?>_<?php echo $i;?>" class="tab-item content_tab_<?php echo $id ?>_<?php echo $i;?>">
+				<?php 
+					//Show Static Block 
+					echo $processor->filter($this->getStaticBlock($i));
+					//Show Widget Instance 
+					echo $processor->filter($this->getWidgetInstance($i));
+				?>	
+			</div>	
+			<?php endif;?>
+		<?php endfor;?>		
+	</div>
+</div>
+<script type="text/javascript">
+function init_<?php echo $id;?>(){
+	jQuery('#<?php echo $id;?>').sliderTabs();
+}
+jQuery(window).load(function(){
+	init_<?php echo $id;?>();
+});
+</script>

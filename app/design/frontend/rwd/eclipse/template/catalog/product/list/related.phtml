@@ -1,0 +1,134 @@
+<?php if (Mage::getStoreConfig('eclipsesettings/eclipsesettings_products/related_product')): ?>
+
+<?php if($this->getItems()->getSize()): ?>
+<!-- BEGIN CATEGORY PRODUCTS -->
+<div class="related-slider">
+  <div class="new_title center">
+      <h2><span><?php echo $this->__('Related Products') ?></span></h2>
+  </div> <!--new_title center-->
+<a href="#" class="jcarousel-prev-horizontal1" id="products_slider_prev1"></a>
+<a href="#" class="jcarousel-next-horizontal1" id="products_slider_next1"></a>
+
+
+  <div class="jcarousel-skin-tango4">
+    <div class="jcarousel-container jcarousel-container-horizontal" style="position: relative; display: block;">
+       <div class="jcarousel-clip jcarousel-clip-horizontal" style="position: relative;">
+ 
+      <ul class="products-grid jcarousel-list jcarousel-list-horizontal" id="products_slider" style="overflow: hidden; position: relative; top: 0px; margin: 0px; padding: 0px; left: -590px; width: 2460px;">
+       <?php foreach($this->getItems() as $_item): ?>
+            <li class="item jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal" jcarouselindex="1" style="float: left; list-style: none outside none;">
+
+<div class="item-inner">
+      <?php echo $this->helper('eclipsesettings')->getLabel($_item);  ?>
+
+      <div class="pro-img-thumb">             
+         <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>"><img alt="<?php echo $this->htmlEscape($_item->getName()) ?>" src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(172,172) ?>"></a>      
+      </div> <!--pro-img-thumb-->  
+
+      <div class="actions-links">
+        <span class="add-to-links">
+          <?php  if(Mage::app()->getStore()->getConfig('eclipsesettings/eclipsesettings_quickview/enable')==1){?> 
+           <a title="magik-btn-quickview" class="magik-btn-quickview" data-fancybox-type="ajax" onclick="callQuickView('<?php echo Mage::getUrl('eclipsesettings/index/view/id/'.$_item->getId());?>');"><span><?php echo $this->__('quickview') ?></span></a>
+          <?php }  ?> 
+           <a href="<?php echo $this->helper('wishlist')->getAddUrl($_item) ?>" class="link-wishlist" title="<?php echo $this->__('Add to Wishlist');?>"><span><?php echo $this->__('Add to Wishlist');?></span></a>
+           <?php if($_compareUrl=$this->getAddToCompareUrl($_item)): ?>
+                    <a href="<?php echo $_compareUrl ?>" class="link-compare" title="<?php echo $this->__('Add to Compare');?>"><span><?php echo $this->__('Add to Compare');?></span></a>
+            <?php endif; ?>
+        </span> <!--add-to-links-->
+      </div> <!--actions-links-->
+
+    <div class="item-info">
+      <div class="info-inner">
+         <div class="item-title">
+             <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>">
+                  <?php $prod_name = $this->htmlEscape($_item->getName()) ; 
+                  if(strlen($prod_name) > 30) {echo substr($prod_name,0,30)."...";}else {echo $prod_name;}?>
+             </a>
+          </div> <!--item-title-->
+          <div class="item-content">
+            <?php
+                        $summaryData = Mage::getModel('review/review_summary')
+                                ->setStoreId($storeId)
+                                ->load($_item->getId());
+                        if($summaryData->getRatingSummary()){ ?>
+                            <div class="ratings">
+                                <div class="rating-box">
+                                        <div class="rating" style="width: <?php echo $summaryData->getRatingSummary().'%'; ?>"></div>
+                                </div> <!--rating-box-->
+                            </div> <!--ratings-->
+                    <?php } else { ?>  
+                            <div class="ratings"><div class="rating-box"><div style="width:0%" class="rating"></div></div></div>
+                    <?php } ?>
+            <div class="item-price"><?php echo $this->getPriceHtml($_item, true, '-related') ?></div>
+          </div> <!--item-content-->
+      </div> <!--info-inner-->
+      <div class="actions">         
+            <?php if($_item->isSaleable()): ?>
+              <button type="button"  title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_item) ?>')"><span><?php echo $this->__('Add to Cart') ?></span></button>
+            <?php else: ?>
+              <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+            <?php endif; ?>          
+        </div> <!--actions-->
+    </div> <!--item-info-->                        
+   </div> <!--item-inner-->
+            </li>
+             <?php endforeach; ?>  
+        </ul>
+         
+        <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+  
+  
+  </div> <!--jcarousel-clip jcarousel-clip-horizontal-->
+ 
+  </div> <!--jcarousel-container jcarousel-container-horizontal-->
+
+  </div> <!--jcarousel-skin-tango4-->
+
+
+</div><!--related-slider-->
+   
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+
+        function mycarousel_initCallback(carousel) {
+            $('#products_slider_next1').bind('click', function() {
+                carousel.next();
+                return false;
+            });
+            $('#products_slider_prev1').bind('click', function() {
+                carousel.prev();
+                return false;
+            });
+        };
+
+    $('#products_slider').jcarousel({
+            scroll: 1,
+        initCallback: mycarousel_initCallback,
+            buttonNextHTML: null,
+            buttonPrevHTML: null
+    });
+});
+</script> 
+<div id="mgkquickview">
+<div id="magikloading" style="display:none;text-align:center;margin-top:400px;"><img src="<?php echo $this->getSkinUrl('images/mgkloading.gif');?>" alt="loading">
+</div></div>
+<script type="text/javascript">
+function callQuickView(qurl) { 
+    jQuery('#mgkquickview').show();
+    jQuery('#magikloading').show();
+    jQuery.get(qurl, function(data) {
+      jQuery.fancybox(data);
+      jQuery('#magikloading').hide();
+jQuery('#mgkquickview').hide();
+    });
+ }
+ 
+</script>
+<?php endif; ?>  <!-- end related product -->
+
+<?php endif; ?>
+
+      
+                
+
+

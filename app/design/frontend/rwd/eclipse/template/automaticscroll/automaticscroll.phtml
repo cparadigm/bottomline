@@ -1,0 +1,44 @@
+<?php if (Mage::getStoreConfig('autoscrollsection/autoscrollgeneral/enabled')): ?>
+<?php 
+$title = Mage::getStoreConfig('autoscrollsection/autoscrollgeneral/title');
+if(empty($title)) { 
+$title = 'Loading more products...';
+} 
+
+$smImage = Mage::getStoreConfig('autoscrollsection/autoscrollgeneral/scrollimage'); 
+      if(empty($smImage)){  
+              $selectedsm=Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'magikautoscroll/default/loader.gif';        
+      }else{ 
+              $selectedsm = Mage::getBaseUrl('media').'magikautoscroll'.DS.$smImage;       
+      }
+
+
+// Get the default setting for grid or list mode
+$productListMode = Mage::getStoreConfig('catalog/frontend/list_mode');
+if ($productListMode == 'grid-list')
+        $productListMode = 'grid';
+elseif ($productListMode == 'list-grid')
+        $productListMode = 'list';
+
+// Check if this setting is overwritten by the user
+if ($this->getRequest()->getParam('mode')) {
+        if($this->getRequest()->getParam('mode') == 'grid')
+                $productListMode = 'grid';
+        else
+                $productListMode = 'list';
+}
+?>
+<script type="text/javascript">
+$jq.ias({
+        container : '.category-products',
+        <?php if ($productListMode == 'grid'): ?>
+        item: '.products-grid',
+        <?php else: ?>
+        item: '.products-list',
+        <?php endif; ?>
+        pagination: '.toolbar .pager',
+        next: '.next',
+        loader: '<div style="padding-top:10px;padding-bottom:10px"><img src="<?php echo $selectedsm; ?>" /> <?php echo $title; ?></div>'
+});
+</script>
+<?php endif; ?>

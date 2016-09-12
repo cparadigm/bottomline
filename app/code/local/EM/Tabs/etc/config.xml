@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    EM
+ * @package     EM_Tabs
+ */
+-->
+<config>
+    <modules>
+        <EM_Tabs>
+            <version>0.0.1</version>
+        </EM_Tabs>
+    </modules>
+    <admin>
+        <routers>
+            <tabs>
+                <use>admin</use>
+                <args>
+                    <module>EM_Tabs</module>
+                    <frontName>tabs</frontName>
+                </args>
+            </tabs>
+        </routers>
+    </admin>
+	<frontend>
+		<layout>
+            <updates>
+                <tabs>
+                    <file>em_tabs.xml</file>
+                </tabs>
+            </updates>
+        </layout>
+	</frontend>
+    <global>
+        <helpers>
+            <tabs>
+                <class>EM_Tabs_Helper</class>
+            </tabs>
+        </helpers>
+        <blocks>
+             <tabs>
+                <class>EM_Tabs_Block</class>
+             </tabs>
+        </blocks>
+        <models>
+            <tabs>
+                <class>EM_Tabs_Model</class>
+                <resourceModel>tabs_mysql4</resourceModel>
+            </tabs>
+            <tabs_mysql4>
+                <class>EM_Tabs_Model_Mysql4</class>
+            </tabs_mysql4>
+        </models>
+    </global>
+</config>

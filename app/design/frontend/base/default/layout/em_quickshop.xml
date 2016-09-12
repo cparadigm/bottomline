@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+		<reference name="head">
+			<block type="page/html" name="top.Js" as="topJs" template="em_quickshop/page/html/jshead.phtml"/>
+			<action method="addCss"><stylesheet>css/em_quickshop.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/fancybox/jquery.fancybox.css</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><name>js/fancybox/jquery.fancybox.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/fancybox/jquery.mousewheel-3.0.6.pack.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/em_quickshop.js</name></action>
+		</reference>
+    </default>
+	
+	<quickshop_index_view>
+		<update handle="catalog_product_view"/> 
+		
+	</quickshop_index_view>
+	
+	<quickshop_index_view_FINAL>
+		<!--reference name="em_variation_css">
+			<action method="setData"><key>disable_adapt</key><value>1</value></action>
+		</reference-->
+
+		<reference name="root">
+            <action method="setTemplate"><template>em_quickshop/product.phtml</template></action>
+			<action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+        <reference name="head">
+			<action method="addCss"><stylesheet>css/em_quickshop_frame.css</stylesheet></action>
+			<action method="setData"><key>disable_adapt</key><value>1</value></action>
+			<!--<action method="addItem"><type>skin_js</type><name>js/em_quickshop_popup.js</name></action>-->
+        </reference>
+		<reference name="product.info">
+            <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary.phtml</template></action>
+			<action method="setTemplate"><template>em_quickshop/product_detail.phtml</template></action>
+			<block type="catalog/product_view" name="reviews" as="reviews" template="em_quickshop/review.phtml"/>
+			<remove name="product.info.addto"/>
+			<block type="catalog/product_view" name="product.info.addto.1" as="addto1" template="em_quickshop/addto.phtml"/>
+            	
+			
+        </reference>
+        <reference name="content">
+			<remove name="product.info.upsell"/>
+			<remove name="product.info.additional"/>
+			<remove name="product.description"/>
+			<remove name="product.attributes"/>
+        </reference>
+	</quickshop_index_view_FINAL>
+	
+</layout> 

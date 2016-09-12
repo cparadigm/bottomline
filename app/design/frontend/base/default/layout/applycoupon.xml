@@ -1,0 +1,9 @@
+<layout version="0.1.0">
+  <default translate="label" module="page">
+    <reference name="head">
+      <action method="addCss" ifconfig="applycoupon_section/applycoupon_group/popup"><stylesheet>css/applycoupon/applycoupon.css</stylesheet></action>
+      <action method="addJs" ifconfig="applycoupon_section/applycoupon_group/addjs"><script>applycoupon/jquery-1.11.1.min.js</script></action>
+      <block type="core/template" name="applycoupon" template="applycoupon/applycoupon.phtml"/>
+    </reference>
+  </default>
+</layout>

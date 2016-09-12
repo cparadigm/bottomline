@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <report>
+            <children>
+                <salesroot translate="title">
+                    <children>
+                        <order_detail_reports translate="title">
+                            <title>Order Detail</title>
+                            <action>adminhtml/order_detail_reports</action>
+                            <sort_order>2</sort_order>
+                        </order_detail_reports>
+                        <sales translate="title" module="reports">
+                            <sort_order>1</sort_order>
+                        </sales>
+                        <tax translate="title" module="reports">
+                            <sort_order>3</sort_order>
+                        </tax>
+                        <invoiced translate="title" module="reports">
+                            <sort_order>4</sort_order>
+                        </invoiced>
+                        <shipping translate="title" module="reports">
+                            <sort_order>5</sort_order>
+                        </shipping>
+                        <refunded translate="title" module="reports">
+                            <sort_order>6</sort_order>
+                        </refunded>
+                        <coupons translate="title" module="reports">
+                            <sort_order>7</sort_order>
+                        </coupons>
+                    </children>
+                </salesroot>
+            </children>
+        </report>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <report>
+                        <children>
+                            <salesroot>
+                                <children>
+                                    <order_detail_reports translate="title">
+                                        <title>Order Detail</title>
+                                    </order_detail_reports>
+                                </children>
+                            </salesroot>
+                        </children>
+                    </report>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

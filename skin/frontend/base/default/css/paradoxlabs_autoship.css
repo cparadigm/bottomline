@@ -1,0 +1,78 @@
+#rp-edit-form {
+	margin: 20px 0 0;
+}
+
+.order-page .narrow {
+	float: left;
+}
+
+	.order-page .narrow ul {
+		padding: 0 15px;
+	}
+	
+		.order-page .narrow.first ul {
+			padding-left: 0;
+		}
+
+		.order-page .narrow.last ul {
+			padding-right: 0;
+		}
+
+.order-page select#shipping-address-select, .order-page .form-list select {
+	max-width: 100%;
+}
+
+.order-page .buttons-set {
+	text-align: left;
+}
+
+	.order-page .buttons-set .button {
+		float: right;
+	}
+
+.order-page .input-box dt, .order-page .input-box dd {
+	float: left;
+}
+
+.order-page .input-box dt {
+	clear: left;
+	width: 120px;
+}
+
+.order-page ol .item {
+	padding-bottom: 30px;
+}
+
+.add-to-box #subscription_period {
+	margin-top: 44px;
+	text-align: left;
+}
+
+	.add-to-box #subscription_period_select {
+		width: 155px;
+		margin-left: 10px;
+		color: #333;
+	}
+
+@media only screen and (max-width: 767px) {
+	.order-page .narrow {
+		float: none;
+		width: 100%;
+	}
+	
+		.order-page .narrow ul {
+			padding: 0;
+		}
+}
+
+
+@media only screen and (max-width: 1220px) {
+	.add-to-box #subscription_period {
+		margin-top: 94px;
+	}
+
+		.add-to-box #subscription_period_select {
+			margin-left: 0;
+			width: 192px;
+		}
+}

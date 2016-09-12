@@ -1,0 +1,87 @@
+<?php /* @var $this Mage_Sales_Block_Recurring_Profile_View */ ?>
+<?php $profile		= $this->_profile; ?>
+<?php $itemInfo		= $profile->getOrderItemInfo(); ?>
+<?php $adtlInfo		= $profile->getAdditionalInfo(); ?>
+<?php $shipInfo		= $profile->getShippingAddressInfo(); ?>
+<?php $product		= Mage::getModel('catalog/product'); ?>
+<?php $product->load( $itemInfo['product_id'] ); ?>
+<?php $isTokenbase	= ( $profile->getMethodCode() == 'authnetcim' ) ? true : false; ?>
+<?php $isOnHold		= ( $adtlInfo['next_cycle'] > strtotime( sprintf( '+%s %s', $profile->getPeriodFrequency(), $profile->getPeriodUnit() ) ) ); ?>
+<?php $frequency	= sprintf( "%s %s%s", $profile->getPeriodFrequency(), $profile->getPeriodUnit(), ($profile->getPeriodFrequency() > 1 ? 's' : '') ); ?>
+
+<div class="order-page">
+	<?php /** Title **/ ?>
+	<div class="page-title title-buttons">
+		<h1><?php echo $this->__('Recurring Profile # %s', $this->escapeHtml($this->getReferenceId())) ?></h1>
+	</div>
+
+	<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+	
+	<?php /** Product info **/ ?>
+	<table id="<?php echo $this->getGridHtmlId() ?>" class="data-table">
+		<thead>
+			<tr>
+				<th colspan="4">
+					<?php if( $product->getId() ): ?>
+						<a href="<?php echo $product->getProductUrl(); ?>"><?php echo $itemInfo['name']; ?></a>
+					<?php else: ?>
+						<?php echo $itemInfo['name']; ?>
+					<?php endif; ?>
+					(<?php echo $itemInfo['sku']; ?>)
+					- <?php echo Mage::helper('core')->currency( $profile->getBillingAmount(), true, false ); ?>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td width="150">
+					<?php if( $product->getId() ): ?>
+						<a href="<?php echo $product->getProductUrl(); ?>"><img src="<?php echo Mage::helper('catalog/image')->init($product, 'small_image')->resize(100); ?>" width="100" height="100" alt="<?php echo $this->stripTags($this->getImageLabel($product, 'thumbnail'), null, true) ?>" /></a>
+					<?php else: ?>
+						<img src="<?php echo Mage::helper('catalog/image')->init($product, 'small_image')->resize(100); ?>" width="100" height="100" alt="<?php echo $this->stripTags($this->getImageLabel($product, 'thumbnail'), null, true) ?>" />
+					<?php endif; ?>
+				</td>
+				<td class="a-center">
+					<h4><?php echo $this->__('Ship Every:'); ?></h4>
+					<strong><?php echo $frequency; ?></strong>
+				</td>
+				<td class="a-center">
+					<h4><?php echo $this->__('Next Shipment:'); ?></h4>
+					<strong>
+						<?php echo ($profile->getState() == 'active' || $profile->getState() == 'pending' ? date( 'n/d/Y', Mage::getModel('core/date')->timestamp( $adtlInfo['next_cycle'] ) ) : 'N/A' ); ?>
+					</strong>
+					<?php if( $isOnHold ): ?>
+						<br /><?php echo $this->__( '(On hold)' ); ?>
+					<?php endif; ?>
+				</td>
+				<td width="150" class="a-right">
+					<?php if( $isTokenbase && !$isOnHold ): ?>
+						<a href="<?php echo $this->getUrl('authnetcim/profile/hold', array( 'profile' => $profile->getId() ) ); ?>" class="button"><span><span><?php echo $this->__( 'Delay %s', $frequency ); ?></span></span></a>
+					<?php endif; ?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	
+	<?php /** Edit **/ ?>
+	<?php if( $isTokenbase ): ?>
+		<?php echo $this->getChildHtml('edit_form'); ?>
+	<?php endif; ?>
+	
+	
+	<?php /** Orders **/ ?>
+	<?php $table = $this->getChild('orders-table') ?>
+	<?php if ($table): ?>
+		<div class="buttons-set">
+			<h3 class="table-caption"><?php echo $this->escapeHtml($this->getObjectData($table, 'view_label')) ?></h3>
+			<?php echo $this->getChildHtml('orders-table') ?>
+		</div>
+	<?php endif; ?>
+	
+	
+	<div class="buttons-set">
+		<p class="back-link"><a href="<?php echo $this->getBackUrl() ?>"><small>&laquo; </small><?php echo $this->__('Back to Recurring Profiles') ?></a></p>
+	</div>
+	
+</div>

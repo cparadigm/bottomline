@@ -1,0 +1,17 @@
+/**
+ * EM AjaxCart
+ *
+ * @license commercial software
+ * @copyright (c) 2012 Codespot Software JSC - EMThemes.com. (http://www.emthemes.com)
+ */
+
+#bg_fade {background-color:#000;left:0px;margin:0px;padding:0px;position:fixed;top:0px;visibility:hidden;width:100%;z-index:998;height:1000px}
+#containerDiv {width: 350px;z-index: 999;display:none;/*left:40% !important; top:40% !important;*/position:fixed;}
+#containerDiv .ajaxcart {position: relative;padding: 20px;text-align: center;border: 10px solid #EAE9E6;background-color: white;z-index: 99999;}
+#containerDiv .ajaxcart .row2 {clear:left;}
+#containerDiv .ajaxcart #ajax_image img {float:left;margin-right:7px;}
+#containerDiv .ajaxcart #ajax_image  { margin-bottom: 10px;overflow: hidden;text-align: left;}
+#containerDiv .ajaxcart #ajax_image span {text-align:left;}
+#containerDiv .ajaxcart .row2 a { background: none repeat scroll 0 0 #F18200;border: 1px solid #DE5400;color: #FFFFFF;display:  inline-block;font: bold 12px/19px Arial,Helvetica,sans-serif;height: 19px;padding: 0 8px;text-align: center;white-space: nowrap; text-decoration: none;}
+#containerDiv .ajaxcart .row2 a span { border: 0 none;padding: 0;}
+.product-essential {position:relative;}

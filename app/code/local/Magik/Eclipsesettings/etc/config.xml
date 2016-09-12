@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magik_Eclipsesettings>
+            <version>0.1.4</version>
+        </Magik_Eclipsesettings>
+    </modules>
+    <admin>
+        <routers>
+            <eclipsesettings>
+                <use>admin</use>
+                <args>
+                    <module>Magik_Eclipsesettings</module>
+                    <frontName>eclipsesettings</frontName>
+                </args>
+            </eclipsesettings>
+        </routers>
+    </admin>            
+    <adminhtml>
+        <layout>
+            <updates>
+                <eclipsesettings>
+                    <file>eclipsesettings.xml</file>
+                </eclipsesettings>
+            </updates>
+        </layout>
+        
+        <translate>
+         <modules>
+             <Magik>
+                 <files>
+                     <default>Magik_Eclipsesettings.csv</default>
+                 </files>
+             </Magik>
+         </modules>
+     </translate>
+     <acl>
+         <resources>
+            <admin>
+               <children>
+                  <system>
+                     <children>
+                         <config>
+                             <children>
+                                 <eclipsesettings>
+                                     <title>Eclipse Theme Settings</title>
+                                 </eclipsesettings>
+                             </children>
+                         </config>
+                     </children>
+                 </system>
+                 <magik>
+                     <children>
+                        <eclipse>
+                            <title>Eclipse</title>
+                            <children>
+                                <settings>
+                                    <title>Theme Settings</title>
+                                </settings> 
+                                <restore>
+                                    <title>Restore Defaults</title>
+                                </restore>
+                            </children>
+                        </eclipse>
+                    </children>
+                </magik>
+            </children>
+        </admin>
+    </resources>
+</acl>
+</adminhtml>
+<global>
+    <blocks>
+        <eclipsesettings>
+            <class>Magik_Eclipsesettings_Block</class>
+        </eclipsesettings>
+    </blocks>
+    <helpers>
+        <eclipsesettings>
+            <class>Magik_Eclipsesettings_Helper</class>
+        </eclipsesettings>
+    </helpers>
+    <models>
+        <eclipsesettings>
+            <class>Magik_Eclipsesettings_Model</class>
+        </eclipsesettings>
+    </models>
+    <resources>
+        <eclipsesettings_setup>
+            <setup>
+                <module>Magik_Eclipsesettings</module>
+                <class>Magik_Eclipsesettings_Model_Resource_Mysql4_Setup</class>
+            </setup>
+            <connection>
+                <use>core_setup</use>
+            </connection>
+        </eclipsesettings_setup>
+        <eclipsesettings_write>
+            <connection>
+              <use>core_write</use>
+          </connection>
+      </eclipsesettings_write>
+      <eclipsesettings_read>
+         <connection>
+            <use>core_read</use>
+        </connection>
+    </eclipsesettings_read>
+</resources>
+</global>
+<default>
+  <eclipsesettings>
+     <eclipsesettings_appearance>
+        <footer>informative</footer>       			
+        <font>Open Sans</font>								
+        <color></color>
+        <header_bg_color></header_bg_color>
+        <header_fg_color></header_fg_color>
+        <footer_bg_color></footer_bg_color>
+        <footer_fg_color></footer_fg_color>
+        <content_bg_color></content_bg_color>
+    </eclipsesettings_appearance>
+    <eclipsesettings_header>
+        <navigation_home>0</navigation_home>                               
+    </eclipsesettings_header>
+    <eclipsesettings_menu>
+        <navigation_menu_type>mega-menu</navigation_menu_type>                                
+    </eclipsesettings_menu>
+    <eclipsesettings_labels>
+        <new_label>1</new_label>
+        <new_label_text>New</new_label_text>
+        <new_label_position>top-left</new_label_position>
+        <sale_label>1</sale_label>
+        <sale_label_text>Sale</sale_label_text>
+        <sale_label_position>top-right</sale_label_position>
+    </eclipsesettings_labels>
+    <eclipsesettings_footer>
+     <footer_google_analytics></footer_google_analytics>
+     <footer_google_analytics_path></footer_google_analytics_path>                                
+ </eclipsesettings_footer>
+ <eclipsesettings_social>
+     <social_link>1</social_link>
+     <facebook_social_link>1</facebook_social_link>
+     <facebook_social_link_path>#</facebook_social_link_path>
+     <twitter_social_link>1</twitter_social_link>
+     <twitter_social_link_path>#</twitter_social_link_path>
+     <googleplus_social_link>1</googleplus_social_link>
+     <googleplus_social_link_path>#</googleplus_social_link_path>
+     <rss_social_link>1</rss_social_link>
+     <rss_social_link_path>#</rss_social_link_path>     
+     <pinterest_social_link>1</pinterest_social_link>
+     <pinterest_social_link_path>#</pinterest_social_link_path>
+     <linkedin_social_link>1</linkedin_social_link>
+     <linkedin_social_link_path>#</linkedin_social_link_path>
+     <youtube_social_link>1</youtube_social_link>
+     <youtube_social_link_path>#</youtube_social_link_path>
+ </eclipsesettings_social>
+ <eclipsesettings_products>
+    <upsell_product>1</upsell_product>
+    <related_product>1</related_product>
+    <nextprevious_product>1</nextprevious_product>
+</eclipsesettings_products>                                              
+<eclipsesettings_shoppingcart>
+    <shoppingcart_top>1</shoppingcart_top>
+</eclipsesettings_shoppingcart>
+<eclipsesettings_newsletterpopup>
+    <newsletterpopup_enable>1</newsletterpopup_enable>
+</eclipsesettings_newsletterpopup>
+<eclipsesettings_quickview>
+    <enable>1</enable>
+</eclipsesettings_quickview>
+<responsivecss>
+  <enable>1</enable>
+</responsivecss>
+</eclipsesettings>
+</default>
+</config>

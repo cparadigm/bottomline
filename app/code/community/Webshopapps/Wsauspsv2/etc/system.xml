@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * WebShopApps Shipping Module
+ *
+ * @category    WebShopApps
+ * @package     WebShopApps_Wsauspsv2
+ * User         Joshua Stewart
+ * Date         24/07/2013
+ * Time         12:24
+ * @copyright   Copyright (c) 2013 Zowta Ltd (http://www.WebShopApps.com)
+ *              Copyright, 2013, Zowta, LLC - US license
+ * @license     http://www.WebShopApps.com/license/license.txt - Commercial license
+ *
+ */
+-->
+<config>
+    <sections>
+        <carriers translate="label" module="shipping">
+            <groups>
+                <usps>
+                    <comment>
+                        <![CDATA[
+                <div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
+                This core Magento USPS module was patched by <a href="http://www.webshopapps.com" target="_blank">WebShopApps.com</a> - <b>Magento Shipping Extension Specialists</b>.
+                </div>
+                  ]]>
+                    </comment>
+                    <fields>
+                        <allowed_methods translate="label">
+                            <label>Allowed Methods</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>wsauspsv2/shipping_carrier_usps_source_method</source_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                        </allowed_methods>
+                    </fields>
+                </usps>
+            </groups>
+        </carriers>
+    </sections>
+</config>

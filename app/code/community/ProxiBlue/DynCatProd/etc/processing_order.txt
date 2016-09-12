@@ -1,0 +1,5 @@
+1: ProxiBlue_DynCatProd_Model_Rule_Condition_Additional_Conditions_Limiter (must always be first)
+50: ProxiBlue_DynCatProd_Model_Rule_Condition_Product_Found
+80: ProxiBlue_DynCatProd_Model_Rule_Condition_Additional_Conditions_SalesReport (container)
+200: ProxiBlue_DynCatProd_Model_Rule_Condition_Additional_Conditions_Discount (container)
+99999: ProxiBlue_DynCatProd_Model_Rule_Condition_Additional_Conditions_Transformations (must always be last)

@@ -1,0 +1,54 @@
+<?php 
+/* Header */
+?>
+<header>
+<div class="top-links">
+<div class="inner">
+     <?php echo $this->getChildHtml('store_language') ?>     
+     <?php echo $this->getChildHtml('custom_currency_selector') ?>
+     <p class="welcome-msg"><?php echo $this->getWelcome() ?><?php echo $this->getAdditionalHtml() ?></p>
+   <div class="toplinks">
+     <div class="links">
+      <div class="myaccount"><a href="<?php echo $this->getUrl('')?>customer/account/" title="<?php echo $this->__('My Account') ?>"><span><?php echo $this->__('My Account') ?></span></a></div>
+      <div class="mycart""><a href="<?php echo $this->getUrl('checkout/cart')?>" title="<?php echo $this->__('My Cart') ?>"><span><?php echo $this->__('My Cart') ?></span></a></div>
+      <div class="wishlist"><a href="<?php echo $this->getUrl('wishlist') ?>" title="<?php echo $this->__('Wishlist') ?>"><span><?php echo $this->__('Wishlist') ?></span></a></div>
+      <?php if(Mage::getStoreConfig('mgkonestepcheckout_section/mgkopcgeneral_group/mgkextenable')==1){?>
+<div class="check"><a href="<?php echo $this->getUrl('')?>onestepcheckout/" title="<?php echo $this->__('Checkout') ?>"><span><?php echo $this->__('Checkout') ?></span></a></div>
+      <?php }else{ ?>
+<div class="check"><a href="<?php echo $this->getUrl('')?>checkout/onepage/" title="<?php echo $this->__('Checkout') ?>"><span><?php echo $this->__('Checkout') ?></span></a></div>
+
+      <?php } ?>
+      <?php if(!Mage::getSingleton( 'customer/session' )->isLoggedIn()) { ?>
+         <div class="login"><a href="<?php echo $this->getUrl('')."customer/account/login/"; ?>"><span><?php echo $this->__('Log In') ?></span></a></div>
+      <?php } ?>
+      <?php if(Mage::getSingleton( 'customer/session' )->isLoggedIn()) { ?>
+         <div class="logout"><a href="<?php echo $this->getUrl('')."customer/account/logout/"; ?>"><span><?php echo $this->__('Log Out') ?></span></a></div>
+      <?php } ?>
+     </div> <!-- links -->
+   </div> <!--toplinks-->
+  </div><!--inner-->
+</div> <!--top-links-->
+  <div class="header">          
+
+    <?php if ($this->getIsHomePage()):?>
+       <div class="logo"><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><?php echo $this->getChildHtml('eclipseLogo', false) ?></a></div>
+    <?php else:?>
+       <div class="logo"><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><?php echo $this->getChildHtml('eclipseLogo', false) ?></a></div>
+    <?php endif?>  
+    
+    <?php echo $this->getChildHtml('topSearch') ?>    
+
+      
+
+  </div> <!--header-->
+  <?php echo $this->getChildHtml('topContainer'); ?>
+</header>
+<nav>
+  <div class="nav-inner">
+    <?php echo $this->getChildHtml('topMenuMob'); ?>
+    <?php echo $this->getChildHtml('topMenu'); ?>    
+  </div> <!--nav-inner-->
+  <?php if (Mage::getStoreConfig('eclipsesettings/eclipsesettings_shoppingcart/shoppingcart_top')): ?>
+      <?php echo $this->getChildHtml('cartTop') ?>
+    <?php endif; ?>
+</nav> <!--nav-->

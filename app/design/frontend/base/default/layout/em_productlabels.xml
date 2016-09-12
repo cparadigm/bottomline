@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+    <default>
+        <reference name="head">
+            <block type="productlabels/css" name="labels.css"/>
+			<action method="addCss"><stylesheet>css/em_productlabels.css</stylesheet></action>
+        </reference>
+    </default>
+</layout> 

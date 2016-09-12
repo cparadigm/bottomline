@@ -1,0 +1,15 @@
+<?php if ($this->getQuote()->isVirtual()) : return; endif; ?>
+<div id="shipping-method" class="mgkosc-smethod">
+      <div class="mgkosc-frame">
+	    <div class="mgkosc-frametitle"><?php echo $this->__('Shipping Method') ?></div>
+	    <div class="mgkosc-framecontent">
+		  <div id="checkout-shipping-method-load"><?php echo $this->getChildHtml('available') ?></div>
+		  <script type="text/javascript">
+		  //<![CDATA[
+			var shippingMethod = new ShippingMethod('shipping-method');
+		  //]]>
+		  </script>
+		  <div id="onepage-checkout-shipping-method-additional-load"><?php echo $this->getChildHtml('additional') ?></div>
+	    </div>
+      </div>
+</div>

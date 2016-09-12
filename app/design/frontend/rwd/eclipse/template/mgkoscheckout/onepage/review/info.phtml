@@ -1,0 +1,37 @@
+<?php echo $this->getChildHtml('items_before'); ?>
+<div id="checkout-review-table-wrapper">
+    <table class="mgkosc-data-table" id="checkout-review-table">
+        <col />
+        <col width="1" />
+        <col width="1" />
+        <?php
+        $colspan	= 1; 
+        if ($this->helper('tax')->displayCartBothPrices()):
+        	$colspan	= 6; 
+        ?>
+        <col width="1" />
+        <?php endif; ?>        
+        <thead>
+            <tr>
+		<th class="mgkosc-prod-thumb"></th>
+                <th class="mgkosc-prod-name"><?php echo $this->__('Product Name') ?></th>
+		<th><?php echo $this->__('Price') ?></th>
+                <th class="a-center"><?php echo $this->__('Qty') ?></th>
+                <th class="a-right"><?php echo $this->__('Subtotal') ?></th>
+		
+            </tr>
+        </thead>
+        <?php echo $this->getChildHtml('totals'); ?>
+        <tbody>
+        <?php foreach($this->getItems() as $_item): ?>
+            <?php echo $this->getItemHtml($_item)?>
+        <?php endforeach ?>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    decorateTable('checkout-review-table');
+    truncateOptions();
+//]]>
+</script>

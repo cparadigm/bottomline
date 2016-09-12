@@ -1,0 +1,48 @@
+/**
+ * EMThemes
+ *
+ * @license commercial software
+ * @copyright (c) 2012 Codespot Software JSC - EMThemes.com. (http://www.emthemes.com)
+ */
+
+.page {
+	background:url(../images/bkg_header.png) 0 0 repeat-x;
+}
+
+.header, .emarea2 { color:/*BEGIN:negative2_color*/#7e7d7d/*END:negative2_color*/ }
+.header h1, .header .h1, .header h2, .header .h2, .header h3, .header .h3, 
+.header h4, .header .h4, .header h5, .header .h5,
+.emarea2 h1, .emarea2 .h1, .emarea2 h2, .emarea2 .h2, .emarea2 h3, .emarea2 .h3, 
+.emarea2 h4, .emarea2 .h4, .emarea2 h5, .emarea2 .h5 { color:/*BEGIN:negative_color*/#ffffff/*END:negative_color*/ }
+
+.quick-access { border-bottom:1px solid #252525 }
+
+.em_nav .hnav { 
+	background-image:url(../images/bkg_nav.png); 
+	background-position:0 0;
+	background-repeat: repeat;
+	box-shadow:0 -3px 3px rgba(0,0,0,0.05) inset;
+}
+
+.wrapper_footer .container_24 { border-top:0; padding-top:0 }
+
+.footer-container { 
+	background:#000000;
+}
+.footer-container a {
+}
+
+.slider_container .widget-title, 
+.slider_container .block_title,
+.sidebar .block-title {
+	box-shadow:0 -3px 3px rgba(0,0,0,0.05) inset;
+}
+
+hr, .hr {
+	box-shadow:0 -3px 3px rgba(0,0,0,0.05);
+}
+
+#emarea18 { border-top:0 }
+
+.sidebar .block-title { text-transform:none }
+.page-title h1, .page-title h2 { text-transform:none }

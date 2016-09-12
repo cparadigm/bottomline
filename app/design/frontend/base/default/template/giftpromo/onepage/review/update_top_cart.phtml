@@ -1,0 +1,44 @@
+<script>
+    var request = new Ajax.Request(
+            '<?php echo mage::getUrl("*/cart/getTopCartQty") ?>',
+            {
+                method: 'get',
+                onSuccess: function(response) {
+                    var json = response.responseText.evalJSON();
+                    var cartElm = $$('.top-link-cart')[0];
+                    if(cartElm){
+                        var updatedTopCart = cartElm.innerHTML.replace(/(\d+)/g, 
+                        json.content);
+                        cartElm.innerHTML = updatedTopCart;
+                        cartElm.title = updatedTopCart;
+                    }
+                }
+            }
+    );
+</script>    
+
+
+<!-- 
+
+for enterprise use:
+
+<script>
+    var request = new Ajax.Request(
+            '<?php echo mage::getUrl("*/cart/getTopCart") ?>',
+            {
+                method: 'get',
+                onSuccess: function(response) {
+                    var json = response.responseText.evalJSON();
+                    var cartElm = $$('.top-cart')[0];
+                    if(cartElm){
+                        //var updatedTopCart = cartElm.innerHTML.replace(/(\d+)/g, 
+                        //json.content);
+                        cartElm.replace(updatedTopCart);
+                        //cartElm.title = updatedTopCart;
+                    }
+                }
+            }
+    );
+</script>
+
+-->
