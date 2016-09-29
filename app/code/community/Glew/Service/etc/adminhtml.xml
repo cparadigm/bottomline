@@ -1,0 +1,23 @@
+<config>
+    <menu>
+        <glew translate="title" module="glew">
+            <title>Glew</title>
+            <sort_order>50</sort_order>
+            <action>glew/module/gotoglew</action>
+            <depends>
+                <config>glew_settings/general/shownav</config>
+            </depends>
+        </glew>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <glew translate="title" module="glew">
+                        <title>Glew</title>
+                    </glew>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
