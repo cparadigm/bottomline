@@ -255,17 +255,17 @@ class OrderPigeonAPIController {
 	protected function get_products_udropship_sql() { 
 		return "
 		select e.sku, vp.vendor_sku as external_sku, vp.vendor_cost as cost, vp.stock_qty as total_quantity, 
-		       n.value as product_name, p.value as price, u.value as upc, mv.value as brand_name, mpn.value as mpn
+		    n.value as product_name, p.value as price, u.value as upc, mv.value as brand_name, mpn.value as mpn
 		from catalog_product_entity e
-		join udropship_vendor_product vp on vp.product_id = e.entity_id
-		join udropship_vendor v on v.vendor_id = vp.vendor_id
-		left join catalog_product_entity_varchar n on n.entity_id = e.entity_id and n.attribute_id = " . $this->get_attribute_id(array('name')) . " and n.store_id = 0
-		left join catalog_product_entity_decimal p on p.entity_id = e.entity_id and p.attribute_id = " . $this->get_attribute_id(array('price')) . " and p.store_id = 0 
-		left join catalog_product_entity_varchar u on u.entity_id = e.entity_id and u.attribute_id = " . $this->get_attribute_id(array('upc')) . " and u.store_id = 0
-		left join catalog_product_entity_varchar mpn on mpn.entity_id = e.entity_id and mpn.attribute_id = " . $this->get_attribute_id(array('mpn','manufacturer_sku')) . " and mpn.store_id = 0
-		left join catalog_product_entity_int m on m.entity_id = e.entity_id and m.attribute_id = " . $this->get_attribute_id(array('brand','manufacturer')) . " and m.store_id = 0
-		left join eav_attribute_option mo on m.value = mo.option_id and mo.attribute_id = m.attribute_id 
-		left join eav_attribute_option_value mv on mv.option_id = mo.option_id and mv.store_id = 0 
+			join udropship_vendor_product vp on vp.product_id = e.entity_id
+			join udropship_vendor v on v.vendor_id = vp.vendor_id
+			left join catalog_product_entity_varchar n on n.entity_id = e.entity_id and n.attribute_id = " . $this->get_attribute_id(array('name')) . " and n.store_id = 0
+			left join catalog_product_entity_decimal p on p.entity_id = e.entity_id and p.attribute_id = " . $this->get_attribute_id(array('price')) . " and p.store_id = 0 
+			left join catalog_product_entity_varchar u on u.entity_id = e.entity_id and u.attribute_id = " . $this->get_attribute_id(array('upc')) . " and u.store_id = 0
+			left join catalog_product_entity_varchar mpn on mpn.entity_id = e.entity_id and mpn.attribute_id = " . $this->get_attribute_id(array('mpn','manufacturer_sku')) . " and mpn.store_id = 0
+			left join catalog_product_entity_int m on m.entity_id = e.entity_id and m.attribute_id = " . $this->get_attribute_id(array('brand','manufacturer')) . " and m.store_id = 0
+			left join eav_attribute_option mo on m.value = mo.option_id and mo.attribute_id = m.attribute_id 
+			left join eav_attribute_option_value mv on mv.option_id = mo.option_id and mv.store_id = 0 
 		";
 	}
 	
@@ -491,30 +491,74 @@ class OrderPigeonAPIController {
 			s.region as shipping_state, s.postcode as shipping_zip, s.country_id as shipping_country, s.telephone as shipping_phone,
 			o.shipping_description as shipping_description 
 		from sales_flat_order o 
-		left join sales_flat_order_address b on o.entity_id = b.parent_id and b.address_type = 'billing'
-		left join sales_flat_order_address s on o.entity_id = s.parent_id and s.address_type = 'shipping' 
+			left join sales_flat_order_address b on o.entity_id = b.parent_id and b.address_type = 'billing'
+			left join sales_flat_order_address s on o.entity_id = s.parent_id and s.address_type = 'shipping' 
 		where o.state = 'processing'				
 		")->fetchAll();
 		
 		// if there are no orders, we are done - return empty array 
 		if (!$orders) $this->api_return(array());
 		
-		// add order id for each order 
-		for ($i = 0; $i < count($orders); $i++) { $orders[intval($orders[$i]['order_id'])] = $orders[$i]; unset($orders[$i]); }
+		// add order id for each order
+		// adding order id into order array key to make it more convinient
+		// to work with on the next step
+		for ($i = 0; $i < count($orders); $i++) 
+		{ 
+			$orders[intval($orders[$i]['order_id'])] = $orders[$i]; 
+			unset($orders[$i]); 
+		}
 
-		// now get the paid but unshipped products of the open orders that are not cancelled or refunded  
+		// now get the paid but unshipped products of the open orders that are not cancelled or refunded
+		/*  
 		$order_products = $this->conn->query("
 		select sku as product_sku, name as product_name, qty_ordered - qty_canceled - qty_refunded - qty_shipped as product_quantity, price as product_price, order_id  
-		from sales_flat_order_item 
+		from sales_flat_order_item
 		where order_id in (" . implode(',',array_keys($orders)) . ")
-		and   qty_invoiced > 0 
-		and   qty_shipped < (qty_ordered - qty_canceled - qty_refunded)  
+			and   qty_invoiced > 0 
+			and   qty_shipped < (qty_ordered - qty_canceled - qty_refunded)
+		")->fetchAll();
+		*/
+		
+		// Changed by Customer Paradigm Timur and Tom and Scott
+		// To exclude products that do not have property HG(id=5)
+		$order_products = $this->conn->query("
+			SELECT
+				si.sku as product_sku,
+				si.name as product_name,
+				si.qty_ordered - si.qty_canceled - si.qty_refunded - si.qty_shipped as product_quantity,
+				si.price as product_price,
+				si.order_id
+			FROM
+					sales_flat_order_item si 
+				JOIN
+						sales_flat_order sfo
+					ON
+							sfo.entity_id = si.order_id
+						AND
+							sfo.state = 'processing'
+				JOIN
+						catalog_product_flat_1 sf
+					ON
+						sf.entity_id = si.product_id
+			WHERE
+					si.qty_invoiced > 0
+				AND
+					si.qty_shipped < (si.qty_ordered - si.qty_canceled - si.qty_refunded)
+				AND
+					sf.vendor = 5
 		")->fetchAll();
 		
 		// add order products to the relevant orders
-		foreach ($order_products as $order_product) {
-			if (isset($orders[$order_product['order_id']]['order_products'])) $orders[$order_product['order_id']]['order_products'][] = $order_product;
-			else $orders[$order_product['order_id']]['order_products'] = array($order_product);
+		foreach ($order_products as $order_product) 
+		{
+			if (isset($orders[$order_product['order_id']]['order_products']))
+			{
+				$orders[$order_product['order_id']]['order_products'][] = $order_product;
+			}
+			else 
+			{
+				$orders[$order_product['order_id']]['order_products'] = array($order_product);
+			}
 		} 
 		
 		// now remove the orders with no products 
