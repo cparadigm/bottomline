@@ -1,0 +1,55 @@
+
+<div id="bss-dym" class="note-msg dym-note-msg-base">
+    <span id="bss-dym-wait">
+        <div class="v-middle bss-loading-img">&nbsp;</div> &nbsp; 
+        <?php echo $this->__('Please wait, searching for products that you may have intended to find...') ?> &nbsp;
+    </span>
+    <span id="bss-dym-results"></span>
+</div>
+
+<script language="javascript" type="text/javascript">
+var bss_dym_options = {
+    'suggest_phrase_url': '<?php echo $this->getSuggestPhraseUrl(array('_secure'=>true)); ?>',
+    'original_search_query': '<?php echo $this->getCleanSearchQuery() ?>'
+};
+</script>
+
+
+<script language="javascript" type="text/javascript">
+var last_dym_ajax_request;
+
+// If the .trim() function does not exist (like in IE 7 and 8), then define it.
+if( !String.prototype.trim ) { 
+    String.prototype.trim = function() { return this.replace(/^\s+|\s+$/g, ''); };
+}
+
+function runAjaxDym(search_query) {
+     $('bss-dym-wait').show();
+     $('bss-dym-results').hide();
+     $('bss-dym').addClassName("dym-note-msg-loading");
+     last_dym_ajax_request = new Ajax.Request(
+         bss_dym_options.suggest_phrase_url, 
+         {
+             parameters: { q: search_query  },
+             onSuccess: function(t) { 
+                 var dym_response = t.responseText;
+                 var empty_response = (dym_response == "" || dym_response == null || !isNaN(dym_response));
+                 if(empty_response) {
+                     $('bss-dym').hide();
+                 } else {
+                     dym_response = dym_response.trim();
+                     
+                     $('bss-dym-wait').hide(); 
+                     $('bss-dym-results').insert({before:t.responseText});
+                     $('bss-dym-results').show();
+                     $('bss-dym').removeClassName("dym-note-msg-loading");
+                 }
+                 
+             } 
+         }
+     );
+}
+document.observe("dom:loaded", function() {
+    runAjaxDym(bss_dym_options.original_search_query);
+});
+</script>
