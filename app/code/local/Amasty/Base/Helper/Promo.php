@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Amasty Team
- * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
  * @package Amasty_Base
  */  
 class Amasty_Base_Helper_Promo extends Mage_Core_Helper_Abstract
