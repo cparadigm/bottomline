@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Amasty Team
- * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
  * @package Amasty_Base
  */  
 class Amasty_Base_Helper_Data extends Mage_Core_Helper_Abstract
@@ -142,10 +142,28 @@ class Amasty_Base_Helper_Data extends Mage_Core_Helper_Abstract
     public function ajaxHtml(){        
         return Mage::app()->getLayout()->createBlock('ambase/adminhtml_debug_general')->toHtml() . 
                 Mage::app()->getLayout()->createBlock('ambase/adminhtml_debug_conflict')->toHtml() .
-                Mage::app()->getLayout()->createBlock('ambase/adminhtml_debug_rewrite')->toHtml();
+                Mage::app()->getLayout()->createBlock('ambase/adminhtml_debug_rewrite')->toHtml() .
+                Mage::app()->getLayout()->createBlock('ambase/adminhtml_debug_event')->toHtml();
     }
     
     public function getParentClasses($class){
         return array_values(class_parents($class));
+    }
+
+    public function getEventsList()
+    {
+        $scopes = array(
+            'global',
+            'frontend',
+            'adminhtml',
+        );
+        $collection = Mage::getResourceModel('ambase/event_collection');
+
+        $data = array();
+        foreach ($scopes as $scope) {
+            $data = array_merge($data, $collection->_prepareData($scope));
+        }
+
+        return $data;
     }
 }
