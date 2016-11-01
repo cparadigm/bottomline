@@ -3467,9 +3467,11 @@ form h2, form h3, .section h3 {
 }
 .products-grid .add-to-links {
 }
+/*
 .products-grid .add-to-links a span {
 	display: none;
 }
+*/
 .link-wishlist, .link-compare {
 	color: #666;
 	text-shadow: none;
@@ -3502,7 +3504,7 @@ form h2, form h3, .section h3 {
 	position: absolute;
 	margin-top: 0px;
 	border-left:1px solid rgba(255, 255, 255, 0.3);
-	width:35px;
+	width: 135px;
 }
 .products-grid .actions-links .add-to-links a.magik-btn-quickview:before {
 	content: "\f002";
