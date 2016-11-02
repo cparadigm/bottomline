@@ -162,7 +162,7 @@ class OrderPigeonAPIController {
 	protected function get_products_sql() {
 
 		// are we going to use brand and/or manufacturer - that changes a lot of things   
-		$brand_attribute = $this->get_attribute('brand');
+		$brand_attribute = $this->get_attribute('vendor');
 		$manufacturer_attribute = $this->get_attribute('manufacturer');
 
 		// if neither brand or manufacturer is found, error out 
@@ -185,7 +185,7 @@ class OrderPigeonAPIController {
 			// build join expression changes if the front-end is select 
 			elseif ($brand_attribute['frontend_input'] == 'select') {
 				$brandjoin = "
-				left join catalog_product_entity_int bv on bv.entity_id = e.entity_id and bv.attribute_id = {$brand_attribute['attribute_id']} and bv.store_id = 0
+				join catalog_product_entity_int bv on bv.entity_id = e.entity_id and bv.attribute_id = {$brand_attribute['attribute_id']} and bv.store_id = 0 and bv.value = '5'
 				left join eav_attribute_option bo on bv.value = bo.option_id and bo.attribute_id = bv.attribute_id 
 				left join eav_attribute_option_value b on b.option_id = bo.option_id and b.store_id = 0 
 				";
