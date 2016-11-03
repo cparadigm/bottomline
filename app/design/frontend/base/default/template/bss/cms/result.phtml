@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * NOTICE OF LICENSE
+ * This source file is subject to the BETTER STORE SEARCH
+ * License, which is available at this URL: http://www.betterstoresearch.com/docs/bss_license.txt
+ *
+ * DISCLAIMER
+ * By adding to, editing, or in any way modifying this code, WDCA is not held liable for any inconsistencies or abnormalities in the
+ * behaviour of this code. By adding to, editing, or in any way modifying this code, the Licensee terminates any agreement of support
+ * offered by WDCA, outlined in the provided Sweet Tooth License.  Upon discovery of modified code in the process of support, the Licensee
+ * is still held accountable for any and all billable time WDCA spent  during the support process.
+ * WDCA does not guarantee compatibility with any other framework extension. WDCA is not responsbile for any inconsistencies or abnormalities in the
+ * behaviour of this code if caused by other framework extension. If you did not receive a copy of the license, please send an email to
+ * contact@wdca.ca or call 1-888-699-WDCA(9322), so we can send you a copy immediately.
+ *
+ * @category   [TBT]
+ * @package    [TBT_Bss]
+ * @copyright  Copyright (c) 2012 WDCA (http://www.wdca.ca)
+ * @license    http://www.betterstoresearch.com/docs/bss_license.txt
+ */
+
+/**
+ *
+ * @category   TBT
+ * @package    TBT_Bss
+ * @author     WDCA Better Store Search Team <contact@wdca.ca>
+ */
+?>
+<?php if ($this->getPageResultCount()) : ?>
+    <div class="page-title cms-search">
+        <h1><?php echo ($this->getHeaderText() || $this->getHeaderText() === false) ? $this->getHeaderText() : $this->__("Page search results for '%s'", $this->helper('catalogsearch')->getEscapedQueryText()) ?></h1>
+    </div>
+    <?php $_pageCollection = $this->_getPageCollection(); ?>
+    <div class="cms-pages">
+        <?php foreach ($_pageCollection as $_page) :?>
+            <p>
+                <h2 class="page-name"><a href="<?php echo Mage::getUrl($_page->getIdentifier()) ?>"><?php echo $_page->getTitle() ?></a></h2>
+                <p><?php echo $this->_outputContent($_page->getContent()) ?></p>
+            </p>
+        <?php endforeach; ?>
+    </div>
+<?php elseif (!Mage::getStoreConfigFlag('bss/special/catalog')): ?>
+<div class="page-title">
+    <h1><?php echo ($this->getHeaderText() || $this->getHeaderText() === false) ? $this->getHeaderText() : $this->__("Page search results for '%s'", $this->helper('catalogsearch')->getEscapedQueryText()) ?></h1>
+</div>
+<p class="note-msg">
+    <?php echo ($this->getNoResultText()) ? $this->getNoResultText() : $this->__('Your search returns no page results.') ?>
+    <?php if ($messages = $this->getNoteMessages()):?>
+    <?php foreach ($messages as $message):?>
+        <br /><?php echo $message?>
+        <?php endforeach;?>
+    <?php endif; ?>
+</p>
+<?php endif; ?>
