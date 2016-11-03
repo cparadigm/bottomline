@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Fpccrawler
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Fpccrawler>
+            <active>true</active>
+            <codePool>local</codePool>
+            <edition>community</edition>
+            <is_system>true</is_system>
+        </Amasty_Fpccrawler>
+    </modules>
+</config>

@@ -2,7 +2,7 @@
 <!--
 /**
  * @author Amasty Team
- * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
  * @package Amasty_Base
  */
 -->
@@ -18,10 +18,10 @@
                         <children>
                             <config>
                                 <children>
-                                    <ambase>
+                                    <ambase translate="title">
                                         <title>Amasty - Extensions Information</title>
                                     </ambase>
-                                    <amstore>
+                                    <amstore translate="title">
                                         <title>Amasty - Extensions Store</title>
                                     </amstore>
                                 </children>
@@ -43,4 +43,13 @@
             </observers>
         </controller_action_predispatch>
     </events>
+    <translate>
+        <modules>
+            <Amasty_Base>
+                <files>
+                    <default>Amasty_Base.csv</default>
+                </files>
+            </Amasty_Base>
+        </modules>
+    </translate>
 </config>
