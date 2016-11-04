@@ -102,7 +102,7 @@ $empty_category_block = Mage::getModel('cms/block')->load('eclipse_empty_categor
       <div class="actions-links">
         <span class="add-to-links">
           <?php  if(Mage::app()->getStore()->getConfig('eclipsesettings/eclipsesettings_quickview/enable')==1){?> 
-           <a title="magik-btn-quickview" class="magik-btn-quickview" data-fancybox-type="ajax" onclick="callQuickView('<?php echo Mage::getUrl('eclipsesettings/index/view/id/'.$_product->getId());?>');"><span><?php echo $this->__('quickview') ?></span></a>
+           <a title="magik-btn-quickview" class="magik-btn-quickview cp-wide" data-fancybox-type="ajax" onclick="callQuickView('<?php echo Mage::getUrl('eclipsesettings/index/view/id/'.$_product->getId());?>');"><span><?php echo $this->__('quickview') ?></span></a>
           <?php }  ?> 
            <?php if ($this->helper('wishlist')->isAllow()) : ?>
            <a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist" title="<?php echo $this->__('Add to Wishlist');?>"><span><?php echo $this->__('Add to Wishlist');?></span></a>
