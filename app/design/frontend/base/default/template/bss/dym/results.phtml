@@ -1,0 +1,11 @@
+<?php
+$suggested_phrase = $this->getSuggestedPhrase();
+if(!empty($suggested_phrase)) {
+    $output =  $this->__("Did you mean <link>%s</link>?", $suggested_phrase);
+    $output = str_replace("<link>", "<a href=\"". $this->getNewQueryUrl() . "\">", $output);
+    $output = str_replace("</link>", "</a>", $output);
+    echo $output;
+} else {
+    //echo $this->__("No related products, misspellings or similar products were found.");
+}
+?>
