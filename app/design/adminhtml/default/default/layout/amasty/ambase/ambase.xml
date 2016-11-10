@@ -2,7 +2,7 @@
 <!--
 /**
  * @author Amasty Team
- * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
  * @package Amasty_Base
  */
 -->
@@ -17,13 +17,13 @@
             </action>
         </reference>
     </adminhtml_system_config_edit>
-    <ambase_adminhtml_base_ajax>
+    <adminhtml_ambase_base_ajax>
         <reference name="root">
             <action method="setTemplate">
                 <template>empty.phtml</template>
             </action>
         </reference>
-    </ambase_adminhtml_base_ajax>
+    </adminhtml_ambase_base_ajax>
     <default>
         <reference name="root">
             <reference name="notifications">

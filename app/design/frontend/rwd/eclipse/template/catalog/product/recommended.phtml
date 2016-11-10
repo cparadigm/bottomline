@@ -5,16 +5,16 @@
               $catalog = $this->getLayout()->createBlock('catalog/product_list')->setStoreId($storeId);
               $productCount = $this->getData('num_products');
 
-$visibility = array( 
-                    Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH, 
+$visibility = array(
+                    Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH,
                     Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG
                 );
 
   if(true == true){
-$collection = Mage::getResourceModel('reports/product_collection') 
-                      ->addAttributeToSelect('*')     
-                      ->setStoreId($storeId) 
-                      ->addStoreFilter($storeId)     
+$collection = Mage::getResourceModel('reports/product_collection')
+                      ->addAttributeToSelect('*')
+                      ->setStoreId($storeId)
+                      ->addStoreFilter($storeId)
                       ->addAttributeToFilter('visibility', $visibility)
                       ->setPageSize($productCount);
 Mage::getSingleton('cataloginventory/stock')->addInStockFilterToCollection($collection);
@@ -27,7 +27,9 @@ if($categoryId=$this->getData('category_id')){
     } ?>
 
   <div class="new_title center">
-    <h2><?php echo $category->getName() ?></h2>
+    <?php if ($category) { ?>
+      <h2><?php echo $category->getName() ?></h2>
+    <?php } ?>
   </div> <!--new_title center-->
 
 <?php             // if no products are currently recommended, display some text
@@ -45,38 +47,38 @@ if($categoryId=$this->getData('category_id')){
                 $_collectionSize = $collection->count();
                 $_columnCount = 6;
                 $i = 0;
-               
+
                 foreach ($collection as $_product) :
                         $_product = Mage::getModel('catalog/product')->setStoreId($storeId)->load($_product->getId());
 
         ?>
-        
-        <?php if ($i++%$_columnCount==0): ?>            
-        <?php endif ?>  
+
+        <?php if ($i++%$_columnCount==0): ?>
+        <?php endif ?>
     <li class="item">
    <div class="item-inner">
-    
+
       <?php echo $this->helper('eclipsesettings')->getLabel($_product);  ?>
-      <div class="pro-img-thumb">             
-         <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><img alt="<?php echo $this->htmlEscape($_product->getName()) ?>" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(172,172) ?>"></a>      
-      </div> <!--pro-img-thumb-->      
+      <div class="pro-img-thumb">
+         <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><img alt="<?php echo $this->htmlEscape($_product->getName()) ?>" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(172,172) ?>"></a>
+      </div> <!--pro-img-thumb-->
       <div class="actions-links">
         <span class="add-to-links">
-          <?php  if(Mage::app()->getStore()->getConfig('eclipsesettings/eclipsesettings_quickview/enable')==1){?> 
+          <?php  if(Mage::app()->getStore()->getConfig('eclipsesettings/eclipsesettings_quickview/enable')==1){?>
            <a title="magik-btn-quickview" class="magik-btn-quickview" data-fancybox-type="ajax" onclick="callQuickView('<?php echo Mage::getUrl('eclipsesettings/index/view/id/'.$_product->getId());?>');"><span><?php echo $this->__('quickview') ?></span></a>
-          <?php }  ?> 
+          <?php }  ?>
            <a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist" title="<?php echo $this->__('Add to Wishlist');?>"><span><?php echo $this->__('Add to Wishlist');?></span></a>
             <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
                     <a href="<?php echo $_compareUrl ?>" class="link-compare" title="<?php echo $this->__('Add to Compare');?>"><span><?php echo $this->__('Add to Compare');?></span></a>
             <?php endif; ?>
         </span> <!--add-to-links-->
       </div> <!--actions-links-->
-    
+
     <div class="item-info">
       <div class="info-inner">
          <div class="item-title">
              <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>">
-                  <?php $prod_name = $this->htmlEscape($_product->getName()) ; 
+                  <?php $prod_name = $this->htmlEscape($_product->getName()) ;
                   if(strlen($prod_name) > 30) {echo substr($prod_name,0,30)."...";}else {echo $prod_name;}?>
              </a>
           </div> <!--item-title-->
@@ -91,25 +93,25 @@ if($categoryId=$this->getData('category_id')){
                                         <div class="rating" style="width: <?php echo $summaryData->getRatingSummary().'%'; ?>"></div>
                                 </div> <!--rating-box-->
                             </div> <!--ratings-->
-                    <?php } else { ?>  
+                    <?php } else { ?>
                             <div class="ratings"><div class="rating-box"><div style="width:0%" class="rating"></div></div></div>
                     <?php } ?>
             <div class="item-price"><?php echo $this->getPriceHtml($_product, true) ?></div>
           </div> <!--item-content-->
       </div> <!--info-inner-->
-      <div class="actions">         
+      <div class="actions">
             <?php if($_product->isSaleable()): ?>
               <button type="button"  title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><?php echo $this->__('Add to Cart') ?></span></button>
             <?php else: ?>
               <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
-            <?php endif; ?>          
+            <?php endif; ?>
         </div> <!--actions-->
-    </div> <!--item-info-->                        
+    </div> <!--item-info-->
    </div> <!--item-inner-->
-</li> <!--item jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal-->   
-            <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>            
-            <?php endif ?>      
-                <?php endforeach ?> 
+</li> <!--item jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal-->
+            <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+            <?php endif ?>
+                <?php endforeach ?>
        </ul>
      </div> <!--jcarousel-clip jcarousel-clip-horizontal-->
    </div> <!--jcarousel-container jcarousel-container-horizontal-->
@@ -147,7 +149,7 @@ jQuery(document).ready(function($) {
 <div id="magikloading3" style="display:none;text-align:center;margin-top:400px;"><img src="<?php echo $this->getSkinUrl('images/mgkloading.gif');?>" alt="loading">
 </div></div>
 <script type="text/javascript">
-function callQuickView(qurl) { 
+function callQuickView(qurl) {
     jQuery('#mgkquickview3').show();
     jQuery('#magikloading3').show();
     jQuery.get(qurl, function(data) {

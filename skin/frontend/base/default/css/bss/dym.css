@@ -1,0 +1,36 @@
+@CHARSET "ISO-8859-1";
+
+.dym-note-msg-loading {
+    background-image:none;
+    padding-left:12px !important;
+}
+
+.dym-note-msg {
+    background-color:#FAFAEC;
+    background-image:url("../images/i_msg-note.gif");
+    border-color:#FCD344;
+    color:#3D6611;
+}
+.dym-note-msg-base {
+    background-color:#FAFAEC;
+    border-color:#FCD344;
+    color:#3D6611;
+    margin-bottom:12px;
+}
+
+.bss-loading-img {
+    background-image: url('../../images/bss/loading/loading1.gif');
+    float: left;
+    height: 16px;
+    width: 16px;
+}
+
+.cms-search {
+    margin-top: 20px;
+}
+
+h2.page-name {
+    font-size: 14px;
+    font-weight: bold
+}
+
