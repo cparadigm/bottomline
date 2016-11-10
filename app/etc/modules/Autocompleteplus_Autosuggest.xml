@@ -8,7 +8,7 @@
         <Autocompleteplus_Autosuggest>
 
 
-            <active>true</active>
+            <active>false</active>
 
 
             <codePool>local</codePool>
