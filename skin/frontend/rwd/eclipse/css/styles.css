@@ -3502,8 +3502,17 @@ form h2, form h3, .section h3 {
 	position: absolute;
 	margin-top: 0px;
 	border-left:1px solid rgba(255, 255, 255, 0.3);
-	width:35px;
+	width: 35px;
 }
+
+.products-grid .add-to-links a.magik-btn-quickview.cp-wide span {
+	display: inline;
+}
+
+.products-grid .item:hover .actions-links .add-to-links a.magik-btn-quickview.cp-wide {
+	width: 135px;
+}
+
 .products-grid .actions-links .add-to-links a.magik-btn-quickview:before {
 	content: "\f002";
 }
