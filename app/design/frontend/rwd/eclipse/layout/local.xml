@@ -9,9 +9,9 @@
                                 <action method="setIsHandle">
                                         <applied>1</applied>
                                 </action>
-                        </action>                          
-                </reference>   
-        
+                        </action>
+                </reference>
+
                 <!-- Remove callouts and rarely used stuff -->
                 <remove name="right.poll"/>
                 <remove name="right.permanent.callout"/>
@@ -31,7 +31,7 @@
                    <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
                    <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
                    <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
-                                            
+
                         <action method="removeItem">
                                 <type>skin_css</type>
                                 <name>css/madisonisland.css</name>
@@ -42,19 +42,19 @@
                         </action>
 			<action method="addItem" ifconfig="eclipsesettings/rtlcss/enable"><type>skin_css</type><name>css/rtl.css</name></action>
 			<action method="addItem" ifconfig="eclipsesettings/rtlcss/rtlresponsive"><type>skin_css</type><name>css/rtl-responsive.css</name></action>
-                        <action method="addCss"><stylesheet>css/styles.css</stylesheet></action>                                                                 
-                        <action method="addCss"><stylesheet>css/font-awesome.css</stylesheet></action>                                            
+                        <action method="addCss"><stylesheet>css/styles.css</stylesheet></action>                                                    <action method="addCss"><stylesheet>css/cp_styles.css</stylesheet></action>             
+                        <action method="addCss"><stylesheet>css/font-awesome.css</stylesheet></action>
                         <action method="addCss"><stylesheet>css/fancybox.css</stylesheet></action>
                         <action method="addCss"><stylesheet>css/br_styles.css</stylesheet></action>
                         <action method="addLinkRel"><rel>stylesheet</rel><href>http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700</href></action>
-                        
-                        <action method="addItem"><type>skin_js</type><name>js/jquery.js</name></action>    
+
+                        <action method="addItem"><type>skin_js</type><name>js/jquery.js</name></action>
                         <action method="addItem"><type>skin_js</type><name>js/banner.js</name></action>
-                        <action method="addItem"><type>skin_js</type><name>js/nav.js</name></action>                     
+                        <action method="addItem"><type>skin_js</type><name>js/nav.js</name></action>
                         <action method="addItem"><type>skin_js</type><name>js/cart.js</name></action>
                         <action method="addItem"><type>skin_js</type><name>js/home-tabs.js</name></action>
-                        <action method="addItem"><type>skin_js</type><name>js/totop.js</name></action>    
-                        <action method="addItem"><type>skin_js</type><name>js/products-slider.js</name></action>   
+                        <action method="addItem"><type>skin_js</type><name>js/totop.js</name></action>
+                        <action method="addItem"><type>skin_js</type><name>js/products-slider.js</name></action>
                         <action method="addItem"><type>skin_js</type><name>js/left-nav.js</name></action>
                         <action method="addItem"><type>skin_js</type><name>js/cat-slides.js</name></action>
                         <action method="addItem"><type>skin_js</type><name>js/mob-nav.js</name></action>
@@ -62,7 +62,7 @@
                         <action method="addItem"><type>skin_js</type><name>js/toggle.js</name></action>
                         <action method="addItem"><type>skin_js</type><name>js/cloud-zoom.js</name></action>
                         <action method="addItem"><type>skin_js</type><name>js/jquery.fancybox-1.3.4.pack.js</name></action>
-                        <action method="addItem"><type>skin_js</type><name>js/easing.js</name></action>    
+                        <action method="addItem"><type>skin_js</type><name>js/easing.js</name></action>
                         <action method="addItem"><type>skin_js</type><name>js/eislideshow.js</name></action>
 
                         <action method="addItem"><type>skin_css</type><name>css/scrollingcart/scroll.css</name><params/></action>
@@ -72,7 +72,7 @@
 
                 <reference name="before_body_end">
 
-                     <block type="scrollingcart/index" name="scrollingcart_index" template="magik/scrollingcart/index.phtml">   
+                     <block type="scrollingcart/index" name="scrollingcart_index" template="magik/scrollingcart/index.phtml">
                       <block type="checkout/cart" name="cart_cartheader" template="magik/scrollingcart/checkout/cart/cartheader.phtml" >
                             <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>magik/scrollingcart/checkout/cart/cartheader/default.phtml</template></action>
                               <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>magik/scrollingcart/checkout/cart/cartheader/default.phtml</template></action>
@@ -80,17 +80,17 @@
                               <block type="core/text_list" name="cart_cartheader.extra_actions" as="extra_actions" translate="label" module="checkout">
                                       <label>Shopping Cart Cartheader Extra Actions</label>
                               </block>
-                      </block>  
+                      </block>
                       </block>
 
                       </reference>
-                
+
                 <reference name="header">
-                
+
             <block type="cms/block" name="eclipse_logo" as="eclipseLogo">
                 <action method="setBlockId"><block_id>eclipse_logo</block_id></action>
             </block>
-         
+
             <block type="checkout/cart_sidebar" name="cart_top" as="cartTop" template="checkout/cart/cart-top.phtml">
                 <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
                 <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
@@ -98,15 +98,15 @@
                 <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
                     <label>Shopping Cart Sidebar Extra Actions</label>
                 </block>
-            </block>                                  
+            </block>
                         <block type="catalog/navigation" name="top.menu" as="topMenu" template="catalog/navigation/top_nav.phtml"/>
                         <block type="catalog/navigation" name="top.menu" as="topMenuMob" template="catalog/navigation/top_nav_mob.phtml"/>
-                        <block type="page/switch" name="store_language" as="store_language" template="page/switch/languages.phtml"/> 
+                        <block type="page/switch" name="store_language" as="store_language" template="page/switch/languages.phtml"/>
                         <block type="directory/currency" name="custom_currency_selector" as="custom_currency_selector" template="currency/currency.phtml"/>
-                                        
+
                 </reference>
-                
-                <reference name="footer">                     
+
+                <reference name="footer">
                       <block type="core/template" name="contactForm" as="contactForm" template="contacts/form1.phtml"/>
                 </reference>
 
@@ -118,17 +118,17 @@
                 </reference>
 
                 <reference name="left">
-         
+
                     <action method="unsetChild"><name>catalogsearch.leftnav</name></action>
                         <remove name="currency"/>
                         <remove name="right_currency"/>
-                        
-                        
+
+
                         <block type="poll/activePoll" name="left.poll" after="-">
                           <action method="setPollTemplate"><template>poll/active.phtml</template><type>poll</type></action>
                           <action method="setPollTemplate"><template>poll/result.phtml</template><type>results</type></action>
                         </block>
-                                                                  
+
                         <action method="insert">
                                 <blockName>catalog.compare.sidebar</blockName>
                                 <sublingName>left.poll</sublingName>
@@ -148,16 +148,16 @@
                                 <blockName>cart_sidebar</blockName>
                                 <sublingName>catalog.compare.sidebar</sublingName>
                                 <after>0</after>
-                        </action>     
+                        </action>
                         <block type="catalog/navigation" name="leftMenu" as="leftMenu" before="catalog.leftnav" template="catalog/navigation/left_nav.phtml"/>
                         <!-- <block type="newsletter/subscribe" name="left.newsletter" before="left.poll" template="newsletter/subscribe.phtml"/> -->
                          <block type="cms/block" name="listingpage_block" as="listingpage_block" after="-">
                         <action method="setBlockId"><block_id>eclipse_listing_page_block</block_id></action>
-                        </block>                            
-                </reference>             
+                        </block>
+                </reference>
 
         </default>
-        
+
         <catalogsearch_result_index translate="label">
          <reference name="left">
             <block type="catalogsearch/layer" name="catalogsearch.leftnav" before="_" template="catalog/layer/view.phtml"/>
@@ -179,7 +179,7 @@
                         <block type="core/template"  template="automaticscroll/automaticscroll.phtml" after="-" />
             </reference>
         </catalog_category_default>
-        
+
         <catalog_category_layered translate="label">
                 <reference name="root">
                       <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
@@ -192,110 +192,110 @@
                         <block type="core/template"  template="automaticscroll/automaticscroll.phtml" after="-" />
             </reference>
         </catalog_category_layered>
-        
+
         <catalog_product_view translate="label">
               <reference name="root">
                       <action method="setTemplate"><template>page/1column.phtml</template></action>
-              </reference>    
-                   
-                          
+              </reference>
+
+
              <reference name="product.info.additional">
               <action method="unsetChild" ><name>product_tag_list</name></action>
               <block type="catalog/product_view_tabs" name="product.info.tabs" as="info_tabs">
                 <action method="setTemplate" ><template>catalog/product/view/tabs.phtml</template></action>
                 <action method="addTab" translate="title" module="catalog" ><alias>description_tabbed</alias><title>Product Description</title><block>catalog/product_view_description</block><template>catalog/product/view/description.phtml</template></action>
-                <action method="addTab" translate="title" module="catalog" ><alias>additional_tabbed</alias><title>Additional Info</title><block>catalog/product_view_attributes</block><template>catalog/product/view/attributes.phtml</template></action>    
+                <action method="addTab" translate="title" module="catalog" ><alias>additional_tabbed</alias><title>Additional Info</title><block>catalog/product_view_attributes</block><template>catalog/product/view/attributes.phtml</template></action>
                 <action method="addTab" translate="title" module="tag" ><alias>tags_tabbed</alias><title>Tags</title><block>tag/product_list</block><template>tag/list.phtml</template></action>
-                <action method="addTab" translate="title" module="review" ><alias>review_tabbed</alias><title>Reviews</title><block>review/product_view_list</block><template>review/product/view/list.phtml</template></action>                                         
+                <action method="addTab" translate="title" module="review" ><alias>review_tabbed</alias><title>Reviews</title><block>review/product_view_list</block><template>review/product/view/list.phtml</template></action>
               </block>
              </reference>
-                          
+
              <reference name="review_tabbed">
                 <block type="review/form" name="tab_review_form" as="review_form" template="review/form.phtml" />
-             </reference> 
+             </reference>
 
-                        
+
         </catalog_product_view>
-        
+
         <review_product_list translate="label">
               <reference name="root">
                       <action method="setTemplate"><template>page/1column.phtml</template></action>
-              </reference>         
+              </reference>
         </review_product_list>
-        
+
         <review_product_view translate="label">
               <reference name="root">
                       <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
-              </reference>        
+              </reference>
         </review_product_view>
-           
-        <sendfriend_product_send translate="label">       
+
+        <sendfriend_product_send translate="label">
               <reference name="root">
-                      <action method="setTemplate"><template>page/1column.phtml</template></action>                    
-              </reference>         
+                      <action method="setTemplate"><template>page/1column.phtml</template></action>
+              </reference>
         </sendfriend_product_send>
-        
+
         <checkout_cart_index translate="label">
                 <reference name="root">
                         <action method="setTemplate"><template>page/1column.phtml</template></action>
-                </reference>   
+                </reference>
         </checkout_cart_index>
-        
+
         <checkout_onepage_index translate="label">
               <reference name="root">
                       <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
-              </reference>              
+              </reference>
         </checkout_onepage_index>
-        
+
         <checkout_onepage_success translate="label">
                 <reference name="root">
                         <action method="setTemplate"><template>page/1column.phtml</template></action>
-                </reference>         
+                </reference>
         </checkout_onepage_success>
                 <reference name="root">
                         <action method="setTemplate"><template>page/1column.phtml</template></action>
-                </reference>           
+                </reference>
         <checkout_onepage_failure translate="label">
-        
+
         </checkout_onepage_failure>
-        
+
         <checkout_multishipping translate="label">
                 <reference name="root">
                         <action method="setTemplate"><template>page/1column.phtml</template></action>
-                </reference>         
+                </reference>
         </checkout_multishipping>
-        
+
         <customer_account_login translate="label">
                 <reference name="root">
                         <action method="setTemplate"><template>page/1column.phtml</template></action>
-                </reference>                   
+                </reference>
         </customer_account_login>
-        
+
         <customer_account_logoutsuccess translate="label">
                 <reference name="root">
                         <action method="setTemplate"><template>page/1column.phtml</template></action>
-                </reference>         
+                </reference>
         </customer_account_logoutsuccess>
-        
+
         <customer_account_create translate="label">
                 <reference name="root">
                         <action method="setTemplate"><template>page/1column.phtml</template></action>
                 </reference>
         </customer_account_create>
-        
+
         <customer_account_forgotpassword translate="label">
                 <reference name="root">
                         <action method="setTemplate"><template>page/1column.phtml</template></action>
                 </reference>
         </customer_account_forgotpassword>
-        
+
         <customer_account translate="label">
-        
+
           <reference name="root">
             <action method="setTemplate"><template>page/2columns-right-dashboard.phtml</template></action>
           </reference>
-                
-                <reference name="left">           
+
+                <reference name="left">
 
                         <remove name="catalog.compare.sidebar"/>
                         <remove name="tags_popular"/>
@@ -308,27 +308,27 @@
                         <remove name="product_mostview"/>
 
                 </reference>
-                
-                <reference name="right">                        
+
+                <reference name="right">
                         <remove name="catalog.left_nav"/>
                 </reference>
                 <reference name="right">
                     <remove name="listingpage_block"/>
                 </reference>
 
-                
+
         </customer_account>
-        
+
         <customer_account_index translate="label">
-        
+
             <reference name="root">
                <action method="setTemplate"><template>page/2columns-right-dashboard.phtml</template></action>
             </reference>
-            
+
         <!-- Tages & Reviews -->
                 <reference name="customer_account_dashboard">
                         <remove name="customer_account_dashboard_info1"/>
-                        <remove name="customer_account_dashboard_info2"/>    
+                        <remove name="customer_account_dashboard_info2"/>
                 </reference>
 
                 <reference name="right">
@@ -336,55 +336,55 @@
                 </reference>
 
         </customer_account_index>
-        
-        <sales_billing_agreement_index>        
+
+        <sales_billing_agreement_index>
              <reference name="root">
                 <action method="setTemplate"><template>page/2columns-right-dashboard.phtml</template></action>
              </reference>
         </sales_billing_agreement_index>
-        
+
         <sales_recurring_profile_index>
              <reference name="root">
                 <action method="setTemplate"><template>page/2columns-right-dashboard.phtml</template></action>
              </reference>
         </sales_recurring_profile_index>
-        
+
         <contacts_index_index translate="label">
               <reference name="root">
                       <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
-              </reference>              
+              </reference>
         </contacts_index_index>
-        
+
         <catalogsearch_result_index translate="label">
               <reference name="root">
                       <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
-              </reference>         
+              </reference>
         </catalogsearch_result_index>
-        
+
         <catalogsearch_advanced_index translate="label">
               <reference name="root">
                       <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
-              </reference> 
+              </reference>
         </catalogsearch_advanced_index>
-        
+
         <catalogsearch_advanced_result translate="label">
               <reference name="root">
                       <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
-              </reference> 
+              </reference>
         </catalogsearch_advanced_result>
-        
+
         <catalogsearch_term_popular translate="label">
               <reference name="root">
                       <action method="setTemplate"><template>page/1column.phtml</template></action>
-              </reference> 
+              </reference>
         </catalogsearch_term_popular>
-        
+
         <catalog_seo_sitemap translate="label">
               <reference name="root">
                       <action method="setTemplate"><template>page/1column.phtml</template></action>
-              </reference>         
+              </reference>
         </catalog_seo_sitemap>
-        
+
         <eclipsesettings_index_view>
           <reference name="root">
               <action method="setTemplate"><template>magik/quickview/page/quickview.phtml</template></action>
