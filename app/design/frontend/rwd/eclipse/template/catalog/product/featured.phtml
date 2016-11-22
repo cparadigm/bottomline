@@ -1,4 +1,4 @@
-<?php
+t<?php
               // some helpers
               $_helper = $this->helper('catalog/output');
               $storeId = Mage::app()->getStore()->getId();
@@ -79,7 +79,7 @@ if($categoryId=$this->getData('category_id')){
          <div class="item-title">
              <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>">
                   <?php $prod_name = $this->htmlEscape($_product->getName()) ;
-                  if(strlen($prod_name) > 30) {echo substr($prod_name,0,30)."...";}else {echo $prod_name;}?>
+                  if(strlen($prod_name) > 87) {echo substr($prod_name,0,87)."...";}else {echo $prod_name;}?>
              </a>
           </div> <!--item-title-->
           <div class="item-content">
