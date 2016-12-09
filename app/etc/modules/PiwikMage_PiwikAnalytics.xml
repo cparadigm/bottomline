@@ -16,7 +16,7 @@
 <config>
     <modules>
         <PiwikMage_PiwikAnalytics>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>
             <depends>
                 <Mage_Core/>
