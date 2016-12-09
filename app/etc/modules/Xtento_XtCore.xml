@@ -2,8 +2,8 @@
 <config>
     <modules>
         <Xtento_XtCore>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </Xtento_XtCore>
     </modules>
-</config> 
+</config>
