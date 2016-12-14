@@ -15,12 +15,13 @@
     <?php echo $this->getChildHtml('form_fields_before')?>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
     <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
+      <?php echo $this->getBlockHtml('formkey') ?>
       <fieldset class="col2-set login-page">
         <div class="col-1 new-users">
           <strong><?php echo $this->__('Personal Information') ?></strong>
           <div class="content">
             <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
-            <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />           
+            <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
             <ul class="form-list">
                 <li class="fields">
                     <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
@@ -60,7 +61,7 @@
         <div class="col-1 new-users">
           <strong><?php echo $this->__('Address Information') ?></strong>
           <div class="content">
-            <input type="hidden" name="create_address" value="1" />            
+            <input type="hidden" name="create_address" value="1" />
             <ul class="form-list">
                 <li class="fields">
                     <div class="field">
@@ -135,7 +136,7 @@
     <?php endif; ?>
         <div class="col-2 registered-users">
           <strong><?php echo $this->__('Login Information') ?></strong>
-          <div class="content">            
+          <div class="content">
             <ul class="form-list">
                 <li class="fields">
                     <div class="field">
