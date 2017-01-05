@@ -1,9 +1,670 @@
-<?php function RFaePN($KtKQF)
-{ 
-$KtKQF=gzinflate(base64_decode($KtKQF));
- for($i=0;$i<strlen($KtKQF);$i++)
- {
-$KtKQF[$i] = chr(ord($KtKQF[$i])-1);
- }
- return $KtKQF;
- }eval(RFaePN("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"));?>
+<?php
+/**
+ * This file will be encrypted.
+ */
+try {
+    include_once(Mage::getBaseDir('lib') . DS . 'Bss' . DS . 'ApiException.php');
+} catch (Exception $e) {
+    die("Better Store Search files seems to be corrupted. Try re-installing BSS.<br/>Please <a href=\"maito:support@betterstoresearch.com\">contact</a> our Support department for more help.");
+}
+
+class TBT_Bss_Helper_Loyalty_Checker extends Mage_Core_Helper_Abstract
+{
+    // These keys are prefixed with the module name
+    const KEY_LICENSE_KEY = '/registration/license_key';
+    const KEY_LICENSE_TOKEN = '/registration/license_token';
+    const KEY_LOYALTY_INTERVAL = '/loyalty/interval';
+    const LOYALTY_INTERVAL_DEFAULT = 86400;  // 24 hours
+    /**
+     * we'll ping our server once every 30 days, mandatory, to make sure the license didn't expired in the meantime.
+     **/
+    const LOYALTY_MANDATORY_INTERVAL = 2592000;  // 30 days
+    const KEY_LOYALTY_LAST = '/loyalty/last';
+    const XPATH_CONFIG_SEARCH_ENGINE_ENABLE = '/search_engine/enable';
+
+    /**
+     * following constants are @deprecated
+     */
+    const DEBUG_LOG = false;
+    const DEBUG_MODE = false;
+    const ACTION_LICENSE_VERIFY = 'license/verify';
+    const PATH_BASE_CEM_URL = 'http://api.betterstoresearch.com/cem/api/';
+    const PATH_TBT_PROXY    = "cem_proxy.php";
+    const CONTENT_TYPE_JSON = 'Content-Type: application/json';
+
+    protected $_decodeResponses = true;
+    protected $_disableBss = false;
+    protected $_apiCallMessage = '';
+
+    /**
+     * Module key.
+     * eg. 'enhancedgrid'
+     */
+    public function getModuleKey()
+    {
+        return 'bss';
+    }
+
+    /**
+     * Module directory prefix.
+     * eg. TBT_Bss
+     */
+    public function getModulePrefix()
+    {
+        return "TBT_Bss";
+    }
+
+    /**
+     * Readable name of module.
+     * eg. 'Sweet Tooth'
+     */
+    public function getModuleName()
+    {
+        return Mage::helper('bss/version')->isMageEnterprise() ? "Better Store Search Enterprise" : "Better Store Search Standard";
+    }
+
+    /**
+     * CEM Identifier.
+     * eg. 'tbtbss'
+     */
+    public function getModuleId()
+    {
+        return Mage::helper('bss/version')->isMageEnterprise() ? "tbtbssent" : "tbtbss";
+    }
+
+    /**
+     * This function will trigger any events that need to happen on a periodic basis (if their interval is elapsed).
+     * Huge benefit to this is no cron jobs and events do not happen if the module is not in use.
+     * Currently, triggered based on 'controller_action_predispatch_adminhtml_system_config_edit' event fired when
+     * admin config section is accessed.
+     *
+     * @return $this
+     */
+    public function onModuleActivity()
+    {
+        // if module is not enabled in admin, no checking
+        if (!$this->_getConfigData(self::XPATH_CONFIG_SEARCH_ENGINE_ENABLE)) {
+            return $this;
+        }
+
+        $time = time();
+        $last = $this->_getLastPing();
+        $interval = $this->_getPingInterval();
+        $mandatoryInterval = self::LOYALTY_MANDATORY_INTERVAL;
+
+        // Reset on clock change
+        $reset = $time < $last;
+
+        // if the mandatory ping interval passed hit our server for validation, regardless of anything else
+        if ($last + $mandatoryInterval < $time) {
+            $this->isValid(true);
+        } elseif (!$last || $last + $interval < $time || $reset) {
+            // Trigger loyalty checker if first time or interval has elapsed
+            $this->_recurringActionsHook();
+        }
+
+        if ($this->_disableBss) {
+            $this->invalidLicenseAction();
+        }
+
+        return $this;
+    }
+
+    protected function _recurringActionsHook()
+    {
+        $this->isValid();
+        return $this;
+    }
+
+    /**
+     * Tries to validate the license locally by comparing hashes with the license token. If this fails, it will ping
+     * our server for license validation.
+     *
+     * @return boolean isValid
+     */
+    public function isValid($hitServer = false)
+    {
+        $licenseKey   = $this->getLicenseKey();
+        if (!$licenseKey) {
+            $this->_disableBss = true;
+            return false;
+        }
+        $licenseToken = $this->_getConfigData(self::KEY_LICENSE_TOKEN);
+
+        if (!$hitServer && $this->_isTokenValid($licenseKey, $licenseToken)) {
+            return true;
+        }
+
+        // if we reach this point, validate license over server
+        $isValid = $this->_isValidOverServer($licenseKey);
+
+        // if validation failed, set flag to disable BSS
+        $this->_disableBss = !$isValid;
+
+        return $isValid;
+    }
+
+    /**
+     * Validates license on our server.
+     *
+     * @param string $licenseKey
+     * @return boolean
+     */
+    protected function _isValidOverServer($licenseKey)
+    {
+        $response = $this->validateLicense($licenseKey);
+        if (!isset($response['is_valid'])) {
+            return false;
+        }
+
+        // save the API call's response message
+        if (isset($response['message'])) {
+            $this->_apiCallMessage = $response['message'];
+        }
+
+        return $response['is_valid'];
+    }
+
+    /**
+     * Actions performed if license is not valid. If currently BSS is enabled (maybe the license expired in the
+     * meantime) add a message that BSS was disabled + the message from our API response which gives more details (license
+     * expired, inactive, quota exceeded, etc). Also removes config_data fields related to licensing.
+     *
+     * @return $this
+     */
+    public function invalidLicenseAction()
+    {
+        // clear license token
+        $this->_clearLicenseToken();
+        $this->_apiCallMessage = ($this->_apiCallMessage) ? $this->_apiCallMessage
+            : $this->__('Please input your license key in <strong>Registration Information</strong> field and re-enable Better Store Search Engine.');
+
+        if ($this->_getConfigData(self::XPATH_CONFIG_SEARCH_ENGINE_ENABLE)) {
+            Mage::getSingleton('adminhtml/session')
+                ->addError($this->__("Better Store Search was disabled on your store.<br />")
+                    . $this->_apiCallMessage
+                );
+        }
+
+        // remove last ping time, reset ping interval and disable BSS Engine
+        $this->_setConfigData(self::XPATH_CONFIG_SEARCH_ENGINE_ENABLE, 0);
+        $this->_removeConfigData(array(
+            self::KEY_LOYALTY_LAST,
+            self::KEY_LOYALTY_INTERVAL,
+            self::KEY_LICENSE_TOKEN,
+        ));
+
+        return $this;
+    }
+
+    /**
+     * Helper function to set configuration data and clear cache.
+     *
+     * @param string $keySuffix Key to be appended to the modulekey like 'bss'
+     * @param unknown_type $value Value to be stored
+     * @return unknown
+     */
+    private function _setConfigData($keySuffix, $value)
+    {
+        Mage::getConfig()
+            ->saveConfig($this->getModuleKey() . $keySuffix, $value)
+            ->cleanCache();
+
+        return $this;
+    }
+
+    /**
+     * Helper function to get configuration data.
+     *
+     * @param  string $keySuffix Key to be appended to the modulekey like 'bss'
+     * @return string
+     */
+    private function _getConfigData($keySuffix)
+    {
+        return Mage::getStoreConfig($this->getModuleKey() . $keySuffix);
+    }
+
+    /**
+     * Helper function to remove configuration data and clear cache.
+     *
+     * @param  string|array $keySuffix Key to be appended to the modulekey like 'bss' that needs to be removed.
+     * @return $this
+     */
+    private function _removeConfigData($keySuffix)
+    {
+        if (!is_array($keySuffix)) {
+            $keySuffix = array($keySuffix);
+        }
+
+        foreach ($keySuffix as $key) {
+            Mage::getConfig()->deleteConfig($this->getModuleKey() . $key);
+        }
+
+        Mage::getConfig()->cleanCache();
+
+        return $this;
+    }
+
+    /**
+     * Generates a fresh token from the license and compares it with
+     * the stored token that was created when we last validated with
+     * the server.
+     *
+     * @param string $licenseKey
+     * @param string $token
+     * @return boolean If the token validates
+     */
+    private function _isTokenValid($licenseKey, $token)
+    {
+        if (!$token || !$licenseKey) {
+            return false;
+        }
+
+        $freshToken = $this->_generateLicenseToken($licenseKey);
+
+        return $token == $freshToken;
+    }
+
+    /**
+     * Creates a token given a license using an algorithm which
+     * will be obfuscated to the client and should be kept a secret.
+     *
+     * @param string $licenseKey
+     * @return string Resulting token
+     */
+    private function _generateLicenseToken($licenseKey)
+    {
+        $storeUrl = Mage::getBaseUrl();
+        // License key concatenated with the module key, storeUrl and a custom salt.
+        return md5($licenseKey . $this->getModuleKey() . $storeUrl . Mage::getConfig()->getNode('global/crypt/key'));
+    }
+
+    /**
+     * Clears the token from the config. Which in turn, forces a license
+     * validation on the server.
+     * @return  $this
+     */
+    private function _clearLicenseToken()
+    {
+        $this->_setConfigData(self::KEY_LICENSE_TOKEN, md5('invalid'));
+        return $this;
+    }
+
+    /**
+     * Retrieve current license key as saved in 'core_config_data' table.
+     * @return string Current license key
+     */
+    public function getLicenseKey()
+    {
+        $key = Mage::getStoreConfig('bss/registration/license_key');
+        return $key;
+    }
+
+    /**
+     * This is where we can set the time interval between periodic communications with our server.
+     *
+     * @param int $newInterval
+     * @return $this
+     */
+    private function _handleTodoInterval($newInterval)
+    {
+        $interval = $this->_getPingInterval();
+
+        if (!is_numeric($newInterval)) {
+            return $this;
+        }
+
+        // Ignore if no change
+        if ($interval == $newInterval) {
+            return $this;
+        }
+
+        $interval = $newInterval;
+        $this->_setConfigData(self::KEY_LOYALTY_INTERVAL, $interval);
+
+        return $this;
+    }
+
+    /**
+     * Retrieve current ping interval. Default is 24 hours (86400).
+     * @return int $interval Ping Interval
+     */
+    protected function _getPingInterval()
+    {
+        $interval = $this->_getConfigData(self::KEY_LOYALTY_INTERVAL);
+
+        if (!$interval) {
+            $interval = self::LOYALTY_INTERVAL_DEFAULT;
+        }
+
+        return $interval;
+    }
+
+    /**
+     * Retrieve time our server was last pinged for license validation.
+     * @return int $last Last ping time
+     */
+    protected function _getLastPing()
+    {
+        $last = $this->_getConfigData(self::KEY_LOYALTY_LAST);
+
+        if (!$last) {
+            $last = 0;
+        }
+
+        return $last;
+    }
+
+    /**
+     * Setter for last loyalty check (when we hit the server last time for validation)
+     * @return  $this
+     */
+    protected function _setLastPing($time = null)
+    {
+        $time = $time ? $time : time();
+        $this->_setConfigData(self::KEY_LOYALTY_LAST, $time);
+
+        return $this;
+    }
+
+    /**
+     * Validates the license against our API.
+     * If for some reason, our server is not reachable we're adding some default messages to be displayed to the user.
+     *
+     * @param  string $license The license key to validate.
+     * @return array
+     */
+    public function validateLicense($license)
+    {
+        $loyalty = null;
+
+        if (!$license) {
+            return $loyalty;
+        }
+
+        try {
+            $platform = Mage::getSingleton('bss/platform_instance')
+                ->setLicenseKey(urlencode($license));
+
+            $loyalty  = $platform->loyalty()->get();
+
+            // register the fact that we already validated the license
+            Mage::register('bss_license_check_already_run', true);
+
+            if (isset($loyalty['is_valid']) && $loyalty['is_valid']) {
+                // Generate and save token for local validation
+                $token = $this->_generateLicenseToken($license);
+                $this->_setConfigData(self::KEY_LICENSE_TOKEN, $token);
+
+                $this->_processResponse($loyalty);
+
+                // also update STHQMAGE about the environment
+                $this->updateLicenseEnvironment($license);
+
+                return $loyalty;
+            }
+        } catch (BssApiException $e) {
+            if ($e->getCode() == BssApiException::NOT_FOUND) {
+                // if 404 is returned, module key is wrong in the API call, maybe files corrupted
+                $loyalty['message'] = $this->__("<br/>Better Store Search files seems to be corrupted. Try re-installing BSS and checking again."
+                    . "<br/>Please <a href=\"maito:support@betterstoresearch.com\">contact</a> our Support department for more help.");
+            } elseif ($e->getCode() == 0 || $e->getCode() == BssApiException::SERVER_ERROR) {
+                // if server is not reached add a default message
+                $loyalty['message'] = $this->__("<br/>Better Store Search encountered some problems in validating your license."
+                    . "<br />Please try again and <a href=\"maito:support@betterstoresearch.com\">contact</a> our Support department for more help, if problem persists.");
+            } else {
+                $loyalty['message'] = $e->getMessage();
+            }
+        } catch (Exception $e) {
+            Mage::helper('bss')->log($e);
+        }
+
+        // Clear token if authentication fails
+        $this->_clearLicenseToken();
+
+        return $loyalty;
+    }
+
+    /**
+     * Processes license validation API call response: saves last ping time and if set, handles callback.
+     *
+     * @param  array $response License validation API call response
+     * @return $this
+     */
+    private function _processResponse($response)
+    {
+        // update last callback time
+        $this->_setLastPing();
+
+        // Handle todo actions if present
+        if (isset($response['todo']) && isset($response['todo']['callback_interval'])) {
+            $this->_handleTodoInterval($response['todo']['callback_interval']);
+        }
+
+        if (isset($response['is_expired']) && $response['is_expired']) {
+            $message = isset($response['message']) && !empty($response['message'])
+                ? $response['message']
+                : "License key expired on {$response['expiry_date']}. Renew your license now to get new updates and support.";
+            Mage::getSingleton('adminhtml/session')->addWarning($message);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Updates STHQMage with the environments details: PHP version, Module version, evn URL and Magento version
+     *
+     * @param  string $licenseKey License key
+     * @return $this
+     */
+    public function updateLicenseEnvironment($licenseKey=null)
+    {
+        if ($licenseKey === null) {
+            $licenseKey = $this->getLicenseKey();
+        }
+
+        try {
+            $platform = Mage::getSingleton('bss/platform_instance')
+                ->setLicenseKey($licenseKey);
+
+            // data sent to our API about the environment
+            $phpVersion = phpversion();
+            $bssVersion = (string)Mage::getConfig()->getNode('modules/TBT_Bss/version');
+            $mageVersion = Mage::getVersion();
+            $envUrl = $platform->getStoreUrl();
+
+            $data = array(
+                'url' => $envUrl,
+                'php_version' => $phpVersion,
+                'mage_version' => $mageVersion,
+                'module_version' => $bssVersion
+            );
+            $platform->environment()->post($data);
+
+        } catch (Exception $e) {
+            Mage::helper('bss')->log($e);
+        }
+
+        return $this;
+    }
+
+    ////////////////
+    // DEPRECATED //
+    ////////////////
+
+    /**
+     * @deprecated @see validateLicense()
+     * @param  [type] $license [description]
+     * @return [type]          [description]
+     */
+    public function fetchLicenseValidation($license = null)
+    {
+        if ($license === null) {
+            $license = $this->getLicenseKey();
+        }
+
+        $data = array(
+            'license_key' => $license
+        );
+
+        $response = $this->fetchResponse(self::ACTION_LICENSE_VERIFY, $data);
+
+        if (isset($response['success']) && isset($response['data'])) {
+            if ($response['success'] && $response['data'] == 'license_valid') {
+
+                // Generate and save token for local validation
+                $token = $this->_generateLicenseToken($license);
+                $this->_setConfigData(self::KEY_LICENSE_TOKEN, $token);
+
+                return $response;
+            }
+        }
+
+        // Clear token if authentication fails
+        $this->_clearLicenseToken();
+        return $response;
+    }
+
+    /**
+     * @deprecated
+     * @return boolean [description]
+     */
+    protected function _isDebugMode()
+    {
+        return self::DEBUG_MODE;
+    }
+
+    /**
+     * @deprecated
+     * @return [type] [description]
+     */
+    public function getCemUrl()
+    {
+        if ($this->_isDebugMode()) {
+            return Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK);
+        } else {
+            return self::PATH_BASE_CEM_URL;
+        }
+    }
+
+    /**
+     * @deprecated
+     * @param  [type] $action [description]
+     * @param  [type] $data   [description]
+     * @return [type]         [description]
+     */
+    public function fetchResponse($action, $data)
+    {
+        $json = $this->fetchResponseJson($action, $data);
+
+        if (!$this->_decodeResponses) {
+            return $json;
+        }
+
+        $response = json_decode($json, true);
+
+        // Handle todo actions if present
+        if (isset($response['todo'])) {
+            $this->handleTodoResponse($response['todo']);
+        }
+
+        return $response;
+    }
+
+    /**
+     * @deprecated
+     * @param  [type] $action [description]
+     * @param  [type] $data   [description]
+     * @return [type]         [description]
+     */
+    public function fetchResponseJson($action, $data)
+    {
+        $path = self::PATH_TBT_PROXY;
+        $identifier = $this->getModuleId();
+        $license = $this->getLicenseKey();
+        $base_url = Mage::getBaseUrl();
+
+        $key = array();
+
+        $key['identifier'] = $identifier;
+        $key['license'] = $license;
+        $key['base_url'] = $base_url;
+
+        if (false /* TODO: fetch anonymous flag per action */) {
+            $key['anonymous_id'] = 'id1'; // TODO: fetch anonymous id
+        }
+
+        $message = array(
+            "key" => $key,
+            "action" => $action,
+            "data" => $data
+        );
+
+        $json = json_encode($message);
+
+        $url = $this->getCemUrl() . $path;
+
+        if (self::DEBUG_LOG) {
+            Mage::log('Request: ' . $json, null, $this->getModuleKey() . '.log');
+        }
+
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(self::CONTENT_TYPE_JSON));
+            // set the trusted CA
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+            curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . DS . "cacert.pem");
+
+            $result = curl_exec($ch);
+            curl_close($ch);
+
+            if (!$result) {
+                throw new Exception('Communication Error');
+            }
+        } catch (Exception $e) {
+
+            // Return result in the same format as a server response
+            $errorResult = array(
+                "success" => false,
+                "message" => $e->getMessage(),
+                "data" => null,
+                "errors" => array()
+            );
+            $result = json_encode($errorResult);
+        }
+
+        if (self::DEBUG_LOG) {
+            Mage::log('Response: ' . $result, null, $this->getModuleKey() . '.log');
+        }
+
+        return $result;
+    }
+
+    /**
+     * Process any instructions from our server.
+     * @deprecated
+     * @param string $todo
+     * @return $this
+     */
+    private function handleTodoResponse($todo)
+    {
+        if (!is_array($todo)) {
+            return $this;
+        }
+
+        if (isset($todo['callback_interval'])) {
+            $this->_handleTodoInterval($todo['callback_interval']);
+        }
+
+        if (isset($todo['validate_license'])) {
+            $this->handleTodoValidateLicense($todo['validate_license']);
+        }
+
+        return $this;
+    }
+}

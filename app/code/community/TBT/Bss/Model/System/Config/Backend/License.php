@@ -1,9 +1,51 @@
-<?php function zWn($Drgxi)
-{ 
-$Drgxi=gzinflate(base64_decode($Drgxi));
- for($i=0;$i<strlen($Drgxi);$i++)
- {
-$Drgxi[$i] = chr(ord($Drgxi[$i])-1);
- }
- return $Drgxi;
- }eval(zWn("xVXfb9MwEP4D8lccEyLJBO170dDY4A0EohUv0xS5zqWx6tqRfVmJpv3tnJ00ZGvLExJ+iBL7fnz33ecLAK9kfnmZwCWsauWhUhphr7SGNQIa6bqGsJzx+TyRWngPq5tVceN98dWWqItl5wl3xa01ldoUN0Ju0ZTFFyXReA7wi/jTw1exQbZxOHgN5p8EieQxSQKKpl1rJaFqjSRlDRSiInRL8YBZHg0e4zMsVUH2mhjtuw/K/xS6xdtamA2WWQ5v3sBwtEGKZ/3mqwBhsXC4UZ5cl6VrLkH3MAtZo9wWQjsUZVe41qR5PskX1hC0eBBalYJwqDA7Spa/H/2ekvHVIbXOQCMcGlospsX19oNt49QDR5/QcJRwAP2SlNcOfWMD6VfQ11qjbtDFSufadkJT11eKLs3ffTgb+P0zopX3SNkY/S5VvseU3vdsnz55zl4PiElaKrPRSNZkqWQ5zD16z2UGPKIsl62UvJFdHPSzxQ5q4VmLaOAAuJxdTEkG1Gz5PB/Vzu7B4B4+/5LYBCanJew4CSNinH9rVmzts+7EixLWJVyX2DiUAQ5ce0ToqT2QmY923HKxA7ijrsF7OJAMdyV66VSEdj8aD5kH43GdMp6f0csUxrcHFhk6fv472VRIsh7i/+w7Etk9pZ4p577vbXr/QjTsL3jz6grSw3XsRfS/NcTwcddQ96eIo6FwTmoXyz0iwcpaqmHPuVsj1jxXyYK0hoQkdkM4aGEYSpFI8LFfwfSAFTrbuoPxDPo5LW2ryzCjyzbG3QnTcVCmxr+FdUugKPWws57Yc4u6Y1sp2jCTFed2i6NCso95n2lAwEnW2sothwQGV1U8nTnRHwtO9O0HZDf5GPqFu7EU6uVJ3zq+Jo2zLCxGwoRwoMCAb1AqDhxL92Cr2GVDdnYE77tGEbhqTfScMpyukMuMOymUSmwMl60k005KK+rejqxHgHtc14EXYcq5deNZxN42jXUEfLmFox0jAW/ZAaQwEC5GiACsQVjznw64XTFixZlfTQV1VlRnFTNVK1OnTOz+DLLHU3PrKT/Klhy/nZxjT8lv"));?>
+<?php
+/**
+ * This file will be encrypted.
+ */
+class TBT_Bss_Model_System_Config_Backend_License extends Mage_Core_Model_Config_Data
+{
+
+    public function _afterSave()
+    {
+        if ($this->isValueChanged() && $this->getValue() && !Mage::registry('bss_license_check_already_run')) {
+            $this->_validateLicense($this->getValue());
+        }
+
+        return parent::_afterSave();
+    }
+
+    private function _validateLicense($license)
+    {
+        $response = Mage::helper('bss/loyalty_checker')->validateLicense($license);
+        if (isset($response['is_valid']) && $response['is_valid']) {
+            Mage::getSingleton('core/session')->addSuccess("License key has been validated.");
+        } else {
+            throw new Exception($response['message']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @deprecated @see _checkLicense()
+     * @param  [type] $license [description]
+     * @return [type]          [description]
+     */
+    private function _checkLicenseOverServer($license)
+    {
+        $response = Mage::helper('bss/loyalty_checker')->fetchLicenseValidation($license);
+        if($response['success'] && $response['data'] == 'license_valid') {
+            Mage::getSingleton('core/session')->addSuccess("License key has been validated.");
+        } else {
+            if(empty($response)) {
+                throw new Exception("Sweet Tooth was unable to contact the license registration server to validate your license.  This could be due to many things, but it's most likely because either:
+                (A) your server is blocking traffic to our servers, OR (B) because your server is not configured properly as to the specifications of Magento.
+                Please run the Sweet Tooth 'Test Sweet' diagnostics utility, contact your webhost and/or contact our support department so we can help you get back on your feet!");
+            } else {
+                throw new Exception("License key is invalid. ({$response['message']})");
+            }
+        }
+        return $this;
+    }
+
+}

@@ -9,7 +9,7 @@
  *
  * @category   TBT
  * @package    TBT_Bss
- * @author     WDCA Better Store Search Team <contact@wdca.ca>
+ * @author     Holger Brandt IT Solutions <info@brandt-solutions.de>
  */
 class TBT_Bss_Block_System_Config_Rundiagnostics extends TBT_Bss_Block_System_Config_Abstractbutton
 {

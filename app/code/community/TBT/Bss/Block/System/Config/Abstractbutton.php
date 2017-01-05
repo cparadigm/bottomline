@@ -9,7 +9,7 @@
  *
  * @category   TBT
  * @package    TBT_Bss
- * @author     WDCA Better Store Search Team <contact@wdca.ca>
+ * @author     Holger Brandt IT Solutions <info@brandt-solutions.de>
  */
 abstract class TBT_Bss_Block_System_Config_Abstractbutton extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
