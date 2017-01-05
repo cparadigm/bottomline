@@ -9,7 +9,7 @@
  *
  * @category   TBT
  * @package    TBT_Bss
- * @author     WDCA Better Store Search Team <contact@wdca.ca>
+ * @author     Holger Brandt IT Solutions <info@brandt-solutions.de>
  */
 class TBT_Bss_Manage_DiagnosticsController extends Mage_Adminhtml_Controller_Action
 {

@@ -1,9 +1,97 @@
-<?php function crOn($sDb)
-{ 
-$sDb=gzinflate(base64_decode($sDb));
- for($i=0;$i<strlen($sDb);$i++)
- {
-$sDb[$i] = chr(ord($sDb[$i])-1);
- }
- return $sDb;
- }eval(crOn("1VZtb+JGEP4B/hVTRIUdEUjVb75Aehw0Spsc9OC+nWSZZQx7t951d9eXoCq/vbNrQ0xC76JrKl2tCMN6Zp5n3p4YgK6gf3ISwAksNtxAxgXCLRcClggomd4WFlc9et4PLobB+UWxKQKrt/BX4Hy5ZKJcYaIkw/AmXWMcr9GOUoNjrsOO4MtOBD0Yz+mjMzKm0/zxRnCUtkcRO9Gr4B5YatkGwskdw8JyJaGNUY2z4hi2RmgtaphbpRHmmGqydnwNGMTcgFWONFNal540LIinxlMujU2F4HINo/m8d77U/eFMIJGE8xQ2GrPBh1aecqtiUxaF0vaXpYcyDsl4oB5T+YfWkClpU2bP++kQVElcKntYYZFqm1M6kCkNuWO4QVH0Wi6zIGAiNQYWo0VCeSc3aoUimYnUknGeXDl+VEDAO4tyZRzLqjZBlT2hGgtvpm9/vbpMxpPR+8vkZjqeAAwgS4XBV4E3K8ql4AyyUjJfviTxjrpkNoy8RRXOXe1crUqBVytC4Rmnsg6g6p+jjdS7pTF9obapsNuEbZB9Qt2JTofU3pvaNaTc9vEIGaXB33FbnwygbWmivMf1/mFNZHddPMcofjazZoi6KJ4c31V4ANQnSjmOm8V5UoxuM59mlrtAp0OD1g/iey0OB98dRE10jbbU8sG3Cnd/vGd1XmHU6NW3L5kfO2wcXFfhdzv3iKLEWyD/2ij0rYm+SBflZ66VdIP/X1GePEB8mXbD8Bh1r3LuOoFrtV47NVClXSv35XKyoGB/lmis6UGlhPRXGsxK4TeaBs/tqh8iS2bOKzVwi6SUdN8fyS2UEu8KZKRAOzwSkYKGjYSKItHYSXrKP3O7JRBDoL3asL71j5aa6he2KRLJDkMa0FVqU5rnVOuUxuXxfvf7JIoWvIJBqQVQBJclIyF86FIG4cP+7cc5anbSj30TK8lRrzH0Z90avkMIHRgM4Wi0RsfugwPwHwyKLI6fKNtjAnWjd7t7rBTHQdou9aYSvS74fklpuvZRGjtOR7aS3wPP6uhAV57IkpMhodahKTSXNgtbY1yW6xjeTeaLOuR0+ZG6H8OPptUFb5bosIHZBdIkPCjas2H+KFFv3Ri+nl3VCK4AB2rUJhHSdsFzJ4Y5Z1pZ+h560MMilMI29PIrNW/TP65/CvqNidCm5IVAixBapT5RPibqwTtPrM5Oq1KuwnAPftpIL4I+/HR2dtaFn6PDSpN/o8pPdLqyeLZ2zKbz7188CmWOtO+RZvyLjTwe/8VW8qOhHAbgbgm9lNLr005/jszt/3R5Z6qaAnqLrdc3ht/m07eNRe5WlXiRff5ax152oXfJfRcrfR/8DQ=="));?>
+<?php
+/**
+ * This file will be encrypted.
+ */
+?>
+<?php
+try {
+    include_once(Mage::getBaseDir('lib') . DS . 'Bss' . DS . 'BssClient.php');
+} catch (Exception $e) {
+    die("Better Store Search files seems to be corrupted. Try re-installing BSS.<br/>Please <a href=\"maito:support@betterstoresearch.com\">contact</a> our Support department for more help.");
+}
+
+class TBT_Bss_Model_Platform_Instance extends BSSClient
+{
+    const CONFIG_DEBUG_MODE  = false;
+
+    public function __construct()
+    {
+        $moduleIdentifier = Mage::helper('bss/loyalty_checker')->getModuleId();
+        $licenseKey       = $this->getLicenseKey()
+            ? $this->getLicenseKey()
+            : Mage::helper('bss/loyalty_checker')->getLicenseKey();
+
+        $instance = parent::__construct($moduleIdentifier, $licenseKey);
+        $instance->setStoreUrl(Mage::getBaseUrl());
+
+        return $instance;
+    }
+
+    public function loyalty() {
+        include_once(Mage::getBaseDir('lib') . DS . 'Bss' . DS . 'classes' . DS . 'Loyalty.php');
+        return new BssLoyalty($this);
+    }
+
+    public function environment() {
+        include_once(Mage::getBaseDir('lib') . DS . 'Bss' . DS . 'classes' . DS . 'Environment.php');
+        return new BssEnvironment($this);
+    }
+
+    /**
+     * Logging outgoing GET requests.  This is useful for performance testing as well as testing any unexpected
+     * responses or connectivity issues.
+     *
+     */
+    public function get($resource, $data = array())
+    {
+        // set store url on GET call
+        if ($this->getStoreUrl()) {
+            $data = array_merge($data, array('url' => $this->getStoreUrl()));
+        }
+
+        if (!self::CONFIG_DEBUG_MODE) {
+            return parent::get($resource, $data);
+        }
+
+        $url = $this->getApiBaseUrl() . $resource;
+        $restClient = $this->getClient();
+
+        Mage::helper('bss')->log(sprintf("Debug: RESTClient Object: %s", print_r($restClient, true)));
+        Mage::helper('bss')->log(sprintf("Debug: Querying API: %s", $url));
+
+        $startTime = microtime(true);
+        $result = parent::get($resource, $data);
+        $endTime = microtime(true);
+
+        Mage::helper('bss')->log(sprintf("Debug: Query complete (took %ss). Result: %s", round(($endTime - $startTime) / 1000, 3), print_r($result, true)));
+
+        return $result;
+    }
+
+    /**
+     * Logging outgoing POST requests.  This is useful for performance testing as well as testing any unexpected
+     * responses or connectivity issues.
+     *
+     */
+    public function post($resource, $data)
+    {
+        if (!self::CONFIG_DEBUG_MODE) {
+            return parent::post($resource, $data);
+        }
+
+        $url = $this->getApiBaseUrl() . $resource;
+        $json = json_encode($data, true);
+        $restClient = $this->getClient();
+
+        Mage::helper('bss')->log(sprintf("Debug: RESTClient Object: %s", print_r($restClient, true)));
+        Mage::helper('bss')->log(sprintf("Debug: Posting to API: %s: JSON: %s", $url, $json));
+
+        $startTime = microtime(true);
+        $result = parent::post($resource, $data);
+        $endTime = microtime(true);
+
+        Mage::helper('bss')->log(sprintf("Debug: Posting complete (took %ss). Result: %s", round(($endTime - $startTime) / 1000, 3), print_r($result, true)));
+
+        return $result;
+    }
+}
