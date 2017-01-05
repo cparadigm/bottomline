@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_Adminhtml
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
@@ -113,6 +113,11 @@ class Mage_Adminhtml_Sales_Order_CreateController extends Mage_Adminhtml_Control
             $this->_getSession()->setCurrencyId((string) $currencyId);
             $this->_getOrderCreateModel()->setRecollect(true);
         }
+
+        //Notify other modules about the session quote
+        Mage::dispatchEvent('create_order_session_quote_initialized',
+                array('session_quote' => $this->_getSession()));
+
         return $this;
     }
 
@@ -527,7 +532,20 @@ class Mage_Adminhtml_Sales_Order_CreateController extends Mage_Adminhtml_Control
      */
     protected function _isAllowed()
     {
+        return Mage::getSingleton('admin/session')->isAllowed($this->_getAclResourse());
+    }
+
+    /**
+     * Get acl resource
+     *
+     * @return string
+     */
+    protected function _getAclResourse()
+    {
         $action = strtolower($this->getRequest()->getActionName());
+        if (in_array($action, array('index', 'save')) && $this->_getSession()->getReordered()) {
+            $action = 'reorder';
+        }
         switch ($action) {
             case 'index':
             case 'save':
@@ -543,7 +561,7 @@ class Mage_Adminhtml_Sales_Order_CreateController extends Mage_Adminhtml_Control
                 $aclResource = 'sales/order/actions';
                 break;
         }
-        return Mage::getSingleton('admin/session')->isAllowed($aclResource);
+        return $aclResource;
     }
 
     /*

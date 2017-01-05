@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_Usa
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 
@@ -340,6 +340,10 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
             if ($r->getService() == 'FIRST CLASS' || $r->getService() == 'FIRST CLASS HFP COMMERCIAL') {
                 $package->addChild('FirstClassMailType', 'PARCEL');
             }
+            if ($r->getService() == 'FIRST CLASS COMMERCIAL') {
+                $package->addChild('FirstClassMailType', 'PACKAGE SERVICE');
+            }
+
             $package->addChild('ZipOrigination', $r->getOrigPostal());
             //only 5 chars available
             $package->addChild('ZipDestination', substr($r->getDestPostal(), 0, 5));
@@ -388,7 +392,10 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
             $package->addChild('Height', $height);
             $package->addChild('Girth', $girth);
 
-
+            if ($this->_isCanada($r->getDestCountryId())) {
+                //only 5 chars available
+                $package->addChild('OriginZip', substr($r->getOrigPostal(), 0, 5));
+            }
             $api = 'IntlRateV2';
         }
         $request = $xml->asXML();
@@ -473,6 +480,9 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                      else {
                         if (is_object($xml->Package) && is_object($xml->Package->Service)) {
                             foreach ($xml->Package->Service as $service) {
+                                if ($service->ServiceErrors->count()) {
+                                    continue;
+                                }
                                 $serviceName = $this->_filterServiceName((string)$service->SvcDescription);
                                 $serviceCode = 'INT_' . (string)$service->attributes()->ID;
                                 $serviceCodeToActualNameMap[$serviceCode] = $serviceName;
@@ -529,14 +539,15 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
              'method' => array(
                  '0_FCLE' => Mage::helper('usa')->__('First-Class Mail Large Envelope'),
                  '0_FCL'  => Mage::helper('usa')->__('First-Class Mail Letter'),
+                 '0_FCSL' => Mage::helper('usa')->__('First-Class Mail Stamped Letter'),
                  '0_FCP'  => Mage::helper('usa')->__('First-Class Mail Parcel'),
                  '0_FCPC' => Mage::helper('usa')->__('First-Class Mail Postcards'),
                  '1'      => Mage::helper('usa')->__('Priority Mail'),
                  '2'      => Mage::helper('usa')->__('Priority Mail Express Hold For Pickup'),
                  '3'      => Mage::helper('usa')->__('Priority Mail Express'),
-                 '4'      => Mage::helper('usa')->__('Standard Post'),
-                 '6'      => Mage::helper('usa')->__('Media Mail'),
-                 '7'      => Mage::helper('usa')->__('Library Mail'),
+                 '4'      => Mage::helper('usa')->__('Retail Ground'),
+                 '6'      => Mage::helper('usa')->__('Media Mail Parcel'),
+                 '7'      => Mage::helper('usa')->__('Library Mail Parcel'),
                  '13'     => Mage::helper('usa')->__('Priority Mail Express Flat Rate Envelope'),
                  '15'     => Mage::helper('usa')->__('First-Class Mail Large Postcards'),
                  '16'     => Mage::helper('usa')->__('Priority Mail Flat Rate Envelope'),
@@ -569,8 +580,6 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                  '49'     => Mage::helper('usa')->__('Priority Mail Regional Rate Box B'),
                  '50'     => Mage::helper('usa')->__('Priority Mail Regional Rate Box B Hold For Pickup'),
                  '53'     => Mage::helper('usa')->__('First-Class Package Service Hold For Pickup'),
-                 '55'     => Mage::helper('usa')->__('Priority Mail Express Flat Rate Boxes'),
-                 '56'     => Mage::helper('usa')->__('Priority Mail Express Flat Rate Boxes Hold For Pickup'),
                  '57'     => Mage::helper('usa')->__('Priority Mail Express Sunday/Holiday Delivery Flat Rate Boxes'),
                  '58'     => Mage::helper('usa')->__('Priority Mail Regional Rate Box C'),
                  '59'     => Mage::helper('usa')->__('Priority Mail Regional Rate Box C Hold For Pickup'),
@@ -578,6 +587,7 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                  '62'     => Mage::helper('usa')->__('Priority Mail Express Padded Flat Rate Envelope'),
                  '63'     => Mage::helper('usa')->__('Priority Mail Express Padded Flat Rate Envelope Hold For Pickup'),
                  '64'     => Mage::helper('usa')->__('Priority Mail Express Sunday/Holiday Delivery Padded Flat Rate Envelope'),
+                 '72'     => Mage::helper('usa')->__('First-Class Mail Metered Letter'),
                  'INT_1'  => Mage::helper('usa')->__('Priority Mail Express International'),
                  'INT_2'  => Mage::helper('usa')->__('Priority Mail International'),
                  'INT_4'  => Mage::helper('usa')->__('Global Express Guaranteed (GXG)'),
@@ -602,19 +612,19 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                  'INT_23' => Mage::helper('usa')->__('Priority Mail International Padded Flat Rate Envelope'),
                  'INT_24' => Mage::helper('usa')->__('Priority Mail International DVD Flat Rate priced box'),
                  'INT_25' => Mage::helper('usa')->__('Priority Mail International Large Video Flat Rate priced box'),
-                 'INT_26' => Mage::helper('usa')->__('Priority Mail Express International Flat Rate Boxes'),
                  'INT_27' => Mage::helper('usa')->__('Priority Mail Express International Padded Flat Rate Envelope'),
              ),
 
            'service_to_code' => array(
                  '0_FCLE' => 'First Class',
                  '0_FCL'  => 'First Class',
+                 '0_FCSL' => 'First Class',
                  '0_FCP'  => 'First Class',
                  '0_FCPC' => 'First Class',
                  '1'      => 'Priority',
                  '2'      => 'Priority Express',
                  '3'      => 'Priority Express',
-                 '4'      => 'Standard Post',
+                 '4'      => 'Retail Ground',
                  '6'      => 'Media',
                  '7'      => 'Library',
                  '13'     => 'Priority Express',
@@ -649,8 +659,6 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                  '49'     => 'Priority',
                  '50'     => 'Priority',
                  '53'     => 'First Class',
-                 '55'     => 'Priority Express',
-                 '56'     => 'Priority Express',
                  '57'     => 'Priority Express',
                  '58'     => 'Priority',
                  '59'     => 'Priority',
@@ -658,6 +666,7 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                  '62'     => 'Priority Express',
                  '63'     => 'Priority Express',
                  '64'     => 'Priority Express',
+                 '72'     => 'First Class',
                  'INT_1'  => 'Priority Express',
                  'INT_2'  => 'Priority',
                  'INT_4'  => 'Priority Express',
@@ -682,7 +691,6 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                  'INT_23' => 'Priority',
                  'INT_24' => 'Priority',
                  'INT_25' => 'Priority',
-                 'INT_26' => 'Priority Express',
                  'INT_27' => 'Priority Express',
              ),
 
@@ -690,6 +698,8 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
              'method_to_code' => array(
                  'First-Class Mail Large Envelope' => '0_FCLE',
                  'First-Class Mail Letter'         => '0_FCL',
+                 'First-Class Mail Stamped Letter' => '0_FCSL',
+                 'First-Class Mail Metered Letter' => '72',
                  'First-Class Mail Parcel'         => '0_FCP',
              ),
 
@@ -732,7 +742,7 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                                 'First-Class Package Service Hold For Pickup',
                                 'Priority Mail Express Flat Rate Boxes',
                                 'Priority Mail Express Flat Rate Boxes Hold For Pickup',
-                                'Standard Post',
+                                'Retail Ground',
                                 'Media Mail',
                                 'First-Class Mail Large Envelope',
                                 'Priority Mail Express Sunday/Holiday Delivery',
@@ -771,8 +781,6 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                                 'Priority Mail International Large Flat Rate Box',
                                 'Priority Mail International Medium Flat Rate Box',
                                 'Priority Mail International Small Flat Rate Box',
-                                'Priority Mail Express Sunday/Holiday Delivery Flat Rate Boxes',
-
                             )
                         ),
                         'from_us' => array(
@@ -824,7 +832,7 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                             'method' => array(
                                 'Priority Mail Express',
                                 'Priority Mail',
-                                'Standard Post',
+                                'Retail Ground',
                                 'Media Mail',
                                 'Library Mail',
                                 'First-Class Package Service'
@@ -847,7 +855,7 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                             'method' => array(
                                 'Priority Mail Express',
                                 'Priority Mail',
-                                'Standard Post',
+                                'Retail Ground',
                                 'Media Mail',
                                 'Library Mail',
                                 'First-Class Package Service'
@@ -902,9 +910,9 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
     {
         $this->setTrackingRequest();
 
-       if (!is_array($trackingData)) {
-          $trackingData = array($trackingData);
-         }
+        if (!is_array($trackingData)) {
+            $trackingData = array($trackingData);
+        }
 
         $this->_getXMLTracking($trackingData);
 
@@ -1116,7 +1124,7 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
           'CF' => 'Central African Republic',
           'CG' => 'Congo, Republic of the',
           'CH' => 'Switzerland',
-          'CI' => 'Cote d Ivoire (Ivory Coast)',
+          'CI' => 'Ivory Coast (Cote d Ivoire)',
           'CK' => 'Cook Islands (New Zealand)',
           'CL' => 'Chile',
           'CM' => 'Cameroon',
@@ -1184,7 +1192,7 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
           'KH' => 'Cambodia',
           'KI' => 'Kiribati',
           'KM' => 'Comoros',
-          'KN' => 'Saint Kitts (St. Christopher and Nevis)',
+          'KN' => 'Saint Kitts (Saint Christopher and Nevis)',
           'KP' => 'North Korea (Korea, Democratic People\'s Republic of)',
           'KR' => 'South Korea (Korea, Republic of)',
           'KW' => 'Kuwait',
@@ -1271,8 +1279,8 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
           'TG' => 'Togo',
           'TH' => 'Thailand',
           'TJ' => 'Tajikistan',
-          'TK' => 'Tokelau (Union) Group (Western Samoa)',
-          'TL' => 'East Timor (Indonesia)',
+          'TK' => 'Tokelau (Union Group) (Western Samoa)',
+          'TL' => 'East Timor (Timor-Leste, Democratic Republic of)',
           'TM' => 'Turkmenistan',
           'TN' => 'Tunisia',
           'TO' => 'Tonga',
@@ -1395,9 +1403,9 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
      *
      * @param Varien_Object $request
      * @param string $serviceType
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return string
      */
     protected function _formUsSignatureConfirmationShipmentRequest(Varien_Object $request, $serviceType)
@@ -1413,7 +1421,8 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
                 break;
             case 'STANDARD':
             case 'Standard Post':
-                $serviceType = 'Standard Post';
+            case 'Retail Ground':
+                $serviceType = 'Retail Ground';
                 break;
             case 'MEDIA':
             case 'Media':
@@ -1947,7 +1956,7 @@ class Mage_Usa_Model_Shipping_Carrier_Usps
     {
         return $this->_methodsMapper($label, false);
     }
-    
+
     /**
       * @deprecated
       */

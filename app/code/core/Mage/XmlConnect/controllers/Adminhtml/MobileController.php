@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_XmlConnect
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
@@ -337,7 +337,7 @@ class Mage_XmlConnect_Adminhtml_MobileController extends Mage_Adminhtml_Controll
             curl_setopt($curlHandler, CURLOPT_POSTFIELDS, $params);
             curl_setopt($curlHandler, CURLOPT_SSL_VERIFYHOST, 2);
             curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curlHandler, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($curlHandler, CURLOPT_SSL_VERIFYPEER, 1);
             curl_setopt($curlHandler, CURLOPT_TIMEOUT, 60);
 
             // Execute the request.
@@ -1377,9 +1377,9 @@ class Mage_XmlConnect_Adminhtml_MobileController extends Mage_Adminhtml_Controll
     public function uploadImagesAction()
     {
         $data = $this->getRequest()->getParams();
-        if (isset($data['Filename'])) {
+        if (isset($data['flowFilename'])) {
             // Add random string to uploaded file new
-            $newFileName = Mage::helper('core')->getRandomString(5) . '_' . $data['Filename'];
+            $newFileName = Mage::helper('core')->getRandomString(5) . '_' . $data['flowFilename'];
         }
         try {
             $this->_initApp();

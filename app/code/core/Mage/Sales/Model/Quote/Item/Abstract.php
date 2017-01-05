@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_Sales
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
@@ -41,8 +41,24 @@
 abstract class Mage_Sales_Model_Quote_Item_Abstract extends Mage_Core_Model_Abstract
     implements Mage_Catalog_Model_Product_Configuration_Item_Interface
 {
+    /**
+     * Parent item for sub items for bundle product, configurable product, etc.
+     *
+     * @var Mage_Sales_Model_Quote_Item_Abstract
+     */
     protected $_parentItem  = null;
+
+    /**
+     * Children items in bundle product, configurable product, etc.
+     *
+     * @var array
+     */
     protected $_children    = array();
+
+    /**
+     *
+     * @var array
+     */
     protected $_messages    = array();
 
     /**
@@ -114,7 +130,10 @@ abstract class Mage_Sales_Model_Quote_Item_Abstract extends Mage_Core_Model_Abst
     {
         if ($parentItem) {
             $this->_parentItem = $parentItem;
-            $parentItem->addChild($this);
+            // Prevent duplication of children in those are already set
+            if (!in_array($this, $parentItem->getChildren())) {
+                $parentItem->addChild($this);
+            }
         }
         return $this;
     }
@@ -250,10 +269,10 @@ abstract class Mage_Sales_Model_Quote_Item_Abstract extends Mage_Core_Model_Abst
 
         try {
             $this->setQty($qty);
-        } catch (Mage_Core_Exception $e){
+        } catch (Mage_Core_Exception $e) {
             $this->setHasError(true);
             $this->setMessage($e->getMessage());
-        } catch (Exception $e){
+        } catch (Exception $e) {
             $this->setHasError(true);
             $this->setMessage(Mage::helper('sales')->__('Item qty declaration error.'));
         }
@@ -323,7 +342,7 @@ abstract class Mage_Sales_Model_Quote_Item_Abstract extends Mage_Core_Model_Abst
         $qty        = $this->getTotalQty();
         // Round unit price before multiplying to prevent losing 1 cent on subtotal
         $total      = $this->getStore()->roundPrice($this->getCalculationPriceOriginal()) * $qty;
-        $baseTotal  = $this->getBaseCalculationPriceOriginal() * $qty;
+        $baseTotal  = $this->getStore()->roundPrice($this->getBaseCalculationPriceOriginal()) * $qty;
 
         $this->setRowTotal($this->getStore()->roundPrice($total));
         $this->setBaseRowTotal($this->getStore()->roundPrice($baseTotal));
@@ -647,8 +666,8 @@ abstract class Mage_Sales_Model_Quote_Item_Abstract extends Mage_Core_Model_Abst
                 $totalTax = $this->getTaxAmount();
 
                 if ($totalTax && $totalBaseTax) {
-                    $totalTax -= $this->getDiscountAmount()*($this->getTaxPercent()/100);
-                    $totalBaseTax -= $this->getBaseDiscountAmount()*($this->getTaxPercent()/100);
+                    $totalTax -= $this->getDiscountAmount() * ($this->getTaxPercent() / 100);
+                    $totalBaseTax -= $this->getBaseDiscountAmount() * ($this->getTaxPercent() / 100);
 
                     $this->setBaseTaxAmount($store->roundPrice($totalBaseTax));
                     $this->setTaxAmount($store->roundPrice($totalTax));

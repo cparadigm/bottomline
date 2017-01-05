@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_Rss
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
@@ -30,7 +30,7 @@
  * @file        IndexController.php
  * @author      Magento Core Team <core@magentocommerce.com>
  */
-class Mage_Rss_IndexController extends Mage_Core_Controller_Front_Action
+class Mage_Rss_IndexController extends Mage_Rss_Controller_Abstract
 {
     /**
      * Current wishlist
@@ -80,9 +80,7 @@ class Mage_Rss_IndexController extends Mage_Core_Controller_Front_Action
      */
     public function wishlistAction()
     {
-        if (!Mage::getStoreConfig('rss/wishlist/active')) {
-            $this->getResponse()->setHeader('HTTP/1.1','404 Not Found');
-            $this->getResponse()->setHeader('Status','404 File not found');
+        if (!$this->isFeedEnable('wishlist/active')) {
             $this->_forward('nofeed','index','rss');
             return;
         }
@@ -155,16 +153,5 @@ class Mage_Rss_IndexController extends Mage_Core_Controller_Front_Action
         }
 
         return $this->_customer;
-    }
-
-    /**
-     * Retrieve helper instance
-     *
-     * @param string $name
-     * @return Mage_Core_Helper_Abstract
-     */
-    protected function _getHelper($name)
-    {
-        return Mage::helper($name);
     }
 }

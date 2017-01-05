@@ -8,7 +8,7 @@
 <config>
     <modules>
         <Inchoo_Owa>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>
         </Inchoo_Owa>
     </modules>

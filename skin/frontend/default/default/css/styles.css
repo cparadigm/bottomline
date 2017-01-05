@@ -9,31 +9,28 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     default_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- *
- *
- *  BLPStyle.css 07252014 v2 - About Us additions
  */
 
 /* Reset ================================================================================= */
 * { margin:0; padding:0; }
 
-body          { background:#ffffff ; font:12px/1.55 Arial, Helvetica, sans-serif; color:#2f2f2f; text-align:center; }
+body          { background:#496778 url(../images/bkg_body.gif) 50% 0 repeat-y; font:12px/1.55 Arial, Helvetica, sans-serif; color:#2f2f2f; text-align:center; }
 
 img           { border:0; vertical-align:top; }
 
-a             { color:#646464; text-decoration:underline; }
+a             { color:#1e7ec8; text-decoration:underline; }
 a:hover       { text-decoration:none; }
 :focus        { outline:0; }
 
@@ -336,7 +333,7 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 /* Page Heading */
 .page-title { width:100%; overflow:hidden; border-bottom:1px solid #ccc; margin:0 0 25px; }
 .page-title h1,
-.page-title h2 { margin:0; font:23px Georgia,"Times New Roman",Times,serif; color:#278FBE; }
+.page-title h2 { margin:0; font-size:20px; color:#0a263c; }
 .page-title .separator { margin:0 3px; }
 .page-title .link-rss { float:right; margin:7px 0 0; }
 .title-buttons { text-align:right; }
@@ -498,7 +495,7 @@ tr.summary-details-excluded { font-style:italic; }
 .global-site-notice .notice-inner .actions { padding-top:10px; }
 
 /* Cookie Notice */
-.notice-cookie { }
+.notice-cookie { position:fixed; z-index:9999; width:100%; bottom:0; left:0; margin:0 !important; opacity:0.95; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=95)"; /* IE8 */ }
 
 /* Noscript Notice */
 .noscript {}
@@ -513,21 +510,19 @@ tr.summary-details-excluded { font-style:italic; }
 
 /* Header ================================================================================ */
 .logo { float:left; }
-.header-container { border-top:5px solid #006999; border-bottom:1px solid #ffffff; ; }
+.header-container { border-top:5px solid #0d2131; border-bottom:1px solid #415966; background:url(../images/bkg_header.jpg) 50% 0 repeat; }
 .header { width:930px; margin:0 auto; padding:10px; text-align:right; position:relative; z-index:10; }
 .header .logo { float:left; margin:3px 0 10px 12px; text-decoration:none !important; }
 .header .logo strong { position:absolute; top:-999em; left:-999em; width:0; height:0; font-size:0; line-height:0; text-indent:-999em; overflow:hidden; }
-.header .logo img { width:300px; height:52px; }
 .header h1.logo { margin:0; }
-.header h1.logo img { width:300px; height:52px; }
 .header .quick-access { float:right; width:600px; padding:28px 10px 0 0; }
-.header .welcome-msg { margin:0; color:#000000; text-align:right; }
-.header .welcome-msg a { color:#0B0B61; }
-.header .form-search { position:absolute; top:0; right:29px; width:315px; height:30px; background:#006999; padding:1px 0 0 16px; -webkit-border-bottom-left-radius:8px; -moz-border-radius-bottomleft:8px; border-bottom-left-radius:8px; -webkit-border-bottom-right-radius:8px; -moz-border-radius-bottomright:8px; border-bottom-right-radius:8px;}
+.header .welcome-msg { margin:0; color:#fff; text-align:right; }
+.header .welcome-msg a { color:#ebbc58; }
+.header .form-search { position:absolute; top:0; right:29px; width:315px; height:30px; background:url(../images/bkg_form-search.gif) 0 0 no-repeat; padding:1px 0 0 16px; }
 .header .form-search label { float:left; width:24px; height:21px; text-align:left; text-indent:-999em; overflow:hidden; }
 .header .form-search input.input-text { float:left; border-color:#5c7989; width:209px; margin-right:4px; }
-.header .form-search button.button { float:left; -webkit-border-radius:8px; -moz-border-radius:8px; border-radius:8px; }
-.header .form-search button.button span { border:0; height:21px; background:#8bc230; padding:0 0 0 3px; font:bold 12px/22px Arial, Helvetica, sans-serif; color:#000000; }
+.header .form-search button.button { float:left; }
+.header .form-search button.button span { border:0; height:21px; background:url(../images/btn_search.gif) 0 0 no-repeat; padding:0 0 0 3px; font:bold 11px/21px Tahoma, Verdana, Arial, sans-serif; }
 .header .form-search button.button span span { background-position:100% 0; padding:0 6px 0 3px; }
 .header .form-search .search-autocomplete { z-index:999; left:40px !important; top:22px !important; }
 .header .form-search .search-autocomplete ul { border:1px solid #5c7989; background-color:#f9f5f0; }
@@ -541,12 +536,13 @@ tr.summary-details-excluded { font-style:italic; }
 .header .form-language select.flags option { background-position:4px 50%; background-repeat:no-repeat; padding-left:25px; }
 .header .links { float:right; margin:0 0 6px; }
 .header .links li { float:left; font-size:11px; background:url(../images/bkg_pipe1.gif) 100% 60% no-repeat; padding:0 8px 0 7px; }
-.header .links a { color:#0B0B61; }
+.header .links a { color:#ebbc58; }
 .header-container .top-container { clear:both; padding:5px 10px 0 12px; text-align:right; }
 .header-container .top-container a { font-size:11px; color:#ebbc58; }
+.top-container .paypal-logo {text-align: left; display: inline-table;}
 
 /********** < Navigation */
-.nav-container { background:#009bc9; background:-webkit-gradient(linear, left top, left bottom, from(#009DC9), to(#267E97)); background:-webkit-linear-gradient(top, #009DC9, #267E97); background:-moz-linear-gradient(top, #009DC9, #267E97); background:-ms-linear-gradient(top, #009DC9, #267E97); background:-o-linear-gradient(top, #009DC9, #267E97); }
+.nav-container { background:#0a263d url(../images/bkg_nav0.jpg) 50% 0 repeat-y; }
 #nav { width:918px; margin:0 auto; padding:0 16px; font-size:13px; }
 
 /* All Levels */ /* Style consistent throughout all nav levels */
@@ -561,10 +557,10 @@ tr.summary-details-excluded { font-style:italic; }
 
 /* 0 Level */
 #nav li { float:left; }
-#nav li.active a { color:#004563; }
-#nav a { float:left; padding:5px 12px 6px 8px; color:#ffffff; font-weight:bold; }
+#nav li.active a { color:#d96708; }
+#nav a { float:left; padding:5px 12px 6px 8px; color:#a7c6dd; font-weight:bold; }
 #nav li.over a,
-#nav a:hover { color:#8bc230; }
+#nav a:hover { color:#d96708; }
 
 /* 1st Level */
 #nav ul li,
@@ -776,7 +772,7 @@ tr.summary-details-excluded { font-style:italic; }
 .block-reorder .validation-advice { margin:3px 9px 7px; }
 
 /* Block: Banner */
-.block-banner { border:0; display:none; }
+.block-banner { border:0; }
 .block-banner .block-content { padding:0; text-align:center; }
 
 /* Block: Login */
@@ -975,9 +971,11 @@ tr.summary-details-excluded { font-style:italic; }
 .add-to-cart label { float:left; margin-right:5px; font-weight:bold; color:#666; }
 .add-to-cart .qty { float:left; margin-right:5px; }
 .add-to-cart button.button { float:left; }
-.add-to-cart .paypal-logo { clear:left; margin:0; text-align:right; }
-.add-to-cart .paypal-logo .paypal-or { clear:both; display:block; margin:5px 60px 5px 0; }
+.add-to-cart .paypal-logo { clear:left; margin:0; text-align:left; }
+.add-to-cart .paypal-logo .paypal-or { clear:both; display:block; margin:5px 60px 5px 60px; }
 .product-view .add-to-cart .paypal-logo { margin:0; }
+.bml-checkout-type { list-style: none; }
+.bml-checkout-type .bml_button  { width: 150px; display: inline-table; }
 
 /* Add to Links + Add to Cart */
 .add-to-box { margin:10px 0; }
@@ -1026,7 +1024,7 @@ tr.summary-details-excluded { font-style:italic; }
 .col1-layout .product-view .product-shop { float:right; width:545px; }
 .col3-layout .product-view .product-shop { float:none; width:auto; }
 .product-view .product-shop .product-name { margin:0 0 5px; }
-.product-view .product-shop .product-name h1 { margin:0; font:bold 23px/1.35 Arial, Helvetica, sans-serif; }
+.product-view .product-shop .product-name h1 { margin:0; font:bold 15px/1.35 Arial, Helvetica, sans-serif; }
 .product-view .product-shop .availability { margin:10px 0; }
 .product-view .product-shop .short-description { margin:10px 0; background:url(../images/bkg_divider1.gif) 0 0 repeat-x; padding:10px 0 0; }
 .product-view .product-shop .price-box { margin:10px 0; }
@@ -1144,6 +1142,7 @@ tr.summary-details-excluded { font-style:italic; }
 .send-friend .buttons-set .limit { float:right; margin:0 7px 0 0; font-size:11px; line-height:21px; }
 /* ======================================================================================= */
 
+
 /* Content Styles ================================================================= */
 .product-name { margin:0; font-size:1em; font-weight:normal; }
 .product-name a { color:#1e7ec8; }
@@ -1191,7 +1190,8 @@ tr.summary-details-excluded { font-style:italic; }
 .cart .page-title .checkout-types li { margin:0 0 5px; }
 .cart .title-buttons .checkout-types { float:right; }
 .cart .title-buttons .checkout-types li { float:left; margin:0 0 5px 5px; }
-.cart .checkout-types .paypal-or { margin:0 8px; line-height:2.3; }
+.cart .checkout-types .paypal-or { margin:0 8px; line-height:2.3; vertical-align: top;}
+.cart .checkout-types .bml_button {display:inline-table; width: 150px; margin: 0 0 5px;}
 .cart .totals .checkout-types .paypal-or { clear:both; display:block; padding:8px 55px 0 0; line-height:1.0; font-size:11px; }
 
 /* Shopping Cart Table */
@@ -1575,7 +1575,7 @@ tr.summary-details-excluded { font-style:italic; }
 /********** Dashboard > */
 
 /* Address Book */
-.addresses-list h2 { font-weight:bold; font-size:13px; color:#646464; text-transform:uppercase; }
+.addresses-list h2 { font-weight:bold; font-size:13px; color:#e26703; text-transform:uppercase; }
 .addresses-list h3 { font-weight:bold; font-size:13px; }
 .addresses-list address { margin:0 0 3px; }
 .addresses-list p { margin:0; }
@@ -1696,8 +1696,11 @@ tr.summary-details-excluded { font-style:italic; }
 .map-popup-close { background:url(../images/btn_window_close.gif) no-repeat; display:block; position:absolute; top:8px; right:10px; height:15px; width:15px; text-indent:-9999em; -moz-box-shadow:0 0 3px #999; -webkit-box-shadow:0 0 3px #999; box-shadow:0 0 3px #999; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; }
 .map-popup-content { border-top:1px solid #eee; padding:10px; overflow:hidden; text-align:left; width:280px; }
 .map-popup-checkout { display:inline; float:right; text-align:right; }
-.map-popup-checkout span { display:block; padding-right:30px; }
+.map-popup-checkout span { display:block; }
+.map-popup-checkout .paypal-or { clear:both; display:block; }
 .map-popup-checkout .paypal-logo { margin:0 0 5px; }
+.map-popup-checkout li { list-style: none; }
+.map-popup-checkout { text-align: center; }
 .map-popup-price .price-box,
 .map-popup-price .price-box .special-price { margin:0; padding:0; }
 .map-popup-price { margin:5px 0 0; }
@@ -1705,172 +1708,26 @@ tr.summary-details-excluded { font-style:italic; }
 .map-popup-only-text { border-top:1px solid #ddd; }
 /* ======================================================================================= */
 
-/* About Us ============================================================================== */
-#container {
-	width: 900px;
-	margin: auto;
-	position: relative;	
-}#left {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	font-style: normal;
-	line-height: 15px;
-	color: #000;
-	float: left;
-	width: 400px;
-	position: relative;
-	left: 0px;
-}.boldtext {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 16px;
-	font-style: normal;
-	line-height: 16px;
-	color: #000;
-	font-weight: bold;
-}
-#right {
-	float: right;
-	width: 500px;
-	position: relative;
-}
-#sarah {
-	z-index: +1;
-	left: 350px;
-	float: left;
-	position: absolute;
-}
-#bottomcontainer {
-	padding-top: 30px;
-	clear: both;
-	display: block;
-}
-.textboxlong {
-	width: 400px;
-	padding-bottom: 15px;
-}
-#textboxlongps {
-	width: 400px;
-	padding-bottom: 15px;
-	padding-top: 15px;
-
-	}
-.textboxshort {
-	width: 350px;
-	padding-bottom: 15px;
-	}
-.textboxlongright {
-	width: 300px;
-	padding-bottom: 0px;
-	padding-left: 100px;
-}
-#successbanner {
-	background-image: url(/skin/frontend/br3/default/images/blue_snip.jpg);
-	background-repeat: repeat-x;
-	width: 900px;
-	height: 30px;
-	color: #FFF;
-	font-weight: normal;
-	font-size: 30px;
-	line-height: 20px;
-	text-align: center;
-	padding-top: 10px;
-	vertical-align: middle;
-	letter-spacing: normal;
-	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-	margin-bottom: 20px;
-}
-#testimonialcontainer {
-	width: 900px;
-}
-#lefttestimonial {
-	width: 480px;
-	float:left;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	font-style: normal;
-	line-height: 15px;
-	color: #000;
-	margin-right: 20px;
-
-}
-#righttestimonial {
-	width: 400px;
-	float:right;
-}
-#rightsmallest {
-	width: 400px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	font-style: normal;
-	line-height: 15px;
-	color: #000;
-	float: right;
-	margin-bottom:20px;
-	
-}
-.state {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	font-style: normal;
-	line-height: 15px;
-	color: #000;
-	padding-left:50px;
-	
-}
-.rightsmallestline {
-	width: 400px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	font-style: normal;
-	line-height: 15px;
-	color: #000;
-	float: right;
-	margin-bottom:20px;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-	border-bottom-color: #000;
-}
-.redheaders {
-	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-	font-size: 22px;
-	font-style: normal;
-	line-height: 15px;
-	color: #B80000;
-	margin-bottom:20px;
-}
-/* ======================================================================================= */
-
 
 /* Footer ================================================================================ */
-.footer-container { border-top:15px solid #006999; }
-.footer { width:930px; margin:0 auto; padding:10px 10px 5px 10px; }
+.footer-container { border-top:15px solid #b6d1e2; }
+.footer { width:930px; margin:0 auto; padding:10px 10px 50px; }
 .footer .store-switcher { display:inline; margin:0 5px 0 0; color:#fff; }
 .footer .store-switcher label { font-weight:bold; vertical-align:middle; }
 .footer .store-switcher select { padding:0; vertical-align:middle; }
-.footer a { color:#000000; text-decoration:none; }
+.footer a { color:#fff; text-decoration:none; }
 .footer a:hover { text-decoration:underline; }
-.footer .bugs { margin:13px 0 0; color:#fff; }
-.footer .bugs a { color:#fff; text-decoration:underline; }
+.footer .bugs { margin:13px 0 0; color:#ecf3f6; }
+.footer .bugs a { color:#ecf3f6; text-decoration:underline; }
 .footer .bugs a:hover { text-decoration:none; }
-.footer address { margin:0 0 20px; color:#000000; }
-.footer address a { color:#000000; text-decoration:underline; }
+.footer address { margin:0 0 20px; color:#ecf3f6; }
+.footer address a { color:#ecf3f6; text-decoration:underline; }
 .footer address a:hover { text-decoration:none; }
 .footer ul { display:inline; }
 .footer ul.links { display:block; }
 .footer li { display:inline; background:url(../images/bkg_pipe2.gif) 100% 60% no-repeat; padding:0 7px 0 4px; }
 .footer li.last { background:none !important; padding-right:0 !important; }
 .footer-container .bottom-container { margin:0 0 5px; }
-/* ======================================================================================= */
-
-/* Footer Badges ========================================================================= */
-#footer-badges { width:700px; margin:auto; height:150px; }
-#bbb-badge { float:left; margin-right:50px; }
-#digicert-badge { float:left; margin-right:60px; }
-#paypal-badge { float:left; margin-right:50px; }
-#amazon-badge { float:left; margin-right:65px; }
-#amazon-badge img { width:100px; height:63px }
-#money-back-badge { float:right; }
-#money-back-badge img { width:100px; height:96px; }
 /* ======================================================================================= */
 
 /* Sample Data============================================================================ */

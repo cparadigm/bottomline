@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Aromicon_Gua>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>
         </Aromicon_Gua>
     </modules>

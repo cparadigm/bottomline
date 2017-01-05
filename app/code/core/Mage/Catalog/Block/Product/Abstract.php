@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_Catalog
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 
@@ -60,7 +60,7 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
      *
      * @var string
      */
-    protected $_tierPriceDefaultTemplate  = 'catalog/product/view/tierprices.phtml';
+    protected $_tierPriceDefaultTemplate = 'catalog/product/view/tierprices.phtml';
 
     /**
      * Price types
@@ -103,6 +103,16 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
      * @var string
      */
     protected $_mapRenderer = 'msrp';
+
+    /**
+     * Get catalog product helper
+     *
+     * @return Mage_Catalog_Helper_Product
+     */
+    public function getProductHelper()
+    {
+        return Mage::helper('catalog/product');
+    }
 
     /**
      * Retrieve url for add product to cart
@@ -195,12 +205,7 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
      */
     public function getMinimalQty($product)
     {
-        $stockItem = $product->getStockItem();
-        if ($stockItem) {
-            return ($stockItem->getMinSaleQty()
-                && $stockItem->getMinSaleQty() > 0 ? $stockItem->getMinSaleQty() * 1 : null);
-        }
-        return null;
+        return $this->getProductHelper()->getMinimalQty($product);
     }
 
     /**
@@ -377,13 +382,15 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
 
         return $this->getData('tier_price_template');
     }
+
     /**
      * Returns product tier price block html
      *
-     * @param Mage_Catalog_Model_Product $product
+     * @param null|Mage_Catalog_Model_Product $product
+     * @param null|Mage_Catalog_Model_Product $parent
      * @return string
      */
-    public function getTierPriceHtml($product = null)
+    public function getTierPriceHtml($product = null, $parent = null)
     {
         if (is_null($product)) {
             $product = $this->getProduct();
@@ -391,8 +398,22 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
         return $this->_getPriceBlock($product->getTypeId())
             ->setTemplate($this->getTierPriceTemplate())
             ->setProduct($product)
-            ->setInGrouped($this->getProduct()->isGrouped())
-            ->toHtml();
+            ->setInGrouped($product->isGrouped())
+            ->setParent($parent)
+            ->callParentToHtml();
+    }
+
+    /*
+     * Calls the object's to Html method.
+     * This method exists to make the code more testable.
+     * By having a protected wrapper for the final method toHtml, we can 'mock' out this method
+     * when unit testing
+     *
+     *  @return string
+     */
+    protected function callParentToHtml()
+    {
+        return $this->toHtml();
     }
 
     /**
@@ -406,7 +427,7 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
         if (is_null($product)) {
             $product = $this->getProduct();
         }
-        $prices  = $product->getFormatedTierPrice();
+        $prices = $product->getFormatedTierPrice();
 
         $res = array();
         if (is_array($prices)) {

@@ -10,17 +10,17 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
@@ -31,12 +31,12 @@
 <?php $_order = $this->getOrder() ?>
 <div class="page-title title-buttons">
     <h1><?php echo $this->__('My Orders - Details') ?></h1>
-    <button class="button"><span><span><?php echo $this->__('Print All Receipts') ?></span></span></button>
+    <button class="button"><span><span><?php echo $this->__('Print All Invoices') ?></span></span></button>
 </div>
 <h3><?php echo $this->__('Order #%s', $_order->getRealOrderId()) ?></h3>
 <?php foreach ($this->getInvoices() as $_invoice): ?>
 <div class="page-title">
-    <h3><?php echo $this->__('Receipt #%s', $_invoice->getIncrementId()) ?></h3>
+    <h3><?php echo $this->__('Invoice #%s', $_invoice->getIncrementId()) ?></h3>
     <a href="#" class="link-print"><?php echo $this->__('Print Invoice') ?></a>
 </div>
 <div class="col2-set">

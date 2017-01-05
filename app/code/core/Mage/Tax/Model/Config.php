@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_Tax
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
@@ -38,6 +38,7 @@ class Mage_Tax_Model_Config
      */
     const XML_PATH_TAX_NOTIFICATION_DISCOUNT = 'tax/ignore_notification/discount';
     const XML_PATH_TAX_NOTIFICATION_PRICE_DISPLAY = 'tax/ignore_notification/price_display';
+    const XML_PATH_TAX_NOTIFICATION_FPT_CONFIGURATION = 'tax/ignore_notification/fpt_configuration';
     const XML_PATH_TAX_NOTIFICATION_URL = 'tax/notification/url';
     /**#@-*/
 
@@ -56,6 +57,7 @@ class Mage_Tax_Model_Config
     const CONFIG_XML_PATH_APPLY_AFTER_DISCOUNT = 'tax/calculation/apply_after_discount';
     const CONFIG_XML_PATH_DISCOUNT_TAX = 'tax/calculation/discount_tax';
     const XML_PATH_ALGORITHM = 'tax/calculation/algorithm';
+    const CONFIG_XML_PATH_CROSS_BORDER_TRADE_ENABLED = 'tax/calculation/cross_border_trade_enabled';
     /**#@-*/
 
     /**#@+
@@ -69,32 +71,32 @@ class Mage_Tax_Model_Config
     /**#@+
      * Prices display settings
      */
-    const CONFIG_XML_PATH_PRICE_DISPLAY_TYPE    = 'tax/display/type';
-    const CONFIG_XML_PATH_DISPLAY_SHIPPING      = 'tax/display/shipping';
+    const CONFIG_XML_PATH_PRICE_DISPLAY_TYPE = 'tax/display/type';
+    const CONFIG_XML_PATH_DISPLAY_SHIPPING = 'tax/display/shipping';
     /**#@-*/
 
     /**#@+
      * Shopping cart display settings
      */
-    const XML_PATH_DISPLAY_CART_PRICE       = 'tax/cart_display/price';
-    const XML_PATH_DISPLAY_CART_SUBTOTAL    = 'tax/cart_display/subtotal';
-    const XML_PATH_DISPLAY_CART_SHIPPING    = 'tax/cart_display/shipping';
-    const XML_PATH_DISPLAY_CART_DISCOUNT    = 'tax/cart_display/discount';
-    const XML_PATH_DISPLAY_CART_GRANDTOTAL  = 'tax/cart_display/grandtotal';
+    const XML_PATH_DISPLAY_CART_PRICE = 'tax/cart_display/price';
+    const XML_PATH_DISPLAY_CART_SUBTOTAL = 'tax/cart_display/subtotal';
+    const XML_PATH_DISPLAY_CART_SHIPPING = 'tax/cart_display/shipping';
+    const XML_PATH_DISPLAY_CART_DISCOUNT = 'tax/cart_display/discount';
+    const XML_PATH_DISPLAY_CART_GRANDTOTAL = 'tax/cart_display/grandtotal';
     const XML_PATH_DISPLAY_CART_FULL_SUMMARY = 'tax/cart_display/full_summary';
-    const XML_PATH_DISPLAY_CART_ZERO_TAX    = 'tax/cart_display/zero_tax';
+    const XML_PATH_DISPLAY_CART_ZERO_TAX = 'tax/cart_display/zero_tax';
     /**#@-*/
 
     /**#@+
      * Shopping cart display settings
      */
-    const XML_PATH_DISPLAY_SALES_PRICE       = 'tax/sales_display/price';
-    const XML_PATH_DISPLAY_SALES_SUBTOTAL    = 'tax/sales_display/subtotal';
-    const XML_PATH_DISPLAY_SALES_SHIPPING    = 'tax/sales_display/shipping';
-    const XML_PATH_DISPLAY_SALES_DISCOUNT    = 'tax/sales_display/discount';
-    const XML_PATH_DISPLAY_SALES_GRANDTOTAL  = 'tax/sales_display/grandtotal';
+    const XML_PATH_DISPLAY_SALES_PRICE = 'tax/sales_display/price';
+    const XML_PATH_DISPLAY_SALES_SUBTOTAL = 'tax/sales_display/subtotal';
+    const XML_PATH_DISPLAY_SALES_SHIPPING = 'tax/sales_display/shipping';
+    const XML_PATH_DISPLAY_SALES_DISCOUNT = 'tax/sales_display/discount';
+    const XML_PATH_DISPLAY_SALES_GRANDTOTAL = 'tax/sales_display/grandtotal';
     const XML_PATH_DISPLAY_SALES_FULL_SUMMARY = 'tax/sales_display/full_summary';
-    const XML_PATH_DISPLAY_SALES_ZERO_TAX    = 'tax/sales_display/zero_tax';
+    const XML_PATH_DISPLAY_SALES_ZERO_TAX = 'tax/sales_display/zero_tax';
     /**#@-*/
 
     /**
@@ -111,13 +113,21 @@ class Mage_Tax_Model_Config
     /**#@-*/
 
     /**#@+
+     * Indexes for FPT Configuration Types
+     */
+    const FPT_NOT_TAXED = 0;
+    const FPT_TAXED = 1;
+    const FPT_LOADED_DISPLAY_WITH_TAX = 2;
+    /**#@-*/
+
+    /**#@+
      * @deprecated
      */
     const CONFIG_XML_PATH_SHOW_IN_CATALOG = 'tax/display/show_in_catalog';
     const CONFIG_XML_PATH_DEFAULT_PRODUCT_TAX_GROUP = 'catalog/product/default_tax_group';
-    const CONFIG_XML_PATH_DISPLAY_TAX_COLUMN    = 'tax/display/column_in_summary';
-    const CONFIG_XML_PATH_DISPLAY_FULL_SUMMARY  = 'tax/display/full_summary';
-    const CONFIG_XML_PATH_DISPLAY_ZERO_TAX      = 'tax/display/zero_tax';
+    const CONFIG_XML_PATH_DISPLAY_TAX_COLUMN = 'tax/display/column_in_summary';
+    const CONFIG_XML_PATH_DISPLAY_FULL_SUMMARY = 'tax/display/full_summary';
+    const CONFIG_XML_PATH_DISPLAY_ZERO_TAX = 'tax/display/zero_tax';
     /**#@-*/
 
     /**
@@ -735,13 +745,24 @@ class Mage_Tax_Model_Config
      *
      * Matrix for invalid discount settings is as follows:
      *      Before Discount / Excluding Tax
-     *      After Discount / Including Tax
+     *      Before Discount / Including Tax
      *
      * @param mixed $store
      * @return bool
      */
     public function checkDiscountSettings($store = null)
     {
-        return $this->applyTaxAfterDiscount($store) != $this->discountTax($store);
+        return $this->applyTaxAfterDiscount($store);
+    }
+
+    /**
+     * Return the config value for self::CONFIG_XML_PATH_CROSS_BORDER_TRADE_ENABLED
+     *
+     * @param int|null $store
+     * @return int
+     */
+    public function crossBorderTradeEnabled($store = null)
+    {
+        return $this->_getStoreConfig(self::CONFIG_XML_PATH_CROSS_BORDER_TRADE_ENABLED, $store);
     }
 }

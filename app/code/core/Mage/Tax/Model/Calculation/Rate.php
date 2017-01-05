@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_Tax
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
@@ -52,7 +52,18 @@
  */
 class Mage_Tax_Model_Calculation_Rate extends Mage_Core_Model_Abstract
 {
+    /**
+     * List of tax titles
+     *
+     * @var array
+     */
     protected $_titles = null;
+
+    /**
+     * The Mage_Tax_Model_Calculation_Rate_Title
+     *
+     * @var Mage_Tax_Model_Calculation_Rate_Title
+     */
     protected $_titleModel = null;
 
     /**
@@ -76,7 +87,7 @@ class Mage_Tax_Model_Calculation_Rate extends Mage_Core_Model_Abstract
             Mage::throwException(Mage::helper('tax')->__('Please fill all required fields with valid information.'));
         }
 
-        if (!is_numeric($this->getRate()) || $this->getRate() <= 0) {
+        if (!is_numeric($this->getRate()) || $this->getRate() < 0) {
             Mage::throwException(Mage::helper('tax')->__('Rate Percent should be a positive number.'));
         }
 
@@ -159,6 +170,11 @@ class Mage_Tax_Model_Calculation_Rate extends Mage_Core_Model_Abstract
         return parent::_afterDelete();
     }
 
+    /**
+     * Saves the tax titles
+     *
+     * @param array | null $titles
+     */
     public function saveTitles($titles = null)
     {
         if (is_null($titles)) {
@@ -167,7 +183,7 @@ class Mage_Tax_Model_Calculation_Rate extends Mage_Core_Model_Abstract
 
         $this->getTitleModel()->deleteByRateId($this->getId());
         if (is_array($titles) && $titles) {
-            foreach ($titles as $store=>$title) {
+            foreach ($titles as $store => $title) {
                 if ($title !== '') {
                     $this->getTitleModel()
                         ->setId(null)
@@ -180,6 +196,11 @@ class Mage_Tax_Model_Calculation_Rate extends Mage_Core_Model_Abstract
         }
     }
 
+    /**
+     * Returns the Mage_Tax_Model_Calculation_Rate_Title
+     *
+     * @return Mage_Tax_Model_Calculation_Rate_Title
+     */
     public function getTitleModel()
     {
         if (is_null($this->_titleModel)) {
@@ -188,6 +209,11 @@ class Mage_Tax_Model_Calculation_Rate extends Mage_Core_Model_Abstract
         return $this->_titleModel;
     }
 
+    /**
+     * Returns the list of tax titles
+     *
+     * @return array
+     */
     public function getTitles()
     {
         if (is_null($this->_titles)) {
@@ -196,6 +222,11 @@ class Mage_Tax_Model_Calculation_Rate extends Mage_Core_Model_Abstract
         return $this->_titles;
     }
 
+    /**
+     * Deletes all tax rates
+     *
+     * @return Mage_Tax_Model_Calculation_Rate
+     */
     public function deleteAllRates()
     {
         $this->_getResource()->deleteAllRates();

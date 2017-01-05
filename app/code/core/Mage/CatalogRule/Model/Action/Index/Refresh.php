@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_CatalogRule
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
@@ -319,8 +319,16 @@ class Mage_CatalogRule_Model_Action_Index_Refresh
             );
             $priceColumn = $this->_connection->getIfNullSql(
                 $this->_connection->getIfNullSql(
-                    'pg.value',
-                    'pgd.value'
+                    $this->_connection->getCheckSql(
+                        'pg.is_percent = 1',
+                        'p.price * (100 - pg.value)/100',
+                        'pg.value'
+                    ),
+                    $this->_connection->getCheckSql(
+                        'pgd.is_percent = 1',
+                        'p.price * (100 - pgd.value)/100',
+                        'pgd.value'
+                    )
                 ),
                 'p.price'
             );
@@ -343,8 +351,22 @@ class Mage_CatalogRule_Model_Action_Index_Refresh
                 );
             $priceColumn = $this->_connection->getIfNullSql(
                 $this->_connection->getIfNullSql(
-                    'pg.value',
-                    'pgd.value'
+                    $this->_connection->getCheckSql(
+                        'pg.is_percent = 1',
+                        $this->_connection->getIfNullSql(
+                            'p.value',
+                            'pd.value'
+                        ) . ' * (100 - pg.value)/100',
+                        'pg.value'
+                    ),
+                    $this->_connection->getCheckSql(
+                        'pgd.is_percent = 1',
+                        $this->_connection->getIfNullSql(
+                            'p.value',
+                            'pd.value'
+                        ) . ' * (100 - pgd.value)/100',
+                        'pgd.value'
+                    )
                 ),
                 $this->_connection->getIfNullSql(
                     'p.value',
@@ -451,7 +473,7 @@ class Mage_CatalogRule_Model_Action_Index_Refresh
     protected function _prepareIndexSelect(Mage_Core_Model_Website $website, $time)
     {
         $nA = $this->_connection->quote('N/A');
-        $this->_connection->query('SET @price := NULL');
+        $this->_connection->query('SET @price := 0');
         $this->_connection->query('SET @group_id := NULL');
         $this->_connection->query('SET @action_stop := NULL');
 

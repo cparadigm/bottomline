@@ -10,17 +10,17 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
@@ -36,10 +36,10 @@
 <script type="text/javascript">
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
-<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
 <div class="product-view">
     <div class="product-essential">
-    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+    <form action="<?php echo $this->getSubmitUrl($_product, array('_secure' => $this->_isSecure())) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
         <?php echo $this->getBlockHtml('formkey') ?>
         <div class="no-display">
             <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
@@ -50,12 +50,6 @@
             <div class="product-name">
                 <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
             </div>
-
-            <?php if ($_product->getBookAuthor()):?>
-                <div class="book-author">
-                    <div class="std"><p><a href="#authorbio"><?php echo $_helper->productAttribute($_product, nl2br($_product->getBookAuthor()), 'book_author') ?></a></p></div>
-                </div>
-            <?php endif;?>  
 
             <?php if ($this->canEmailToFriend()): ?>
                 <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
@@ -84,7 +78,12 @@
                 </div>
             <?php endif; ?>
 
-
+            <?php if ($_product->getShortDescription()):?>
+                <div class="short-description">
+                    <h2><?php echo $this->__('Quick Overview') ?></h2>
+                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+                </div>
+            <?php endif;?>
 
             <?php echo $this->getChildHtml('other');?>
 
@@ -99,21 +98,6 @@
         </div>
 
         <div class="clearer"></div>
-        
-            <?php if ($_product->getShortDescription()):?>
-                <div class="short-description">
-                    <h2><?php echo $this->__('Bottom Line Says...') ?></h2>
-                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
-                </div>
-            <?php endif;?>        
-
-
-
-
-
-
-
-        
         <?php if ($_product->isSaleable() && $this->hasOptions()):?>
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
         <?php endif;?>
@@ -167,57 +151,20 @@
                 Object.extend(Validation.methods, nv);
             }
         }.bind(productAddToCartForm);
-        
-        
-        
-		var $j = jQuery.noConflict(); 
-		var addthis_config = {"data_track_addressbar":true};
-
-		
-		$j(document).ready(function(){
-
-		    			
-				$j("p.email-friend").css({display: "inline", float: "left"});
-		    $j(".addthis_toolbox").insertAfter("p.email-friend").css("float", "left");
-		  //$j('<div class="clearer"></div>').insertAfter(".addthis_toolbox");
-		    $j('<div class="clearer"></div>').insertAfter("p.email-friend");
-		    $j('li#product_tabs_authorbio.last a').attr("name", "authorbio");
-		    $j("div.book-author div.std p a").on( "click", function() {
-				$j( "#product_tabs_description_contents" ).hide();
-				$j( "#product_tabs_authorbio_contents" ).show();
-				$j( "li#product_tabs_description" ).removeClass("active");
-				$j( "li#product_tabs_authorbio" ).addClass("active");
-						
-				});
-				$j("div.product-shop p.no-rating").after('<div class="addthis_toolbox addthis_default_style" style="margin-top:10px;"><a class="addthis_button_preferred_1"></a><a class="addthis_button_preferred_2"></a><a class="addthis_button_preferred_3"></a><a class="addthis_button_preferred_4"></a><a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a></div>');
-		});
-
-
-		$j(function() {
-		  $j('[name="#authorbio"]').click(function() {
-		    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-		      var target = $j(this.hash);
-		      target = target.length ? target : $j('[name=' + this.hash.slice(1) +']');
-		      if (target.length) {
-		        $j('html,body').animate({
-		          scrollTop: target.offset().top
-		        }, 1000);
-		        return false;
-		      }
-		    }
-		  });
-		});
-        
     //]]>
     </script>
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50f036685929d734"></script>
     </div>
 
     <div class="product-collateral">
-
-
-<?php echo $this->getChildHtml('info_tabs') ?>
-        <!--?php echo $this->getChildHtml('upsell_products') ?-->
+<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+        <div class="box-collateral <?php echo "box-{$alias}"?>">
+            <?php if ($title = $this->getChildData($alias, 'title')):?>
+            <h2><?php echo $this->escapeHtml($title); ?></h2>
+            <?php endif;?>
+            <?php echo $html; ?>
+        </div>
+<?php endforeach;?>
+        <?php echo $this->getChildHtml('upsell_products') ?>
         <?php echo $this->getChildHtml('product_additional_data') ?>
     </div>
 </div>

@@ -2,8 +2,8 @@
 <config>
  <modules>
   <GoIvvy_OneCode>
-    <active>true</active>
-    <codePool>community</codePool> 
-  </GoIvvy_OneCode> 
+    <active>false</active>
+    <codePool>community</codePool>
+  </GoIvvy_OneCode>
  </modules>
 </config>

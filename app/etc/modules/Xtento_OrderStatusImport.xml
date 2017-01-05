@@ -2,11 +2,11 @@
 <config>
     <modules>
         <Xtento_OrderStatusImport>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
             <depends>
                 <Xtento_XtCore/>
             </depends>
         </Xtento_OrderStatusImport>
     </modules>
-</config> 
+</config>

@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_Tax
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
@@ -132,14 +132,23 @@ class Mage_Tax_Block_Sales_Order_Tax extends Mage_Core_Block_Template
             $subtotalIncl   = (float) $this->_source->getSubtotalInclTax();
             $baseSubtotalIncl= (float) $this->_source->getBaseSubtotalInclTax();
 
-            if (!$subtotalIncl) {
-                $subtotalIncl = $subtotal+ $this->_source->getTaxAmount()
+            if (!$subtotalIncl || !$baseSubtotalIncl) {
+                //Calculate the subtotal if not set
+                $subtotalIncl = $subtotal + $this->_source->getTaxAmount()
                     - $this->_source->getShippingTaxAmount();
-            }
-            if (!$baseSubtotalIncl) {
                 $baseSubtotalIncl = $baseSubtotal + $this->_source->getBaseTaxAmount()
                     - $this->_source->getBaseShippingTaxAmount();
+
+                if ($this->_source instanceof Mage_Sales_Model_Order) {
+                    //Adjust the discount amounts for the base and well as the weee to display the right totals
+                    foreach ($this->_source->getAllItems() as $item) {
+                        $subtotalIncl += $item->getHiddenTaxAmount() + $item->getDiscountAppliedForWeeeTax();
+                        $baseSubtotalIncl += $item->getBaseHiddenTaxAmount() +
+                            $item->getBaseDiscountAppliedForWeeeTax();
+                    }
+                }
             }
+
             $subtotalIncl = max(0, $subtotalIncl);
             $baseSubtotalIncl = max(0, $baseSubtotalIncl);
             $totalExcl = new Varien_Object(array(
