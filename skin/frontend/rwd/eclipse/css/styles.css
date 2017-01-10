@@ -179,7 +179,7 @@ img {
 	min-height: 400px;
 	display: inline-block;
 }
-/* Base Columns */ 
+/* Base Columns */
 .col-main {
 	width: 1170px;
 	margin: auto;
@@ -419,7 +419,7 @@ header .header .logo a img {
 	border-color: #c4c4c4;
 }
 /* ========= End language currency==========*/
- 
+
 ul.stores_top_link {
 	display: inline-block;
 	text-transform: uppercase;
@@ -3286,6 +3286,10 @@ form h2, form h3, .section h3 {
 .products-grid .item .item-inner .pro-img-thumb {
 	position: relative;
 }
+.pro-img-thumb img {
+    height: auto;
+    width: 79%;
+}
 .products-grid .item .item-inner .item-img {
 	position: relative;
 }
@@ -3529,7 +3533,7 @@ form h2, form h3, .section h3 {
 	-webkit-transition: all 0.2s linear;
 	padding: 5px 5px;
 	line-height: 25px;
-	width:20px;	
+	width:20px;
 }
 .products-grid .actions-links .add-to-links a.magik-btn-quickview:hover {
 	font-family: 'FontAwesome';
@@ -3552,7 +3556,7 @@ form h2, form h3, .section h3 {
 
 .products-grid .actions-links .add-to-links a.link-wishlist, a.link-compare {
 	color: #fff;
-	font-family: 'FontAwesome';	
+	font-family: 'FontAwesome';
 	font-weight: normal;
 	margin: 0;
 	text-decoration: none;
@@ -8499,7 +8503,7 @@ nav.dropdown a.act {
 	padding: 0;
 	list-style: none !important;
 }
-/*========== FlexSlider Necessary Styles ==========*/ 
+/*========== FlexSlider Necessary Styles ==========*/
 .flexslider {
 	margin: 0;
 	padding: 0;
@@ -9957,7 +9961,7 @@ button.subscribe:hover {
 html .icon-money:before {
 	content: "\f182""\f183";
 }
-.icon-slider:before 
+.icon-slider:before
 {
 	content: "\f07e";
 }
@@ -10463,7 +10467,7 @@ html .icon-money:before {
 /**
  *  Horizontal Buttons
  */
- 
+
 .jcarousel-skin-tango4 .jcarousel-next-horizontal {
 	cursor: pointer;
 	height: 41px;
@@ -11834,7 +11838,7 @@ a.button.view-all:before {
 .latest-news .icon-calendar {
 	margin-right: 5px
 }
-/*============ blog-End ============*/	
+/*============ blog-End ============*/
 .blog-img img {
 	-webkit-transition: all 0.4s ease-in-out 0.5s;
 	-moz-transition: all 0.4s ease-in-out 0.5s;
@@ -12700,7 +12704,7 @@ ul.products-grid li.item a img.image-hover {
 /* products page */
 .category-products ul.products-grid li.item {
 	text-align: center;
-	width: 268px;
+	width: 210px !important;
 }
 .category-products ul.products-grid li.item .item-info {
 	margin-top: 12px;
@@ -12976,7 +12980,7 @@ ul.products-grid li.item a img.image-hover {
 #slides a.prev, #slides a.next {
 	margin: 125px 6px 0px 5px;
 }
-/*============ Testimonials ============*/	
+/*============ Testimonials ============*/
 
 .testimonials {
 	margin: auto;
@@ -13171,7 +13175,7 @@ ul#products_slider, ul#featured_products_slider, ul#product_slider {
 	border-right:none;
 	line-height: 26px !important;
 }
-#products_slider.products-grid .item:hover .actions-links .add-to-links a.magik-btn-quickview, #featured_products_slider.products-grid .item:hover .actions-links .add-to-links a.magik-btn-quickview, #product_slider.products-grid .item:hover .actions-links .add-to-links a.magik-btn-quickview, #product_slider_a.products-grid .item:hover .actions-links .add-to-links a.magik-btn-quickview {	
+#products_slider.products-grid .item:hover .actions-links .add-to-links a.magik-btn-quickview, #featured_products_slider.products-grid .item:hover .actions-links .add-to-links a.magik-btn-quickview, #product_slider.products-grid .item:hover .actions-links .add-to-links a.magik-btn-quickview, #product_slider_a.products-grid .item:hover .actions-links .add-to-links a.magik-btn-quickview {
 	left: 24px;
 	opacity: 8;
 	position: absolute;
