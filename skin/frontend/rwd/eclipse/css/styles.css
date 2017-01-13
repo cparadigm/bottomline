@@ -12706,7 +12706,7 @@ ul.products-grid li.item a img.image-hover {
 	margin-right: 28px !important;
 }
 /* products page */
-@media only screen and (min-width: 978px) and (max-width: 1450px){
+@media only screen and (min-width: 978px) and (max-width: 2400px){
 .category-products ul.products-grid li.item {
 	text-align: center;
 	width: 245px !important;
