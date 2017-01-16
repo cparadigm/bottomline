@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Amasty Team
- * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
  * @package Amasty_Base
  */  
 class Amasty_Base_Helper_Data extends Mage_Core_Helper_Abstract
@@ -165,5 +165,17 @@ class Amasty_Base_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         return $data;
+    }
+
+    /**
+     * @param $filename
+     * @return mixed
+     */
+    public static function sanitizeFileName($filename)
+    {
+        $chars = array(" ", '"', "'", "&", "/", "\\", "?", "#");
+
+        // every forbidden character is replace by an underscore
+        return str_replace($chars, '_', $filename);
     }
 }
