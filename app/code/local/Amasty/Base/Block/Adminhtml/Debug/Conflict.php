@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Amasty Team
- * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
  * @package Amasty_Base
  */ 
 class Amasty_Base_Block_Adminhtml_Debug_Conflict extends Amasty_Base_Block_Adminhtml_Debug_Base
@@ -70,4 +70,3 @@ class Amasty_Base_Block_Adminhtml_Debug_Conflict extends Amasty_Base_Block_Admin
         return $ret;
     }
 }
-?>
