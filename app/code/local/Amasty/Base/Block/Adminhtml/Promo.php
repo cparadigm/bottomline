@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Amasty Team
- * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
  * @package Amasty_Base
  */ 
 class Amasty_Base_Block_Adminhtml_Promo extends Mage_Adminhtml_Block_Widget_Form
@@ -25,18 +25,21 @@ class Amasty_Base_Block_Adminhtml_Promo extends Mage_Adminhtml_Block_Widget_Form
         $mageNotifications = !Mage::getStoreConfig('advanced/modules_disable_output/Mage_AdminNotification');
         
         $collection = $this->_getPromoHelper()->getNotificationsCollection();
-        
-        $collection->getSelect()
-            
-            ->order('notification_id DESC')
-            ->limit(1);
-        
-        if ($this->isSubscribed() && !$mageNotifications)
-        {
-            $items = array_values($collection->getItems());
-        
-            $ret = count($items) > 0 ? $items[0] : null;
+
+        if ($collection) {
+            $collection->getSelect()
+                ->order('notification_id DESC')
+                ->limit(1);
+
+            if ($this->isSubscribed() && !$mageNotifications)
+            {
+                $items = array_values($collection->getItems());
+
+                $ret = count($items) > 0 ? $items[0] : null;
+            }
         }
+        
+
         
         return $ret;
     }
