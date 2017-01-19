@@ -18,6 +18,7 @@
             <action method="addJs"><script>aw_ajaxcartpro/observers/clickOnDeleteFromCart.js</script></action>
             <action method="addJs"><script>aw_ajaxcartpro/observers/clickOnAddToCartInMiniWishlist.js</script></action>
             <action method="addJs"><script>varien/product.js</script></action>
+            <action method="addJs"><script>varien/product_options.js</script></action>
             <action method="addJs"><script>aw_ajaxcartpro/product.js</script></action>
             <action method="addItem"><type>skin_js</type><name>js/bundle.js</name></action>
             <action method="addCss"><stylesheet>ajaxcartpro/css/styles.css</stylesheet></action>

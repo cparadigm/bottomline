@@ -26,6 +26,7 @@
                 <reference name="head">
                    <action method="addJs"><script>prototype/validation.js</script></action>
                    <action method="addJs"><script>varien/product.js</script></action>
+                   <action method="addJs"><script>varien/product_options.js</script></action>
                    <action method="addJs"><script>varien/configurable.js</script></action>
                    <action method="addItem"><type>skin_js</type><name>js/bundle.js</name></action>
                    <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
@@ -42,7 +43,7 @@
                         </action>
 			<action method="addItem" ifconfig="eclipsesettings/rtlcss/enable"><type>skin_css</type><name>css/rtl.css</name></action>
 			<action method="addItem" ifconfig="eclipsesettings/rtlcss/rtlresponsive"><type>skin_css</type><name>css/rtl-responsive.css</name></action>
-                        <action method="addCss"><stylesheet>css/styles.css</stylesheet></action>                                                    <action method="addCss"><stylesheet>css/cp_styles.css</stylesheet></action>             
+                        <action method="addCss"><stylesheet>css/styles.css</stylesheet></action>                                                    <action method="addCss"><stylesheet>css/cp_styles.css</stylesheet></action>
                         <action method="addCss"><stylesheet>css/font-awesome.css</stylesheet></action>
                         <action method="addCss"><stylesheet>css/fancybox.css</stylesheet></action>
                         <action method="addCss"><stylesheet>css/br_styles.css</stylesheet></action>
