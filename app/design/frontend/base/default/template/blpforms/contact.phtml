@@ -25,9 +25,11 @@
  */
 ?>
 <script src='https://www.google.com/recaptcha/api.js'></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/bpl_forms/bpl_forms_styles.css').'?'.time() ?>">
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
-<div class="page-title">
-    <h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
+<div class="page-title bpl_title">
+    <div class="bpl_header"><h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1></div>
+    <a class="bpl-logo" href="mailto:customerservice@bottomlinestore.com"><img class="bpl_form_logo" src="<?php echo $this->getSkinUrl('images/bpl_forms/contact-us-page_logo.jpg'); ?>" /></a>
 </div>
 <form action="<?php echo $this->getUrl('contactform/') ?>index/sendemail" id="contactForm" method="post">
     <div class="fieldset">
@@ -41,17 +43,18 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label for="order-number"><?php echo Mage::helper('contacts')->__('Order No. (Optional)') ?></label>
-                    <div class="input-box">
-                        <input name="order-number" id="order-number" title="<?php echo Mage::helper('contacts')->__('Order No. (Optional)') ?>" class="input-text" type="text" />
-                    </div>
-                </div>
-            </li>
-            <li class="fields">
-                <div class="field">
                     <label for="last-name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Last Name') ?></label>
                     <div class="input-box">
                         <input name="last-name" id="last-name" title="<?php echo Mage::helper('contacts')->__('Last Name') ?>" class="input-text required-entry" type="text" />
+                    </div>
+                </div>
+
+            </li>
+            <li class="fields">
+                <div class="field">
+                    <label for="order-number"><?php echo Mage::helper('contacts')->__('Order No. (Optional)') ?></label>
+                    <div class="input-box">
+                        <input name="order-number" id="order-number" title="<?php echo Mage::helper('contacts')->__('Order No. (Optional)') ?>" class="input-text" type="text" />
                     </div>
                 </div>
                <div class="field">
@@ -187,7 +190,7 @@
                 </div>
             </li>
 			<li>
-				<div class="g-recaptcha" data-sitekey="6Lf7cBQUAAAAAFuQnx9f0Pu7q3KwoOi9PXzeyHuo"></div>
+				<div class="g-recaptcha" data-sitekey="6LdEB_8SAAAAADB0Xts9nG2WYWBhtrK64TlblPsJ"></div>
 			</li>
         </ul>
     </div>
