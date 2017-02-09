@@ -28,7 +28,7 @@ class Blp_ContactForm_IndexController extends Mage_Core_Controller_Front_Action
 		$params = $this->getRequest()->getParams();
 
 		if ($params['g-recaptcha-response']=='') {
-			Mage::getSingleton('core/session')->addError('Unable to send email. Please contact bottomlineproductions.com by phone.');
+			Mage::getSingleton('core/session')->addError('Temporarily unable to send message. Please contact customerservice@bottomlinestore.com by email.');
 			$this->_redirect('contact-us');
 		} else {
 			$mail = new Zend_Mail();
@@ -50,10 +50,7 @@ class Blp_ContactForm_IndexController extends Mage_Core_Controller_Front_Action
 			</table>
 			');
 		
-		
-			$recipient = $mail->addTo('customerservice@bottomlinepublications.com');
-			$recipient = $mail->addBCC('gemberlingb@gmail.com');
-			$recipient = $mail->addBCC('joeromello@gmail.com');
+			$recipient = $mail->addTo('customerservice@bottomlinestore.com');
 			$mail->setSubject('Main Contact Form: ' . $params['subject']);
 
 			try { 
@@ -61,7 +58,7 @@ class Blp_ContactForm_IndexController extends Mage_Core_Controller_Front_Action
 				Mage::getSingleton('core/session')->addSuccess('Thank you!  Your inquiry has been submitted to our customer service team. We will do our best to answer your question as soon as possible.');
 			}
 			catch (Exception $_oException) {
-				Mage::getSingleton('core/session')->addError('Unable to send email. Please contact bottomlineproductions.com by phone.');
+				Mage::getSingleton('core/session')->addError('Temporarily unable to send message. Please contact customerservice@bottomlinestore.com by email.');
 			}
 
 			$this->_redirect('contact-us');
