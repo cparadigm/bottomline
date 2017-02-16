@@ -1,3 +1,8 @@
 .products-grid .item .item-inner .item-info .info-inner .item-title {
     white-space: normal !important;
     overflow: visible !important;
+}
+
+.fieldset .form-list textarea {
+  width: 80% !important;
+}
