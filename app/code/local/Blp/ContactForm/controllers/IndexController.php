@@ -28,7 +28,7 @@ class Blp_ContactForm_IndexController extends Mage_Core_Controller_Front_Action
 		$params = $this->getRequest()->getParams();
 
 		if ($params['g-recaptcha-response']=='') {
-			Mage::getSingleton('core/session')->addError('Temporarily unable to send message. Please contact customerservice@bottomlinestore.com by email.');
+			Mage::getSingleton('core/session')->addError('Temporarily unable to send messages. Please contact customerservice@bottomlinestore.com by email.');
 			$this->_redirect('contact-us');
 		} else {
 			$mail = new Zend_Mail();
@@ -50,7 +50,7 @@ class Blp_ContactForm_IndexController extends Mage_Core_Controller_Front_Action
 			</table>
 			');
 		
-			$recipient = $mail->addTo('customerservice@bottomlinestore.com');
+			$recipient = $mail->addTo('MAlmonacy@bottomlineinc.com');
 			$mail->setSubject('Main Contact Form: ' . $params['subject']);
 
 			try { 
