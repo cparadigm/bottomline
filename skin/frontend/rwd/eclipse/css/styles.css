@@ -1320,6 +1320,8 @@ nav {
 	border-bottom: none;
 }
 #nav > li > a:first-child {
+	padding-left: 10px !important;
+ padding-right: 10px !important;
 	margin-left: 0px;
 }
 #nav > li > a:last-child a {
@@ -1377,6 +1379,7 @@ nav {
 	display: block;
 }
 #nav > li > a > span {
+	font-size: 12px !important;
 	display: inline-block;
 	line-height: 18px
 }

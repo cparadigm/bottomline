@@ -66,6 +66,8 @@ class OrderPigeonAPIController {
 	 */
 	public function execute() {
 		
+		file_put_contents('orderpigeon_log.txt', print_r($_REQUEST, true), FILE_APPEND);
+		
 		// authenticate credentials before processing request
 		// this interface only works with an established SOAP API session (obtained via SOAP API login call) 
 		// clients usually have problems setting up the API in Magento, so we tried to eliminate the API altogether 
