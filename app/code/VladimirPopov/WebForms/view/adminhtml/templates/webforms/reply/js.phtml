@@ -1,0 +1,85 @@
+<script type="text/javascript">
+    //<![CDATA[
+    require(['prototype'], function () {
+        deleteMessage = function(messageId) {
+            if (confirm('<?php echo __('Delete this message?')?>')) {
+                new Ajax.Request('<?php echo $this->getUrl('*/message/delete')?>', {
+                    parameters: {
+                        id: messageId
+                    },
+                    method: 'post',
+                    onSuccess: function (transport) {
+                        new Effect.DropOut('history-message-' + messageId);
+                    }
+                });
+            }
+        }
+
+        emailMessage = function(messageId) {
+            if (confirm('<?php echo __('E-mail this message?')?>')) {
+                new Ajax.Request('<?php echo $this->getUrl('*/message/email')?>', {
+                    parameters: {
+                        id: messageId
+                    },
+                    method: 'post',
+                    onSuccess: function (transport) {
+                        var json = transport.responseText.evalJSON();
+                        if (json.success) {
+                            $('subdue-' + messageId).update('<?php echo __('E-mailed') ?>');
+                            alert('<?php echo __('E-mail has been sent.')?>');
+                        } else {
+                            alert(json.errors);
+                        }
+                    }
+                });
+            }
+        }
+
+        function insertAtCursor(myFieldName, myValue) {
+            var myField = $(myFieldName);
+
+            //IE support
+            if (document.selection) {
+                myField.focus();
+                sel = document.selection.createRange();
+                sel.text = myValue;
+
+            //MOZILLA/NETSCAPE support
+            } else if (myField.selectionStart || myField.selectionStart == '0') {
+
+                var startPos = myField.selectionStart;
+                var endPos = myField.selectionEnd;
+                myField.value = myField.value.substring(0, startPos) + myValue + myField.value.substring(endPos, myField.value.length);
+
+            } else {
+                myField.value += myValue;
+            }
+
+            if (tinyMCE) {
+                tinyMCE.execInstanceCommand(myFieldName, "mceInsertContent", false, myValue);
+            }
+        }
+
+        Event.observe(window, 'load', function () {
+
+            $('quickresponse_button').onclick = function () {
+                if ($('quick_response').selectedIndex) {
+                    new Ajax.Request('<?php echo $this->getUrl('*/quickresponse/get')?>', {
+                        parameters: {
+                            id: $('quick_response').getValue()
+                        },
+                        method: 'post',
+                        onSuccess: function (transport) {
+                            var response = transport.responseText.evalJSON() || '';
+                            insertAtCursor('message', response.message);
+                        }
+                    });
+                } else {
+                    alert('<?php echo __('Please select quick response from the list') ?>');
+                }
+            }
+
+        });
+    })
+    //]]>
+</script>

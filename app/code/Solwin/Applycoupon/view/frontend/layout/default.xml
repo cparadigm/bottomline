@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Solwin Infotech
+ * Solwin Discount Coupon Code Link Extension
+ *
+ * @category   Solwin
+ * @package    Solwin_Applycoupon
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/ 
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Solwin_Applycoupon::css/fancybox/jquery.fancybox.css"/>
+    </head>
+    <body>	
+        <referenceContainer name="after.body.start">			
+            <block class="Magento\Framework\View\Element\Js\Components" name="success.page" template="Solwin_Applycoupon::success.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

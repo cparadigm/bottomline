@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <Webshopapps_Wsauspsv2>
-            <active>false</active>
-            <codePool>community</codePool>
-        </Webshopapps_Wsauspsv2>
-    </modules>
-</config>

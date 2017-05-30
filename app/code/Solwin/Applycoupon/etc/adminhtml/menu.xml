@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Solwin Infotech
+ * Solwin Discount Coupon Code Link Extension
+ *
+ * @category   Solwin
+ * @package    Solwin_Applycoupon
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/ 
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Solwin_Applycoupon::extension" title="Solwin" module="Solwin_Applycoupon" sortOrder="65" resource="Solwin_Applycoupon::extension" />
+        <add id="Solwin_Applycoupon::applycoupon" title="Discount Coupon Code Link" module="Solwin_Applycoupon" sortOrder="65" parent="Solwin_Applycoupon::extension" resource="Solwin_Applycoupon::applycoupon"/>
+        <add id="Solwin_Applycoupon::couponcode" title="Manage Coupon Code Links" module="Solwin_Applycoupon" sortOrder="10" action="solwin_applycoupon/couponcode" resource="Solwin_Applycoupon::couponcode" parent="Solwin_Applycoupon::applycoupon"/>
+        <add id="Solwin_Applycoupon::applycoupon_config" title="Configuration" module="Solwin_Applycoupon" sortOrder="20" parent="Solwin_Applycoupon::applycoupon" action="adminhtml/system_config/edit/section/applycouponsection" resource="Solwin_Applycoupon::applycoupon_config"/>
+    </menu>
+</config>

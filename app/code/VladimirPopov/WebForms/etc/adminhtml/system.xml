@@ -1,0 +1,256 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webforms" translate="label" sortOrder="300">
+            <label>Web-forms</label>
+        </tab>
+        <section id="webforms" translate="label" type="text" sortOrder="1110" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Web-forms Settings</label>
+            <tab>webforms</tab>
+            <resource>VladimirPopov_WebForms::config</resource>
+            <group id="license" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>License</label>
+                <frontend_model>VladimirPopov\WebForms\Block\Adminhtml\License</frontend_model>
+                <field id="version" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>WebForms Pro</label>
+                    <frontend_model>VladimirPopov\WebForms\Block\Adminhtml\Version</frontend_model>
+                </field>
+                <field id="serial" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Serial #</label>
+                    <comment><![CDATA[Enter your license serial number here]]></comment>
+                </field>
+            </group>
+            <group id="general" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+                <field id="ajax" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Ajax submission</label>
+                    <comment><![CDATA[Forms will be submitted without page reloading]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="store_temp_submission_data" translate="label comment" type="select" sortOrder="11"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Store temporary submission data</label>
+                    <comment><![CDATA[Store temporary customer submission data when the form submission fails. Please
+                    disable this option if you have cache related issues with the form]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="ajax">0</field>
+                    </depends>
+                </field>
+                <field id="formkey" translate="label comment" type="select" sortOrder="12"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable form key check</label>
+                    <comment><![CDATA[Enable form key check for improved customer session validation. Please
+                    disable if you have <b>Invalid form key</b> error on submission]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="use_translation" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Use Magento translations</label>
+                    <comment><![CDATA[Use Magento translations to automatically translate forms in frontend]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="login_redirect" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Login redirect URL</label>
+                    <comment><![CDATA[Custom login redirect URL(Key) if user is not authorized]]></comment>
+                </field>
+                <field id="preview_enabled" translate="label comment" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable preview of web-forms</label>
+                    <comment><![CDATA[Enable preview of web-forms in frontend]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="preview_template" translate="label comment" type="select" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Preview template</label>
+                    <comment><![CDATA[Select default template for the form preview]]></comment>
+                    <source_model>VladimirPopov\WebForms\Model\Config\Form\Template</source_model>
+                    <depends>
+                        <field id="preview_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="preview_store" translate="label comment" type="select" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Preview Store View</label>
+                    <comment><![CDATA[Select default Store View for the form preview]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Store</source_model>
+                    <depends>
+                        <field id="preview_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="customer_navigation_block_title" translate="label comment" type="text" sortOrder="70"
+                       showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Customer area Web-forms block title</label>
+                    <comment><![CDATA[Set Web-forms block title in customer account area]]></comment>
+                </field>
+            </group>
+            <group id="email" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>E-mail</label>
+                <field id="email" translate="label comment" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Default e-mail address for notifications</label>
+                    <comment><![CDATA[This address will be used by default to send you new results notifications. You can set multiple addresses comma-separated]]></comment>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="email_reply_to" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Reply-to e-mail address for customer</label>
+                    <comment><![CDATA[This address will be used in reply-to field in customer notification]]></comment>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="email_from" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Send all e-mails from this address</label>
+                    <comment><![CDATA[In case you have problems receiving notifications this e-mail address should be set to your mailbox used for sending out system e-mails. It doesn't affect reply-to values(except Gmail web-interface which has issues with it).]]></comment>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="stoplist" translate="label comment" type="textarea" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Block e-mail addresses</label>
+                    <comment><![CDATA[Block specified e-mail addresses from submission]]></comment>
+                </field>
+            </group>
+            <group id="message" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Messages</label>
+                <field id="nl2br" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Convert newline characters to &lt;br&gt; html tags when saving message]]></label>
+                    <comment><![CDATA[This address will be used by default to send you new results notifications. You can set multiple addresses comma-separated]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="captcha" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Google reCAPTCHA v2</label>
+                <comment><![CDATA[In order for reCaptcha to work please enter valid site and secret keys. You can get those by visiting <a href='http://www.google.com/recaptcha' target='_blank'>this page</a>]]></comment>
+                <field id="mode" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Mode</label>
+                    <source_model>VladimirPopov\WebForms\Model\Config\Captcha</source_model>
+                </field>
+                <field id="theme" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Theme</label>
+                    <source_model>VladimirPopov\WebForms\Model\Config\Captcha\Theme</source_model>
+                </field>
+                <field id="public_key" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Site key</label>
+                </field>
+                <field id="private_key" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Secret key</label>
+                </field>
+            </group>
+            <group id="honeypot" translate="label comment" type="text" sortOrder="60" showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Honeypot CAPTCHA</label>
+                <comment><![CDATA[Honeypot captcha uses special hidden field to trick spam bots. This feature can dramatically decrease spam submissions at no cost to customer comfort]]></comment>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="results" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Results</label>
+                <field id="fieldname_display_limit" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Field name display length</label>
+                    <comment><![CDATA[This will limit long field names in results table. It doesn't affect export]]></comment>
+                </field>
+            </group>
+            <group id="files" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Files</label>
+                <field id="ajax" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Ajax upload</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="upload_limit" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Upload limit</label>
+                    <comment><![CDATA[Maximum upload file size in kB]]></comment>
+                </field>
+            </group>
+            <group id="images" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Images</label>
+                <field id="cache" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable cache</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="upload_limit" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Upload limit</label>
+                    <comment><![CDATA[Maximum upload file size in kB]]></comment>
+                </field>
+                <field id="grid_thumbnail_width" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Grid thumbnail width</label>
+                    <comment><![CDATA[Thumbnail width in results grid]]></comment>
+                </field>
+                <field id="grid_thumbnail_height" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Grid thumbnail height</label>
+                    <comment><![CDATA[Thumbnail height in results grid]]></comment>
+                </field>
+                <field id="email_thumbnail_width" translate="label comment" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>E-mail thumbnail width</label>
+                    <comment><![CDATA[Thumbnail width in e-mail notifications]]></comment>
+                </field>
+                <field id="email_thumbnail_height" translate="label comment" type="text" sortOrder="60"
+                       showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>E-mail thumbnail height</label>
+                    <comment><![CDATA[Thumbnail height in e-mail notifications]]></comment>
+                </field>
+            </group>
+            <group id="contacts" translate="label comment" type="text" sortOrder="100" showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Contacts</label>
+                <comment><![CDATA[Replace default Magento contacts page (yourdomain.com/contacts) with the preferred web-form]]></comment>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="webform" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Contacts web-form</label>
+                    <comment><![CDATA[Select web-form to replace default contacts page]]></comment>
+                    <source_model>VladimirPopov\WebForms\Model\Config\Contacts</source_model>
+                </field>
+            </group>
+            <group id="accessibility" translate="label comment" type="text" sortOrder="100" showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Accessibility</label>
+                <field id="accdc_calendar" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Use accessible date picker</label>
+                    <comment><![CDATA[Enable accessible date picker for compatibility with screen readers]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

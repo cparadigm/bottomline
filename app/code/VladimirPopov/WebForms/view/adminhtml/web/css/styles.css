@@ -1,0 +1,167 @@
+/* Autocomplete */
+
+.ui-autocomplete {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    display: none;
+    min-width: 160px;
+    padding: 4px 0;
+    margin: 0 0 10px 25px;
+    list-style: none;
+    background-color: #ffffff;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+}
+
+.ui-menu-item > a.ui-corner-all {
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #555555;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.ui-state-hover, .ui-state-active, .ui-state-focus {
+    background-color: #eee;
+}
+.ui-autocomplete-loading
+{
+    background: #fff url(VladimirPopov_WebForms::images/ajax-loader-big.gif) no-repeat 99%;
+    background-size: 25px;
+}
+
+/* Star rating */
+
+.stars {
+    padding:1px 0;
+    width:80px;
+}
+
+.stars-bar {
+    list-style:none;
+    margin: 0px !important;
+    padding:0px !important;
+    height: 16px;
+    position: relative;
+    background: url(VladimirPopov_WebForms::images/stars.png) top left repeat-x;
+}
+
+.stars-bar li{
+    padding:0px;
+    margin:0px;
+    /*\*/
+    float: left;
+    /* */
+}
+
+.stars-bar li.stars-value {
+    background: url(VladimirPopov_WebForms::images/stars.png) left bottom;
+    position: absolute;
+    height: 16px;
+    display: block;
+    z-index: 1;
+}
+
+/* Replies */
+.result-replied{
+    padding-left: 16px;
+    background: url(VladimirPopov_WebForms::images/bullet-replied.png) left top no-repeat;
+}
+
+.result-not-replied{
+    padding-left: 16px;
+}
+
+.note-list-action {
+    border-left: 1px solid #676056;
+    padding: 0 0 0 5px;
+    margin: 0 0 0 5px;
+}
+
+/* Fix for table grid */
+
+.admin__scope-old th.data-grid-th {
+    background: #514943 !important;
+}
+
+/* Grid statuses */
+
+.grid-status{
+    background: #feeee1 none repeat scroll 0 0;
+    border: 1px solid #ed4f2e;
+    color: #ed4f2e;
+    display: block;
+    font-weight: bold;
+    line-height: 17px;
+    padding: 0 3px;
+    text-align: center;
+    text-transform: uppercase;
+    margin:5px;
+    cursor:auto;
+}
+
+.notapproved {
+    background: #f9d4d4 none repeat scroll 0 0;
+    border-color: #e22626;
+    color: #e22626;}
+
+.approved, .completed {
+    background: #d0e5a9 none repeat scroll 0 0;
+    border-color: #5b8116;
+    color: #185b00;
+}
+
+.pending {
+    background:rgb(255, 255, 164);
+}
+
+/* Grid actions */
+
+.grid-button-action{
+    background: #ddd none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    color: #888;
+    display: block;
+    font-weight: bold;
+    line-height: 17px;
+    padding: 0 3px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin:5px;
+    cursor:pointer;
+}
+.grid-button-action:hover{
+    color: #fff;
+    background: #666666;;
+    text-decoration: none;
+}
+.reject, .approve, .complete {
+    margin: 5px 10px;
+}
+
+.reject:hover{
+    background:#FF0000;
+}
+
+.approve:hover, .complete:hover{
+    border-color: #5b8116;
+    background: #5b8116;
+}
+
+.inline-buttons {
+    width:150px;
+    margin:auto;
+}
+.inline-action { float:left; display: inline;}

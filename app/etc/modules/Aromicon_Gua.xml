@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <Aromicon_Gua>
-            <active>false</active>
-            <codePool>community</codePool>
-        </Aromicon_Gua>
-    </modules>
-</config>

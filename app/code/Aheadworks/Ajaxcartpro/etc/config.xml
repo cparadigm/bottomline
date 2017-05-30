@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <aw_ajaxcartpro>
+            <add_to_cart_block>
+                <display_for>1</display_for>
+                <display_product_short_description>1</display_product_short_description>
+                <display_product_reviews>1</display_product_reviews>
+            </add_to_cart_block>
+            <additional>
+                <enable_on_product_page>1</enable_on_product_page>
+            </additional>
+        </aw_ajaxcartpro>
+    </default>
+</config>

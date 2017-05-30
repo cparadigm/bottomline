@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<update handle="customer_account"/>
+<body>
+    <referenceBlock name="page.main.title">
+        <action method="setPageTitle">
+            <argument translate="true" name="title" xsi:type="string">Edit Account Information</argument>
+        </action>
+    </referenceBlock>
+    <referenceContainer name="content">
+        <block class="VladimirPopov\WebForms\Block\Customer\Account" name="webforms.customer.account"
+               template="VladimirPopov_WebForms::webforms/customer/account.phtml">
+            <block class="VladimirPopov\WebForms\Block\Customer\Account\Results" name="webforms.customer.account.results"
+                   template="VladimirPopov_WebForms::webforms/customer/account/results.phtml"/>
+            <block class="VladimirPopov\WebForms\Block\Form" name="webforms.customer.account.form"
+                   template="VladimirPopov_WebForms::webforms/form/default.phtml" cacheable="false"/>
+        </block>
+    </referenceContainer>
+</body>
+</page>

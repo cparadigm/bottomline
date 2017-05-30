@@ -1,0 +1,40 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+/* @var $block \Magento\Framework\View\Element\Template */
+?>
+<div class="aw-acp-popup aw-acp-popup-with-anim mfp-hide" data-mage-init='{"awACPDialog": {}}' data-role="aw-acp-ui">
+    <div data-role="update"></div>
+    <div data-role="progress">
+        <div class="aw-acp-popup__mobile-header">
+            <h3 class="aw-acp-popup__mobile-title"></h3>
+            <div class="aw-acp-popup__mobile-close-wrapper">
+                <button type="button" class="aw-acp-popup__mobile-close" data-action="cancel"><?php echo $block->escapeHtml(__('Cancel')) ?></button>
+            </div>
+        </div>
+        <div class="aw-acp-popup__main">
+            <div class="aw-acp-popup__loader">
+                <div class="aw-acp-popup__loader-bar"></div>
+            </div>
+        </div>
+    </div>
+    <div class="aw-acp-popup__actions aw-acp-popup__columns">
+        <div class="aw-acp-popup__close-wrapper aw-acp-popup__column">
+            <a href="#" class="aw-acp-popup__close" data-action="cancel"><?php echo $block->escapeHtml(__('Cancel')) ?></a>
+            <a href="#" class="aw-acp-popup__close" data-action="continue"><?php echo $block->escapeHtml(__('Continue Shopping')) ?></a>
+        </div>
+        <div class="aw-acp-popup__submit-wrapper aw-acp-popup__column">
+            <button type="button"
+                    class="aw-acp-popup__submit action primary"
+                    data-action="submit"
+                    data-form="product_addtocart_form_acp"
+                    data-mage-init='{"uiAddToCart": {}}'><?php echo $block->escapeHtml(__('Add To Cart')) ?></button>
+            <button type="button" class="aw-acp-popup__submit action primary" disabled data-action="wait"><?php echo $block->escapeHtml(__('Please wait...')) ?></button>
+            <button type="button" class="aw-acp-popup__submit action primary" data-action="checkout"><?php echo $block->escapeHtml(__('Go To Checkout')) ?></button>
+        </div>
+    </div>
+    <div data-role="related"></div>
+</div>

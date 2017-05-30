@@ -1,0 +1,31 @@
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<!--@subject {{var data.subject}} @-->
+{{template config_path="design/email/header_template"}}
+<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <h3>Dear {{var data.name}}</h3>
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td align="center" style="text-align:left;width:30%;font-weight:bold;">Email:</td>
+                        <td align="center" style="padding-left:5px;text-align:left;width:70%;"> {{var data.email}}</td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td align="center" style="text-align:left;width:30%;font-weight:bold;">Comment:</td>
+                        <td align="center" style="padding-left:5px;text-align:left;width:70%;"> {{var data.comment}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+{{template config_path="design/email/footer_template"}}

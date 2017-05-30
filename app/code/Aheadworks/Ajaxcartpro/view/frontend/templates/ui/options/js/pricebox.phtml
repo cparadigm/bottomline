@@ -1,0 +1,15 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+/* @var $block \Magento\Catalog\Block\Product\View */
+?>
+<script>
+    require(['jquery', 'Aheadworks_Ajaxcartpro/js/ui/options/price-box'], function($, priceBox) {
+        priceBox({
+            priceConfig: <?php /* @noEscape */ echo $block->getJsonConfig() ?>
+        }, $('#product_addtocart_form_acp [data-role=priceBox]'));
+    });
+</script>

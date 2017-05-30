@@ -1,0 +1,22 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\ConfigurableProduct\Block\Product\View\Type\Configurable */
+?>
+<?php if ($block->getProduct()->isSaleable() && count($block->getAllowAttributes())):?>
+    <script type="text/x-magento-init">
+        {
+            "#product_addtocart_form_acp": {
+                "configurable": {
+                    "priceHolderSelector": "#product_addtocart_form_acp .price-box",
+                    "spConfig": <?php /* @noEscape */ echo $block->getJsonConfig() ?>
+                }
+            }
+        }
+    </script>
+<?php endif;?>

@@ -1,0 +1,56 @@
+<?php /** @var \VladimirPopov\WebForms\Block\Customer\Account\Results $this */ ?>
+
+<?php if ($this->getCollection()->getSize()): ?>
+    <div class="table-wrapper webforms-results-table">
+        <table class="data table" id="webform-customer-account-results" cellspacing="0">
+            <thead>
+            <tr>
+                <th scope="col" class="col id"><?php echo __('ID') ?></th>
+                <th scope="col" class="col subject"><?php echo __('Subject') ?></th>
+                <th scope="col" class="col date"><?php echo __('Date') ?></th>
+                <?php if ($this->getForm()->getApprove()): ?>
+                    <th><?php echo __('Status') ?></th>
+                <?php endif; ?>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($this->getCollection() as $result): ?>
+                <?php /** @var \VladimirPopov\WebForms\Model\Result $result */ ?>
+                <tr>
+                    <td class="col id" style="white-space:nowrap;"><?php echo $result->getId() ?></td>
+                    <td class="col subject" title="<?php echo $this->escapeHtml($result->getEmailSubject()); ?>"><a
+                            href="<?php echo $this->getUrlResultView($result) ?>"><?php echo $result->getEmailSubject() ?></a>
+                    </td>
+                    <td class="col date"><?php echo $this->formatDate($result->getCreatedTime(), \IntlDateFormatter::MEDIUM, true); ?></td>
+                    <?php if ($this->getForm()->getApprove()): ?>
+                        <td class="col status"><?php echo $this->getApproveStatus($result) ?></td>
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="toolbar bottom">
+        <?php echo $this->getChildHtml('toolbar') ?>
+    </div>
+    <div class="actions-toolbar">
+        <div class="secondary"><a class="action back"
+                                  href="javascript:window.history.back()"><span><?php echo __('Back') ?></span></a>
+        </div>
+
+        <button type="button" class="action primary add"
+                id="webforms-show-form"
+                onclick="this.hide();$('webforms-hide-form').show();Effect.SlideDown('webforms-customer-account-form');"
+                title="<?php echo __('Show Form') ?>">
+            <span><?php echo __('Show Form') ?></span>
+        </button>
+
+        <button type="button" class="action primary add"
+                id="webforms-hide-form"
+                style="display: none"
+                onclick="this.hide();$('webforms-show-form').show();Effect.SlideUp('webforms-customer-account-form',{duration:0.1});"
+                title="<?php echo __('Hide Form') ?>">
+            <span><?php echo __('Hide Form') ?></span>
+        </button>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,125 @@
+<?php
+/**
+ * Solwin Infotech
+ * Solwin Discount Coupon Code Link Extension
+ *
+ * @category   Solwin
+ * @package    Solwin_Applycoupon
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/ 
+ */
+$helper = $this->helper('Solwin\Applycoupon\Helper\Data');
+$moduleEnable = $helper->getConfigValue('applycouponsection/applycoupongroup/enable');
+if ($moduleEnable) {
+    $successPopup = $helper->getConfigValue('applycouponsection/applycoupongroup/success_popup');
+    $codesuccess = $this->getRequest()->getParam('codesuccess');
+    if (isset($codesuccess)) {
+        $couponCode = $this->getRequest()->getParam('cc');
+        $couponCollection = $helper->getCouponCollection($couponCode);
+        $coupon_id = 0;
+        foreach ($couponCollection as $coupon) {
+            $coupon_id = $coupon['couponcode_id'];
+            $cpCollection = $helper->getSingleCouponCollection($coupon_id);
+            $viewsCount = $cpCollection->getViewsCount();
+            if ($viewsCount != 0) {
+                $viewsCount = $viewsCount + 1;
+            } else {
+                $viewsCount = 1;
+            }
+            $cpCollection->setViewsCount($viewsCount)->save();
+        }
+
+        $return_url = explode('?', $helper->getCurrentUrl());
+
+        $successImage = $helper->getConfigValue('applycouponsection/applycoupongroup/success_image');
+        $successImagePath = $helper->getMediaUrl() . 'coupon/' . $successImage;
+        $successMsg = $helper->getConfigValue('applycouponsection/applycoupongroup/success_msg');
+        ?>
+
+        <script>
+            if (typeof window.history.pushState == 'function') {
+                window.history.pushState({}, "Hide", '<?php echo $return_url[0]; ?>');
+            }
+        </script>
+        <script type="text/javascript">
+            require(['jquery', 'cpfancybox'], function () {
+                jQuery(document).ready(function () {
+                    jQuery.fancybox("#hidden");
+                });
+            });
+        </script>
+        <?php if ($successPopup) { ?>
+            <div id="hidden" style="display: none" class="modal-box">
+                <div class="modal-body">
+                    <?php if(!empty($successImage)){ ?>
+                    <div class="coupon-successfully-img">
+                        <img src="<?php echo $successImagePath; ?>" alt="apply coupon code">
+                    </div>
+                    <?php } ?>
+                    <div class="coupon-successfully-text">
+                        <?php echo $successMsg; ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <?php
+    } else {
+        $return_url = explode('?', $helper->getCurrentUrl());
+        ?>
+        <?php
+        $couponcode = $this->getRequest()->getParam('coupon');
+        if (isset($couponcode) && $couponcode != '') {
+            ?>
+            <?php
+            if ($successPopup) {
+                $errorMsg = $helper->getConfigValue('applycouponsection/applycoupongroup/error_msg');
+                ?>
+                <div id="hidden" style="display: none" class="modal-box">
+                    <div class="modal-body">
+                        <div class="coupon-successfully-text">
+                            <?php echo $errorMsg; ?>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    if (typeof window.history.pushState == 'function') {
+                        window.history.pushState({}, "Hide", '<?php echo $return_url[0]; ?>');
+                    }
+                </script>
+                <script type="text/javascript">
+                    require(['jquery', 'cpfancybox'], function () {
+                        jQuery(document).ready(function () {
+                            jQuery.fancybox("#hidden");
+                        });
+                    });
+                </script>
+                <?php
+            }
+        }
+    }
+    ?>
+    <?php if ($successPopup) { ?>
+        <style>
+            .modal-box .modal-body {
+                padding: 2em 1.5em;
+            }
+            .modal-box .coupon-successfully-img {
+                margin: 36px 0 15px;
+                text-align: center;
+            }
+            .modal-box .coupon-successfully-img img {
+                display: inline-block;
+                max-width: 100%;
+            }
+            .modal-box .coupon-successfully-text {
+                color: #000000;
+                font-size: 28px;
+                font-weight: 500;
+                line-height: 34px;
+                text-align: center;
+            }
+        </style>
+    <?php } ?>
+
+    <?php
+}

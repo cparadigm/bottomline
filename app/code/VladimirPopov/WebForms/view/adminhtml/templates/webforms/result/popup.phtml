@@ -1,0 +1,13 @@
+<?php
+/** @var \VladimirPopov\WebForms\Block\Adminhtml\Result\Popup $this */
+?>
+<div class="page-main-actions" <?php echo $block->getUiId('content-header') ?>>
+    <div class="page-actions">
+        <div class="page-actions-inner">
+            <div class="page-actions-buttons">
+                <?php echo $this->getButtonsHtml() ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php echo $this->getResult()->toHtml() ?>

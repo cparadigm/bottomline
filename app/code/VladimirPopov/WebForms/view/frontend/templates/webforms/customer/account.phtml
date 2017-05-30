@@ -1,0 +1,8 @@
+<?php
+$results_html = trim($this->getChildHtml('webforms.customer.account.results'));
+echo $results_html;
+?>
+
+<div id="webforms-customer-account-form" class="webforms-customer-account-form" <?php if($results_html) echo 'style="display:none"'?>>
+    <?php echo $this->getChildHtml('webforms.customer.account.form') ?>
+</div>

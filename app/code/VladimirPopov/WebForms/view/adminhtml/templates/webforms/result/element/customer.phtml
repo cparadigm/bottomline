@@ -1,0 +1,62 @@
+<?php
+/** @var \VladimirPopov\WebForms\Block\Adminhtml\Result\Autocomplete\Customer $this */
+$customer_id = $this->getValue();
+$customer = false;
+$customer_text = '';
+if ($customer_id) {
+    $customer = $this->getCustomer($customer_id);
+    if (!$customer->getId()) $customer = false;
+}
+if ($customer)
+    $customer_text = $customer->getName() . ' <' . $customer->getEmail() . '>';
+
+?>
+<input id="customer_id" name="result[customer_id]" type="hidden" value="<?php echo $customer_id ?>"/>
+<input id="customer" name="customer" value="" type="text" class="input-text"
+       placeholder="<?php echo __('Guest'); ?>">
+<a id="customer_change" href="#customer_change"
+   style="<?php if (!$customer) { ?>display: none<?php } ?>">[<?php echo __('Change') ?>]</a>
+
+<p id="customer_comments" class="note"><?php echo __('Start typing customer name or e-mail address') ?></p>
+
+<div id="customer-autocomplete" class="webforms-autocomplete"></div>
+
+<script>
+    require([
+        "jquery",
+        "jquery/ui"
+    ], function ($) {
+        $(function () {
+            $("#customer").autocomplete({
+                source: "<?php echo $this->getAutocompleteUrl()?>",
+                minLength: 3,
+                select: function (event, ui) {
+                    $('#customer_id').val(ui.item.customerId);
+                    $('#customer_change').show();
+                    $('#customer_comments').hide();
+                    $('#customer').val(ui.item.label);
+                    $('#customer').prop('disabled', true);
+                },
+                messages: {
+                    noResults: '',
+                    results: function (amount) {
+                    }
+                }
+            });
+
+            $("#customer_change").click(function () {
+                $("#customer").val('');
+                $("#customer").prop('disabled', false);
+                $("#customer_comments").show();
+                $("#customer_id").val('');
+                $("#customer_change").hide();
+            });
+
+            <?php if($customer){?>
+            $("#customer").val("<?php echo $customer_text?>");
+            $("#customer").prop('disabled', true);
+            $("#customer_comments").hide();
+            <?php }?>
+        });
+    });
+</script>

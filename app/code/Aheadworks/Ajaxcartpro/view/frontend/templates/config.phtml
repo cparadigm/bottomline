@@ -1,0 +1,16 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+/* @var $block \Aheadworks\Ajaxcartpro\Block\Config */
+?>
+<script>
+    require([
+        'jquery',
+        'Aheadworks_Ajaxcartpro/js/config'
+    ], function($, awAcpConfig) {
+        awAcpConfig.setOptions(<?php /* @noEscape */ echo $block->getOptions() ?>);
+    });
+</script>

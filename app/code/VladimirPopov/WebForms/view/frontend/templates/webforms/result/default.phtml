@@ -1,0 +1,82 @@
+<?php
+/** @var \VladimirPopov\WebForms\Block\Widget\Result $this */
+?>
+
+<?php echo $this->getChildHtml('rating'); ?>
+
+<?php $_items = $this->getResultsCollection(); ?>
+<div class="webforms-results">
+    <?php
+    /** @var \VladimirPopov\WebForms\Model\Result $result */
+    foreach ($_items as $result) {
+        ?>
+        <div class="webforms-results-block">
+            <h2><?php echo $this->formatDate($result->getCreatedTime()) ?></h2>
+            <?php
+            foreach ($this->getForm()->getFieldsToFieldsets() as $fieldset) {
+
+                /** @var \VladimirPopov\WebForms\Model\Field $field */
+                foreach ($fieldset['fields'] as $field) {
+                    $text = trim($result->getData('field_' . $field->getId()));
+                    $filename = $text;
+                    if (strlen($text) > 0 && $field->getResultDisplay() != 'off') {
+                        ?>
+                        <div class="webforms-results-field">
+                            <?php if (strlen($field->getResultLabel()) > 1 && $field->getResultDisplay() != 'value') { ?>
+                                <div class="webforms-results-label"><?php echo $field->getResultLabel() ?></div>
+                            <?php } ?>
+                            <div class="webforms-results-value">
+                                <?php switch ($field->getType()) {
+                                    case 'date':
+                                        echo $this->formatDate($text);
+                                        break;
+                                    case 'datetime':
+                                        echo $this->formatDate($text) . ' ' . $this->formatTime($text);
+                                        break;
+                                    // download link
+                                    case 'file':
+                                        echo "<a href=" . $result->getDownloadLink($field->getId(), $filename) . ">" . $filename . "</a>";
+                                        break;
+                                    // image thumbnail
+                                    case 'image':
+                                        echo "<a href='" . $result->getDownloadLink($field->getId(), $filename) . "'><img src='" . $result->getThumbnail($field->getId(), $filename, 200) . "'/></a>";
+                                        break;
+                                    // stars rating bar
+                                    case 'stars':
+                                        $value = (int)$text;
+                                        $width = round(100 * $value / $field->getStarsCount()) . '%';
+                                        echo '
+
+                                                <div class="rating-box">
+                                                    <div class="rating-summary rating-summary-'.$field->getId().'">
+                                                        <div class="rating-result" title="' . $width . '">
+                                                            <span style="width:' . $width . '"><span>' . $width . '</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>';
+                                        break;
+                                    case 'wysiwyg':
+                                        echo $text;
+                                        break;
+                                    // text
+                                    default:
+                                        echo nl2br(htmlentities($text));
+                                        break;
+                                } ?>
+                            </div>
+                        </div>
+                        <?php
+                    } // if text
+                } // foreach fields
+            } // foreach fields_to_fieldsets
+            ?>
+        </div>
+        <?php
+    } // foreach results
+    ?>
+
+
+    <div class="toolbar bottom">
+        <?php echo $this->getChildHtml('toolbar') ?>
+    </div>
+</div>

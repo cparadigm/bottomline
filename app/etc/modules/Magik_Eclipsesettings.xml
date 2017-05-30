@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <Magik_Eclipsesettings>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Magik_Eclipsesettings>
-    </modules>
-</config>

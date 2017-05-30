@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Solwin Infotech
+ * Solwin Request For Quote Extension
+ * 
+ * @category   Solwin
+ * @package    Solwin_Ourquote
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Email/etc/email_templates.xsd">
+    <template id="applycouponsection_emailopt_template" label="Send Coupon code to friend" file="coupon_email.html" type="html" module="Solwin_Applycoupon" area="adminhtml"/>
+</config>

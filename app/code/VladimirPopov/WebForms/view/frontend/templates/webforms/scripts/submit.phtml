@@ -1,0 +1,81 @@
+<div id="webform_<?php echo $this->getUid()?>_modal" style="display: none"></div>
+<script type="text/javascript">
+    require([
+        'VladimirPopov_WebForms/js/form',
+        'jquery',
+        'Magento_Ui/js/modal/modal'
+    ], function (VarienForm,jQuery) {
+        // page-cache.js compatibility fix
+        if($('webform_<?php echo $this->getUid() ?>_iframe')) $('webform_<?php echo $this->getUid() ?>_iframe').prop = function(el){};
+
+        var webform_<?php echo $this->getUid()?> = new VarienForm('webform_<?php echo $this->getUid()?>', <?php echo (int)$this->getData('focus')?>);
+        $('webform_<?php echo $this->getUid()?>_submit_button').observe('click', function () {
+            var form = webform_<?php echo $this->getUid()?>;
+            if (form.validator && form.validator.validate()) {
+                form.submit();
+                <?php if($this->getAjax()) { ?>
+                this.disable();
+                $('webform_<?php echo $this->getUid()?>_sending_data').show();
+                <?php } ?>
+            }
+        });
+
+        <?php if($this->getAjax()) { ?>
+        var iframe = $('webform_<?php echo $this->getUid()?>_iframe');
+        iframe.observe('load', function () {
+            var doc = this.contentDocument ? this.contentDocument : this.contentWindow.document;
+            var json = {success: false};
+            if (doc.body.getElementsByTagName('pre')[0].innerHTML.unfilterJSON())
+                json = doc.body.getElementsByTagName('pre')[0].innerHTML.evalJSON();
+            else return;
+            if (json.success > 0) {
+                if (json.script) {
+                    eval(json.script);
+                    return;
+                }
+                if (json.redirect_url) {
+                    $('webform_<?php echo $this->getUid()?>_progress_text').update('<?php echo __('Redirecting')?>');
+                    window.location = json.redirect_url;
+                    return;
+                }
+                var successText = json.success_text.unescapeHTML();
+                <?php if ($this->getData('after_submission_form')) { ?>
+                $('webform_<?php echo $this->getUid()?>_modal').update(successText);
+                $('webform_<?php echo $this->getUid()?>_sending_data').hide();
+                $('webform_<?php echo $this->getUid()?>_submit_button').enable();
+                $('webform_<?php echo $this->getUid()?>').reset();
+                jQuery('#webform_<?php echo $this->getUid()?>_modal').modal({title:'<?php echo __('Success!')?>'}).modal('openModal');
+                <?php } else { ?>
+                $('webform_<?php echo $this->getUid()?>_progress_text').update('<?php echo __('Complete')?>');
+                Effect.Fade('webform_<?php echo $this->getUid()?>_form', {
+                    duration: 0.5, from: 1, to: 0,
+                    afterFinish: function () {
+                        $('webform_<?php echo $this->getUid()?>_success_text').update(successText).show();
+                        Effect.Fade('webform_<?php echo $this->getUid()?>_success_text', {
+                            duration: 0.5, from: 0, to: 1
+                        });
+                        if (<?php echo (int)$this->getData('scroll_to')?>) $('webform_<?php echo $this->getUid()?>_success_text').scrollTo();
+                    }
+                });
+                <?php } ?>
+                <?php echo $this->getData('after_submission_script')?>
+            } else {
+                if ($('webform_<?php echo $this->getUid()?>_sending_data'))
+                    $('webform_<?php echo $this->getUid()?>_sending_data').hide();
+                if ($('webform_<?php echo $this->getUid()?>_submit_button'))
+                    $('webform_<?php echo $this->getUid()?>_submit_button').enable();
+                if (json.errors && typeof(json.errors) == "string") {
+                    $('webform_<?php echo $this->getUid()?>_modal').update(json.errors.unescapeHTML());
+                } else {
+                    $('webform_<?php echo $this->getUid()?>_modal').update('<?php echo __('Unknown error(s) occured')?>');
+                }
+                jQuery('#webform_<?php echo $this->getUid()?>_modal').modal({title:'<?php echo __('Error')?>'}).modal('openModal');
+
+                if (json.script) {
+                    eval(json.script);
+                }
+            }
+        });
+        <?php } ?>
+    });
+</script>

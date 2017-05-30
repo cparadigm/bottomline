@@ -1,0 +1,6 @@
+<div id="<?php echo $this->getHtmlId() ?>" class="tooltip-icon"></div>
+<script>
+    require(['VladimirPopov_WebForms/js/opentip'], function () {
+        new Opentip("#<?php echo $this->getHtmlId()?>", "<?php echo $this->getTooltip()?>", {delay: 0});
+    })
+</script>

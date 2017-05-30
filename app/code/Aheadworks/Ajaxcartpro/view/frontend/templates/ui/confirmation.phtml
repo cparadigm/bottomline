@@ -1,0 +1,33 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+/* @var $block \Magento\Framework\View\Element\Template */
+?>
+<?php
+    $cartSummary = $block->getCartSummary();
+    $cartSummaryText = $cartSummary == 1 ? __('item') : __('items');
+?>
+<div class="aw-acp-popup__mobile-header">
+    <h3 class="aw-acp-popup__mobile-title"></h3>
+    <div class="aw-acp-popup__mobile-close-wrapper">
+        <button type="button" class="aw-acp-popup__mobile-close" data-action="continue"><?php echo $block->escapeHtml(__('Continue Shopping')) ?></button>
+    </div>
+</div>
+<div class="aw-acp-popup__main aw-acp-popup--result">
+    <?php echo $block->getChildHtml('messages') ?>
+    <div class="aw-acp-popup__columns">
+        <div class="aw-acp-popup__column aw-acp-popup__column--media">
+            <?php echo $block->getChildHtml('product_image') ?>
+            <?php echo $block->getChildHtml('product_reviews') ?>
+        </div>
+        <div class="aw-acp-popup__column aw-acp-popup__result">
+            <p class="aw-acp-popup__result-title"><?php echo $block->escapeHtml(__('Cart Subtotal')) ?>:</p>
+            <p class="aw-acp-popup__result-price"><?php /* @noEscape */ echo $block->getCartSubtotal() ?></p>
+            <p class="aw-acp-popup__result-items"><b><?php /* @noEscape */ echo $cartSummary ?></b> <?php echo $block->escapeHtml(__($cartSummaryText)) ?></p>
+            <p class="aw-acp-popup__result-view-cart"><a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getUrl('checkout/cart')) ?>"><?php echo $block->escapeHtml(__('View Cart')) ?></a></p>
+        </div>
+    </div>
+</div>

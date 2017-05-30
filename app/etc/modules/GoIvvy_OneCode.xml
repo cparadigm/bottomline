@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
- <modules>
-  <GoIvvy_OneCode>
-    <active>false</active>
-    <codePool>community</codePool>
-  </GoIvvy_OneCode>
- </modules>
-</config>

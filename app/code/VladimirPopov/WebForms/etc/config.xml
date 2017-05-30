@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <webforms>
+            <general>
+                <ajax>1</ajax>
+                <preview_template><![CDATA[VladimirPopov_WebForms::webforms/form/default.phtml]]></preview_template>
+                <preview_enabled>1</preview_enabled>
+                <customer_navigation_block_title><![CDATA[Web-forms]]></customer_navigation_block_title>
+            </general>
+            <results>
+                <fieldname_display_limit>25</fieldname_display_limit>
+            </results>
+            <files>
+                <load_jquery>1</load_jquery>
+                <upload_limit>5000</upload_limit>
+            </files>
+            <images>
+                <cache>1</cache>
+                <upload_limit>300</upload_limit>
+                <grid_thumbnail_width>100</grid_thumbnail_width>
+                <email_thumbnail_width>200</email_thumbnail_width>
+            </images>
+            <captcha>
+                <mode>off</mode>
+                <theme>standard</theme>
+            </captcha>
+            <honeypot>
+                <enable>1</enable>
+            </honeypot>
+        </webforms>
+    </default>
+</config>

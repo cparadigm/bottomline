@@ -1,0 +1,25 @@
+{
+  "name": "vladimirpopov/webforms",
+  "description": "WebForms Pro - Form Builder for Magento",
+  "keywords": [
+    "magento 2",
+    "form builder",
+    "custom form"
+  ],
+  "type": "magento2-module",
+  "version": "2.7.3",
+  "license": [
+    "commercial"
+  ],
+  "require": {
+    "mpdf/mpdf": "6.*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "VladimirPopov\\WebForms\\": ""
+    }
+  }
+}

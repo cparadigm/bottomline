@@ -1,0 +1,87 @@
+<?php
+$accdc = $this->getData('accdc');
+$container_style = "";
+if ($accdc && $this->getField()->getType() == 'datetime') {
+    $container_style = "style='width:75%;float:left;'";
+}
+?>
+<div class='webforms-datepicker'>
+    <div class='webforms-calendar' <?php echo $container_style ?>>
+        <input type='text' name='<?php echo $this->getFieldName() ?>[]' id='<?php echo $this->getFieldId() ?>'
+               class='<?php echo $this->getFieldClass() ?>' style='<?php echo $this->getFieldStyle() ?>'
+               aria-labelledby="label_<?php echo $this->getFieldId() ?>"
+               <?php if ($this->getField()->getRequired()) { ?>required<?php } ?>
+               value='<?php echo $this->getCustomerValue() ?>' readonly='readonly'/>
+        <button aria-labelledby="label_<?php echo $this->getFieldId() ?>"
+                aria-describedby="<?php echo $this->getFieldId() ?>" type="button"
+                id='<?php echo $this->getFieldId() ?>_trigger' class="ui-datepicker-trigger v-middle"><span>Date selector</span>
+        </button>
+    </div>
+
+<?php if ($accdc && $this->getField()->getType() == 'datetime') { ?>
+    <div class="webforms-time" aria-label="<?php __("Time") ?>" role="group">
+        <select id="<?php echo $this->getFieldId() ?>_hours" name='<?php echo $this->getFieldName() ?>[]' class="hours"
+                aria-label="<?php echo __("Hours") ?>">
+            <?php for ($i = 0; $i < 24; $i++) { ?>
+                <option value="<?php echo substr("0" . $i, -2) ?>"><?php echo substr("0" . $i, -2) ?></option>
+            <?php } ?>
+        </select> :
+        <select id="<?php echo $this->getFieldId() ?>_minutes" name='<?php echo $this->getFieldName() ?>[]'
+                class="minutes" aria-label="<?php echo __("Minutes") ?>">
+            <?php for ($i = 0; $i < 60; $i += 5) { ?>
+                <option value="<?php echo substr("0" . $i, -2) ?>"><?php echo substr("0" . $i, -2) ?></option>
+            <?php } ?>
+        </select>
+    </div>
+<?php } ?>
+</div>
+
+<?php if ($accdc) { ?>
+    <script type='text/javascript'>
+
+        require([
+            'prototype',
+            'VladimirPopov_WebForms/js/accdc/modules/calendar_generator'
+        ], function () {
+            $Acc.addClass(document.getElementById('<?php echo $this->getFieldId() ?>'), '_has-datepicker');
+            if (document.getElementById('<?php echo $this->getFieldId() ?>_hours')) document.getElementById('<?php echo $this->getFieldId() ?>_hours').value = 12;
+
+            $Acc.setCalendar('<?php echo $this->getFieldId() ?>_calendar', document.getElementById('<?php echo $this->getFieldId() ?>_trigger'), document.getElementById('<?php echo $this->getFieldId() ?>'), false,
+                function (ev, dc, targ) {
+                    // Save the desired date string
+                    targ.value = dc.date.toDateString();
+
+                    dc.close();
+                },
+                {
+                    // Set CSS positioning calculation for the calendar
+                    autoPosition: 0,
+                    offsetTop: -25
+                });
+            // add action to input text field
+            document.getElementById('<?php echo $this->getFieldId() ?>').onkeypress = function () {
+                document.getElementById('<?php echo $this->getFieldId() ?>_trigger').click();
+            }
+        });
+
+    </script>
+
+<?php } else { ?>
+
+    <script type='text/javascript'>
+
+        require([
+            'jquery',
+            'mage/calendar'
+        ], function ($) {
+            $("#<?php echo $this->getFieldId()?>").datetimepicker({
+                showButtonPanel: true,
+                showTimepicker: <?php echo $this->getShowTime()?>
+            });
+            $("#<?php echo $this->getFieldId()?>_trigger").click(function () {
+                $("#<?php echo $this->getFieldId()?>").datetimepicker("show");
+            });
+        });
+
+    </script>
+<?php } ?>

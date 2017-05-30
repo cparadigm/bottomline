@@ -1,8 +1,0 @@
-<config>
-    <modules>
-        <Boardroom_Pcd>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Boardroom_Pcd>
-    </modules>
-</config>

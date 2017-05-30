@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="VladimirPopov_WebForms::js/result.js"/>
+        <css src="VladimirPopov_WebForms::css/styles.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <referenceBlock name="customer_form">
+                <block class="VladimirPopov\WebForms\Block\Adminhtml\Customer\Tab\Results" name="customer_edit_tab_webforms_results">
+                    <arguments>
+                        <argument name="tab_label" xsi:type="string">Web-forms</argument>
+                        <argument name="sort_order" xsi:type="number">100</argument>
+                    </arguments>
+                </block>
+            </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>

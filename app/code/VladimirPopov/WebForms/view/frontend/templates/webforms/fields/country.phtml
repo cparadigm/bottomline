@@ -1,0 +1,17 @@
+<?php $_countries = $this->getCountries() ?>
+<?php if (count($_countries) > 0): ?>
+    <select
+            name="<?php echo $this->getFieldName()?>"
+            id='<?php echo $this->getFieldId()?>'
+            class='<?php echo $this->getFieldClass()?>'
+            aria-labelledby="label_<?php echo $this->getFieldId() ?>"
+            <?php if($this->getField()->getRequired()) {?>required<?php }?>
+            style='<?php echo $this->getFieldStyle()?>' <?php if($this->getField()->getDisabled()){?> disabled <?php } ?>>>
+        <?php foreach($_countries as $_country): ?>
+            <?php $selected = ($this->getFieldValue() == $_country['value']) ? 'selected="selected"' : ''; ?>
+            <option value="<?php echo $_country['value'] ?>" <?php echo $selected ?>>
+                <?php echo $_country['label'] ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+<?php endif; ?>

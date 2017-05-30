@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Solwin Infotech
+ * Solwin Discount Coupon Code Link Extension
+ *
+ * @category   Solwin
+ * @package    Solwin_Applycoupon
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/ 
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="solwin" translate="label" sortOrder="20">
+            <label>Apply Coupon</label>
+        </tab>
+        <section id="applycouponsection" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Configuration</label>
+            <tab>solwin</tab>
+            <resource>Solwin_Applycoupon::applycoupon_config</resource>
+            <group id="applycoupongroup" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="share_link" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Share Link</label>
+                    <source_model>Solwin\Applycoupon\Model\System\Config\Source\ShareLink</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="success_popup" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Success Message Popup</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="success_image" translate="label" type="image" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Success Popup Image</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">coupon</upload_dir>
+                    <base_url type="media" scope_info="1">coupon</base_url>
+                    <comment><![CDATA[Upload success popup image.]]></comment>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="success_popup">1</field>
+                    </depends>
+                </field>
+                <field id="success_msg" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Coupon code success Message</label>
+                    <comment><![CDATA[This message will show in lightbox popup or page when coupon code link call and coupon code apply successfully.]]></comment>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="success_popup">1</field>
+                    </depends>
+                </field>
+                <field id="error_msg" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Coupon code expire/inactive message</label>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="success_popup">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="emailopt" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Email Setup Options</label>
+                <field id="emailsender" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="template" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

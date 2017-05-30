@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="page.bottom">
+            <block class="Aheadworks\Ajaxcartpro\Block\ProductPage\Actions" ifconfig="aw_ajaxcartpro/additional/enable_on_product_page" name="aw_ajaxcartpro.product_page" template="Aheadworks_Ajaxcartpro::product_page/actions.phtml" />
+            <block class="Aheadworks\Ajaxcartpro\Block\ProductPage\Config" ifconfig="aw_ajaxcartpro/additional/enable_on_product_page" name="aw_ajaxcartpro.product_page_config" template="Aheadworks_Ajaxcartpro::product_page/config.phtml" />
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
+        <css src="VladimirPopov_WebForms::css/styles.css"/>
+    </head>
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                <action method="setUseConfirm">
+                    <argument name="params" xsi:type="string">1</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="VladimirPopov\WebForms\Block\Adminhtml\Field\Edit" name="webforms_field_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="VladimirPopov\WebForms\Block\Adminhtml\Field\Edit\Tabs" name="webforms_field_edit_tabs">
+                <block class="VladimirPopov\WebForms\Block\Adminhtml\Field\Edit\Tab\Information" name="webforms_field_edit_tab_information"/>
+                <block class="VladimirPopov\WebForms\Block\Adminhtml\Field\Edit\Tab\Design" name="webforms_field_edit_tab_design"/>
+                <block class="VladimirPopov\WebForms\Block\Adminhtml\Field\Edit\Tab\Validation" name="webforms_field_edit_tab_validation"/>
+                <block class="VladimirPopov\WebForms\Block\Adminhtml\Field\Edit\Tab\Logic" name="webforms_field_edit_tab_logic"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">information_section</argument>
+                    <argument name="block" xsi:type="string">webforms_field_edit_tab_information</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">design_section</argument>
+                    <argument name="block" xsi:type="string">webforms_field_edit_tab_design</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">validation_section</argument>
+                    <argument name="block" xsi:type="string">webforms_field_edit_tab_validation</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">logic_section</argument>
+                    <argument name="block" xsi:type="string">webforms_field_edit_tab_logic</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

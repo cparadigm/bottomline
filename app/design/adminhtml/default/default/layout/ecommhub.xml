@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<layout>
-    <ecommhub_adminhtml_information_index>
-        <update handle="ecommhub_information_index"/>
-        <reference name="content">
-            <block type="ecommhub/information" name="information" template="ecommhub/information.phtml"/>
-        </reference>
-    </ecommhub_adminhtml_information_index>
-</layout>

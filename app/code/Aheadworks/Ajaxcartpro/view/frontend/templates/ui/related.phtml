@@ -1,0 +1,99 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/** @var \Aheadworks\Ajaxcartpro\Block\Ui\Related $block */
+
+if (($items = $block->getItems()) && $items->count()):
+    $title = __('Based on your selection, you may be interested in the following items');
+    // Compatibility with AW ARP - option to count arp clicks
+    $addToCartOptions = $block->getData('awarp_rule') ? ['awarp_rule' => $block->getData('awarp_rule')] : [];
+?>
+
+    <div class="block aw-acp-popup__related">
+        <div class="block-title title">
+            <strong id="block-acp-related-heading" role="heading" aria-level="2"><?php echo $block->escapeHtml($title); ?></strong>
+        </div>
+        <div class="block-content content" aria-labelledby="block-acp-related-heading">
+            <div class="products wrapper grid products-grid products-acp-related">
+                <ol data-acp-related-block="items" class="products list items product-items">
+                    <?php $iterator = 1; ?>
+                    <?php foreach ($items as $item): ?>
+                        <?php $available = ''; ?>
+
+                        <?php if (!$item->isComposite() && $item->isSaleable()): ?>
+                            <?php if (!$item->getRequiredOptions()): ?>
+                                <?php $available = 'related-available'; ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php /* @noEscape */ echo($iterator++ == 1) ? '<li class="item product product-item">' : '</li><li class="item product product-item">' ?>
+
+                        <div class="product-item-info <?php  /* @noEscape */ echo $available; ?>">
+                            <a
+                                <?php if ($block->getData('awarp_rule')) : ?>
+                                    data-mage-init='{"awArpRedirect": {}}'
+                                    data-aw-arp-rule-id="<?php /* @noEscape */ echo $block->getData('awarp_rule') ?>"
+                                <?php endif; ?>
+                                href="<?php echo $block->escapeUrl($block->getProductUrl($item)) ?>"
+                               class="product photo product-item-photo">
+                                <?php  /* @noEscape */ echo $block->getImage($item, 'product_small_image')->toHtml(); ?>
+                            </a>
+                            <div class="product details product-item-details">
+                                <strong class="product name product-item-name">
+                                    <a class="product-item-link"
+                                       title="<?php echo $block->escapeHtml($item->getName()) ?>"
+                                       <?php if ($block->getData('awarp_rule')) : ?>
+                                           data-mage-init='{"awArpRedirect": {}}'
+                                           data-aw-arp-rule-id="<?php /* @noEscape */ echo $block->getData('awarp_rule') ?>"
+                                       <?php endif; ?>
+                                       href="<?php echo $block->escapeUrl($block->getProductUrl($item)) ?>">
+                                        <?php echo $block->escapeHtml($item->getName()) ?>
+                                    </a>
+                                </strong>
+
+                                <?php /* @noEscape */ echo $block->getProductPrice($item); ?>
+                                    <div class="actions-primary">
+                                        <?php if ($item->isSaleable()): ?>
+                                            <?php if ($item->getTypeInstance()->hasRequiredOptions($item)): ?>
+                                                <button class="action tocart primary" data-mage-init='{"redirectUrl": {"url": "<?php echo $block->escapeUrl($block->getAddToCartUrl($item, $addToCartOptions)) ?>"}}' type="button" title="<?php echo $block->escapeHtml(__('Add to Cart')) ?>">
+                                                    <span><?php echo $block->escapeHtml(__('Add to Cart')) ?></span>
+                                                </button>
+                                            <?php else: ?>
+                                                <?php
+                                                /** @var Magento\Framework\Data\Helper\PostHelper $postDataHelper */
+                                                $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+                                                $postData = $postDataHelper
+                                                    ->getPostData(
+                                                        $block->getAddToCartUrl($item, $addToCartOptions),
+                                                        ['product' => $item->getEntityId()]
+                                                    );
+                                                ?>
+
+                                                <button class="action tocart primary"
+                                                        data-post='<?php /* @noEscape */ echo $postData; ?>'
+                                                        type="button" title="<?php echo $block->escapeHtml(__('Add to Cart')) ?>">
+                                                    <span><?php echo $block->escapeHtml(__('Add to Cart')) ?></span>
+                                                </button>
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <?php if ($item->getIsSalable()): ?>
+                                                <div class="stock available"><span><?php echo $block->escapeHtml(__('In stock')) ?></span></div>
+                                            <?php else: ?>
+                                                <div class="stock unavailable"><span><?php echo $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </div>
+                            </div>
+                        </div>
+                        <?php  /* @noEscape */ echo($iterator == count($items)+1) ? '</li>' : '' ?>
+                    <?php endforeach ?>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+<?php endif;?>

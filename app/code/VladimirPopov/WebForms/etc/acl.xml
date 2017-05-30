@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::content">
+                    <resource id="VladimirPopov_WebForms::webforms" title="Web-forms" sortOrder="10">
+                        <resource id="VladimirPopov_WebForms::manage_forms" title="Manage Forms" sortOrder="100"/>
+                        <resource id="VladimirPopov_WebForms::quickresponse" title="Manage Quickresponse" sortOrder="105"/>
+                        <resource id="VladimirPopov_WebForms::settings" title="Settings" sortOrder="120"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

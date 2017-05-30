@@ -1,8 +1,0 @@
-<config>
-    <modules>
-        <Boardroom_OneClickOrder>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Boardroom_OneClickOrder>
-    </modules>
-</config>

@@ -1,0 +1,25 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Ajaxcartpro\Block\Ui\Messages */
+?>
+<?php foreach ($block->getErrorMessages() as $message): ?>
+    <p class="aw-acp-popup__message aw-acp-popup__message--bad">
+        <?php echo $block->escapeHtml($message->getText()) ?>
+    </p>
+<?php endforeach; ?>
+<?php foreach ($block->getNoticeMessages() as $message): ?>
+    <p class="aw-acp-popup__message aw-acp-popup__message--info">
+        <?php echo $block->escapeHtml($message->getText()) ?>
+    </p>
+<?php endforeach; ?>
+<?php foreach ($block->getSuccessMessages() as $message): ?>
+    <p class="aw-acp-popup__message aw-acp-popup__message--good">
+        <?php echo $block->escapeHtml($message->getText()) ?>
+    </p>
+<?php endforeach; ?>
