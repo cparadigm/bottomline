@@ -1,0 +1,28 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Magento\Catalog\Block\Product\View */
+?>
+<div class="fieldset">
+    <?php if ($block->shouldRenderQuantity()): ?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?php echo $block->escapeHtml(__('Qty')) ?></span></label>
+            <div class="control">
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       maxlength="12"
+                       value="<?php /* @noEscape */  echo $block->getProductDefaultQty() * 1 ?>"
+                       title="<?php  echo $block->escapeHtml(__('Qty')) ?>" class="input-text qty"
+                       data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       data-errors-message-box="[data-role=qty-error-placement]"
+                />
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

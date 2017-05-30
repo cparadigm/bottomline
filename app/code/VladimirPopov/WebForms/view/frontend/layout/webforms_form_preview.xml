@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Form Preview</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="VladimirPopov\WebForms\Block\Form"
+                   name="webforms.form.preview"
+                   template="VladimirPopov_WebForms::webforms/form/default.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>

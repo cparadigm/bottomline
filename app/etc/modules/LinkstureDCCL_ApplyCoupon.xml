@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <LinkstureDCCL_ApplyCoupon>
-            <active>true</active>
-            <codePool>local</codePool>
-        </LinkstureDCCL_ApplyCoupon>
-    </modules>
-</config>

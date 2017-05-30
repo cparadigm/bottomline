@@ -1,0 +1,19 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+/* @var $block \Magento\Framework\View\Element\Template */
+?>
+<?php if ($block->getRequest()->getModuleName() == 'catalog'):
+      // Check module name to void ACP usage for 'checkout/cart/configure'
+    ?>
+    <script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "productAddToCart": {"bindSubmit": true, "redirectToCatalog": true}
+        }
+    }
+    </script>
+<?php endif; ?>

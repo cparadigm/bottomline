@@ -1,0 +1,35 @@
+<div class="dashboard">
+    <?php
+    /** @var \VladimirPopov\WebForms\Model\Result $result */
+    $result = $this->getResult();
+    $messages = $this->getMessages();
+    if ($result->getId()) {
+        ?>
+        <?php foreach ($messages as $message): ?>
+            <div class="box-account webforms-customer-account-message">
+                <div class="block">
+                    <div class="block-title">
+                        <strong><?php echo __('Replied by %1 on %2', $message->getAuthor(), $this->formatDate($message->getCreatedTime(), \IntlDateFormatter::MEDIUM)) ?></strong>
+                    </div>
+                    <div class="block-content">
+                        <?php echo $message->getMessage() ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+        <div class="block-account webforms-customer-account-result-view">
+            <div class="block">
+                <div class="block-title">
+                    <h3><?php echo __('You submitted:') ?></h3>
+                </div>
+                <div class="block-content">
+                    <?php echo $result->toHtml('customer'); ?>
+                </div>
+            </div>
+        </div>
+        <div class="actions-toolbar">
+            <div class="secondary"><a class="action back" href="javascript:window.history.back()"><span><?php echo __('Back') ?></span></a></div>
+        </div>
+    <?php } ?>
+</div>

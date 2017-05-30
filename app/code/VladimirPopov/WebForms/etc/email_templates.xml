@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template area="frontend" id="webforms_notification" label="WebForms: Submission Notification" file="notification.html" type="html" module="VladimirPopov_WebForms"/>
+    <template area="frontend" id="webforms_reply" label="WebForms: Reply" file="reply.html" type="html" module="VladimirPopov_WebForms"/>
+    <template area="frontend" id="webforms_result_approval" label="WebForms: Result Approval Status Notification" file="result_approval.html" type="html" module="VladimirPopov_WebForms"/>
+    <template area="frontend" id="webforms_result_print" label="WebForms: Print Result" file="result_print.html" type="html" module="VladimirPopov_WebForms"/>
+</config>

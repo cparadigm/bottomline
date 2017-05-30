@@ -1,0 +1,23 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Magento\Catalog\Block\Product\View\Options */
+?>
+<?php if (count($block->getOptions())):?>
+    <script type="text/x-magento-init">
+    {
+        "#product_addtocart_form_acp": {
+            "priceOptions": {
+                "optionConfig": <?php /* @noEscape */ echo $block->getJsonConfig()?>,
+                "controlContainer": ".field",
+                "priceHolderSelector": "#product_addtocart_form_acp [data-role=priceBox]"
+            }
+        }
+    }
+    </script>
+<?php endif; ?>

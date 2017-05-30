@@ -1,0 +1,27 @@
+<ul class="note-list">
+    <?php foreach ($this->getMessages() as $message): ?>
+        <li id="history-message-<?php echo $message->getId() ?>" class="note-list-item">
+            <span class="note-list-time"><?php echo $this->formatDate($message->getCreatedTime(), \IntlDateFormatter::MEDIUM, true) ?></span>
+            <span class="note-list-customer"><?php echo __('Customer') ?>
+                <span class="note-list-customer-notified" id="subdue-<?php echo $message->getId() ?>">
+                    <?php if ($message->getIsCustomerEmailed()): ?>
+                        <?php echo __('E-mailed') ?>
+                    <?php else: ?>
+                        <?php echo __('Not E-mailed') ?>
+                    <?php endif; ?>
+                </span>
+            </span>
+            <?php if ($this->getResult()->getCustomerEmail()) { ?>
+            <span class="note-list-action">
+                <a class="button" href="javascript:emailMessage(<?php echo $message->getId() ?>)"><?php echo __('Send e-mail') ?></a>
+            </span>
+            <?php } ?>
+            <span class="note-list-action">
+                <a href="javascript:deleteMessage(<?php echo $message->getId() ?>)"><?php echo __('Delete') ?></a>
+            </span>
+
+            <div class="note-list-comment"><?php echo $message->getMessage() ?></div>
+            <div class="note-list-comment"><i><?php echo $message->getAuthor() ?></i></div>
+        </li>
+    <?php endforeach; ?>
+</ul>

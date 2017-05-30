@@ -1,0 +1,21 @@
+<?php
+
+$startAt = $this->getField()->getStarsInit();
+
+if ($this->getCustomerValue()) {
+    $val = explode('/', $this->getCustomerValue());
+    $startAt = (int)$val[0];
+}
+
+?>
+<div id="<?php echo $this->getFieldId()?>container"></div>
+<script>
+    require(['VladimirPopov_WebForms/js/stars'], function (Starry) {
+        new Starry('<?php echo $this->getFieldId()?>', {
+            name: '<?php echo $this->getFieldName()?>',
+            showNull: false,
+            startAt:<?php echo $startAt?>,
+            maxLength:<?php echo $this->getField()->getStarsCount()?>
+        });
+    })
+</script>

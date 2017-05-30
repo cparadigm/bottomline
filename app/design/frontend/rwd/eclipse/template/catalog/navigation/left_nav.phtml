@@ -1,7 +1,0 @@
-<?php $menu_type = Mage::getStoreConfig('eclipsesettings/eclipsesettings_menu/sidebar_menu_type'); ?>
-
-<?php if($menu_type == 'sidebar-classic-menu') { ?>
- <?php echo $this->getLayout()->createBlock('catalog/navigation')->setTemplate('catalog/navigation/left_nav_classicmenu.phtml')->toHtml(); ?>
-<?php } else { ?>
-  <?php echo $this->getLayout()->createBlock('catalog/navigation')->setTemplate('catalog/navigation/left_nav_fixed.phtml')->toHtml(); ?>
-<?php } ?>

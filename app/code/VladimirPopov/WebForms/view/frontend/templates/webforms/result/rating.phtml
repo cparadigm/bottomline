@@ -1,0 +1,41 @@
+<?php
+/** @var \VladimirPopov\WebForms\Block\Result\Rating $this */
+$collection = $this->getSummaryRatings();
+?>
+<?php if (!empty($collection)): ?>
+    <div class="webforms-rating-summary">
+        <?php foreach ($collection as $rating): ?>
+            <?php
+            $field = $this->getField($rating['field_id']);
+            $value = $rating['sum'] / $rating['count'];
+            $width = ceil(100 * $value / $field->getStarsCount()) . '%';
+            $stars = [];
+            for ($i = 0; $i < $field->getStarsCount(); $i++) {
+                $stars[] = '\'\e605\'';
+            }
+            $content = implode(' ', $stars);
+            ?>
+            <?php if ($value): ?>
+                <style>
+                    .rating-summary-<?php echo $field->getId()?> .rating-result > span::before,
+                    .rating-summary-<?php echo $field->getId()?> .rating-result::before {
+                        content: <?php echo $content?>
+                    }
+
+                    .rating-summary-<?php echo $field->getId()?> .rating-result {
+                        width: auto !important
+                    }
+                </style>
+                <div class="rating-box">
+                    <div class="rating-summary rating-summary-<?php echo $field->getId() ?>">
+                        <span class="label"><span><?php echo __($this->escapeHtml($field->getResultLabel())) ?>:</span></span>
+
+                        <div class="rating-result" title="<?php echo $width; ?>">
+                            <span style="width:<?php echo $width; ?>"><span><?php echo $value; ?>%</span></span>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>

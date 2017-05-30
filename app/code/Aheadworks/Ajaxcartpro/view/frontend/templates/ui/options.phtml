@@ -1,0 +1,88 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php
+    $product = $block->getProduct();
+    /** @var \Magento\Catalog\Helper\Output $outputHelper */
+    $outputHelper = $this->helper('Magento\Catalog\Helper\Output');
+    $productNameHtml = $outputHelper->productAttribute($product, $product->getName(), 'name');
+
+    $required = '';
+    if ($block->hasRequiredOptions()) {
+        $required = ' data-hasrequired="' . __('* Required Fields') . '"';
+    }
+
+    $optionsHtml = $block->getChildHtml('product_options');
+    $configurableOptionsHtml = $block->getChildHtml('product_options_configurable');
+    $groupedOptionsHtml = $block->getChildHtml('product_options_grouped');
+    $bundleOptionsHtml = $block->getChildHtml('product_options_bundle');
+    $downloadableOptionsHtml = $block->getChildHtml('product_options_downloadable');
+
+    $isSmallImage = trim($optionsHtml)
+        || $configurableOptionsHtml
+        || $groupedOptionsHtml
+        || $bundleOptionsHtml
+        || $downloadableOptionsHtml;
+?>
+<div class="aw-acp-popup__mobile-header">
+    <h3 class="aw-acp-popup__mobile-title"><?php echo /* @noEscape */ $productNameHtml ?></h3>
+    <div class="aw-acp-popup__mobile-close-wrapper">
+        <button type="button" class="aw-acp-popup__mobile-close" data-action="cancel"><?php echo $block->escapeHtml(__('Cancel')) ?></button>
+    </div>
+</div>
+<div class="aw-acp-popup__main">
+    <?php echo $block->getChildHtml('messages') ?>
+    <div class="aw-acp-popup__columns">
+        <div class="aw-acp-popup__column aw-acp-popup__column--media<?php if ($isSmallImage): ?> small<?php endif; ?>">
+            <?php echo $block->getChildHtml('product_image') ?>
+            <?php echo $block->getChildHtml('product_reviews') ?>
+        </div>
+        <div class="aw-acp-popup__column">
+            <div class="aw-acp-popup__product-info">
+                <h2 class="aw-acp-popup__title"><?php echo /* @noEscape */ $productNameHtml ?></h2>
+                <?php if ($block->getConfigDisplayShortDescription()): ?>
+                    <div class="aw-acp-popup__description">
+                        <?php /* @noEscape */ echo $outputHelper->productAttribute($product, $product->getShortDescription(), 'short_description') ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <div class="aw-acp-popup__form">
+                <form id="product_addtocart_form_acp" action="<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getAddToCartUrl($product)) ?>"
+                    <?php if ($product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>
+                      data-mage-init='{"Magento_Catalog/product/view/validation": {"radioCheckboxClosest": ".nested"}}'>
+                    <input type="hidden" name="product" value="<?php /* @noEscape */ echo $product->getId() ?>" />
+                    <input type="hidden" name="selected_configurable_option" value="" />
+                    <input type="hidden" name="related_product" id="related-products-field" value="" />
+                    <?php echo $block->getBlockHtml('formkey') ?>
+
+                    <div class="aw-acp-popup__options-wrapper product-options-wrapper" id="product-options-wrapper"<?php /* @noEscape */ echo $required; ?>>
+                        <div class="fieldset">
+                            <?php /* @noEscape */ echo $optionsHtml
+                                . $configurableOptionsHtml
+                                . $groupedOptionsHtml
+                                . $bundleOptionsHtml
+                                . $downloadableOptionsHtml; ?>
+                        </div>
+                    </div>
+                    <div class="aw-acp-popup__box-tocart-wrapper">
+                        <div class="aw-acp-popup__box-qty box-tocart">
+                            <?php echo $block->getChildHtml('product_qty') ?>
+                        </div>
+                        <div class="aw-acp-popup__box-price">
+                            <?php echo $block->getChildHtml('product_price') ?>
+                        </div>
+                    </div>
+                    <div data-role="qty-error-placement"></div>
+                    <?php echo $block->getChildHtml('product_form_js') ?>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

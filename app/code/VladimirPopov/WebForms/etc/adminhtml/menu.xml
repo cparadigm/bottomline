@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="VladimirPopov_WebForms::webforms" title="Web-forms" module="VladimirPopov_WebForms" sortOrder="40" parent="Magento_Backend::content" resource="VladimirPopov_WebForms::webforms"/>
+        <add id="VladimirPopov_WebForms::manage_forms" title="Manage Forms" module="VladimirPopov_WebForms" parent="VladimirPopov_WebForms::webforms" sortOrder="10" action="webforms/form/" resource="VladimirPopov_WebForms::manage_forms"/>
+        <add id="VladimirPopov_WebForms::quickresponse" title="Manage Quick Responses" module="VladimirPopov_WebForms" sortOrder="20" parent="VladimirPopov_WebForms::webforms" action="webforms/quickresponse/" resource="VladimirPopov_WebForms::quickresponse"/>
+        <add id="VladimirPopov_WebForms::settings" title="Settings" module="VladimirPopov_WebForms" sortOrder="20" parent="VladimirPopov_WebForms::webforms" action="webforms/settings/" resource="VladimirPopov_WebForms::settings"/>
+    </menu>
+</config>

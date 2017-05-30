@@ -1,0 +1,45 @@
+<div role="group" aria-labelledby="label_<?php echo $this->getFieldId() ?>"
+     class="input-box customer-dob customer-dob<?php echo $this->getField()->getId() ?>">
+    <div class="webforms-datepicker">
+        <?php
+        $this->setDateInput('d',
+            '<div class="dob-day">
+             <input type="text" id="day' . $this->getField()->getId() . '" name="day' . $this->getField()->getId() . '" value="' . $this->getDay() . '" title="' . __('Day') . '" class="input-text"/>
+             <label for="day' . $this->getField()->getId() . '">' . __('DD') . '</label>
+         </div>'
+        );
+
+        $this->setDateInput('m',
+            '<div class="dob-month">
+             <input type="text" id="month' . $this->getField()->getId() . '" name="month' . $this->getField()->getId() . '" value="' . $this->getMonth() . '" title="' . __('Month') . '" class="input-text"/>
+             <label for="month' . $this->getField()->getId() . '">' . __('MM') . '</label>
+         </div>'
+        );
+
+        $this->setDateInput('y',
+            '<div class="dob-year">
+             <input type="text" id="year' . $this->getField()->getId() . '" name="year' . $this->getField()->getId() . '" value="' . $this->getYear() . '" title="' . __('Year') . '" class="input-text"/>
+             <label for="year' . $this->getField()->getId() . '">' . __('YYYY') . '</label>
+         </div>'
+        );
+        ?>
+        <?php echo $this->getSortedDateInputs() ?>
+        <div class="dob-full" style="display:none;">
+            <input type="hidden" id="<?php echo $this->getData('field_id') ?>"
+                   name="<?php echo $this->getData('field_name') ?>"/>
+        </div>
+
+        <div class="validation-advice" style="display:none;"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    require([
+            'prototype',
+            'varien/js'
+        ], function () {
+            var customer_dob = new Varien.DOB('.customer-dob<?php echo $this->getField()->getId()?>', <?php echo $this->getField()->getRequired() ? 'true' : 'false' ?>, '<?php echo $this->getDateFormat() ?>');
+        }
+    );
+    //]]>
+</script>

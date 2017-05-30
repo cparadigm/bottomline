@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Solwin Infotech
+ * Solwin Discount Coupon Code Link Extension
+ *
+ * @category   Solwin
+ * @package    Solwin_Applycoupon
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/ 
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <applycouponsection>
+            <applycoupongroup>
+                <enable>1</enable>
+                <share_link>0</share_link>
+                <success_popup>1</success_popup>
+                <success_image></success_image>
+                <success_msg><![CDATA[Coupon code applied successfully, You can start adding products to cart now]]></success_msg>
+                <error_msg><![CDATA[Sorry, looks like you've got Invalid Cart ID or you have already made a purchase with the cart you are trying to access. Thank you!]]></error_msg>
+            </applycoupongroup>
+            <emailopt>
+                <emailsender>custom2</emailsender>
+                <email_template>applycouponsection_emailopt_template</email_template>
+            </emailopt>            
+        </applycouponsection>
+    </default>
+</config>

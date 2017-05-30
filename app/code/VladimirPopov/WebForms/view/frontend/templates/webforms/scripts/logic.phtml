@@ -1,0 +1,50 @@
+<?php
+$widgetUid = $this->getUid();
+if (!$widgetUid) $widgetUid = $this->getForm()->getId();
+$fields_to_fieldsets = $this->getForm()->getFieldsToFieldsets();
+// create field map
+$field_map = array();
+foreach ($fields_to_fieldsets as $fieldset_id => $fieldset) {
+    foreach ($fieldset["fields"] as $field) {
+        $field_map['fieldset_' . $fieldset_id][] = $field->getId();
+    }
+}
+?>
+
+<script type="text/javascript">
+    var logicRules_<?php echo $widgetUid?> = [];
+    var targets_<?php echo $widgetUid?> = <?php echo json_encode($this->getForm()->_getLogicTarget($this->getUid()))?>;
+    var fieldMap_<?php echo $widgetUid?> = <?php echo json_encode($field_map)?>;
+    <?php
+    $logic_rules = $this->getForm()->getLogic();
+    foreach ($logic_rules as $logic) {
+        if ($logic->getIsActive()) {
+            $targets = $logic->getTarget();
+            if($this->getUid()){
+                for($i=0;$i<count($targets);$i++){
+                    if(strstr($targets[$i],'field_')){
+                        $targets[$i] = str_replace('field_','field_'.$this->getUid(),$targets[$i]);
+                    }
+                    if(strstr($targets[$i],'fieldset_')){
+                        $targets[$i] = str_replace('fieldset_','fieldset_'.$this->getUid(),$targets[$i]);
+                    }
+                }
+            }
+    ?>
+    logicRules_<?php echo $widgetUid?>.push({
+        'field_id': '<?php echo $logic->getFieldId()?>',
+        'action': '<?php echo $logic->getAction()?>',
+        'logic_condition': '<?php echo $logic->getLogicCondition()?>',
+        'aggregation': '<?php echo $logic->getAggregation()?>',
+        'value':<?php echo json_encode($logic->getFrontendValue())?>,
+        'target':<?php echo json_encode($targets)?>
+    });
+    <?php
+        }
+    }
+    ?>
+    // execute form logic
+    require(['prototype', 'VladimirPopov_WebForms/js/logic'], function () {
+        JSWebFormsLogic(targets_<?php echo $widgetUid?>, logicRules_<?php echo $widgetUid?>, fieldMap_<?php echo $widgetUid?>, '<?php echo $this->getUid()?>');
+    });
+</script>

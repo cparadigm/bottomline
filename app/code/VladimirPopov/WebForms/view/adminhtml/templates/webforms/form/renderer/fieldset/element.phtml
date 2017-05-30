@@ -1,0 +1,65 @@
+<?php
+/* @var $block \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element */
+$element = $block->getElement();
+$note = $element->getNote() ? '<div class="note" id="' . $element->getId() . '-note">' . $element->getNote() . '</div>' : '';
+$elementBeforeLabel = $element->getExtType() == 'checkbox admin__control-checkbox' || $element->getExtType() == 'radio admin__control-radio';
+$addOn = $element->getBeforeElementHtml() || $element->getAfterElementHtml();
+$fieldId = ($element->getHtmlContainerId()) ? ' id="' . $element->getHtmlContainerId() . '"' : '';
+$fieldClass = "admin__field field field-{$element->getId()} {$element->getCssClass()}";
+$fieldClass .= ($elementBeforeLabel) ? ' choice' : '';
+$fieldClass .= ($addOn) ? ' with-addon' : '';
+$fieldClass .= ($element->getRequired()) ? ' required _required' : '';
+$fieldClass .= ($note) ? ' with-note' : '';
+$fieldClass .= (!$element->getLabelHtml()) ? ' no-label' : '';
+
+$block->checkFieldDisable();
+
+$fieldAttributes = $fieldId . ' class="' . $fieldClass . '" '
+    . $block->getUiId('form-field', $element->getId());
+?>
+
+<?php
+$elementToggleCode = $element->getToggleCode() ? $element->getToggleCode()
+    : 'toggleValueElements(this, this.parentNode.parentNode.parentNode)';
+?>
+<?php if (!$element->getNoDisplay()): ?>
+    <?php if ($element->getType() == 'hidden'): ?>
+        <?php echo $element->getElementHtml() ?>
+    <?php else: ?>
+        <div<?php echo $fieldAttributes ?>>
+            <?php if ($elementBeforeLabel): ?>
+                <?php echo $element->getElementHtml() ?>
+                <?php echo $element->getLabelHtml() ?>
+                <?php echo $note ?>
+            <?php else: ?>
+                <?php echo $element->getLabelHtml() ?>
+                <div class="admin__field-control control">
+                    <?php echo($addOn) ? '<div class="admin__field admin__field-option">' . $element->getElementHtml() . '</div>' : $element->getElementHtml(); ?>
+                    <?php echo $note ?>
+                </div>
+            <?php endif; ?>
+            <?php if ($block->getScopeLabel()): ?>
+                <div class="field-service" value-scope="<?php echo $block->getScopeLabel()?>">
+                    <?php if ($block->canDisplayUseDefault()): ?>
+                        <label for="<?php echo $element->getHtmlId() ?>_default" class="choice use-default">
+                            <input <?php if ($element->getReadonly()):?> disabled="disabled"<?php endif; ?>
+                                type="checkbox"
+                                name="use_default[]"
+                                class="use-default-control"
+                                id="<?php echo $element->getHtmlId() ?>_default"
+                                <?php if ($block->usedDefault()): ?> checked="checked"<?php endif; ?>
+                                onclick="<?php echo $elementToggleCode; ?>"
+                                value="<?php echo $element->getName() ?>"/>
+                            <span class="use-default-label"><?php echo __('Use Default Value') ?></span>
+                        </label>
+                    <?php endif; ?>
+                </div>
+                <script>
+                    <?php if ($block->usedDefault()){ ?>
+                    require(['prototype'],function(){Event.observe(window, 'load', function(){$('<?php echo $element->getHtmlId() ?>').disable()})});
+                    <?php } ?>
+                </script>
+            <?php endif;?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

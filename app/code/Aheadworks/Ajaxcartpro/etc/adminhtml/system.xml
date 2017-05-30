@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="aheadworks" translate="label" sortOrder="300">
+            <label>Aheadworks Extensions</label>
+        </tab>
+        <section id="aw_ajaxcartpro" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Ajax Cart Pro</label>
+            <tab>aheadworks</tab>
+            <resource>Aheadworks_Ajaxcartpro::config_aw_ajaxcartpro</resource>
+            <group id="add_to_cart_block" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Add to cart block</label>
+                <field id="display_for" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Display Block For</label>
+                    <source_model>Aheadworks\Ajaxcartpro\Model\Source\DisplayFor</source_model>
+                </field>
+                <field id="display_product_short_description" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Display Product Short Description</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Will be displayed only for desktop devices</comment>
+                </field>
+                <field id="display_product_reviews" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Display Product Reviews Summary</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="additional" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Additional Settings</label>
+                <field id="enable_on_product_page" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Display Confirmation Message on Product Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="related_products_type" translate="comment label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Display Related Products</label>
+                    <source_model>Aheadworks\Ajaxcartpro\Model\Source\DisplayRelated</source_model>
+                    <comment><![CDATA[Can be integrated with <a href="https://ecommerce.aheadworks.com/magento-2-extensions/automatic-related-products">Automatic Related Products</a> and <a href="https://ecommerce.aheadworks.com/magento-2-extensions/who-bought-this-also-bought">Who Bougth This Also Bought</a> extensions by aheadWorks.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

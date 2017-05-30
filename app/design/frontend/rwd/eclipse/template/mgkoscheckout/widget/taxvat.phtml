@@ -1,7 +1,0 @@
-<label for="<?php echo $this->getFieldId('taxvat')?>">
-	<?php echo $this->__('Tax/VAT number') ?><?php if ($this->isRequired()) echo ' <em class="required">*</em>' ?>
-</label>
-
-<div class="mgkosc-box">
-    <input type="text" id="<?php echo $this->getFieldId('taxvat')?>" name="<?php echo $this->getFieldName('taxvat')?>" value="<?php echo $this->htmlEscape($this->getTaxvat()) ?>" title="<?php echo $this->__('Tax/VAT number') ?>" class="mgkosc-input-text <?php if ($this->isRequired()){echo 'required-entry';} ?>" <?php echo $this->getFieldParams() ?> />
-</div>

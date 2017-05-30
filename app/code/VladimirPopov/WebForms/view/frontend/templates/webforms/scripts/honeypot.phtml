@@ -1,0 +1,4 @@
+<?php $honeypot = 'field_' . $this->getWebformId(); ?>
+<textarea id="<?php echo $honeypot; ?>" type="text"
+          name="message">Please enable JavaScript.</textarea>
+<script> (hp=document.getElementById('<?php echo $honeypot?>')).parentNode.removeChild(hp); </script>

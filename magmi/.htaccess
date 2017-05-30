@@ -1,5 +1,0 @@
-AuthUserFile /home/.htpasswd
-AuthType Basic
-AuthName "Magmi"
-Require valid-user
-

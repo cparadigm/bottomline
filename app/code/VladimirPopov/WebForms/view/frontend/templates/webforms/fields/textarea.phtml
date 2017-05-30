@@ -1,0 +1,7 @@
+<?php $hint = htmlspecialchars(trim($this->getField()->getHint())); ?>
+<textarea name='<?php echo $this->getFieldName()?>' id='<?php echo $this->getFieldId()?>'
+          class='<?php echo $this->getFieldClass()?>'
+          aria-labelledby="label_<?php echo $this->getFieldId() ?>"
+          <?php if($this->getField()->getRequired()) {?>required<?php }?>
+          style='<?php echo $this->getFieldStyle()?>' <?php if ($this->getField()->getDisabled()) { ?> disabled <?php } ?>
+          placeholder="<?php echo $hint?>"><?php echo $this->getFieldValue(); ?></textarea>

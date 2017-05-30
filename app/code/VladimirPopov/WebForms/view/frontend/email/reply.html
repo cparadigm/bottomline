@@ -1,0 +1,15 @@
+<!--@subject Re: {{var result.subject}} @-->
+
+<p>Dear {{var customer.name}},</p>
+
+{{var reply.message|raw}}
+
+<p><strong>{{var reply.author}}, {{var store.getFrontendName()}}</strong></p>
+
+<i>On {{var result.date}} you submitted:</i>
+
+<blockquote>
+
+	<p>{{layout handle="webforms_email_result" result=$result recipient="customer" area="frontend"}}</p>
+
+</blockquote>

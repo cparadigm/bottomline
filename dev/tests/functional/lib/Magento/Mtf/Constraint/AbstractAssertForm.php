@@ -1,32 +1,13 @@
 <?php
 /**
- * Magento
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magento.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magento.com for more information.
- *
- * @category    Tests
- * @package     Tests_Functional
- * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Mtf\Constraint;
 
 /**
+ * Class AssertForm
  * Abstract class AssertForm
  * Implements:
  *  - verify fixture data and form data
@@ -55,8 +36,8 @@ abstract class AbstractAssertForm extends AbstractConstraint
      *
      * @param array $fixtureData
      * @param array $formData
-     * @param bool $isStrict [optional]
-     * @param bool $isPrepareError [optional]
+     * @param bool $isStrict
+     * @param bool $isPrepareError
      * @return array|string
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
@@ -78,7 +59,7 @@ abstract class AbstractAssertForm extends AbstractConstraint
             if (null === $formValue) {
                 $errors[] = '- field "' . $key . '" is absent in form';
             } elseif (is_array($value) && is_array($formValue)) {
-                $valueErrors = $this->verifyData($value, $formValue, $isStrict, $isPrepareError);
+                $valueErrors = $this->verifyData($value, $formValue, true, false);
                 if (!empty($valueErrors)) {
                     $errors[$key] = $valueErrors;
                 }
@@ -169,6 +150,7 @@ abstract class AbstractAssertForm extends AbstractConstraint
      *
      * @param array $data
      * @param string $path
+     * @param string $path
      * @return array
      * @throws \Exception
      *
@@ -189,11 +171,17 @@ abstract class AbstractAssertForm extends AbstractConstraint
         }
 
         if ($key) {
-            $data[$key] = $order ? $this->sortMultidimensionalArray($data[$key], $order) : $data[$key];
-            $data[$key] = $nextPath ? $this->sortDataByPath($data[$key], $nextPath) : $data[$key];
+            if ($order) {
+                $data[$key] = $this->sortMultidimensionalArray($data[$key], $order);
+            }
+            if ($nextPath) {
+                $data[$key] = $this->sortDataByPath($data[$key], $nextPath);
+            }
         } else {
             $data = $this->sortMultidimensionalArray($data, $order);
-            $data = $nextPath ? $this->sortDataByPath($data, $nextPath) : $data;
+            if ($nextPath) {
+                $data = $this->sortDataByPath($data, $nextPath);
+            }
         }
 
         return $data;
@@ -211,13 +199,10 @@ abstract class AbstractAssertForm extends AbstractConstraint
         $result = [];
         foreach ($data as $key => $value) {
             if (isset($value[$orderKey])) {
-                $orderValue = is_numeric($value[$orderKey]) ? floatval($value[$orderKey]) : $value[$orderKey];
-                $result[$orderValue] = $value;
-            } else {
-                $result[$key] = $value;
+                $key = is_numeric($value[$orderKey]) ? (int)$value[$orderKey] : $value[$orderKey];
             }
+            $result[$key] = $value;
         }
-
         ksort($result);
         return $result;
     }
